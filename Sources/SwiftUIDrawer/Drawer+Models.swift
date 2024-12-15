@@ -5,11 +5,11 @@ import UIKit
 // MARK: - Enums
 
 public enum DrawerContentLayoutingStrategy {
-    /// Robust option which is based on an `UICollectionViewFlowLayout` but animated content size changes, e.g. the expanding of an `Accordion` component, can look choppy.
+    /// Robust option which is based on an `UICollectionViewFlowLayout` but animated content size-changes can look choppy.
     case classic
 
-    /// Better adapts to animated size changes by leveraging a `UICollectionViewCompositionalLayout`,
-    /// but can show glitchy or jumpy behavior when swapping out content, e.g. in a typical list-to-detail transition when a user selects a vehicle from a station.
+    /// Better adapts to animated size-changes by leveraging a `UICollectionViewCompositionalLayout`,
+    /// but can show glitchy or jumpy behavior when swapping out content, e.g. in a typical list-to-detail transition.
     case modern
 }
 

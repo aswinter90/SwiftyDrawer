@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ViewDidAppearFirst: ViewModifier {
-    @State private var didLoad = false
+    @State private var didAppear = false
     private let action: (() -> Void)?
 
     init(perform action: (() -> Void)? = nil) {
@@ -10,9 +10,9 @@ struct ViewDidAppearFirst: ViewModifier {
 
     func body(content: Content) -> some View {
         content.onAppear {
-            if didLoad == false {
-                didLoad = true
+            if !didAppear {
                 action?()
+                didAppear = true
             }
         }
     }

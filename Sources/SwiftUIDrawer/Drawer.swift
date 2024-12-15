@@ -43,7 +43,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Computed
 
     /// Property that controls the drawer's position on the screen.
-    /// Updating the visible portion of the drawer this way is less error-prone than changing its height as in previous implementations, which delivers unexpected results when we have a sticky header with a fixed intrinsic content size (e.g. a `Text`).
+    /// Updating the visible portion of the drawer this way is less error-prone than changing its height as in previous implementations, which delivered unexpected results when it contains a sticky header with a fixed intrinsic content size (e.g. a `Text`).
     private var drawerPaddingTop: CGFloat {
         UIScreen.main.bounds.height - state.currentHeight
     }
@@ -127,7 +127,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         }
         .padding(.top, drawerPaddingTop)
         .modifier(
-            // Visually the drawer does not move from just adding a top padding, an offset effect is also required:
+            // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
             // https://www.hackingwithswift.com/quick-start/swiftui/how-to-adjust-the-position-of-a-view-using-its-offset
             // Instead of the default `offset` modifier, we add our own to observe value changes, which can be published to the outside world
             OffsetEffect(
@@ -267,7 +267,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         case (.fullyOpened, .up):
             state.case = .fullyOpened
         case (_, .undefined):
-            // Gesture was too slow or translation too small. Find the nearest fixed drawer position
+            // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
             let offsetToMinHeight = abs(state.currentHeight - minHeight.absoluteValue)
 
             let offsetToMediumHeight = if let mediumHeight = mediumHeight?.wrappedValue.absoluteValue {
@@ -302,7 +302,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             if let mediumHeight = mediumHeight?.wrappedValue.absoluteValue {
                 state.currentHeight = mediumHeight
             } else {
-                assertionFailure("Error: Cannot set drawer state to `partiallyOpened` because no medium height was defined")
+                assertionFailure("Error: Cannot set drawer state to `partiallyOpened` when no medium height was defined")
             }
         case .fullyOpened:
             state.currentHeight = maxHeight.absoluteValue
