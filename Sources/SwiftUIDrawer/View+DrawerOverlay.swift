@@ -16,7 +16,7 @@ public extension View {
         contentViewEventHandler: DrawerContentCollectionViewEventHandler? = nil,
         originObservable: DrawerOriginObservable? = nil
     ) -> some View {
-        dimmingOverlay(
+        dimmedDrawerBackground(
             isShown: isDimmingBackground,
             drawerState: state,
             drawerMinHeight: minHeight,

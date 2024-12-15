@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-private struct DimmingView: View {
+struct DimmingView: View {
     private static let maxOpacity = 0.4
 
     @Binding var drawerState: DrawerState
@@ -31,30 +31,5 @@ private struct DimmingView: View {
         )
 
         return max(0, opacity)
-    }
-}
-
-extension View {
-    @ViewBuilder
-    func dimmingOverlay(
-        isShown: Bool,
-        drawerState: Binding<DrawerState>,
-        drawerMinHeight: Binding<DrawerMinHeight>,
-        drawerMediumHeight: Binding<DrawerMediumHeight>?,
-        drawerMaxHeight: DrawerMaxHeight
-    ) -> some View {
-        if isShown {
-            overlay {
-                DimmingView(
-                    drawerState: drawerState,
-                    drawerMinHeight: drawerMinHeight,
-                    drawerMediumHeight: drawerMediumHeight,
-                    drawerMaxHeight: drawerMaxHeight
-                )
-            }
-            .ignoresSafeArea()
-        } else {
-            self
-        }
     }
 }
