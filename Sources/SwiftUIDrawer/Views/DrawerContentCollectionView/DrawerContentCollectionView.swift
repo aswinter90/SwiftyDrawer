@@ -34,7 +34,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
     private let configuration: UICollectionLayoutListConfiguration = {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.showsSeparators = false
-        configuration.backgroundColor = .systemBackground
+        configuration.backgroundColor = .init(.background)
         return configuration
     }()
 
@@ -42,7 +42,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         if #available(iOS 16.0, *) {
             let hostingConfiguration = UIHostingConfiguration { content }.margins(.horizontal, 0)
             collectionViewCell.contentConfiguration = hostingConfiguration
-            collectionViewCell.contentView.backgroundColor = .systemBackground
+            collectionViewCell.contentView.backgroundColor = .init(.background)
         } else {
             fatalError("DrawerContentCollectionView is only available on iOS 16+")
         }

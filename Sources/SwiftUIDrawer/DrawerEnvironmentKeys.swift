@@ -1,19 +1,22 @@
 import SwiftUI
 
-public struct DrawerFloatingButtonsEnvironmentKey: EnvironmentKey {
-    public static let defaultValue: DrawerFloatingButtons = .init(firstConfiguration: nil, secondConfiguration: nil)
+public struct DrawerFloatingButtonsConfigurationEnvironmentKey: EnvironmentKey {
+    public static let defaultValue: DrawerFloatingButtonsConfiguration = .init(
+        firstButtonProperties: nil,
+        secondButtonProperties: nil
+    )
 }
 
 public extension EnvironmentValues {
-    var drawerFloatingButtons: DrawerFloatingButtons {
-        get { self[DrawerFloatingButtonsEnvironmentKey.self] }
-        set { self[DrawerFloatingButtonsEnvironmentKey.self] = newValue }
+    var drawerFloatingButtonsConfiguration: DrawerFloatingButtonsConfiguration {
+        get { self[DrawerFloatingButtonsConfigurationEnvironmentKey.self] }
+        set { self[DrawerFloatingButtonsConfigurationEnvironmentKey.self] = newValue }
     }
 }
 
 public extension View {
-    func drawerFloatingButtons(_ configuration: DrawerFloatingButtons) -> some View {
-        environment(\.drawerFloatingButtons, configuration)
+    func drawerFloatingButtonsConfiguration(_ configuration: DrawerFloatingButtonsConfiguration) -> some View {
+        environment(\.drawerFloatingButtonsConfiguration, configuration)
     }
 }
 

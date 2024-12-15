@@ -16,7 +16,8 @@ private struct RoundedCorner: Shape {
                 roundedRect: rect,
                 byRoundingCorners: corners,
                 cornerRadii: CGSize(width: radius, height: radius)
-            ).cgPath
+            )
+            .cgPath
         )
     }
 }

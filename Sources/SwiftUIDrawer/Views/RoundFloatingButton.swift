@@ -19,7 +19,7 @@ public struct RoundFloatingButton: View {
                 icon
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
-                    .background(Color.init(uiColor: .systemBackground))
+                    .background(Color.background)
                     .frame(width: Self.height)
                     .clipShape(Circle())
                     .prerenderedShadow(

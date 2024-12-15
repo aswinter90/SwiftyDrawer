@@ -70,7 +70,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self)
         )
         dataSource = self
-        backgroundColor = .systemBackground
+        backgroundColor = .init(.background)
         delegate = self
     }
 
@@ -111,22 +111,41 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int { 1 }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: UICollectionViewCell.self), for: indexPath)
-
-        if !cell.contentView.subviews.isEmpty {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: String(describing: UICollectionViewCell.self),
+            for: indexPath
+        )
+        
+        let contentView = cell.contentView
+        
+        if !contentView.subviews.isEmpty {
             return cell
         }
 
         guard let hostingView = UIHostingController(rootView: content).view else { return .init() }
 
-        cell.contentView.backgroundColor = .systemBackground
-        cell.contentView.translatesAutoresizingMaskIntoConstraints = false
-        cell.constrain(subview: cell.contentView)
-
-        cell.contentView.addSubview(hostingView)
-        cell.contentView.constrain(subview: hostingView)
+        contentView.backgroundColor = .init(.background)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        let widthConstraint = cell.contentView.widthAnchor.constraint(
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: cell.topAnchor),
+            contentView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
+        ])
+        
+        contentView.addSubview(hostingView)
+        
+        hostingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            hostingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hostingView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hostingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            hostingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+        
+        let widthConstraint = contentView.widthAnchor.constraint(
             equalToConstant: UIScreen.main.bounds.width
         )
         widthConstraint.priority = .defaultHigh

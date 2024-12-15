@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
+/// The `PrerenderedShadowView` replaces the default SwiftUI shadow modifier. It has a smaller performance impact due to its shadow path, which must not be redrawn if the layout changes.
 public class PrerenderedShadowView: UIView {
     public struct ShadowConfiguration: Equatable {
         let layerCornerRadius: CGFloat
@@ -20,7 +21,7 @@ public class PrerenderedShadowView: UIView {
         self.configuration = configuration
         super.init(frame: .zero)
 
-        backgroundColor = .systemBackground
+        backgroundColor = .init(.background)
         layer.shouldRasterize = true
 
         layer.cornerRadius = configuration.layerCornerRadius

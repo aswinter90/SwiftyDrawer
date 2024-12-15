@@ -34,8 +34,8 @@ extension Drawer {
         }
     }
 
-    /// The value returned by this function controls if the CollectionView should accept drag gestures based on its content offset, the current drag gesture and the DrawerState.
-    /// If the drawer is closed or partially opened, the gesture is never consumed by the CollectionView, as scrolling its content should only be possible when the drawer is fully opened.
+    /// The value returned by this function controls if the `UICollectionView`, which is embedded in the `Drawer`, should accept drag gestures based on its content offset, the current drag gesture and the `DrawerState`.
+    /// If the drawer is closed or partially opened, the gesture is never consumed by the UICollectionView, as scrolling its content should only be possible when the drawer is fully opened.
     private func shouldContentBeginDragging(verticalContentOffset: CGFloat, verticalTranslation: CGFloat) -> Bool {
         // Content scrolling is only available on a fully opened drawer
         if state.case != .fullyOpened {

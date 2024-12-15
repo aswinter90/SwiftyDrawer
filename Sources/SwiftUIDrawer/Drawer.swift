@@ -4,7 +4,7 @@ import SwiftUI
 public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Environment
 
-    @Environment(\.drawerFloatingButtons) var drawerFloatingButtons: DrawerFloatingButtons
+    @Environment(\.drawerFloatingButtonsConfiguration) var drawerFloatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
 
     // MARK: - Bindings
 
@@ -106,13 +106,13 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 contentContainer(
                     content: content
                         .fixedSize(horizontal: false, vertical: true)
-                        .background(Color(uiColor: .systemBackground))
+                        .background(Color.background)
                 )
                 .padding(.bottom, contentBottomPadding)
                 .zIndex(0)
             }
             .frame(height: UIScreen.main.bounds.height)
-            .background(Color(uiColor: .systemBackground))
+            .background(Color.background)
             .roundedCorners(DrawerConstants.cornerRadius, corners: [.topLeft, .topRight])
             .background { shadowView(yOffset: -3) }
             .gesture(drawerDragGesture)
@@ -164,7 +164,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .background(Color(uiColor: .systemBackground))
+        .background(Color.background)
         .drawingGroup()
         .background {
             shadowView(yOffset: 3)
@@ -190,20 +190,20 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @ViewBuilder
     private func floatingButtons() -> some View {
-        if drawerFloatingButtons.isEmpty {
+        if drawerFloatingButtonsConfiguration.isEmpty {
             EmptyView()
         } else {
             HStack {
                 Spacer()
 
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
-                    drawerFloatingButtons.firstConfiguration.map { configuration in
+                    drawerFloatingButtonsConfiguration.firstButtonProperties.map { configuration in
                         RoundFloatingButton(icon: configuration.icon) {
                             configuration.action()
                         }
                     }
 
-                    drawerFloatingButtons.secondConfiguration.map { configuration in
+                    drawerFloatingButtonsConfiguration.secondButtonProperties.map { configuration in
                         RoundFloatingButton(icon: configuration.icon) {
                             configuration.action()
                         }
@@ -211,8 +211,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
                 .padding(.trailing, DrawerConstants.floatingButtonsPadding)
                 .opacity(floatingButtonsOpacity)
-                .animation(.smooth, value: drawerFloatingButtons.firstConfiguration != nil)
-                .animation(.smooth, value: drawerFloatingButtons.secondConfiguration != nil)
+                .animation(.smooth, value: drawerFloatingButtonsConfiguration.firstButtonProperties != nil)
+                .animation(.smooth, value: drawerFloatingButtonsConfiguration.secondButtonProperties != nil)
             }
         }
     }
@@ -302,7 +302,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             if let mediumHeight = mediumHeight?.wrappedValue.absoluteValue {
                 state.currentHeight = mediumHeight
             } else {
-                assertionFailure("Error: Cannot set drawer state to `partiallyOpened` when no medium height was defined")
+                assertionFailure("Cannot set drawer state to `partiallyOpened` when no medium height was defined")
             }
         case .fullyOpened:
             state.currentHeight = maxHeight.absoluteValue

@@ -1,11 +1,33 @@
 import SwiftUI
 
 extension Color {
-    static var border: Color { .init(hex: "#d7dce1") }
+    static var background: Color {
+        UIColor(
+            darkMode: .init(hex: "#131821"),
+            lightMode: .white
+        )
+        .toColor()
+    }
+    static var border: Color {
+        UIColor(
+            darkMode: .init(hex: "#3c414b"),
+            lightMode: .init(hex: "#d7dce1")
+        )
+        .toColor()
+    }
 }
 
-extension Color {
-    init(hex: String) {
+extension UIColor {
+    convenience init(darkMode: UIColor, lightMode: UIColor) {
+        self.init { traitCollection in
+            switch traitCollection.userInterfaceStyle {
+            case .dark: darkMode
+            default: lightMode
+            }
+        }
+    }
+    
+    convenience init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
@@ -34,7 +56,11 @@ extension Color {
         } else {
             fatalError("Could not create Color from hex value \(hex)")
         }
-
-        self.init(.sRGB, red: red, green: green, blue: blue, opacity: opacity)
+        
+        self.init(red: red, green: green, blue: blue, alpha: opacity)
+    }
+    
+    func toColor() -> Color {
+        Color(uiColor: self)
     }
 }

@@ -5,7 +5,7 @@ import UIKit
 // MARK: - Enums
 
 public enum DrawerContentLayoutingStrategy {
-    /// Robust option which is based on an `UICollectionViewFlowLayout` but animated content size-changes can look choppy.
+    /// Robust option which is based on an `UICollectionViewFlowLayout`, but animated content size-changes can look choppy.
     case classic
 
     /// Better adapts to animated size-changes by leveraging a `UICollectionViewCompositionalLayout`,
