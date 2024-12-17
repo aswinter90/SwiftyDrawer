@@ -19,7 +19,10 @@ public final class DrawerFloatingButtonsConfiguration: Sendable {
         firstButtonProperties == nil && secondButtonProperties == nil
     }
 
-    public init(firstButtonProperties: ButtonProperties?, secondButtonProperties: ButtonProperties? = nil) {
+    public init(
+        firstButtonProperties: ButtonProperties?,
+        secondButtonProperties: ButtonProperties? = nil
+    ) {
         self.firstButtonProperties = firstButtonProperties
         self.secondButtonProperties = secondButtonProperties
     }
