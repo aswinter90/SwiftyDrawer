@@ -23,6 +23,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
     @State var contentHeight: CGFloat = 0.0
+    
     @State private var stickyHeaderHeight: CGFloat = 0.0
     @State var shouldElevateStickyHeader = false
     @State private var areAnimationsDisabled = true
@@ -173,7 +174,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         .drawingGroup()
         .background {
             shadowView(yOffset: 3)
-                .opacity(shouldElevateStickyHeader ? 1 : 0)
+                .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
                 .padding(.horizontal, -8)
         }
     }
