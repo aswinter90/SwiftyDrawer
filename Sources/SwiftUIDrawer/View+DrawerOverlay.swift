@@ -41,15 +41,3 @@ public extension View {
         .ignoresSafeArea(.container, edges: .bottom)
     }
 }
-
-struct Wot: View {
-  let model: String?
-
-  var body: Optional<some View> {
-    guard let model else {
-      return Body.none
-    }
-
-    return Text(model)
-  }
-}
