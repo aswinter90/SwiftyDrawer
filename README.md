@@ -7,4 +7,4 @@ This is still a WIP, later I might add a license file and make it open-source.
 
 # Demo
 
-https://github.com/user-attachments/assets/e7195a40-de32-4629-852a-8ac155067716
+https://github.com/user-attachments/assets/a20808c2-e293-4603-aaee-2699c418307a
