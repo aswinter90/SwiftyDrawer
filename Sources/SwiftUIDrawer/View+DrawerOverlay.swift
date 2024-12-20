@@ -10,7 +10,7 @@ public extension View {
         maxHeight: DrawerMaxHeight = .relativeToSafeAreaTop(0),
         isTabBarShown: Bool = true,
         isDimmingBackground: Bool = false,
-        stickyHeader: () -> StickyHeaderContent? = { nil },
+        @ViewBuilder stickyHeader: () -> StickyHeaderContent? = { nil },
         animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),
         @ViewBuilder content: () -> some View,
         contentViewEventHandler: DrawerContentCollectionViewEventHandler? = nil,
