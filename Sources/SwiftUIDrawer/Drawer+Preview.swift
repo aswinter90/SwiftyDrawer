@@ -56,7 +56,7 @@ struct DrawerDemoView: View {
                         Color.border
                             .frame(height: 1)
                     }
-                } : nil,
+                } : { nil },
                 animation: .snappy(duration: 0.3),
                 content: {
                     VStack(spacing: 16) {

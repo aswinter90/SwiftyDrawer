@@ -16,7 +16,7 @@ struct ContentView: View {
                         state: $drawerState,
                         minHeight: $drawerMinHeight,
                         isTabBarShown: isTabBarShown,
-                        stickyHeader: isStickyHeaderShown ? { stickyDrawerHeader } : nil,
+                        stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                         content: { drawerContent }
                     )
             }
@@ -38,7 +38,11 @@ struct ContentView: View {
     @ViewBuilder
     func tabViewIfNeeded<Content: View>(content: () -> Content) -> some View {
         if isTabBarShown {
-            TabView { content() }
+            TabView {
+                content()
+                    .tabItem { Label("Demo", systemImage: "wrench.and.screwdriver") }
+                    .opaqueTabBarStyle()
+            }
         } else {
             ZStack { content() }
         }
@@ -48,8 +52,6 @@ struct ContentView: View {
         Color(.systemBackground)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .top) { configButtons }
-            .tabItem { Label("Demo", systemImage: "wrench.and.screwdriver") }
-            .opaqueTabBarStyle()
     }
     
     var configButtons: some View {
@@ -66,6 +68,7 @@ struct ContentView: View {
             
             Text("Show sticky header")
                 .padding(.top)
+            
             Toggle("", isOn: $isStickyHeaderShown)
                 .frame(maxWidth: 51)
         }

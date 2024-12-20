@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension View {
     @ViewBuilder
-    func drawerOverlay(
+    func drawerOverlay<StickyHeaderContent: View>(
         layoutingStrategy: Binding<DrawerContentLayoutingStrategy> = .constant(.classic),
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
@@ -10,9 +10,9 @@ public extension View {
         maxHeight: DrawerMaxHeight = .relativeToSafeAreaTop(0),
         isTabBarShown: Bool = true,
         isDimmingBackground: Bool = false,
-        stickyHeader: (() -> some View)? = nil,
+        stickyHeader: () -> StickyHeaderContent? = { nil },
         animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),
-        content: () -> some View,
+        @ViewBuilder content: () -> some View,
         contentViewEventHandler: DrawerContentCollectionViewEventHandler? = nil,
         originObservable: DrawerOriginObservable? = nil
     ) -> some View {
@@ -31,7 +31,7 @@ public extension View {
                 mediumHeight: mediumHeight,
                 maxHeight: maxHeight,
                 isTabBarShown: isTabBarShown,
-                stickyHeader: stickyHeader?(),
+                stickyHeader: stickyHeader(),
                 animation: animation,
                 content: content(),
                 contentViewEventHandler: contentViewEventHandler,
@@ -40,4 +40,16 @@ public extension View {
         })
         .ignoresSafeArea(.container, edges: .bottom)
     }
+}
+
+struct Wot: View {
+  let model: String?
+
+  var body: Optional<some View> {
+    guard let model else {
+      return Body.none
+    }
+
+    return Text(model)
+  }
 }
