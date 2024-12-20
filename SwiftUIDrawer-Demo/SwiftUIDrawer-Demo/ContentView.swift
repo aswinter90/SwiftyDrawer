@@ -5,8 +5,8 @@ struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerMinHeight = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
     
-    @State private var isTabBarShown = true
-    @State private var isStickyHeaderShown = true
+    @State private var isTabBarShown = false
+    @State private var isStickyHeaderShown = false
     
     var body: some View {
         ZStack {
