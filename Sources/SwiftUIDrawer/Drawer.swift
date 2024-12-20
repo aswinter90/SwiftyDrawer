@@ -154,14 +154,19 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         VStack(spacing: 0) {
             DragHandle()
 
-            stickyHeader?
-                .readSize {
-                    stickyHeaderHeight = $0.height
-
-                    if minHeight.isSameAsStickyHeaderHeight {
-                        minHeight.updateAssociatedValue(stickyHeaderHeight)
-                    }
+            ZStack {
+                stickyHeader
+            }
+            .readSize {
+                if minHeight.isSameAsStickyHeaderHeight {
+                    minHeight.updateAssociatedValue($0.height)
                 }
+                if stickyHeaderHeight != $0.height {
+                    updateCurrentHeight(with: state.case)
+                }
+                
+                stickyHeaderHeight = $0.height
+            }
         }
         .fixedSize(horizontal: false, vertical: true)
         .background(Color.background)

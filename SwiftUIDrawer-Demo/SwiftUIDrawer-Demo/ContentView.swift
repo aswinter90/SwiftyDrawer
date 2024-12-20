@@ -83,11 +83,14 @@ struct ContentView: View {
             Color.black.opacity(0.3)
                 .frame(height: 1)
         }
+        .background {
+            Color.teal
+        }
     }
     
     var drawerContent: some View {
         VStack(spacing: 16) {
-            Text("Content")
+            Text("Scrollable content")
                 .font(.title2)
                 .padding(.top)
             
