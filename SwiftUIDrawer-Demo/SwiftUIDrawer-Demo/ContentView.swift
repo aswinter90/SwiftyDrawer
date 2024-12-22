@@ -3,7 +3,7 @@ import SwiftUIDrawer
 
 struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var drawerMinHeight = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
+    @State private var drawerMinHeight = DrawerMinHeight.relativeToSafeAreaBottom(0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false

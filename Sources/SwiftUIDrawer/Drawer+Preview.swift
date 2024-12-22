@@ -1,22 +1,28 @@
 import SwiftUI
 
 struct Drawer_PreviewProvider: PreviewProvider {
+    @State private static var previewDrawerMinHeight1 = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
+    
+    @State private static var previewDrawerMinHeight2 = DrawerMinHeight.relativeToSafeAreaBottomAndTabBar(0)
+    
     static var previews: some View {
         Group {
-            DrawerDemoView(showStickyHeader: true)
+            DrawerDemoView(isShowingStickyHeader: true)
                 .previewDisplayName("Drawer with header")
 
-            DrawerDemoView(showStickyHeader: false)
+            DrawerDemoView(isShowingStickyHeader: false)
                 .previewDisplayName("Drawer without header")
         }
     }
 }
 
 struct DrawerDemoView: View {
-    private let defaultHeight: CGFloat = 450
+    private let mediumHeight: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
-
-    let showStickyHeader: Bool
+    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
+    @State private var minHeight2 = DrawerMinHeight.relativeToSafeAreaBottomAndTabBar(0)
+    
+    let isShowingStickyHeader: Bool
 
     var body: some View {
         Color.blue.opacity(0.2)
@@ -24,12 +30,10 @@ struct DrawerDemoView: View {
             .ignoresSafeArea()
             .drawerOverlay(
                 state: $drawerState,
-                minHeight: .constant(
-                    showStickyHeader ? .sameAsStickyHeaderContentHeightRelativeToTabBar(0) : .relativeToSafeAreaBottomAndTabBar(0)
-                ),
-                mediumHeight: .constant(.absolute(defaultHeight)),
+                minHeight: isShowingStickyHeader ? $minHeight1 : $minHeight2,
+                mediumHeight: .constant(.absolute(mediumHeight)),
                 isDimmingBackground: true,
-                stickyHeader: showStickyHeader ? {
+                stickyHeader: isShowingStickyHeader ? {
                     VStack {
                         VStack {
                             Text("Drawer Component Demo")
