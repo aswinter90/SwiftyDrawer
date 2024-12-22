@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// This can be used as a wrapper for Drawer content, which should not be layed out from the top but be centered vertically.
+/// This can be used as a wrapper for Drawer content, which should not be laid out from the top but be centered vertically.
 public struct DrawerVerticallyCenteredContentContainerView<Content: View>: View {
     @Environment(\.mediumDrawerContentHeight) private var mediumDrawerContentHeight: CGFloat
     @Environment(\.drawerStickyHeaderHeight) private var drawerStickyHeaderHeight: CGFloat

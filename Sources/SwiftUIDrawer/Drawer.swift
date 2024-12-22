@@ -35,7 +35,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Properties: Private
 
-    private let isTabBarShown: Bool
+    private var isTabBarShown: Bool { minHeight.isAlignedToTabBar }
     private let stickyHeader: HeaderContent?
     private let animation: Animation
     private let content: Content
@@ -75,7 +75,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
         mediumHeight: Binding<DrawerMediumHeight>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
         maxHeight: DrawerMaxHeight = .relativeToSafeAreaTop(0),
-        isTabBarShown: Bool = true,
         stickyHeader: HeaderContent? = nil,
         animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),
         content: Content,
@@ -87,7 +86,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         _minHeight = minHeight
         self.mediumHeight = mediumHeight
         self.maxHeight = maxHeight
-        self.isTabBarShown = isTabBarShown
         self.stickyHeader = stickyHeader
         self.animation = animation
         self.content = content

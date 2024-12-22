@@ -15,7 +15,6 @@ struct ContentView: View {
                     .drawerOverlay(
                         state: $drawerState,
                         minHeight: $drawerMinHeight,
-                        isTabBarShown: isTabBarShown,
                         stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                         content: { drawerContent }
                     )

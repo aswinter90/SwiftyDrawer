@@ -76,11 +76,22 @@ public enum DrawerMinHeight: Equatable {
 
     var isSameAsStickyHeaderHeight: Bool {
         switch self {
-        case .sameAsStickyHeaderContentHeightRelativeToSafeAreaBottom, .sameAsStickyHeaderContentHeightRelativeToTabBar: true
-        default: false
+        case .sameAsStickyHeaderContentHeightRelativeToSafeAreaBottom, .sameAsStickyHeaderContentHeightRelativeToTabBar:
+            true
+        default:
+            false
         }
     }
 
+    var isAlignedToTabBar: Bool {
+        switch self {
+        case .relativeToSafeAreaBottomAndTabBar, .sameAsStickyHeaderContentHeightRelativeToTabBar:
+            true
+        default:
+            false
+        }
+    }
+    
     mutating func updateAssociatedValue(_ newValue: CGFloat) {
         switch self {
         case .absolute:

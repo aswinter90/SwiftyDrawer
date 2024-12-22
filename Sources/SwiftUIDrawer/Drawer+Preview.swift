@@ -19,7 +19,7 @@ struct DrawerDemoView: View {
     let showStickyHeader: Bool
 
     var body: some View {
-        Color.purple.opacity(0.2)
+        Color.blue.opacity(0.2)
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
             .drawerOverlay(
@@ -28,7 +28,6 @@ struct DrawerDemoView: View {
                     showStickyHeader ? .sameAsStickyHeaderContentHeightRelativeToTabBar(0) : .relativeToSafeAreaBottomAndTabBar(0)
                 ),
                 mediumHeight: .constant(.absolute(defaultHeight)),
-                isTabBarShown: true,
                 isDimmingBackground: true,
                 stickyHeader: showStickyHeader ? {
                     VStack {
@@ -62,6 +61,7 @@ struct DrawerDemoView: View {
                     VStack(spacing: 16) {
                         Text("Content")
                             .font(.headline)
+                            .foregroundStyle(Color.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(8)
                             .background(
@@ -104,7 +104,7 @@ private extension View {
                         height: TabBarHeightProvider.sharedInstance.height
                             + UIApplication.shared.safeAreaInsets.bottom
                     )
-                    .background(Color.green.opacity(0.3))
+                    .background(Color.gray.opacity(0.8))
             }
         )
         .ignoresSafeArea(.container, edges: .bottom)
