@@ -7,7 +7,7 @@ public extension View {
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
         mediumHeight: Binding<DrawerMediumHeight>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
-        maxHeight: DrawerMaxHeight = .relativeToSafeAreaTop(0),
+        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
         isDimmingBackground: Bool = false,
         @ViewBuilder stickyHeader: () -> StickyHeaderContent? = { nil },
         animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),

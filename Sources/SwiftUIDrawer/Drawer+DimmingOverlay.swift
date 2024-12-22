@@ -7,7 +7,7 @@ extension View {
         drawerState: Binding<DrawerState>,
         drawerMinHeight: Binding<DrawerMinHeight>,
         drawerMediumHeight: Binding<DrawerMediumHeight>?,
-        drawerMaxHeight: DrawerMaxHeight
+        drawerMaxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0))
     ) -> some View {
         if isShown {
             overlay {

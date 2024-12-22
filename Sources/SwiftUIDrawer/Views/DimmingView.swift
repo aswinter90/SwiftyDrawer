@@ -7,7 +7,7 @@ struct DimmingView: View {
     @Binding var drawerState: DrawerState
     @Binding var drawerMinHeight: DrawerMinHeight
     let drawerMediumHeight: Binding<DrawerMediumHeight>?
-    let drawerMaxHeight: DrawerMaxHeight
+    @Binding var drawerMaxHeight: DrawerMaxHeight
 
     var body: some View {
         Color.black

@@ -11,6 +11,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Binding var layoutingStrategy: DrawerContentLayoutingStrategy
     @Binding var state: DrawerState
     @Binding var minHeight: DrawerMinHeight
+    @Binding var maxHeight: DrawerMaxHeight
     var mediumHeight: Binding<DrawerMediumHeight>?
 
     // MARK: - State
@@ -30,7 +31,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Properties: Internal
 
-    let maxHeight: DrawerMaxHeight
     let contentViewEventHandler: DrawerContentCollectionViewEventHandler?
 
     // MARK: - Properties: Private
@@ -74,7 +74,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
         mediumHeight: Binding<DrawerMediumHeight>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
-        maxHeight: DrawerMaxHeight = .relativeToSafeAreaTop(0),
+        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
         stickyHeader: HeaderContent? = nil,
         animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),
         content: Content,
@@ -85,7 +85,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         _state = state
         _minHeight = minHeight
         self.mediumHeight = mediumHeight
-        self.maxHeight = maxHeight
+        _maxHeight = maxHeight
         self.stickyHeader = stickyHeader
         self.animation = animation
         self.content = content
@@ -320,7 +320,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
         let origin = CGPoint(
             x: 0,
-            y: verticalPosition - DrawerConstants.appleAttributionLabelPadding
+            y: verticalPosition - DrawerConstants.appleMapAttributionLabelPadding
         )
 
         if originObservable.origin != origin {

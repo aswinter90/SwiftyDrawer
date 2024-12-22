@@ -8,8 +8,7 @@ public enum DrawerContentLayoutingStrategy {
     /// Robust option which is based on an `UICollectionViewFlowLayout`, but animated content size-changes can look choppy.
     case classic
 
-    /// Better adapts to animated size-changes by leveraging a `UICollectionViewCompositionalLayout`,
-    /// but can show glitchy or jumpy behavior when swapping out content, e.g. in a typical list-to-detail transition.
+    /// Better adapts to animated size-changes by leveraging a `UICollectionViewCompositionalLayout`, but can show glitchy or jumpy behavior when swapping out content, e.g. in a typical transition from a list to a detail view.
     case modern
 }
 
@@ -152,11 +151,11 @@ public enum DrawerMediumHeight: Equatable {
 
 public enum DrawerConstants {
     public static let dragHandleHeight = 28.0
-    public static let draggingVelocityThreshold = 200.0
     public static let drawerDefaultMediumHeight = DrawerMediumHeight.relativeToSafeAreaBottomAndTabBar(328)
     public static let defaultAnimationDuration = 0.32
-    public static let floatingButtonsPadding = 16.0
-    static let appleAttributionLabelPadding = 5.0
+    static let floatingButtonsPadding = 16.0
+    static let draggingVelocityThreshold = 200.0
+    static let appleMapAttributionLabelPadding = 5.0
     static let cornerRadius = 14.0
 }
 
@@ -179,7 +178,7 @@ extension Drawer {
         }
     }
 
-    /// Used for interpolating values of the Drawer's top padding during animations.
+    /// Used for interpolating values of the drawer position during animations.
     struct OffsetEffect: GeometryEffect {
         var value: CGFloat
         var onValueDidChange: (CGFloat) -> Void
