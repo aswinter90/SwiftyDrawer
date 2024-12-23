@@ -76,7 +76,6 @@ struct ContentView: View {
                             .tag(Alignment.tabBar.rawValue)
                     }
                 )
-                .pickerStyle(.segmented)
                 
                 Toggle("Show sticky header", isOn: $isStickyHeaderShown)
             }
@@ -140,7 +139,6 @@ extension View {
         }
     }
 }
-
 
 #Preview {
     ContentView()
