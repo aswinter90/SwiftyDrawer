@@ -9,7 +9,7 @@ This project is still a WIP that I work on spontaneously. Later I might add more
 
 ### Minimal setup
 
-![image](https://github.com/user-attachments/assets/36863d01-7fdb-4a86-8e98-daa8719337d1)
+![image](https://github.com/user-attachments/assets/5c4c22e8-db86-4beb-9a44-ee43f2486d40)
 
 ```
 struct MinimalContentView: View {
