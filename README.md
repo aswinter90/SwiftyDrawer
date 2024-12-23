@@ -35,4 +35,4 @@ struct MinimalContentView: View {
 
 ### With sticky header and changing alignments
 
-https://github.com/user-attachments/assets/a20808c2-e293-4603-aaee-2699c418307a
+https://github.com/user-attachments/assets/efe3143f-4cc5-452a-a470-9c9f2c84034b
