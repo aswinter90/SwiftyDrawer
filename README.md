@@ -17,6 +17,7 @@ struct MinimalContentView: View {
     
     var body: some View {
         AppleLogo()
+            .padding(.top, 8)
             .drawerOverlay(
                 state: $drawerState,
                 content: {
