@@ -33,6 +33,6 @@ struct MinimalContentView: View {
 }
 ```
 
-### With sticky header and changing alignments
+### [With sticky header and changing alignments] (https://github.com/aswinter90/SwiftUIDrawer/blob/main/SwiftUIDrawer-Demo/SwiftUIDrawer-Demo/ContentView.swift)
 
 https://github.com/user-attachments/assets/efe3143f-4cc5-452a-a470-9c9f2c84034b
