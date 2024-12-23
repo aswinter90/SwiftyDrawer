@@ -15,7 +15,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Binding var state: DrawerState
     @Binding var minHeight: DrawerMinHeight
     @Binding var maxHeight: DrawerMaxHeight
-    var mediumHeight: Binding<DrawerMediumHeight>?
+    @Binding var mediumHeight: DrawerMediumHeight?
 
     // MARK: - State
 
@@ -30,11 +30,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     
     @State private var stickyHeaderHeight: CGFloat = 0.0
     @State var shouldElevateStickyHeader = false
-    @State private var areAnimationsDisabled = true
+    @State private var isAnimationDisabled = true
 
     // MARK: - Properties: Private
 
-    private var isTabBarShown: Bool { minHeight.isAlignedToTabBar }
+    private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
     private let stickyHeader: HeaderContent?
     private let content: Content
 
@@ -52,7 +52,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         case .fullyOpened:
             drawerPaddingTop
                 + UIApplication.shared.safeAreaInsets.bottom
-                + (isTabBarShown ? TabBarHeightProvider.sharedInstance.height : 0)
+                + (isAlignedToTabBar ? TabBarHeightProvider.sharedInstance.height : 0)
         default:
             0
         }
@@ -60,7 +60,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     private var floatingButtonsOpacity: CGFloat {
         let heightModifier = UIScreen.main.scale > 2 ? 200.0 : 100
-        let heightThreshold = mediumHeight?.wrappedValue.absoluteValue ?? minHeight.absoluteValue
+        let heightThreshold = mediumHeight?.absoluteValue ?? minHeight.absoluteValue
         return (heightThreshold + heightModifier - state.currentHeight) / 100.0
     }
 
@@ -69,14 +69,14 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     public init(
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
-        mediumHeight: Binding<DrawerMediumHeight>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
+        mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
         maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {
         _state = state
         _minHeight = minHeight
-        self.mediumHeight = mediumHeight
+        _mediumHeight = mediumHeight ?? .constant(nil)
         _maxHeight = maxHeight
         self.stickyHeader = stickyHeader
         self.content = content
@@ -124,13 +124,13 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             )
         )
         .animation(
-            isDragging || areAnimationsDisabled ? .none : animation,
+            isDragging || isAnimationDisabled ? .none : animation,
             value: state.currentHeight
         )
         .onFirstAppear {
             // The initial change of `state.currentHeight` should not be animated
             DispatchQueue.main.async {
-                areAnimationsDisabled = false
+                isAnimationDisabled = false
             }
         }
     }
@@ -263,7 +263,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
             let offsetToMinHeight = abs(state.currentHeight - minHeight.absoluteValue)
 
-            let offsetToMediumHeight = if let mediumHeight = mediumHeight?.wrappedValue.absoluteValue {
+            let offsetToMediumHeight = if let mediumHeight = mediumHeight?.absoluteValue {
                 abs(max(state.currentHeight, mediumHeight) - min(state.currentHeight, mediumHeight))
             } else {
                 CGFloat.infinity // Eliminates `offsetToMediumHeight` from the following switch
@@ -292,7 +292,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         case .closed:
             state.currentHeight = minHeight.absoluteValue
         case .partiallyOpened:
-            if let mediumHeight = mediumHeight?.wrappedValue.absoluteValue {
+            if let mediumHeight = mediumHeight?.absoluteValue {
                 state.currentHeight = mediumHeight
             } else {
                 assertionFailure("Cannot set drawer state to `partiallyOpened` when no medium height was defined")

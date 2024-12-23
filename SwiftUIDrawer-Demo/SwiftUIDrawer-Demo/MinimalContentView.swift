@@ -13,7 +13,6 @@ struct MinimalContentView: View {
                     VStack(spacing: 16) {
                         ForEach(0..<30) { index in
                             Text("Item \(index)")
-                                .frame(maxWidth: .infinity)
                         }
                     }
                     .padding(.top, 8)

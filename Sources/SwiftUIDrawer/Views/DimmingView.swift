@@ -6,7 +6,7 @@ struct DimmingView: View {
 
     @Binding var drawerState: DrawerState
     @Binding var drawerMinHeight: DrawerMinHeight
-    let drawerMediumHeight: Binding<DrawerMediumHeight>?
+    @Binding var drawerMediumHeight: DrawerMediumHeight?
     @Binding var drawerMaxHeight: DrawerMaxHeight
 
     var body: some View {
@@ -17,7 +17,7 @@ struct DimmingView: View {
     }
 
     private var opacity: CGFloat {
-        let mediumHeight = if let drawerMediumHeight = drawerMediumHeight?.wrappedValue.absoluteValue {
+        let mediumHeight = if let drawerMediumHeight = drawerMediumHeight?.absoluteValue {
             drawerMediumHeight
         } else {
             (drawerMinHeight.absoluteValue + drawerMaxHeight.absoluteValue) / 2

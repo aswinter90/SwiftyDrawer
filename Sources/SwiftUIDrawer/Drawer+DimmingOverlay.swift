@@ -6,7 +6,7 @@ extension View {
         isShown: Bool,
         drawerState: Binding<DrawerState>,
         drawerMinHeight: Binding<DrawerMinHeight>,
-        drawerMediumHeight: Binding<DrawerMediumHeight>?,
+        drawerMediumHeight: Binding<DrawerMediumHeight?>?,
         drawerMaxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0))
     ) -> some View {
         if isShown {
@@ -14,7 +14,7 @@ extension View {
                 DimmingView(
                     drawerState: drawerState,
                     drawerMinHeight: drawerMinHeight,
-                    drawerMediumHeight: drawerMediumHeight,
+                    drawerMediumHeight: drawerMediumHeight ?? .constant(nil),
                     drawerMaxHeight: drawerMaxHeight
                 )
             }
