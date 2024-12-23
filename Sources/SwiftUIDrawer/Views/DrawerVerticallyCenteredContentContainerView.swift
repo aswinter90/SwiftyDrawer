@@ -2,7 +2,7 @@ import SwiftUI
 
 /// This can be used as a wrapper for Drawer content, which should not be laid out from the top but be centered vertically.
 public struct DrawerVerticallyCenteredContentContainerView<Content: View>: View {
-    @Environment(\.mediumDrawerContentHeight) private var mediumDrawerContentHeight: CGFloat
+    @Environment(\.drawerMediumStateContentContainerHeight) private var drawerMediumStateContentContainerHeight: CGFloat
     @Environment(\.drawerStickyHeaderHeight) private var drawerStickyHeaderHeight: CGFloat
     @State private var height: CGFloat?
 
@@ -23,6 +23,6 @@ public struct DrawerVerticallyCenteredContentContainerView<Content: View>: View 
     }
     
     private var paddingTop: CGFloat {
-        (mediumDrawerContentHeight - drawerStickyHeaderHeight) / 2 - (height ?? 0) / 2
+        (drawerMediumStateContentContainerHeight - drawerStickyHeaderHeight) / 2 - (height ?? 0) / 2
     }
 }

@@ -4,11 +4,14 @@ import SwiftUI
 public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Environment
 
-    @Environment(\.drawerFloatingButtonsConfiguration) var drawerFloatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
-
+    @Environment(\.drawerLayoutStrategy) var layoutStrategy: DrawerContentLayoutStrategy
+    @Environment(\.drawerAnimation) private var animation: Animation
+    @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
+    @Environment(\.drawerContentViewEventHandler) var contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+    @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
+    
     // MARK: - Bindings
 
-    @Binding var layoutingStrategy: DrawerContentLayoutingStrategy
     @Binding var state: DrawerState
     @Binding var minHeight: DrawerMinHeight
     @Binding var maxHeight: DrawerMaxHeight
@@ -29,17 +32,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State var shouldElevateStickyHeader = false
     @State private var areAnimationsDisabled = true
 
-    // MARK: - Properties: Internal
-
-    let contentViewEventHandler: DrawerContentCollectionViewEventHandler?
-
     // MARK: - Properties: Private
 
     private var isTabBarShown: Bool { minHeight.isAlignedToTabBar }
     private let stickyHeader: HeaderContent?
-    private let animation: Animation
     private let content: Content
-    private let originObservable: DrawerOriginObservable?
 
     // MARK: - Computed
 
@@ -70,27 +67,19 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Initializer
 
     public init(
-        layoutingStrategy: Binding<DrawerContentLayoutingStrategy> = .constant(.classic),
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
         mediumHeight: Binding<DrawerMediumHeight>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
         maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
         stickyHeader: HeaderContent? = nil,
-        animation: Animation = .smooth(duration: DrawerConstants.defaultAnimationDuration),
-        content: Content,
-        contentViewEventHandler: DrawerContentCollectionViewEventHandler? = nil,
-        originObservable: DrawerOriginObservable? = nil
+        content: Content
     ) {
-        _layoutingStrategy = layoutingStrategy
         _state = state
         _minHeight = minHeight
         self.mediumHeight = mediumHeight
         _maxHeight = maxHeight
         self.stickyHeader = stickyHeader
-        self.animation = animation
         self.content = content
-        self.contentViewEventHandler = contentViewEventHandler
-        self.originObservable = originObservable
     }
 
     public var body: some View {
@@ -112,7 +101,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             }
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.background)
-            .roundedCorners(DrawerConstants.cornerRadius, corners: [.topLeft, .topRight])
+            .roundedCorners(DrawerConstants.drawerCornerRadius, corners: [.topLeft, .topRight])
             .background { shadowView(yOffset: -3) }
             .gesture(drawerDragGesture)
             .onAppear { updateCurrentHeight(with: state.case) }
@@ -180,7 +169,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     private func shadowView(yOffset: CGFloat) -> some View {
         PrerenderedShadowView(
             configuration: .init(
-                layerCornerRadius: DrawerConstants.cornerRadius,
+                layerCornerRadius: DrawerConstants.drawerCornerRadius,
                 shadowColor: .black,
                 shadowOpacity: 0.15,
                 shadowRadius: 3.0,
@@ -194,20 +183,20 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @ViewBuilder
     private func floatingButtons() -> some View {
-        if drawerFloatingButtonsConfiguration.isEmpty {
+        if floatingButtonsConfiguration.isEmpty {
             EmptyView()
         } else {
             HStack {
                 Spacer()
 
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
-                    drawerFloatingButtonsConfiguration.firstButtonProperties.map { configuration in
+                    floatingButtonsConfiguration.firstButtonProperties.map { configuration in
                         RoundFloatingButton(icon: configuration.icon) {
                             configuration.action()
                         }
                     }
 
-                    drawerFloatingButtonsConfiguration.secondButtonProperties.map { configuration in
+                    floatingButtonsConfiguration.secondButtonProperties.map { configuration in
                         RoundFloatingButton(icon: configuration.icon) {
                             configuration.action()
                         }
@@ -215,8 +204,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
                 .padding(.trailing, DrawerConstants.floatingButtonsPadding)
                 .opacity(floatingButtonsOpacity)
-                .animation(.smooth, value: drawerFloatingButtonsConfiguration.firstButtonProperties != nil)
-                .animation(.smooth, value: drawerFloatingButtonsConfiguration.secondButtonProperties != nil)
+                .animation(.smooth, value: floatingButtonsConfiguration.firstButtonProperties != nil)
+                .animation(.smooth, value: floatingButtonsConfiguration.secondButtonProperties != nil)
             }
         }
     }

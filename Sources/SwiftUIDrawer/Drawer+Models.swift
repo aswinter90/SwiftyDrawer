@@ -4,7 +4,7 @@ import UIKit
 
 // MARK: - Enums
 
-public enum DrawerContentLayoutingStrategy {
+public enum DrawerContentLayoutStrategy {
     /// Robust option which is based on an `UICollectionViewFlowLayout`, but animated content size-changes can look choppy.
     case classic
 
@@ -156,7 +156,7 @@ public enum DrawerConstants {
     static let floatingButtonsPadding = 16.0
     static let draggingVelocityThreshold = 200.0
     static let appleMapAttributionLabelPadding = 5.0
-    static let cornerRadius = 14.0
+    static let drawerCornerRadius = 14.0
 }
 
 // MARK: - Nested types

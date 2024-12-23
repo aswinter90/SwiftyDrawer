@@ -2,11 +2,18 @@ import SwiftUI
 import SwiftUIDrawer
 
 struct ContentView: View {
+    private enum Alignment: Int {
+        case safeArea
+        case tabBar
+    }
+    
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerMinHeight = DrawerMinHeight.relativeToSafeAreaBottom(0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
+    
+    @State private var selectedAlignment = Alignment.safeArea.rawValue
     
     var body: some View {
         ZStack {
@@ -32,6 +39,9 @@ struct ContentView: View {
                 isTabBarShown: newValue
             )
         }
+        .onChange(of: selectedAlignment) { newValue in
+            isTabBarShown = newValue == Alignment.tabBar.rawValue
+        }
     }
     
     @ViewBuilder
@@ -55,23 +65,23 @@ struct ContentView: View {
     
     var configButtons: some View {
         VStack {
-            Text("Align to:")
-            
-            HStack(spacing: 16) {
-                Button("Safe area") { isTabBarShown = false }
-                    .disabled(!isTabBarShown)
+            List {
+                Picker(
+                    "Align to",
+                    selection: $selectedAlignment,
+                    content: {
+                        Text("Safe area")
+                            .tag(Alignment.safeArea.rawValue)
+                        Text("Tab bar")
+                            .tag(Alignment.tabBar.rawValue)
+                    }
+                )
+                .pickerStyle(.segmented)
                 
-                Button("Tab bar") { isTabBarShown = true }
-                    .disabled(isTabBarShown)
+                Toggle("Show sticky header", isOn: $isStickyHeaderShown)
             }
-            
-            Text("Show sticky header")
-                .padding(.top)
-            
-            Toggle("", isOn: $isStickyHeaderShown)
-                .frame(maxWidth: 51)
+                
         }
-        .padding()
     }
     
     var stickyDrawerHeader: some View {

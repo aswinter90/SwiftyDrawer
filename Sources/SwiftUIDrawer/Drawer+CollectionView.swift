@@ -4,7 +4,7 @@ import SwiftUI
 extension Drawer {
     @ViewBuilder
     func contentContainer(content: some View) -> some View {
-        switch layoutingStrategy {
+        switch layoutStrategy {
         case .classic:
             LegacyDrawerContentCollectionView(
                 content: content.readSize {

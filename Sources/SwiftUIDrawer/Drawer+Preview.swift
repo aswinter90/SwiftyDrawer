@@ -25,7 +25,7 @@ struct DrawerDemoView: View {
     let isShowingStickyHeader: Bool
 
     var body: some View {
-        Color.blue.opacity(0.2)
+        Color.blue.opacity(0.5)
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
             .drawerOverlay(
@@ -60,7 +60,6 @@ struct DrawerDemoView: View {
                             .frame(height: 1)
                     }
                 } : { nil },
-                animation: .snappy(duration: 0.3),
                 content: {
                     VStack(spacing: 16) {
                         Text("Content")
@@ -85,6 +84,7 @@ struct DrawerDemoView: View {
                     }
                 }
             )
+            .drawerAnimation(.snappy(duration: 0.3))
             .drawerFloatingButtonsConfiguration(.init(
                 firstButtonProperties: .init(icon: .init(systemName: "map"), action: {}),
                 secondButtonProperties: .init(icon: .init(systemName: "mappin.circle"), action: {})
