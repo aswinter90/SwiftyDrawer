@@ -5,7 +5,7 @@ public final class DrawerOriginObservable {
 
     public init() {}
 
-    func change(origin: CGPoint) {
+    func update(origin: CGPoint) {
         self.origin = origin
     }
 }

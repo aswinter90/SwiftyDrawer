@@ -1,6 +1,6 @@
 import CoreGraphics
 
-public final class DrawerContentCollectionViewEventHandler {
+public final class DrawerContentOffsetController {
     public init() {}
 
     private var contentOffset: CGPoint?
@@ -9,7 +9,7 @@ public final class DrawerContentCollectionViewEventHandler {
         contentOffset = offset
     }
 
-    func consumeLatestContentOffset() -> CGPoint? {
+    @discardableResult func consumeLatestContentOffset() -> CGPoint? {
         guard let contentOffset else { return nil }
 
         self.contentOffset = nil

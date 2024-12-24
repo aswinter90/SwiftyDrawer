@@ -16,7 +16,7 @@ extension Drawer {
                 onDecelaratingEnded: onContentDecelaratingEnded,
                 onDidScroll: onContentDidScroll,
                 onDidResetContentOffset: onDidResetContentOffset,
-                contentViewEventHandler: contentViewEventHandler
+                drawerContentOffsetController: contentOffsetController
             )
             .swiftUIView()
 
@@ -28,7 +28,7 @@ extension Drawer {
                 onDecelaratingEnded: onContentDecelaratingEnded,
                 onDidScroll: onContentDidScroll,
                 onDidResetContentOffset: onDidResetContentOffset,
-                contentViewEventHandler: contentViewEventHandler
+                drawerContentOffsetController: contentOffsetController
             )
             .swiftUIView()
         }

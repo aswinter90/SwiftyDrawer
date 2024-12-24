@@ -7,7 +7,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
     var content: Content {
         didSet {
-            if let contentOffset = contentViewEventHandler?.consumeLatestContentOffset() {
+            if let contentOffset = drawerContentOffsetController?.consumeLatestContentOffset() {
                 self.contentOffset = contentOffset
 
                 if contentOffset == .zero {
@@ -30,7 +30,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
     // MARK: - Properties: Private
 
     private let flowLayout = UICollectionViewFlowLayout()
-    private let contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+    private let drawerContentOffsetController: DrawerContentOffsetController?
 
     // MARK: - Initializer
 
@@ -42,7 +42,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
         onDecelaratingEnded: @escaping () -> Void,
         onDidScroll: @escaping (_ verticalContentOffset: CGFloat) -> Void,
         onDidResetContentOffset: @escaping () -> Void,
-        contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+        drawerContentOffsetController: DrawerContentOffsetController?
     ) {
         self.content = content
         self.contentHeight = contentHeight
@@ -51,7 +51,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
         self.onDecelaratingEnded = onDecelaratingEnded
         self.onDidScroll = onDidScroll
         self.onDidResetContentOffset = onDidResetContentOffset
-        self.contentViewEventHandler = contentViewEventHandler
+        self.drawerContentOffsetController = drawerContentOffsetController
 
         super.init(frame: .zero, collectionViewLayout: flowLayout)
         commonInit()

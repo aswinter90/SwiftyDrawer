@@ -7,7 +7,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerLayoutStrategy) var layoutStrategy: DrawerContentLayoutStrategy
     @Environment(\.drawerAnimation) private var animation: Animation
     @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
-    @Environment(\.drawerContentViewEventHandler) var contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+    @Environment(\.drawerContentOffsetController) var contentOffsetController: DrawerContentOffsetController?
     @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
     
     // MARK: - Bindings
@@ -313,7 +313,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         )
 
         if originObservable.origin != origin {
-            originObservable.change(origin: origin)
+            originObservable.update(origin: origin)
         }
     }
 }

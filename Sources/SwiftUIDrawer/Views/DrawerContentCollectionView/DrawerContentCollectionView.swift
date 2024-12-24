@@ -11,7 +11,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
 
     var content: Content {
         didSet {
-            if let contentOffset = contentViewEventHandler?.consumeLatestContentOffset() {
+            if let contentOffset = drawerContentOffsetController?.consumeLatestContentOffset() {
                 self.contentOffset = contentOffset
 
                 if contentOffset == .zero {
@@ -29,7 +29,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
 
     // MARK: - Properties: Private
 
-    private let contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+    private let drawerContentOffsetController: DrawerContentOffsetController?
 
     private let configuration: UICollectionLayoutListConfiguration = {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -57,7 +57,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         onDecelaratingEnded: @escaping () -> Void,
         onDidScroll: @escaping (_ verticalContentOffset: CGFloat) -> Void,
         onDidResetContentOffset: @escaping () -> Void,
-        contentViewEventHandler: DrawerContentCollectionViewEventHandler?
+        drawerContentOffsetController: DrawerContentOffsetController?
     ) {
         self.content = content
         self.shouldBeginDragging = shouldBeginDragging
@@ -65,7 +65,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         self.onDecelaratingEnded = onDecelaratingEnded
         self.onDidScroll = onDidScroll
         self.onDidResetContentOffset = onDidResetContentOffset
-        self.contentViewEventHandler = contentViewEventHandler
+        self.drawerContentOffsetController = drawerContentOffsetController
 
         super.init(
             frame: .zero,

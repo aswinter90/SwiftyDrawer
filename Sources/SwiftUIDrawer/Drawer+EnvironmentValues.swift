@@ -10,7 +10,7 @@ extension EnvironmentValues {
         secondButtonProperties: nil
     )
     
-    @Entry var drawerContentViewEventHandler: DrawerContentCollectionViewEventHandler?
+    @Entry var drawerContentOffsetController: DrawerContentOffsetController?
     @Entry var drawerOriginObservable: DrawerOriginObservable?
     
     @Entry var drawerMediumStateContentContainerHeight: CGFloat = 0
@@ -30,8 +30,8 @@ public extension View {
         environment(\.drawerFloatingButtonsConfiguration, configuration)
     }
     
-    func drawerContentViewEventHandler(_ eventHandler: DrawerContentCollectionViewEventHandler?) -> some View {
-        environment(\.drawerContentViewEventHandler, eventHandler)
+    func drawerContentOffsetController(_ controller: DrawerContentOffsetController?) -> some View {
+        environment(\.drawerContentOffsetController, controller)
     }
     
     func drawerOriginObservable(_ observable: DrawerOriginObservable?) -> some View {
