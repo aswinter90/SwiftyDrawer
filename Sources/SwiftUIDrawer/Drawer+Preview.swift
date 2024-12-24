@@ -26,8 +26,6 @@ struct DrawerDemoView: View {
 
     var body: some View {
         Color.blue.opacity(0.5)
-            .frame(maxHeight: .infinity)
-            .ignoresSafeArea()
             .drawerOverlay(
                 state: $drawerState,
                 minHeight: isShowingStickyHeader ? $minHeight1 : $minHeight2,
