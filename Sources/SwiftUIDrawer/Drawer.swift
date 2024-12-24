@@ -186,27 +186,29 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         if floatingButtonsConfiguration.isEmpty {
             EmptyView()
         } else {
-            HStack {
-                Spacer()
-
+            HStack(alignment: .bottom) {
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
-                    floatingButtonsConfiguration.firstButtonProperties.map { configuration in
-                        RoundFloatingButton(icon: configuration.icon) {
-                            configuration.action()
-                        }
-                    }
-
-                    floatingButtonsConfiguration.secondButtonProperties.map { configuration in
-                        RoundFloatingButton(icon: configuration.icon) {
-                            configuration.action()
-                        }
+                    ForEach(floatingButtonsConfiguration.leadingButtons) { buttonProperties in
+                        RoundFloatingButton(icon: buttonProperties.icon, action: {
+                            buttonProperties.action()
+                        })
                     }
                 }
-                .padding(.trailing, DrawerConstants.floatingButtonsPadding)
-                .opacity(floatingButtonsOpacity)
-                .animation(.smooth, value: floatingButtonsConfiguration.firstButtonProperties != nil)
-                .animation(.smooth, value: floatingButtonsConfiguration.secondButtonProperties != nil)
+                .animation(.smooth, value: !floatingButtonsConfiguration.leadingButtons.isEmpty)
+                
+                Spacer()
+                
+                VStack(spacing: DrawerConstants.floatingButtonsPadding) {
+                    ForEach(floatingButtonsConfiguration.trailingButtons) { buttonProperties in
+                        RoundFloatingButton(icon: buttonProperties.icon, action: {
+                            buttonProperties.action()
+                        })
+                    }
+                }
+                .animation(.smooth, value: !floatingButtonsConfiguration.trailingButtons.isEmpty)
             }
+            .padding(.horizontal, DrawerConstants.floatingButtonsPadding)
+            .opacity(floatingButtonsOpacity)
         }
     }
 

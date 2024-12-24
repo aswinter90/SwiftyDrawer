@@ -83,10 +83,17 @@ struct DrawerDemoView: View {
                 }
             )
             .drawerAnimation(.snappy(duration: 0.3))
-            .drawerFloatingButtonsConfiguration(.init(
-                firstButtonProperties: .init(icon: .init(systemName: "map"), action: {}),
-                secondButtonProperties: .init(icon: .init(systemName: "mappin.circle"), action: {})
-            ))
+            .drawerFloatingButtonsConfiguration(
+                .init(
+                    leadingButtons: [
+                        .init(icon: .init(systemName: "map"), action: {}),
+                        .init(icon: .init(systemName: "pencil"), action: {}),
+                    ],
+                    trailingButtons: [
+                        .init(icon: .init(systemName: "mappin.circle"), action: {})
+                    ]
+                )
+            )
             .fakeTransparentTabBar
     }
 }

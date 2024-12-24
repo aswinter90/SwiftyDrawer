@@ -6,8 +6,8 @@ extension EnvironmentValues {
     @Entry var drawerAnimation = Animation.smooth(duration: DrawerConstants.defaultAnimationDuration)
     
     @Entry var drawerFloatingButtonsConfiguration = DrawerFloatingButtonsConfiguration(
-        firstButtonProperties: nil,
-        secondButtonProperties: nil
+        leadingButtons: [],
+        trailingButtons: []
     )
     
     @Entry var drawerContentOffsetController: DrawerContentOffsetController?

@@ -25,6 +25,16 @@ struct ContentView: View {
                         stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                         content: { drawerContent }
                     )
+                    .drawerFloatingButtonsConfiguration(
+                        .init(
+                            trailingButtons: [
+                                .init(
+                                    icon: Image(systemName: "map"),
+                                    action: {}
+                                )
+                            ]
+                        )
+                    )
             }
         }
         .onChange(of: isStickyHeaderShown) { newValue in

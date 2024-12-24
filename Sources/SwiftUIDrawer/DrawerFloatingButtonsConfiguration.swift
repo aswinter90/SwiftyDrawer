@@ -2,7 +2,8 @@ import Foundation
 import SwiftUI
 
 public final class DrawerFloatingButtonsConfiguration: Sendable {
-    public struct ButtonProperties: Sendable {
+    public struct ButtonProperties: Sendable, Identifiable {
+        public let id = UUID().uuidString
         let icon: Image
         let action: @Sendable @MainActor () -> Void
 
@@ -12,18 +13,18 @@ public final class DrawerFloatingButtonsConfiguration: Sendable {
         }
     }
 
-    let firstButtonProperties: ButtonProperties?
-    let secondButtonProperties: ButtonProperties?
+    let leadingButtons: [ButtonProperties]
+    let trailingButtons: [ButtonProperties]
 
     var isEmpty: Bool {
-        firstButtonProperties == nil && secondButtonProperties == nil
+        leadingButtons.isEmpty && trailingButtons.isEmpty
     }
 
     public init(
-        firstButtonProperties: ButtonProperties?,
-        secondButtonProperties: ButtonProperties? = nil
+        leadingButtons: [ButtonProperties] = [],
+        trailingButtons: [ButtonProperties] = []
     ) {
-        self.firstButtonProperties = firstButtonProperties
-        self.secondButtonProperties = secondButtonProperties
+        self.leadingButtons = leadingButtons
+        self.trailingButtons = trailingButtons
     }
 }
