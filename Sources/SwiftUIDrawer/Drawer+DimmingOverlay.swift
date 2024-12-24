@@ -17,8 +17,8 @@ extension View {
                     drawerMediumHeight: drawerMediumHeight ?? .constant(nil),
                     drawerMaxHeight: drawerMaxHeight
                 )
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
         } else {
             self
         }

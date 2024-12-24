@@ -22,6 +22,7 @@ struct ContentView: View {
                     .drawerOverlay(
                         state: $drawerState,
                         minHeight: $drawerMinHeight,
+                        isDimmingBackground: true,
                         stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                         content: { drawerContent }
                     )
