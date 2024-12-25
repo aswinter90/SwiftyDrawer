@@ -1,8 +1,8 @@
 import SwiftUI
 
 extension EnvironmentValues {
+    @Entry var drawerStyle = DrawerStyle()
     @Entry var drawerLayoutStrategy = DrawerContentLayoutStrategy.classic
-    
     @Entry var drawerAnimation = Animation.smooth(duration: DrawerConstants.defaultAnimationDuration)
     
     @Entry var drawerFloatingButtonsConfiguration = DrawerFloatingButtonsConfiguration(
@@ -18,6 +18,10 @@ extension EnvironmentValues {
 }
 
 public extension View {
+    func drawerStyle(_ drawerStyle: DrawerStyle) -> some View {
+        environment(\.drawerStyle, drawerStyle)
+    }
+    
     func drawerLayoutStrategy(_ layoutStrategy: DrawerContentLayoutStrategy) -> some View {
         environment(\.drawerLayoutStrategy, layoutStrategy)
     }

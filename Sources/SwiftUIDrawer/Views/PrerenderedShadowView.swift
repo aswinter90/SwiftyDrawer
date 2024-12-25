@@ -7,7 +7,7 @@ public class PrerenderedShadowView: UIView {
     public struct ShadowConfiguration: Equatable {
         let layerCornerRadius: CGFloat
         let shadowColor: UIColor
-        let shadowOpacity: Float
+        let shadowOpacity: CGFloat
         let shadowRadius: CGFloat
         let shadowOffset: CGSize
     }
@@ -44,7 +44,7 @@ public class PrerenderedShadowView: UIView {
         shadowLayer.shadowPath = nil
 
         shadowLayer.shadowColor = configuration.shadowColor.cgColor
-        shadowLayer.shadowOpacity = configuration.shadowOpacity
+        shadowLayer.shadowOpacity = Float(configuration.shadowOpacity)
         shadowLayer.shadowRadius = configuration.shadowRadius
         shadowLayer.shadowOffset = configuration.shadowOffset
 
@@ -99,7 +99,7 @@ public extension View {
                 configuration: .init(
                     layerCornerRadius: layerCornerRadius,
                     shadowColor: color,
-                    shadowOpacity: opacity,
+                    shadowOpacity: CGFloat(opacity),
                     shadowRadius: radius,
                     shadowOffset: offset
                 )

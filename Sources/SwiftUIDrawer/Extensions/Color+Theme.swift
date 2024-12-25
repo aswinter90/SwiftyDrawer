@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension Color {
+public extension Color {
     static var background: Color {
         UIColor(
             darkMode: .init(hex: "#131821"),

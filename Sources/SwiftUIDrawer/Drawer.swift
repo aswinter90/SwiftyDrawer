@@ -4,6 +4,7 @@ import SwiftUI
 public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Environment
 
+    @Environment(\.drawerStyle) var style: DrawerStyle
     @Environment(\.drawerLayoutStrategy) var layoutStrategy: DrawerContentLayoutStrategy
     @Environment(\.drawerAnimation) private var animation: Animation
     @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
@@ -34,14 +35,15 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Properties: Private
 
-    private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
     private let stickyHeader: HeaderContent?
     private let content: Content
 
     // MARK: - Computed
 
+    private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
+    
     /// Property that controls the drawer's position on the screen.
-    /// Updating the visible portion of the drawer this way is less error-prone than changing its height as in previous implementations, which delivered unexpected results when it contains a sticky header with a fixed intrinsic content size (e.g. a `Text`).
+    /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations, which delivered unexpected results when it contained a sticky header with a fixed intrinsic content size (e.g. a `Text`).
     private var drawerPaddingTop: CGFloat {
         UIScreen.main.bounds.height - state.currentHeight
     }
@@ -69,7 +71,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     public init(
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
-        mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeight),
+        mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
         maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
         stickyHeader: HeaderContent? = nil,
         content: Content
@@ -94,15 +96,15 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 contentContainer(
                     content: content
                         .fixedSize(horizontal: false, vertical: true)
-                        .background(Color.background)
+                        .background(style.backgroundColor)
                 )
                 .padding(.bottom, contentBottomPadding)
                 .zIndex(0)
             }
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.background)
-            .roundedCorners(DrawerConstants.drawerCornerRadius, corners: [.topLeft, .topRight])
-            .background { shadowView(yOffset: -3) }
+            .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
+            .background { shadowView(style: style.shadowStyle) }
             .gesture(drawerDragGesture)
             .onAppear { updateCurrentHeight(with: state.case) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
@@ -157,23 +159,23 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .background(Color.background)
+        .background(style.backgroundColor)
         .drawingGroup()
         .background {
-            shadowView(yOffset: 3)
+            shadowView(style: style.stickyHeaderShadowStyle)
                 .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
                 .padding(.horizontal, -8)
         }
     }
 
-    private func shadowView(yOffset: CGFloat) -> some View {
+    private func shadowView(style: DrawerStyle.ShadowStyle) -> some View {
         PrerenderedShadowView(
             configuration: .init(
                 layerCornerRadius: DrawerConstants.drawerCornerRadius,
-                shadowColor: .black,
-                shadowOpacity: 0.15,
-                shadowRadius: 3.0,
-                shadowOffset: .init(width: 0, height: yOffset)
+                shadowColor: UIColor(style.color),
+                shadowOpacity: style.opacity,
+                shadowRadius: style.radius,
+                shadowOffset: .init(width: style.offset.width, height: style.offset.height)
             )
         )
         .swiftUIView
@@ -289,7 +291,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         updateCurrentHeight(with: state.case)
     }
 
-    private func updateCurrentHeight(with newStateCase: DrawerState.Cases) {
+    private func updateCurrentHeight(with newStateCase: DrawerState.Case) {
         switch newStateCase {
         case .closed:
             state.currentHeight = minHeight.absoluteValue

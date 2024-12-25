@@ -1,26 +1,18 @@
 import SwiftUI
 
-struct Drawer_PreviewProvider: PreviewProvider {
-    @State private static var previewDrawerMinHeight1 = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
-    
-    @State private static var previewDrawerMinHeight2 = DrawerMinHeight.relativeToSafeAreaBottomAndTabBar(0)
-    
-    static var previews: some View {
-        Group {
-            DrawerDemoView(isShowingStickyHeader: true)
-                .previewDisplayName("Drawer with header")
+#Preview("Drawer with header") {
+    DrawerDemoView(isShowingStickyHeader: true)
+}
 
-            DrawerDemoView(isShowingStickyHeader: false)
-                .previewDisplayName("Drawer without header")
-        }
-    }
+#Preview("Drawer without header") {
+    DrawerDemoView(isShowingStickyHeader: false)
 }
 
 struct DrawerDemoView: View {
     private let mediumHeight: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
-    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.sameAsStickyHeaderContentHeightRelativeToTabBar(0)
-    @State private var minHeight2 = DrawerMinHeight.relativeToSafeAreaBottomAndTabBar(0)
+    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.sameAsStickyHeaderContentHeightAlignedToTabBar(0)
+    @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(0)
     
     let isShowingStickyHeader: Bool
 

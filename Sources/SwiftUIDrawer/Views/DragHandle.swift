@@ -1,7 +1,9 @@
 import SwiftUI
 
-struct DragHandle: View {
-    var body: some View {
+public struct DragHandle: View {
+    public init() {}
+    
+    public var body: some View {
         HStack {
             Color.border
                 .frame(width: 32, height: 4)

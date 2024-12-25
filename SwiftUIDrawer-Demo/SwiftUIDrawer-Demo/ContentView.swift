@@ -128,11 +128,11 @@ struct ContentView: View {
     func updateDrawerState(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         switch (isStickyHeaderShown, isTabBarShown) {
         case (true, true):
-            drawerMinHeight = .sameAsStickyHeaderContentHeightRelativeToTabBar(0)
+            drawerMinHeight = .sameAsStickyHeaderContentHeightAlignedToTabBar(0)
         case (true, false):
-            drawerMinHeight = .sameAsStickyHeaderContentHeightRelativeToSafeAreaBottom(0)
+            drawerMinHeight = .sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom(0)
         case (false, true):
-            drawerMinHeight = .relativeToSafeAreaBottomAndTabBar(0)
+            drawerMinHeight = .relativeToTabBar(0)
         case (false, false):
             drawerMinHeight = .relativeToSafeAreaBottom(0)
         }
