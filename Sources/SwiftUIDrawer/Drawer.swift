@@ -104,7 +104,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.background)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
-            .background { shadowView(style: style.shadowStyle) }
+            .background { shadowView(style: style.shadowStyle, cornerRadius: style.cornerRadius) }
             .gesture(drawerDragGesture)
             .onAppear { updateCurrentHeight(with: state.case) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
@@ -162,16 +162,16 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         .background(style.backgroundColor)
         .drawingGroup()
         .background {
-            shadowView(style: style.stickyHeaderShadowStyle)
+            shadowView(style: style.stickyHeaderShadowStyle, cornerRadius: 0)
                 .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
                 .padding(.horizontal, -8)
         }
     }
 
-    private func shadowView(style: DrawerStyle.ShadowStyle) -> some View {
+    private func shadowView(style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) -> some View {
         PrerenderedShadowView(
             configuration: .init(
-                layerCornerRadius: DrawerConstants.drawerCornerRadius,
+                layerCornerRadius: cornerRadius,
                 shadowColor: UIColor(style.color),
                 shadowOpacity: style.opacity,
                 shadowRadius: style.radius,
