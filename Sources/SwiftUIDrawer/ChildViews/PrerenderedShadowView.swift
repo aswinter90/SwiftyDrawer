@@ -10,6 +10,30 @@ public class PrerenderedShadowView: UIView {
         let shadowOpacity: CGFloat
         let shadowRadius: CGFloat
         let shadowOffset: CGSize
+        
+        init(style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) {
+            self.init(
+                layerCornerRadius: cornerRadius,
+                shadowColor: UIColor(style.color),
+                shadowOpacity: style.opacity,
+                shadowRadius: style.radius,
+                shadowOffset: style.offset
+            )
+        }
+        
+        init(
+            layerCornerRadius: CGFloat,
+            shadowColor: UIColor,
+            shadowOpacity: CGFloat,
+            shadowRadius: CGFloat,
+            shadowOffset: CGSize
+        ) {
+            self.layerCornerRadius = layerCornerRadius
+            self.shadowColor = shadowColor
+            self.shadowOpacity = shadowOpacity
+            self.shadowRadius = shadowRadius
+            self.shadowOffset = shadowOffset
+        }
     }
 
     private var shadowLayer = CALayer()

@@ -5,8 +5,8 @@ public enum DrawerMinHeight: Equatable {
     case absolute(CGFloat)
     case relativeToSafeAreaBottom(CGFloat) // Value of 0: Drag handle is on top of the safe area
     case relativeToTabBar(CGFloat) // Value of 0: Drag handle is on top of the tab bar
-    case sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat) // Value will be calculated. May be 0 during init
-    case sameAsStickyHeaderContentHeightAlignedToTabBar(CGFloat) // Value will be calculated. May be 0 during init
+    case equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat) // Value will be calculated. May be 0 during init
+    case equalToStickyHeaderContentHeightAlignedToTabBar(CGFloat) // Value will be calculated. May be 0 during init
 
     public var absoluteValue: CGFloat {
         switch self {
@@ -20,10 +20,10 @@ public enum DrawerMinHeight: Equatable {
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
-        case let .sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
+        case let .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
             UIApplication.shared.safeAreaInsets.bottom + float + DrawerConstants
                 .dragHandleHeight
-        case let .sameAsStickyHeaderContentHeightAlignedToTabBar(float):
+        case let .equalToStickyHeaderContentHeightAlignedToTabBar(float):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
@@ -31,9 +31,9 @@ public enum DrawerMinHeight: Equatable {
         }
     }
 
-    var isSameAsStickyHeaderHeight: Bool {
+    var isEqualToStickyHeaderHeight: Bool {
         switch self {
-        case .sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom, .sameAsStickyHeaderContentHeightAlignedToTabBar:
+        case .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom, .equalToStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
             false
@@ -42,7 +42,7 @@ public enum DrawerMinHeight: Equatable {
 
     var isAlignedToTabBar: Bool {
         switch self {
-        case .relativeToTabBar, .sameAsStickyHeaderContentHeightAlignedToTabBar:
+        case .relativeToTabBar, .equalToStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
             false
@@ -57,10 +57,10 @@ public enum DrawerMinHeight: Equatable {
             self = .relativeToSafeAreaBottom(newValue)
         case .relativeToTabBar:
             self = .relativeToTabBar(newValue)
-        case .sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom:
-            self = .sameAsStickyHeaderContentHeightAlignedToSafeAreaBottom(newValue)
-        case .sameAsStickyHeaderContentHeightAlignedToTabBar:
-            self = .sameAsStickyHeaderContentHeightAlignedToTabBar(newValue)
+        case .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom:
+            self = .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(newValue)
+        case .equalToStickyHeaderContentHeightAlignedToTabBar:
+            self = .equalToStickyHeaderContentHeightAlignedToTabBar(newValue)
         }
     }
 }

@@ -3,9 +3,7 @@ import SwiftUI
 public struct RoundFloatingButton: View {
     @Environment(\.drawerStyle) private var drawerStyle: DrawerStyle
     
-    public static let height = 40.0
-    public static let padding = 16.0
-
+    private static let height = 40.0
     private let properties: DrawerFloatingButtonsConfiguration.ButtonProperties
 
     public init(properties: DrawerFloatingButtonsConfiguration.ButtonProperties) {

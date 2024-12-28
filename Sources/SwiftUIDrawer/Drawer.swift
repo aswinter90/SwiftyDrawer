@@ -38,8 +38,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     private let stickyHeader: HeaderContent?
     private let content: Content
 
-    // MARK: - Computed
-
     private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
@@ -48,7 +46,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         UIScreen.main.bounds.height - state.currentHeight
     }
 
-    /// This makes sure that the scrollable content does not touch the safe area or is covered by the tab bar when the drawer is open
+    /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
     private var contentBottomPadding: CGFloat {
         switch state.case {
         case .fullyOpened:
@@ -84,11 +82,15 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         self.content = content
     }
 
+    // MARK: - Body
+    
     public var body: some View {
+        // Outer transparent container
         VStack(spacing: 0) {
             floatingButtons()
                 .padding(.bottom, DrawerConstants.floatingButtonsPadding)
 
+            // Header and content container
             VStack(spacing: 0) {
                 headerContainer
                     .zIndex(1) // For casting shadows on the scrollable content below
@@ -104,7 +106,15 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.background)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
-            .background { shadowView(style: style.shadowStyle, cornerRadius: style.cornerRadius) }
+            .background { // TODO: Shadow background modifier
+                PrerenderedShadowView(
+                    configuration: .init(
+                        style: style.shadowStyle,
+                        cornerRadius: style.cornerRadius
+                    )
+                )
+                .swiftUIView
+            }
             .gesture(drawerDragGesture)
             .onAppear { updateCurrentHeight(with: state.case) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
@@ -136,10 +146,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             }
         }
     }
+}
 
-    // MARK: - Header
+// MARK: - Views
 
-    @ViewBuilder
+extension Drawer {
     private var headerContainer: some View {
         VStack(spacing: 0) {
             DragHandle()
@@ -148,7 +159,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 stickyHeader
             }
             .readSize {
-                if minHeight.isSameAsStickyHeaderHeight {
+                if minHeight.isEqualToStickyHeaderHeight {
                     minHeight.updateAssociatedValue($0.height)
                 }
                 if stickyHeaderHeight != $0.height {
@@ -162,27 +173,18 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         .background(style.backgroundColor)
         .drawingGroup()
         .background {
-            shadowView(style: style.stickyHeaderShadowStyle, cornerRadius: 0)
-                .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
-                .padding(.horizontal, -8)
+            PrerenderedShadowView(
+                configuration: .init(
+                    style: style.stickyHeaderShadowStyle,
+                    cornerRadius: 0
+                )
+            )
+            .swiftUIView
+            .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
+            .padding(.horizontal, -8)
         }
     }
-
-    private func shadowView(style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) -> some View {
-        PrerenderedShadowView(
-            configuration: .init(
-                layerCornerRadius: cornerRadius,
-                shadowColor: UIColor(style.color),
-                shadowOpacity: style.opacity,
-                shadowRadius: style.radius,
-                shadowOffset: .init(width: style.offset.width, height: style.offset.height)
-            )
-        )
-        .swiftUIView
-    }
-
-    // MARK: - Floating buttons
-
+    
     @ViewBuilder
     private func floatingButtons() -> some View {
         if floatingButtonsConfiguration.isEmpty {
@@ -209,7 +211,10 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .opacity(floatingButtonsOpacity)
         }
     }
+}
 
+extension Drawer {
+    
     // MARK: - Drag Gesture
 
     private var drawerDragGesture: some Gesture {
@@ -236,6 +241,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             }
     }
 
+    // MARK: - State updates
+    
     private func updateState(withDragGestureValue value: _ChangedGesture<DragGesture>.Value) {
         let startLocation = value.startLocation.y.roundToDecimal(3)
         let endlocation = value.location.y.roundToDecimal(3)
