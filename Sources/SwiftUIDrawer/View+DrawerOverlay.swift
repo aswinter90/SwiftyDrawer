@@ -42,7 +42,7 @@ public extension View {
     ) -> some View {
         if isShown {
             overlay {
-                DrawerDimmingView(
+                DimmingView(
                     drawerState: drawerState,
                     drawerMinHeight: drawerMinHeight,
                     drawerMediumHeight: drawerMediumHeight ?? .constant(nil),

@@ -13,16 +13,18 @@ public enum DrawerMinHeight: Equatable {
         case let .absolute(float):
             float + DrawerConstants.dragHandleHeight
         case let .relativeToSafeAreaBottom(float):
-            UIApplication.shared.safeAreaInsets.bottom + float + DrawerConstants
-                .dragHandleHeight
+            UIApplication.shared.safeAreaInsets.bottom
+                + float
+                + DrawerConstants.dragHandleHeight
         case let .relativeToTabBar(float):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
         case let .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
-            UIApplication.shared.safeAreaInsets.bottom + float + DrawerConstants
-                .dragHandleHeight
+            UIApplication.shared.safeAreaInsets.bottom
+                + float
+                + DrawerConstants.dragHandleHeight
         case let .equalToStickyHeaderContentHeightAlignedToTabBar(float):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height

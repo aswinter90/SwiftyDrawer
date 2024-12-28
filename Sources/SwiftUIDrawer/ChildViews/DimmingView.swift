@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct DrawerDimmingView: View {
+struct DimmingView: View {
     private static let maxOpacity = 0.4
 
     @Binding var drawerState: DrawerState
