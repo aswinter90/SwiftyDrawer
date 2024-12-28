@@ -29,7 +29,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
     @State var contentHeight: CGFloat = 0.0
     
-    @State private var stickyHeaderHeight: CGFloat = 0.0
+    @State var stickyHeaderHeight: CGFloat = 0.0
     @State var shouldElevateStickyHeader = false
     @State private var isAnimationDisabled = true
 
@@ -106,15 +106,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.background)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
-            .background { // TODO: Shadow background modifier
-                PrerenderedShadowView(
-                    configuration: .init(
-                        style: style.shadowStyle,
-                        cornerRadius: style.cornerRadius
-                    )
-                )
-                .swiftUIView
-            }
+            .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
             .gesture(drawerDragGesture)
             .onAppear { updateCurrentHeight(with: state.case) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
@@ -132,7 +124,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             // Instead of the default `offset` modifier, we add our own to observe value changes, which can be published to the outside world
             OffsetEffect(
                 value: drawerPaddingTop,
-                onValueDidChange: onDrawerVerticalPositionDidChange
+                onValueDidChange: onVerticalPositionDidChange
             )
         )
         .animation(
@@ -180,7 +172,7 @@ extension Drawer {
                 )
             )
             .swiftUIView
-            .opacity(shouldElevateStickyHeader && stickyHeaderHeight > 0 ? 1 : 0)
+            .opacity(shouldElevateStickyHeader ? 1 : 0)
             .padding(.horizontal, -8)
         }
     }
@@ -311,16 +303,11 @@ extension Drawer {
 
     // MARK: - Origin observing
 
-    private func onDrawerVerticalPositionDidChange(_ verticalPosition: CGFloat) {
+    private func onVerticalPositionDidChange(_ verticalPosition: CGFloat) {
         guard let originObservable else { return }
 
-        let origin = CGPoint(
-            x: 0,
-            y: verticalPosition - DrawerConstants.appleMapAttributionLabelPadding
+        originObservable.updateIfNeeded(
+            origin: CGPoint(x: 0, y: verticalPosition - DrawerConstants.appleMapAttributionLabelPadding)
         )
-
-        if originObservable.origin != origin {
-            originObservable.update(origin: origin)
-        }
     }
 }

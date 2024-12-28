@@ -131,4 +131,14 @@ public extension View {
             .swiftUIView
         }
     }
+    
+    func prerenderedShadow(_ style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) -> some View {
+        prerenderedShadow(
+            layerCornerRadius: cornerRadius,
+            color: UIColor(style.color),
+            opacity: Float(style.opacity),
+            radius: style.radius,
+            offset: style.offset
+        )
+    }
 }

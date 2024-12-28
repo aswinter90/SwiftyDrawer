@@ -73,7 +73,7 @@ extension Drawer {
 
     private func onContentDidScroll(verticalContentOffset: CGFloat) {
         DispatchQueue.main.async {
-            shouldElevateStickyHeader = verticalContentOffset > 0
+            shouldElevateStickyHeader = verticalContentOffset > 0 && stickyHeaderHeight > 0
         }
     }
 
