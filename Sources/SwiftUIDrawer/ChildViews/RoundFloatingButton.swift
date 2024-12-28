@@ -6,19 +6,18 @@ public struct RoundFloatingButton: View {
     public static let height = 40.0
     public static let padding = 16.0
 
-    private var icon: Image
-    private var action: () -> Void
+    private let properties: DrawerFloatingButtonsConfiguration.ButtonProperties
 
-    public init(icon: Image, action: @escaping () -> Void) {
-        self.icon = icon
-        self.action = action
+    public init(properties: DrawerFloatingButtonsConfiguration.ButtonProperties) {
+        self.properties = properties
     }
-
+    
     public var body: some View {
         Button(
-            action: action,
+            action: properties.action,
             label: {
-                icon
+                properties
+                    .icon
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
                     .background(Color.background)

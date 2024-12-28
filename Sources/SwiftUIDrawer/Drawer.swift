@@ -191,9 +191,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             HStack(alignment: .bottom) {
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
                     ForEach(floatingButtonsConfiguration.leadingButtons) { buttonProperties in
-                        RoundFloatingButton(icon: buttonProperties.icon, action: {
-                            buttonProperties.action()
-                        })
+                        RoundFloatingButton(properties: buttonProperties)
                     }
                 }
                 .animation(.smooth, value: !floatingButtonsConfiguration.leadingButtons.isEmpty)
@@ -202,9 +200,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
                     ForEach(floatingButtonsConfiguration.trailingButtons) { buttonProperties in
-                        RoundFloatingButton(icon: buttonProperties.icon, action: {
-                            buttonProperties.action()
-                        })
+                        RoundFloatingButton(properties: buttonProperties)
                     }
                 }
                 .animation(.smooth, value: !floatingButtonsConfiguration.trailingButtons.isEmpty)
