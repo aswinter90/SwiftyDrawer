@@ -5,8 +5,8 @@ public enum DrawerMinHeight: Equatable {
     case absolute(CGFloat)
     case relativeToSafeAreaBottom(CGFloat) // Value of 0: Drag handle is on top of the safe area
     case relativeToTabBar(CGFloat) // Value of 0: Drag handle is on top of the tab bar
-    case equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat) // Value will be calculated. May be 0 during init
-    case equalToStickyHeaderContentHeightAlignedToTabBar(CGFloat) // Value will be calculated. May be 0 during init
+    case equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat = 0) // Value will be calculated. May be 0 during init
+    case equalToStickyHeaderContentHeightAlignedToTabBar(CGFloat = 0) // Value will be calculated. May be 0 during init
 
     public var absoluteValue: CGFloat {
         switch self {
