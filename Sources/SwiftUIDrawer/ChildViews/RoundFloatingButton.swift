@@ -30,6 +30,6 @@ public struct RoundFloatingButton: View {
                     )
             }
         )
-        .tint(.primary)
+        .tint(properties.tintColor)
     }
 }

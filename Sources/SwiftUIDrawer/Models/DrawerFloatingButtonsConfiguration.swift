@@ -5,10 +5,16 @@ public final class DrawerFloatingButtonsConfiguration: Sendable {
     public struct ButtonProperties: Sendable, Identifiable {
         public let id = UUID().uuidString
         let icon: Image
+        let tintColor: Color
         let action: @Sendable @MainActor () -> Void
 
-        public init(icon: Image, action: @escaping @Sendable @MainActor () -> Void) {
+        public init(
+            icon: Image,
+            tintColor: Color = .primary,
+            action: @escaping @Sendable @MainActor () -> Void
+        ) {
             self.icon = icon
+            self.tintColor = tintColor
             self.action = action
         }
     }
