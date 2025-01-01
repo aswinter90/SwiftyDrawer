@@ -156,18 +156,13 @@ extension Drawer {
                 retriggerHeaderReadSize(using: $0)
             }
             .readSize {
-                print("current minHeight on readSize: ", minHeight)
-                
                 if minHeight.shouldMatchStickyHeaderHeight {
-                    print("MATCHES STICKYHEADERHEIGHT")
                     minHeight.updateAssociatedValue($0.height)
                 }
 
                 updateCurrentHeight(with: state.case)
                 
                 stickyHeaderHeight = $0.height
-                
-                print("SAVED NEW HEADER HEIGHT: ", $0.height)
             }
         }
         .fixedSize(horizontal: false, vertical: true)
@@ -188,7 +183,6 @@ extension Drawer {
     
     private func retriggerHeaderReadSize(using newMinHeight: DrawerMinHeight) {
         stickyHeaderId = newMinHeight.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
-        print("minHeight changed, ID was updated")
     }
     
     @ViewBuilder

@@ -9,37 +9,28 @@ public enum DrawerMinHeight: Equatable {
     case matchesStickyHeaderContentHeightAlignedToTabBar(CGFloat = 0) // Value will be calculated. Can be 0 during init
 
     public var absoluteValue: CGFloat {
-        let value: CGFloat
-        
         switch self {
         case let .absolute(float):
-            value = float + DrawerConstants.dragHandleHeight
+            float + DrawerConstants.dragHandleHeight
         case let .relativeToSafeAreaBottom(float):
-            value = UIApplication.shared.safeAreaInsets.bottom
+            UIApplication.shared.safeAreaInsets.bottom
                 + float
                 + DrawerConstants.dragHandleHeight
         case let .relativeToTabBar(float):
-            value = UIApplication.shared.safeAreaInsets.bottom
+            UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
-            value = UIApplication.shared.safeAreaInsets.bottom
+            UIApplication.shared.safeAreaInsets.bottom
                 + float
                 + DrawerConstants.dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToTabBar(float):
-            print("UIApplication.shared.safeAreaInsets.bottom: ", UIApplication.shared.safeAreaInsets.bottom)
-            print("TabBarHeightProvider.sharedInstance.height: ", TabBarHeightProvider.sharedInstance.height)
-            print("float: ", float)
-            print("DrawerConstants.dragHandleHeight: ", DrawerConstants.dragHandleHeight)
-            value = UIApplication.shared.safeAreaInsets.bottom
+            UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
         }
-        
-        print("value: ", value)
-        return value
     }
     
     var shouldMatchStickyHeaderHeight: Bool {
