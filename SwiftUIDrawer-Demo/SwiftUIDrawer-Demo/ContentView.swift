@@ -37,13 +37,13 @@ struct ContentView: View {
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
-            updateDrawerState(
+            updateDrawerMinHeight(
                 isStickyHeaderShown: newValue,
                 isTabBarShown: isTabBarShown
             )
         }
         .onChange(of: isTabBarShown) { newValue in
-            updateDrawerState(
+            updateDrawerMinHeight(
                 isStickyHeaderShown: isStickyHeaderShown,
                 isTabBarShown: newValue
             )
@@ -142,7 +142,7 @@ struct ContentView: View {
         }
     }
     
-    func updateDrawerState(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
+    func updateDrawerMinHeight(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         print("isStickyHeaderShown: ", isStickyHeaderShown)
         print("isTabBarShown: ", isTabBarShown)
         
