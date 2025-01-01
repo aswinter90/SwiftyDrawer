@@ -153,6 +153,9 @@ extension Drawer {
             }
             .id(stickyHeaderId)
             .onChange(of: minHeight) {
+                // In SwiftUI previews after updating the sticky header content and changing the drawer's `minHeight` on the outside,
+                // the `readSize` closure below is not always called.
+                // By changing the view's id we trigger a redraw and can make sure we always re-read its size.
                 retriggerHeaderReadSize(using: $0)
             }
             .readSize {
