@@ -89,6 +89,39 @@ struct ContentView: View {
                 )
                 
                 Toggle("Show sticky header", isOn: $isStickyHeaderShown)
+                
+                LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
+                    Text("Actions:")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button {
+                        drawerState.case = .closed
+                    } label: {
+                        Text("Close")
+                    }
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+
+                    Spacer()
+                    
+                    Button {
+                        drawerState.case = .partiallyOpened
+                    } label: {
+                        Text("Open half")
+                    }
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
+                    Spacer()
+                    
+                    Button {
+                        drawerState.case = .fullyOpened
+                    } label: {
+                        Text("Open fully")
+                    }
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
                 
         }
