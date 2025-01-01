@@ -5,37 +5,46 @@ public enum DrawerMinHeight: Equatable {
     case absolute(CGFloat)
     case relativeToSafeAreaBottom(CGFloat) // Value of 0: Drag handle is on top of the safe area
     case relativeToTabBar(CGFloat) // Value of 0: Drag handle is on top of the tab bar
-    case equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat = 0) // Value will be calculated. May be 0 during init
-    case equalToStickyHeaderContentHeightAlignedToTabBar(CGFloat = 0) // Value will be calculated. May be 0 during init
+    case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat = 0) // Value will be calculated. Can be 0 during init
+    case matchesStickyHeaderContentHeightAlignedToTabBar(CGFloat = 0) // Value will be calculated. Can be 0 during init
 
     public var absoluteValue: CGFloat {
+        let value: CGFloat
+        
         switch self {
         case let .absolute(float):
-            float + DrawerConstants.dragHandleHeight
+            value = float + DrawerConstants.dragHandleHeight
         case let .relativeToSafeAreaBottom(float):
-            UIApplication.shared.safeAreaInsets.bottom
+            value = UIApplication.shared.safeAreaInsets.bottom
                 + float
                 + DrawerConstants.dragHandleHeight
         case let .relativeToTabBar(float):
-            UIApplication.shared.safeAreaInsets.bottom
+            value = UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
-        case let .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
-            UIApplication.shared.safeAreaInsets.bottom
+        case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
+            value = UIApplication.shared.safeAreaInsets.bottom
                 + float
                 + DrawerConstants.dragHandleHeight
-        case let .equalToStickyHeaderContentHeightAlignedToTabBar(float):
-            UIApplication.shared.safeAreaInsets.bottom
+        case let .matchesStickyHeaderContentHeightAlignedToTabBar(float):
+            print("UIApplication.shared.safeAreaInsets.bottom: ", UIApplication.shared.safeAreaInsets.bottom)
+            print("TabBarHeightProvider.sharedInstance.height: ", TabBarHeightProvider.sharedInstance.height)
+            print("float: ", float)
+            print("DrawerConstants.dragHandleHeight: ", DrawerConstants.dragHandleHeight)
+            value = UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
                 + float
                 + DrawerConstants.dragHandleHeight
         }
+        
+        print("value: ", value)
+        return value
     }
-
-    var isEqualToStickyHeaderHeight: Bool {
+    
+    var shouldMatchStickyHeaderHeight: Bool {
         switch self {
-        case .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom, .equalToStickyHeaderContentHeightAlignedToTabBar:
+        case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom, .matchesStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
             false
@@ -44,7 +53,7 @@ public enum DrawerMinHeight: Equatable {
 
     var isAlignedToTabBar: Bool {
         switch self {
-        case .relativeToTabBar, .equalToStickyHeaderContentHeightAlignedToTabBar:
+        case .relativeToTabBar, .matchesStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
             false
@@ -59,10 +68,10 @@ public enum DrawerMinHeight: Equatable {
             self = .relativeToSafeAreaBottom(newValue)
         case .relativeToTabBar:
             self = .relativeToTabBar(newValue)
-        case .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom:
-            self = .equalToStickyHeaderContentHeightAlignedToSafeAreaBottom(newValue)
-        case .equalToStickyHeaderContentHeightAlignedToTabBar:
-            self = .equalToStickyHeaderContentHeightAlignedToTabBar(newValue)
+        case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom:
+            self = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(newValue)
+        case .matchesStickyHeaderContentHeightAlignedToTabBar:
+            self = .matchesStickyHeaderContentHeightAlignedToTabBar(newValue)
         }
     }
 }

@@ -30,6 +30,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State var contentHeight: CGFloat = 0.0
     
     @State var stickyHeaderHeight: CGFloat = 0.0
+    @State private var stickyHeaderId = UUID()
     @State var shouldElevateStickyHeader = false
     @State private var isAnimationDisabled = true
 
@@ -150,8 +151,16 @@ extension Drawer {
             ZStack {
                 stickyHeader
             }
+            .id(stickyHeaderId)
+            .onChange(of: minHeight) {
+                stickyHeaderId = $0.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
+                print("minHeight changed, ID was updated")
+            }
             .readSize {
-                if minHeight.isEqualToStickyHeaderHeight {
+                print("current minHeight on readSize: ", minHeight)
+                
+                if minHeight.shouldMatchStickyHeaderHeight {
+                    print("MATCHES STICKYHEADERHEIGHT")
                     minHeight.updateAssociatedValue($0.height)
                 }
                 if stickyHeaderHeight != $0.height {
@@ -159,6 +168,8 @@ extension Drawer {
                 }
                 
                 stickyHeaderHeight = $0.height
+                
+                print("SAVED NEW HEADER HEIGHT: ", $0.height)
             }
         }
         .fixedSize(horizontal: false, vertical: true)

@@ -11,7 +11,7 @@ import SwiftUI
 struct DrawerDemoView: View {
     private let mediumHeight: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
-    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.equalToStickyHeaderContentHeightAlignedToTabBar()
+    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.matchesStickyHeaderContentHeightAlignedToTabBar()
     @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(0)
     
     let isShowingStickyHeader: Bool
