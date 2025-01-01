@@ -128,7 +128,7 @@ struct ContentView: View {
     }
     
     var stickyDrawerHeader: some View {
-        VStack {
+        VStack(spacing: 0) {
             Text("Sticky header")
                 .font(.title)
                 .frame(maxWidth: .infinity)
