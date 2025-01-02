@@ -22,7 +22,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @State private var isDragging = false
     @GestureState private var lastTranslationYValue = 0.0
-
+    @State private var isAnimationDisabled = true
+    
     /// Additional safety measure to prevent the drawer from moving slightly when scrolling its content
     @State var isDrawerDragGestureEnabled = true
 
@@ -32,7 +33,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State var stickyHeaderHeight: CGFloat = 0.0
     @State private var stickyHeaderId = UUID()
     @State var shouldElevateStickyHeader = false
-    @State private var isAnimationDisabled = true
 
     // MARK: - Properties: Private
 
@@ -42,7 +42,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
-    /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations, which delivered unexpected results when it contained a sticky header with a fixed intrinsic content size (e.g. a `Text`).
+    /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
     private var drawerPaddingTop: CGFloat {
         UIScreen.main.bounds.height - state.currentHeight
     }
@@ -153,10 +153,9 @@ extension Drawer {
             }
             .id(stickyHeaderId)
             .onChange(of: minHeight) {
-                // In SwiftUI previews after updating the sticky header content and changing the drawer's `minHeight` on the outside,
-                // the `readSize` closure below is not always called.
+                // The `readSize` closure below is not always called when using SwiftUI previews after updating the sticky header content and changing the drawer's `minHeight` on the outside.
                 // By changing the view's id we trigger a redraw and can make sure we always re-read its size.
-                retriggerHeaderReadSize(using: $0)
+                redrawHeaderIfNeeded(using: $0)
             }
             .readSize {
                 if minHeight.shouldMatchStickyHeaderHeight {
@@ -164,7 +163,6 @@ extension Drawer {
                 }
 
                 updateCurrentHeight(with: state.case)
-                
                 stickyHeaderHeight = $0.height
             }
         }
@@ -184,7 +182,7 @@ extension Drawer {
         }
     }
     
-    private func retriggerHeaderReadSize(using newMinHeight: DrawerMinHeight) {
+    private func redrawHeaderIfNeeded(using newMinHeight: DrawerMinHeight) {
         stickyHeaderId = newMinHeight.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
     }
     
@@ -227,9 +225,11 @@ extension Drawer {
 
                 isDragging = true
 
+                let newHeight = state.currentHeight - (value.translation.height - lastTranslationYValue)
+                
                 state.currentHeight = max(
                     minHeight.absoluteValue,
-                    min(maxHeight.absoluteValue, state.currentHeight - (value.translation.height - lastTranslationYValue))
+                    min(maxHeight.absoluteValue, newHeight)
                 )
             }
             .updating($lastTranslationYValue, body: { value, lastTranslationYValue, _ in
