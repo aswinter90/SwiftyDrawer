@@ -61,7 +61,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     private var floatingButtonsOpacity: CGFloat {
         let heightModifier = UIScreen.main.scale > 2 ? 200.0 : 100
-        let heightThreshold = mediumHeight?.absoluteValue ?? minHeight.absoluteValue
+        let heightThreshold = mediumHeight?.value ?? minHeight.value
         return (heightThreshold + heightModifier - state.currentHeight) / 100.0
     }
 
@@ -69,9 +69,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     public init(
         state: Binding<DrawerState>,
-        minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(0)),
+        minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(offset: 0)),
         mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
-        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(0)),
+        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0)),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {
@@ -228,8 +228,8 @@ extension Drawer {
                 let newHeight = state.currentHeight - (value.translation.height - lastTranslationYValue)
                 
                 state.currentHeight = max(
-                    minHeight.absoluteValue,
-                    min(maxHeight.absoluteValue, newHeight)
+                    minHeight.value,
+                    min(maxHeight.value, newHeight)
                 )
             }
             .updating($lastTranslationYValue, body: { value, lastTranslationYValue, _ in
@@ -271,15 +271,15 @@ extension Drawer {
             state.case = .fullyOpened
         case (_, .undefined):
             // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
-            let offsetToMinHeight = abs(state.currentHeight - minHeight.absoluteValue)
+            let offsetToMinHeight = abs(state.currentHeight - minHeight.value)
 
-            let offsetToMediumHeight = if let mediumHeight = mediumHeight?.absoluteValue {
+            let offsetToMediumHeight = if let mediumHeight = mediumHeight?.value {
                 abs(max(state.currentHeight, mediumHeight) - min(state.currentHeight, mediumHeight))
             } else {
                 CGFloat.infinity // Eliminates `offsetToMediumHeight` from the following switch
             }
 
-            let offsetToMaxHeight = abs(maxHeight.absoluteValue - state.currentHeight)
+            let offsetToMaxHeight = abs(maxHeight.value - state.currentHeight)
 
             switch min(offsetToMinHeight, offsetToMediumHeight, offsetToMaxHeight) {
             case offsetToMinHeight:
@@ -300,15 +300,15 @@ extension Drawer {
     private func updateCurrentHeight(with newStateCase: DrawerState.Case) {
         switch newStateCase {
         case .closed:
-            state.currentHeight = minHeight.absoluteValue
+            state.currentHeight = minHeight.value
         case .partiallyOpened:
-            if let mediumHeight = mediumHeight?.absoluteValue {
+            if let mediumHeight = mediumHeight?.value {
                 state.currentHeight = mediumHeight
             } else {
                 assertionFailure("Cannot set drawer state to `partiallyOpened` when no medium height was defined")
             }
         case .fullyOpened:
-            state.currentHeight = maxHeight.absoluteValue
+            state.currentHeight = maxHeight.value
         }
     }
 

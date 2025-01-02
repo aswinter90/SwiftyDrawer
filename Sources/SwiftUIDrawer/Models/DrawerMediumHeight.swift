@@ -3,28 +3,21 @@ import UIKit
 @MainActor
 public enum DrawerMediumHeight: Equatable {
     case absolute(CGFloat)
-    case relativeToSafeAreaBottom(CGFloat)
-    case relativeToSafeAreaBottomAndTabBar(CGFloat)
+    case relativeToSafeAreaBottom(offset: CGFloat)
+    case relativeToTabBar(offset: CGFloat)
 
-    public var absoluteValue: CGFloat {
+    public var value: CGFloat {
         switch self {
         case let .absolute(float): float
-        case let .relativeToSafeAreaBottom(float):
-            UIApplication.shared.safeAreaInsets.bottom + float + DrawerConstants
-                .dragHandleHeight
-        case let .relativeToSafeAreaBottomAndTabBar(float):
+        case let .relativeToSafeAreaBottom(offset):
+            UIApplication.shared.safeAreaInsets.bottom
+                + offset
+                + DrawerConstants.dragHandleHeight
+        case let .relativeToTabBar(offset):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
-                + float
+                + offset
                 + DrawerConstants.dragHandleHeight
-        }
-    }
-
-    public var associatedValue: CGFloat {
-        switch self {
-        case let .absolute(float): float
-        case let .relativeToSafeAreaBottom(float): float
-        case let .relativeToSafeAreaBottomAndTabBar(float): float
         }
     }
 
@@ -33,9 +26,9 @@ public enum DrawerMediumHeight: Equatable {
         case .absolute:
             self = .absolute(newValue)
         case .relativeToSafeAreaBottom:
-            self = .relativeToSafeAreaBottom(newValue)
-        case .relativeToSafeAreaBottomAndTabBar:
-            self = .relativeToSafeAreaBottomAndTabBar(newValue)
+            self = .relativeToSafeAreaBottom(offset: newValue)
+        case .relativeToTabBar:
+            self = .relativeToTabBar(offset: newValue)
         }
     }
 }

@@ -17,15 +17,15 @@ struct DimmingView: View {
     }
 
     private var opacity: CGFloat {
-        let mediumHeight = if let drawerMediumHeight = drawerMediumHeight?.absoluteValue {
+        let mediumHeight = if let drawerMediumHeight = drawerMediumHeight?.value {
             drawerMediumHeight
         } else {
-            (drawerMinHeight.absoluteValue + drawerMaxHeight.absoluteValue) / 2
+            (drawerMinHeight.value + drawerMaxHeight.value) / 2
         }
 
         let opacity = drawerState.currentHeight.normalize(
             min: mediumHeight,
-            max: drawerMaxHeight.absoluteValue,
+            max: drawerMaxHeight.value,
             from: 0,
             to: Self.maxOpacity
         )

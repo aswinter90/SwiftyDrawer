@@ -12,12 +12,13 @@ struct DrawerDemoView: View {
     private let mediumHeight: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
     @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.matchesStickyHeaderContentHeightAlignedToTabBar()
-    @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(0)
+    @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(offset: 0)
     
     let isShowingStickyHeader: Bool
 
     var body: some View {
         Color.blue.opacity(0.5)
+            .ignoresSafeArea()
             .drawerOverlay(
                 state: $drawerState,
                 minHeight: isShowingStickyHeader ? $minHeight1 : $minHeight2,

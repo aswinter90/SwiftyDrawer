@@ -3,14 +3,14 @@ import UIKit
 @MainActor
 public enum DrawerMaxHeight: Equatable {
     case absolute(CGFloat)
-    case relativeToSafeAreaTop(CGFloat)
+    case relativeToSafeAreaTop(offset: CGFloat)
 
-    var absoluteValue: CGFloat {
+    var value: CGFloat {
         switch self {
         case let .absolute(float):
             float
-        case let .relativeToSafeAreaTop(float):
-            UIScreen.main.bounds.height - UIApplication.shared.safeAreaInsets.top - float
+        case let .relativeToSafeAreaTop(offset):
+            UIScreen.main.bounds.height - UIApplication.shared.safeAreaInsets.top - offset
         }
     }
 }

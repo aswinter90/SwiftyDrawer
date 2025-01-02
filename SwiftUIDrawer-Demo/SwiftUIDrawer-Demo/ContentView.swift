@@ -8,7 +8,7 @@ struct ContentView: View {
     }
     
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var drawerMinHeight = DrawerMinHeight.relativeToSafeAreaBottom(0)
+    @State private var drawerMinHeight = DrawerMinHeight.relativeToSafeAreaBottom(offset: 0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
@@ -149,9 +149,9 @@ struct ContentView: View {
         case (true, false):
             drawerMinHeight = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom()
         case (false, true):
-            drawerMinHeight = .relativeToTabBar(0)
+            drawerMinHeight = .relativeToTabBar(offset: 0)
         case (false, false):
-            drawerMinHeight = .relativeToSafeAreaBottom(0)
+            drawerMinHeight = .relativeToSafeAreaBottom(offset: 0)
         }
     }
 }

@@ -3,32 +3,32 @@ import UIKit
 @MainActor
 public enum DrawerMinHeight: Equatable {
     case absolute(CGFloat)
-    case relativeToSafeAreaBottom(CGFloat) // Value of 0: Drag handle is on top of the safe area
-    case relativeToTabBar(CGFloat) // Value of 0: Drag handle is on top of the tab bar
-    case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(CGFloat = 0) // Value will be calculated. Can be 0 during init
-    case matchesStickyHeaderContentHeightAlignedToTabBar(CGFloat = 0) // Value will be calculated. Can be 0 during init
+    case relativeToSafeAreaBottom(offset: CGFloat) // Value of 0: Drag handle is on top of the safe area
+    case relativeToTabBar(offset: CGFloat) // Value of 0: Drag handle is on top of the tab bar
+    case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
+    case matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
 
-    public var absoluteValue: CGFloat {
+    public var value: CGFloat {
         switch self {
         case let .absolute(float):
             float + DrawerConstants.dragHandleHeight
-        case let .relativeToSafeAreaBottom(float):
+        case let .relativeToSafeAreaBottom(offset):
             UIApplication.shared.safeAreaInsets.bottom
-                + float
+                + offset
                 + DrawerConstants.dragHandleHeight
-        case let .relativeToTabBar(float):
+        case let .relativeToTabBar(offset):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
-                + float
+                + offset
                 + DrawerConstants.dragHandleHeight
-        case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(float):
+        case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight):
             UIApplication.shared.safeAreaInsets.bottom
-                + float
+                + stickyHeaderHeight
                 + DrawerConstants.dragHandleHeight
-        case let .matchesStickyHeaderContentHeightAlignedToTabBar(float):
+        case let .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight):
             UIApplication.shared.safeAreaInsets.bottom
                 + TabBarHeightProvider.sharedInstance.height
-                + float
+                + stickyHeaderHeight
                 + DrawerConstants.dragHandleHeight
         }
     }
@@ -56,13 +56,13 @@ public enum DrawerMinHeight: Equatable {
         case .absolute:
             self = .absolute(newValue)
         case .relativeToSafeAreaBottom:
-            self = .relativeToSafeAreaBottom(newValue)
+            self = .relativeToSafeAreaBottom(offset: newValue)
         case .relativeToTabBar:
-            self = .relativeToTabBar(newValue)
+            self = .relativeToTabBar(offset: newValue)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom:
-            self = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(newValue)
+            self = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: newValue)
         case .matchesStickyHeaderContentHeightAlignedToTabBar:
-            self = .matchesStickyHeaderContentHeightAlignedToTabBar(newValue)
+            self = .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: newValue)
         }
     }
 }
