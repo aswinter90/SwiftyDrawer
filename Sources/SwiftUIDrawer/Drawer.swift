@@ -138,6 +138,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 isAnimationDisabled = false
             }
         }
+        .accessibilityIdentifier("SwiftUIDrawer")
+        .storeSafeAreaInsets()
     }
 }
 
@@ -319,6 +321,22 @@ extension Drawer {
 
         originObservable.updateIfNeeded(
             origin: CGPoint(x: 0, y: verticalPosition - DrawerConstants.appleMapAttributionLabelPadding)
+        )
+    }
+}
+
+private extension View {
+    func storeSafeAreaInsets() -> some View {
+        let top = UIApplication.shared.safeAreaInsets.top
+        let bottom = UIApplication.shared.safeAreaInsets.bottom
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "en_US")
+        numberFormatter.numberStyle = .decimal
+        let formattedTop = numberFormatter.string(from: NSNumber(value: top)) ?? ""
+        let formattedBottom = numberFormatter.string(from: NSNumber(value: bottom)) ?? ""
+
+        return self.accessibilityLabel(
+            #"{"safeAreaTop\": \#(formattedTop),"safeAreaBottom\": \#(formattedBottom)}"#
         )
     }
 }

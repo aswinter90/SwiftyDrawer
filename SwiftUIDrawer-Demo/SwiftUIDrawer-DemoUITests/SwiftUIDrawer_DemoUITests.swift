@@ -1,12 +1,7 @@
-//
-//  SwiftUIDrawer_DemoUITests.swift
-//  SwiftUIDrawer-DemoUITests
-//
-//  Created by Arne-Sebastian Winter on 14.12.24.
-//
-
 import XCTest
+import SwiftUIDrawer
 
+/// The UI tests defined here serve as a playground for the author to catch up with the capabilities of XCUITests. In the long term they should probably be replaced with Snapshot tests (using the Point-Free framework, or similar)
 final class SwiftUIDrawer_DemoUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -23,12 +18,47 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testDrawerPositions() async throws {
         let app = XCUIApplication()
         app.launch()
+        
+        let drawer = app.otherElements.matching(identifier: "SwiftUIDrawer").firstMatch
+        XCTAssertTrue(drawer.exists)
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Unfortunately there is no UIWindow available to grab the insets from in XCTestCases, that is why the insets are injected as an accessibility label from the UI hierarchy
+        let safeAreaInsets = try SafeAreaInsetsHolder(data: drawer.label.data(using: .utf8) ?? .init())
+        
+        // Check top position
+        
+        drawer.swipeUp()
+        try? await Task.sleep(nanoseconds: 800_000_000)
+
+        XCTAssertEqual(drawer.frame.origin.y, safeAreaInsets.top)
+
+        // Todo: Check mid position
+        
+        drawer.swipeDown()
+        try? await Task.sleep(nanoseconds: 800_000_000)
+        
+        XCTAssertEqual(
+            drawer.frame.origin.y,
+            app.frame.height
+                - CGFloat(safeAreaInsets.bottom)
+                - TabBarHeightProvider.sharedInstance.height
+                - DrawerConstants.drawerDefaultMediumHeightConstant
+                - DrawerConstants.dragHandleHeight
+        )
+
+        // Check bottom position
+        
+        drawer.swipeDown()
+        
+        try? await Task.sleep(nanoseconds: 800_000_000)
+        
+        XCTAssertEqual(
+            drawer.frame.origin.y,
+            app.frame.height - CGFloat(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight
+        )
     }
 
     @MainActor
@@ -39,5 +69,19 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+}
+
+private struct SafeAreaInsetsHolder: Decodable {
+    let top: CGFloat
+    let bottom: CGFloat
+    
+    init(data: Data) throws {
+        self = try JSONDecoder().decode(SafeAreaInsetsHolder.self, from: data)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case top = "safeAreaTop"
+        case bottom = "safeAreaBottom"
     }
 }
