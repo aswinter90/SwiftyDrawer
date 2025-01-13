@@ -327,16 +327,16 @@ extension Drawer {
 
 private extension View {
     func storeSafeAreaInsets() -> some View {
-        let top = UIApplication.shared.safeAreaInsets.top
-        let bottom = UIApplication.shared.safeAreaInsets.bottom
+        let topInset = UIApplication.shared.safeAreaInsets.top
+        let bottomInset = UIApplication.shared.safeAreaInsets.bottom
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale(identifier: "en_US")
         numberFormatter.numberStyle = .decimal
-        let formattedTop = numberFormatter.string(from: NSNumber(value: top)) ?? ""
-        let formattedBottom = numberFormatter.string(from: NSNumber(value: bottom)) ?? ""
+        let formattedTopInset = numberFormatter.string(from: NSNumber(value: topInset)) ?? ""
+        let formattedBottomInset = numberFormatter.string(from: NSNumber(value: bottomInset)) ?? ""
 
         return self.accessibilityLabel(
-            #"{"safeAreaTop\": \#(formattedTop),"safeAreaBottom\": \#(formattedBottom)}"#
+            #"{"safeAreaTop\": \#(formattedTopInset), "safeAreaBottom\": \#(formattedBottomInset)}"#
         )
     }
 }
