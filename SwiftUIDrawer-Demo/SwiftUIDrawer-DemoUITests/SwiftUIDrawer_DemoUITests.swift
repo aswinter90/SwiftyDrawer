@@ -6,6 +6,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
 
     private static let drawerSwipeDuration: UInt64 = 800_000_000
     private static let drawerPositionCheckAccuracy = 0.1
+    private static let lastDrawerContentItemIdentifier = "Item 29"
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,27 +22,44 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
     }
 
     @MainActor
-    func testDrawerPositions() async throws {
+    func testDrawerPositionsAndContent() async throws {
         let app = XCUIApplication()
         app.launch()
         
         let drawer = app.otherElements.matching(identifier: "SwiftUIDrawer").firstMatch
         XCTAssertTrue(drawer.exists)
 
-        // Unfortunately there is no UIWindow available to grab the insets from in XCTestCases, hence the insets are injected as an accessibility label from the UI hierarchy. Which is rather a hack...
+        // Unfortunately there is no UIWindow instance available in XCTestCases to grab the safe area insets from, hence the insets are injected as an accessibility label from the UI hierarchy. Which is rather a hack, but... 🙄
         let safeAreaInsets = try SafeAreaInsetsHolder(data: drawer.label.data(using: .utf8)!)
         
-        // Check top position
+        // Check drawer top position
         
-        drawer.swipeUp()
-        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
+        await runAction(drawer.swipeUpFast())
 
-        XCTAssertEqual(drawer.frame.origin.y, safeAreaInsets.top, accuracy: Self.drawerPositionCheckAccuracy)
+        XCTAssertEqual(
+            drawer.frame.origin.y,
+            safeAreaInsets.top,
+            accuracy: Self.drawerPositionCheckAccuracy
+        )
 
-        // Check mid position
+        // Check drawer content by finding last item
         
-        drawer.swipeDown()
-        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
+        await runAction(drawer.swipeUpFast(), iterations: 2)
+        
+        let lastDrawerContentItem = app
+            .staticTexts
+            .matching(identifier: Self.lastDrawerContentItemIdentifier)
+            .firstMatch
+        
+        XCTAssertTrue(lastDrawerContentItem.isHittable)
+        
+        // Check drawer mid position
+        
+        await runAction(
+            drawer.swipeDownFast(),
+            iterations: 3,
+            sleepAfterAction: Self.drawerSwipeDuration
+        )
         
         XCTAssertEqual(
             drawer.frame.origin.y,
@@ -53,17 +71,28 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
             accuracy: Self.drawerPositionCheckAccuracy
         )
 
-        // Check bottom position
+        // Check drawer bottom position
         
-        drawer.swipeDown()
-        
-        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
+        await runAction(drawer.swipeDownFast())
         
         XCTAssertEqual(
             drawer.frame.origin.y,
             app.frame.height - CGFloat(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy
         )
+    }
+    
+    @MainActor
+    private func runAction(
+        _ action: @escaping @autoclosure () -> Void,
+        iterations: Int = 1,
+        sleepAfterAction nanoseconds: UInt64 = SwiftUIDrawer_DemoUITests.drawerSwipeDuration
+    ) async {
+        for _ in 0 ..< iterations {
+            action()
+            
+            try! await Task.sleep(nanoseconds: nanoseconds)
+        }
     }
 }
 
@@ -78,5 +107,15 @@ private struct SafeAreaInsetsHolder: Decodable {
     enum CodingKeys: String, CodingKey {
         case top = "safeAreaTop"
         case bottom = "safeAreaBottom"
+    }
+}
+
+private extension XCUIElement {
+    func swipeUpFast() {
+        swipeUp(velocity: .fast)
+    }
+    
+    func swipeDownFast() {
+        swipeDown(velocity: .fast)
     }
 }
