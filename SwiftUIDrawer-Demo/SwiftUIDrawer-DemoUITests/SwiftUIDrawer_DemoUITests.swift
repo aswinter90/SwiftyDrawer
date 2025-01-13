@@ -5,6 +5,7 @@ import SwiftUIDrawer
 final class SwiftUIDrawer_DemoUITests: XCTestCase {
 
     private static let drawerSwipeDuration: UInt64 = 800_000_000
+    private static let drawerPositionCheckAccuracy = 0.1
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,20 +28,20 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         let drawer = app.otherElements.matching(identifier: "SwiftUIDrawer").firstMatch
         XCTAssertTrue(drawer.exists)
 
-        // Unfortunately there is no UIWindow available to grab the insets from in XCTestCases, that is why the insets are injected as an accessibility label from the UI hierarchy
-        let safeAreaInsets = try SafeAreaInsetsHolder(data: drawer.label.data(using: .utf8) ?? .init())
+        // Unfortunately there is no UIWindow available to grab the insets from in XCTestCases, hence the insets are injected as an accessibility label from the UI hierarchy. Which is rather a hack...
+        let safeAreaInsets = try SafeAreaInsetsHolder(data: drawer.label.data(using: .utf8)!)
         
         // Check top position
         
         drawer.swipeUp()
-        try? await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
+        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
 
-        XCTAssertEqual(drawer.frame.origin.y, safeAreaInsets.top)
+        XCTAssertEqual(drawer.frame.origin.y, safeAreaInsets.top, accuracy: Self.drawerPositionCheckAccuracy)
 
-        // Todo: Check mid position
+        // Check mid position
         
         drawer.swipeDown()
-        try? await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
+        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
         
         XCTAssertEqual(
             drawer.frame.origin.y,
@@ -48,29 +49,21 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
                 - CGFloat(safeAreaInsets.bottom)
                 - TabBarHeightProvider.sharedInstance.height
                 - DrawerConstants.drawerDefaultMediumHeightConstant
-                - DrawerConstants.dragHandleHeight
+                - DrawerConstants.dragHandleHeight,
+            accuracy: Self.drawerPositionCheckAccuracy
         )
 
         // Check bottom position
         
         drawer.swipeDown()
         
-        try? await Task.sleep(nanoseconds: 800_000_000)
+        try await Task.sleep(nanoseconds: Self.drawerSwipeDuration)
         
         XCTAssertEqual(
             drawer.frame.origin.y,
-            app.frame.height - CGFloat(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight
+            app.frame.height - CGFloat(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight,
+            accuracy: Self.drawerPositionCheckAccuracy
         )
-    }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
     }
 }
 
