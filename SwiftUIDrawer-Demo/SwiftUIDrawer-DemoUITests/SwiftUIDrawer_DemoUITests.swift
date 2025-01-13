@@ -96,20 +96,6 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
     }
 }
 
-private struct SafeAreaInsetsHolder: Decodable {
-    let top: CGFloat
-    let bottom: CGFloat
-    
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(SafeAreaInsetsHolder.self, from: data)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case top = "safeAreaTop"
-        case bottom = "safeAreaBottom"
-    }
-}
-
 private extension XCUIElement {
     func swipeUpFast() {
         swipeUp(velocity: .fast)
