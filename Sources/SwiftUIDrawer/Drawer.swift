@@ -52,8 +52,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         switch state.case {
         case .fullyOpened:
             drawerPaddingTop
-                + UIApplication.shared.safeAreaInsets.bottom
-                + (isAlignedToTabBar ? TabBarHeightProvider.sharedInstance.height : 0)
+                + UIApplication.shared.insets.bottom
+                + (isAlignedToTabBar ? TabBarFrameProvider.sharedInstance.frame.height : 0)
         default:
             0
         }
@@ -69,7 +69,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     public init(
         state: Binding<DrawerState>,
-        minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(offset: 0)),
+        minHeight: Binding<DrawerMinHeight> = .constant(DrawerMinHeight(case: .relativeToSafeAreaBottom(offset: 0))),
         mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
         maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0)),
         stickyHeader: HeaderContent? = nil,

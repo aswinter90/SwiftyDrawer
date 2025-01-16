@@ -10,7 +10,7 @@ public enum DrawerMaxHeight: Equatable {
         case let .absolute(float):
             float
         case let .relativeToSafeAreaTop(offset):
-            UIScreen.main.bounds.height - UIApplication.shared.safeAreaInsets.top - offset
+            UIScreen.main.bounds.height - UIApplication.shared.insets.top - offset
         }
     }
 }

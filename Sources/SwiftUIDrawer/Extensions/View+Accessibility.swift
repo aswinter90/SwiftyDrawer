@@ -2,8 +2,8 @@ import SwiftUI
 
 extension View {
     func storeSafeAreaInsetsAsAccessibilityLabel() -> some View {
-        let topInset = UIApplication.shared.safeAreaInsets.top
-        let bottomInset = UIApplication.shared.safeAreaInsets.bottom
+        let topInset = UIApplication.shared.insets.top
+        let bottomInset = UIApplication.shared.insets.bottom
         
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale(identifier: "en_US")

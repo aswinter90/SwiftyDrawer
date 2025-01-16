@@ -10,12 +10,12 @@ public enum DrawerMediumHeight: Equatable {
         switch self {
         case let .absolute(float): float
         case let .relativeToSafeAreaBottom(offset):
-            UIApplication.shared.safeAreaInsets.bottom
+            UIApplication.shared.insets.bottom
                 + offset
                 + DrawerConstants.dragHandleHeight
         case let .relativeToTabBar(offset):
-            UIApplication.shared.safeAreaInsets.bottom
-                + TabBarHeightProvider.sharedInstance.height
+            UIApplication.shared.insets.bottom
+                + TabBarFrameProvider.sharedInstance.frame.height
                 + offset
                 + DrawerConstants.dragHandleHeight
         }

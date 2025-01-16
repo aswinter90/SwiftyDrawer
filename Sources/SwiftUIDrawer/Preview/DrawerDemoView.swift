@@ -11,8 +11,8 @@ import SwiftUI
 struct DrawerDemoView: View {
     private let mediumHeight: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
-    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.matchesStickyHeaderContentHeightAlignedToTabBar()
-    @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(offset: 0)
+    @State private var minHeight1 = DrawerMinHeight(case: .matchesStickyHeaderContentHeightAlignedToTabBar())
+    @State private var minHeight2 = DrawerMinHeight(case: .relativeToTabBar(offset: 0))
     
     let isShowingStickyHeader: Bool
 
@@ -103,8 +103,8 @@ private extension View {
                     .shadow(radius: 2)
                     .frame(
                         width: UIScreen.main.bounds.width,
-                        height: TabBarHeightProvider.sharedInstance.height
-                            + UIApplication.shared.safeAreaInsets.bottom
+                        height: TabBarFrameProvider.sharedInstance.frame.height
+                            + UIApplication.shared.insets.bottom
                     )
                     .background(Color.gray.opacity(0.8))
             }

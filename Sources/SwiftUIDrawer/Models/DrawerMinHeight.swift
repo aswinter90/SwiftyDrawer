@@ -1,40 +1,57 @@
 import UIKit
 
-@MainActor
-public enum DrawerMinHeight: Equatable {
-    case absolute(CGFloat)
-    case relativeToSafeAreaBottom(offset: CGFloat) // Value of 0: Drag handle is on top of the safe area
-    case relativeToTabBar(offset: CGFloat) // Value of 0: Drag handle is on top of the tab bar
-    case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
-    case matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
-
+public struct DrawerMinHeight: Equatable {
+    @MainActor
+    public enum Case: Equatable {
+        case absolute(CGFloat)
+        case relativeToSafeAreaBottom(offset: CGFloat) // Value of 0: Drag handle is on top of the safe area
+        case relativeToTabBar(offset: CGFloat) // Value of 0: Drag handle is on top of the tab bar
+        case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
+        case matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
+    }
+    
+    public let safeAreaInsetsProvider: any SafeAreaInsetsProviding
+    public let tabBarFrameProvider: any TabBarFrameProviding
+    
+    public var `case`: Case
+    
+    public init(
+        case: Case,
+        safeAreaInsetsProvider: any SafeAreaInsetsProviding = UIApplication.shared,
+        tabBarFrameProvider: any TabBarFrameProviding = TabBarFrameProvider()
+    ) {
+        self.case = `case`
+        self.safeAreaInsetsProvider = safeAreaInsetsProvider
+        self.tabBarFrameProvider = tabBarFrameProvider
+    }
+    
     public var value: CGFloat {
-        switch self {
+        switch `case` {
         case let .absolute(float):
             float + DrawerConstants.dragHandleHeight
         case let .relativeToSafeAreaBottom(offset):
-            UIApplication.shared.safeAreaInsets.bottom
+            safeAreaInsetsProvider.insets.bottom
                 + offset
                 + DrawerConstants.dragHandleHeight
         case let .relativeToTabBar(offset):
-            UIApplication.shared.safeAreaInsets.bottom
-                + TabBarHeightProvider.sharedInstance.height
+            safeAreaInsetsProvider.insets.bottom
+                + tabBarFrameProvider.frame.height
                 + offset
                 + DrawerConstants.dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight):
-            UIApplication.shared.safeAreaInsets.bottom
+            safeAreaInsetsProvider.insets.bottom
                 + stickyHeaderHeight
                 + DrawerConstants.dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight):
-            UIApplication.shared.safeAreaInsets.bottom
-                + TabBarHeightProvider.sharedInstance.height
+            safeAreaInsetsProvider.insets.bottom
+                + tabBarFrameProvider.frame.height
                 + stickyHeaderHeight
                 + DrawerConstants.dragHandleHeight
         }
     }
     
     var shouldMatchStickyHeaderHeight: Bool {
-        switch self {
+        switch `case` {
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom, .matchesStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
@@ -43,7 +60,7 @@ public enum DrawerMinHeight: Equatable {
     }
 
     var isAlignedToTabBar: Bool {
-        switch self {
+        switch `case` {
         case .relativeToTabBar, .matchesStickyHeaderContentHeightAlignedToTabBar:
             true
         default:
@@ -52,17 +69,21 @@ public enum DrawerMinHeight: Equatable {
     }
     
     mutating func updateAssociatedValue(_ newValue: CGFloat) {
-        switch self {
+        switch `case` {
         case .absolute:
-            self = .absolute(newValue)
+            self.case = .absolute(newValue)
         case .relativeToSafeAreaBottom:
-            self = .relativeToSafeAreaBottom(offset: newValue)
+            self.case = .relativeToSafeAreaBottom(offset: newValue)
         case .relativeToTabBar:
-            self = .relativeToTabBar(offset: newValue)
+            self.case = .relativeToTabBar(offset: newValue)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom:
-            self = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: newValue)
+            self.case = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: newValue)
         case .matchesStickyHeaderContentHeightAlignedToTabBar:
-            self = .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: newValue)
+            self.case = .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: newValue)
         }
+    }
+    
+    nonisolated public static func ==(lhs: DrawerMinHeight, rhs: DrawerMinHeight) -> Bool {
+        lhs.case == rhs.case
     }
 }
