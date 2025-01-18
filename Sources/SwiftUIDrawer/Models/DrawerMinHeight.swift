@@ -71,15 +71,15 @@ public struct DrawerMinHeight: Equatable {
     mutating func updateAssociatedValue(_ newValue: CGFloat) {
         switch `case` {
         case .absolute:
-            self.case = .absolute(newValue)
+            `case` = .absolute(newValue)
         case .relativeToSafeAreaBottom:
-            self.case = .relativeToSafeAreaBottom(offset: newValue)
+            `case` = .relativeToSafeAreaBottom(offset: newValue)
         case .relativeToTabBar:
-            self.case = .relativeToTabBar(offset: newValue)
+            `case` = .relativeToTabBar(offset: newValue)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom:
-            self.case = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: newValue)
+            `case` = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: newValue)
         case .matchesStickyHeaderContentHeightAlignedToTabBar:
-            self.case = .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: newValue)
+            `case` = .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: newValue)
         }
     }
     

@@ -42,23 +42,11 @@ public struct DrawerMediumHeight: Equatable {
     mutating func updateAssociatedValue(_ newValue: CGFloat) {
         switch `case` {
         case .absolute:
-            self = .init(
-                case: .absolute(newValue),
-                safeAreaInsetsProvider: safeAreaInsetsProvider,
-                tabBarFrameProvider: tabBarFrameProvider
-            )
+            `case` = .absolute(newValue)
         case .relativeToSafeAreaBottom:
-            self = .init(
-                case: .relativeToSafeAreaBottom(offset: newValue),
-                safeAreaInsetsProvider: safeAreaInsetsProvider,
-                tabBarFrameProvider: tabBarFrameProvider
-            )
+            `case` = .relativeToSafeAreaBottom(offset: newValue)
         case .relativeToTabBar:
-            self = .init(
-                case: .relativeToTabBar(offset: newValue),
-                safeAreaInsetsProvider: safeAreaInsetsProvider,
-                tabBarFrameProvider: tabBarFrameProvider
-            )
+            `case` = .relativeToTabBar(offset: newValue)
         }
     }
     
