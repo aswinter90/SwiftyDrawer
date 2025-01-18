@@ -7,9 +7,9 @@ public struct DrawerMaxHeight: Equatable {
         case relativeToSafeAreaTop(offset: CGFloat)
     }
     
-    public let screenBoundsProvider: any ScreenBoundsProviding
-    public let safeAreaInsetsProvider: any SafeAreaInsetsProviding
-    public let tabBarFrameProvider: any TabBarFrameProviding
+    public let screenBoundsProvider: ScreenBoundsProviding
+    public let safeAreaInsetsProvider: SafeAreaInsetsProviding
+    public let tabBarFrameProvider: TabBarFrameProviding
     
     public var `case`: Case
     

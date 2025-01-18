@@ -8,8 +8,8 @@ public struct DrawerMediumHeight: Equatable {
         case relativeToTabBar(offset: CGFloat)
     }
 
-    public let safeAreaInsetsProvider: any SafeAreaInsetsProviding
-    public let tabBarFrameProvider: any TabBarFrameProviding
+    public let safeAreaInsetsProvider: SafeAreaInsetsProviding
+    public let tabBarFrameProvider: TabBarFrameProviding
     
     public var `case`: Case
     

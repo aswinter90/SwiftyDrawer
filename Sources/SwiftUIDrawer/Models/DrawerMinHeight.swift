@@ -10,8 +10,8 @@ public struct DrawerMinHeight: Equatable {
         case matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: CGFloat = 0) // Value will be calculated. Can be 0 during init
     }
     
-    public let safeAreaInsetsProvider: any SafeAreaInsetsProviding
-    public let tabBarFrameProvider: any TabBarFrameProviding
+    public let safeAreaInsetsProvider: SafeAreaInsetsProviding
+    public let tabBarFrameProvider: TabBarFrameProviding
     
     public var `case`: Case
     
