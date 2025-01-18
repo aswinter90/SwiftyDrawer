@@ -71,7 +71,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(DrawerMinHeight(case: .relativeToSafeAreaBottom(offset: 0))),
         mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
-        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        maxHeight: Binding<DrawerMaxHeight> = .constant(.init(case: .relativeToSafeAreaTop(offset: 0))),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {

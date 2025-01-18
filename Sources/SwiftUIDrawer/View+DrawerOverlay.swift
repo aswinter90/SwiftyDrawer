@@ -6,7 +6,7 @@ public extension View {
         state: Binding<DrawerState>,
         minHeight: Binding<DrawerMinHeight> = .constant(.init(case: .relativeToSafeAreaBottom(offset: 0))),
         mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
-        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        maxHeight: Binding<DrawerMaxHeight> = .constant(.init(case: .relativeToSafeAreaTop(offset: 0))),
         isDimmingBackground: Bool = false,
         @ViewBuilder stickyHeader: () -> some View = { EmptyView() },
         @ViewBuilder content: () -> some View
@@ -38,7 +38,7 @@ public extension View {
         drawerState: Binding<DrawerState>,
         drawerMinHeight: Binding<DrawerMinHeight>,
         drawerMediumHeight: Binding<DrawerMediumHeight?>?,
-        drawerMaxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0))
+        drawerMaxHeight: Binding<DrawerMaxHeight> = .constant(.init(case: .relativeToSafeAreaTop(offset: 0)))
     ) -> some View {
         if isShown {
             overlay {

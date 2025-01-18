@@ -18,7 +18,7 @@ public struct DrawerMinHeight: Equatable {
     public init(
         case: Case,
         safeAreaInsetsProvider: any SafeAreaInsetsProviding = UIApplication.shared,
-        tabBarFrameProvider: any TabBarFrameProviding = TabBarFrameProvider()
+        tabBarFrameProvider: any TabBarFrameProviding = TabBarFrameProvider.sharedInstance
     ) {
         self.case = `case`
         self.safeAreaInsetsProvider = safeAreaInsetsProvider

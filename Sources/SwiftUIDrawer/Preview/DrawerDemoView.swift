@@ -22,7 +22,7 @@ struct DrawerDemoView: View {
             .drawerOverlay(
                 state: $drawerState,
                 minHeight: isShowingStickyHeader ? $minHeight1 : $minHeight2,
-                mediumHeight: .constant(.absolute(mediumHeight)),
+                mediumHeight: .constant(.init(case: .absolute(mediumHeight))),
                 isDimmingBackground: true,
                 stickyHeader: isShowingStickyHeader ? {
                     VStack {
