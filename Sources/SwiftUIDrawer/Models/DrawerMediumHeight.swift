@@ -10,17 +10,20 @@ public struct DrawerMediumHeight: Equatable {
 
     public let safeAreaInsetsProvider: SafeAreaInsetsProviding
     public let tabBarFrameProvider: TabBarFrameProviding
+    public var dragHandleHeight: CGFloat
     
     public var `case`: Case
     
     public init(
         case: Case,
         safeAreaInsetsProvider: SafeAreaInsetsProviding = UIApplication.shared,
-        tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance
+        tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
+        dragHandleHeight: CGFloat = DrawerConstants.dragHandleHeight
     ) {
         self.case = `case`
         self.safeAreaInsetsProvider = safeAreaInsetsProvider
         self.tabBarFrameProvider = tabBarFrameProvider
+        self.dragHandleHeight = dragHandleHeight
     }
     
     public var value: CGFloat {
@@ -30,16 +33,16 @@ public struct DrawerMediumHeight: Equatable {
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
                 + offset
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         case let .relativeToTabBar(offset):
             safeAreaInsetsProvider.insets.bottom
                 + tabBarFrameProvider.frame.height
                 + offset
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         }
     }
     
-    mutating func updateAssociatedValue(_ newValue: CGFloat) {
+    mutating func updateAssociatedValueOfCurrentCase(_ newValue: CGFloat) {
         switch `case` {
         case .absolute:
             `case` = .absolute(newValue)

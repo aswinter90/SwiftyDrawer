@@ -12,41 +12,48 @@ public struct DrawerMinHeight: Equatable {
     
     public let safeAreaInsetsProvider: SafeAreaInsetsProviding
     public let tabBarFrameProvider: TabBarFrameProviding
+    public var dragHandleHeight: CGFloat {
+        didSet {
+            print("Did set handle height: \(dragHandleHeight)")
+        }
+    }
     
     public var `case`: Case
     
     public init(
         case: Case,
         safeAreaInsetsProvider: any SafeAreaInsetsProviding = UIApplication.shared,
-        tabBarFrameProvider: any TabBarFrameProviding = TabBarFrameProvider.sharedInstance
+        tabBarFrameProvider: any TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
+        dragHandleHeight: CGFloat = DrawerConstants.dragHandleHeight
     ) {
         self.case = `case`
         self.safeAreaInsetsProvider = safeAreaInsetsProvider
         self.tabBarFrameProvider = tabBarFrameProvider
+        self.dragHandleHeight = dragHandleHeight
     }
     
     public var value: CGFloat {
         switch `case` {
         case let .absolute(float):
-            float + DrawerConstants.dragHandleHeight
+            float + dragHandleHeight
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
                 + offset
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         case let .relativeToTabBar(offset):
             safeAreaInsetsProvider.insets.bottom
                 + tabBarFrameProvider.frame.height
                 + offset
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight):
             safeAreaInsetsProvider.insets.bottom
                 + stickyHeaderHeight
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight):
             safeAreaInsetsProvider.insets.bottom
                 + tabBarFrameProvider.frame.height
                 + stickyHeaderHeight
-                + DrawerConstants.dragHandleHeight
+                + dragHandleHeight
         }
     }
     
@@ -68,7 +75,7 @@ public struct DrawerMinHeight: Equatable {
         }
     }
     
-    mutating func updateAssociatedValue(_ newValue: CGFloat) {
+    mutating func updateAssociatedValueOfCurrentCase(_ newValue: CGFloat) {
         switch `case` {
         case .absolute:
             `case` = .absolute(newValue)

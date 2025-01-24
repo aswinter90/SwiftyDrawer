@@ -32,7 +32,7 @@ public struct DrawerStyle {
         backgroundColor: Color = Color.background,
         cornerRadius: CGFloat = DrawerConstants.drawerCornerRadius,
         shadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: -3)),
-        dragHandle: (() -> AnyView) = { AnyView(DragHandle()) },
+        dragHandle: @autoclosure (() -> AnyView) = { AnyView(DragHandle()) }(),
         stickyHeaderShadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: 3)),
         floatingButtonShadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: 3))
     ) {

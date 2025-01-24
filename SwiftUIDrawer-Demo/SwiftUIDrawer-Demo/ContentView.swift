@@ -51,6 +51,7 @@ struct ContentView: View {
         .onChange(of: selectedAlignment) { newValue in
             isTabBarShown = newValue == Alignment.tabBar.rawValue
         }
+        .drawerStyle(.init(dragHandle: AnyView(Color.red.frame(width: 100, height: 100))))
     }
     
     @ViewBuilder
