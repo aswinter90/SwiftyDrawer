@@ -161,7 +161,7 @@ extension Drawer {
             }
             .readSize {
                 if minHeight.shouldMatchStickyHeaderHeight {
-                    minHeight.updateAssociatedValue($0.height)
+                    minHeight.updateAssociatedValueOfCurrentCase($0.height)
                 }
 
                 updateCurrentHeight(with: state.case)
