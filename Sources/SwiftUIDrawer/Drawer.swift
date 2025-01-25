@@ -14,9 +14,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Bindings
 
     @Binding var state: DrawerState
-    @Binding var minHeight: DrawerMinHeight
-    @Binding var maxHeight: DrawerMaxHeight
-    @Binding var mediumHeight: DrawerMediumHeight?
+    @Binding var bottomPosition: DrawerBottomPosition
+    @Binding var topPosition: DrawerTopPosition
+    @Binding var midPosition: DrawerMidPosition?
 
     // MARK: - State
 
@@ -39,7 +39,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     private let stickyHeader: HeaderContent?
     private let content: Content
 
-    private var isAlignedToTabBar: Bool { minHeight.isAlignedToTabBar }
+    private var isAlignedToTabBar: Bool { bottomPosition.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
     /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
@@ -61,7 +61,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     private var floatingButtonsOpacity: CGFloat {
         let heightModifier = UIScreen.main.scale > 2 ? 200.0 : 100
-        let heightThreshold = mediumHeight?.value ?? minHeight.value
+        let heightThreshold = midPosition?.value ?? bottomPosition.value
         return (heightThreshold + heightModifier - state.currentHeight) / 100.0
     }
 
@@ -69,16 +69,16 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     public init(
         state: Binding<DrawerState>,
-        minHeight: Binding<DrawerMinHeight> = .constant(DrawerMinHeight(case: .relativeToSafeAreaBottom(offset: 0))),
-        mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
-        maxHeight: Binding<DrawerMaxHeight> = .constant(.init(case: .relativeToSafeAreaTop(offset: 0))),
+        bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
+        midPosition: Binding<DrawerMidPosition?>? = .constant(DrawerConstants.drawerDefaultMidPosition),
+        topPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {
         _state = state
-        _minHeight = minHeight
-        _mediumHeight = mediumHeight ?? .constant(nil)
-        _maxHeight = maxHeight
+        _bottomPosition = bottomPosition
+        _midPosition = midPosition ?? .constant(nil)
+        _topPosition = topPosition
         self.stickyHeader = stickyHeader
         self.content = content
     }
@@ -148,20 +148,20 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 extension Drawer {
     private var headerContainer: some View {
         VStack(spacing: 0) {
-            DragHandle()
+            style.dragHandle
 
             ZStack {
                 stickyHeader
             }
             .id(stickyHeaderId)
-            .onChange(of: minHeight) {
-                // The `readSize` closure below is not always called when using SwiftUI previews after updating the sticky header content and changing the drawer's `minHeight` on the outside.
+            .onChange(of: bottomPosition) {
+                // The `readSize` closure below is not always called when using SwiftUI previews after updating the sticky header content and changing the drawer's `bottomPosition` on the outside.
                 // By changing the view's id we trigger a redraw and can make sure we always re-read its size.
                 redrawHeaderIfNeeded(using: $0)
             }
             .readSize {
-                if minHeight.shouldMatchStickyHeaderHeight {
-                    minHeight.updateAssociatedValueOfCurrentCase($0.height)
+                if bottomPosition.shouldMatchStickyHeaderHeight {
+                    bottomPosition.updateAssociatedValueOfCurrentCase($0.height)
                 }
 
                 updateCurrentHeight(with: state.case)
@@ -184,8 +184,8 @@ extension Drawer {
         }
     }
     
-    private func redrawHeaderIfNeeded(using newMinHeight: DrawerMinHeight) {
-        stickyHeaderId = newMinHeight.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
+    private func redrawHeaderIfNeeded(using newBottomPosition: DrawerBottomPosition) {
+        stickyHeaderId = newBottomPosition.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
     }
     
     @ViewBuilder
@@ -230,8 +230,8 @@ extension Drawer {
                 let newHeight = state.currentHeight - (value.translation.height - lastTranslationYValue)
                 
                 state.currentHeight = max(
-                    minHeight.value,
-                    min(maxHeight.value, newHeight)
+                    bottomPosition.value,
+                    min(topPosition.value, newHeight)
                 )
             }
             .updating($lastTranslationYValue, body: { value, lastTranslationYValue, _ in
@@ -262,33 +262,33 @@ extension Drawer {
         case (.closed, .down):
             state.case = .closed
         case (.closed, .up):
-            state.case = mediumHeight != nil ? .partiallyOpened : .fullyOpened
+            state.case = midPosition != nil ? .partiallyOpened : .fullyOpened
         case (.partiallyOpened, .down):
             state.case = .closed
         case (.partiallyOpened, .up):
             state.case = .fullyOpened
         case (.fullyOpened, .down):
-            state.case = mediumHeight != nil ? .partiallyOpened : .closed
+            state.case = midPosition != nil ? .partiallyOpened : .closed
         case (.fullyOpened, .up):
             state.case = .fullyOpened
         case (_, .undefined):
             // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
-            let offsetToMinHeight = abs(state.currentHeight - minHeight.value)
+            let offsetToBottomPosition = abs(state.currentHeight - bottomPosition.value)
 
-            let offsetToMediumHeight = if let mediumHeight = mediumHeight?.value {
-                abs(max(state.currentHeight, mediumHeight) - min(state.currentHeight, mediumHeight))
+            let offsetToMidPosition = if let midPosition = midPosition?.value {
+                abs(max(state.currentHeight, midPosition) - min(state.currentHeight, midPosition))
             } else {
-                CGFloat.infinity // Eliminates `offsetToMediumHeight` from the following switch
+                CGFloat.infinity // Eliminates `offsetToMidPosition` from the following switch
             }
 
-            let offsetToMaxHeight = abs(maxHeight.value - state.currentHeight)
+            let offsetToTopPosition = abs(topPosition.value - state.currentHeight)
 
-            switch min(offsetToMinHeight, offsetToMediumHeight, offsetToMaxHeight) {
-            case offsetToMinHeight:
+            switch min(offsetToBottomPosition, offsetToMidPosition, offsetToTopPosition) {
+            case offsetToBottomPosition:
                 state.case = .closed
-            case offsetToMediumHeight:
+            case offsetToMidPosition:
                 state.case = .partiallyOpened
-            case offsetToMaxHeight:
+            case offsetToTopPosition:
                 state.case = .fullyOpened
             default:
                 // Unexpected case
@@ -302,15 +302,15 @@ extension Drawer {
     private func updateCurrentHeight(with newStateCase: DrawerState.Case) {
         switch newStateCase {
         case .closed:
-            state.currentHeight = minHeight.value
+            state.currentHeight = bottomPosition.value
         case .partiallyOpened:
-            if let mediumHeight = mediumHeight?.value {
-                state.currentHeight = mediumHeight
+            if let midPosition = midPosition?.value {
+                state.currentHeight = midPosition
             } else {
                 assertionFailure("Cannot set drawer state to `partiallyOpened` when no medium height was defined")
             }
         case .fullyOpened:
-            state.currentHeight = maxHeight.value
+            state.currentHeight = topPosition.value
         }
     }
 

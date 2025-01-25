@@ -8,7 +8,7 @@ struct ContentView: View {
     }
     
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var drawerMinHeight = DrawerMinHeight(case: .relativeToSafeAreaBottom(offset: 0))
+    @State private var drawerBottomPosition = DrawerBottomPosition(case: .relativeToSafeAreaBottom(offset: 0))
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
@@ -29,7 +29,7 @@ struct ContentView: View {
             configList
                 .drawerOverlay(
                     state: $drawerState,
-                    minHeight: $drawerMinHeight,
+                    bottomPosition: $drawerBottomPosition,
                     isDimmingBackground: true,
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
@@ -37,13 +37,13 @@ struct ContentView: View {
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
-            updateDrawerMinHeight(
+            updateDrawerBottomPosition(
                 isStickyHeaderShown: newValue,
                 isTabBarShown: isTabBarShown
             )
         }
         .onChange(of: isTabBarShown) { newValue in
-            updateDrawerMinHeight(
+            updateDrawerBottomPosition(
                 isStickyHeaderShown: isStickyHeaderShown,
                 isTabBarShown: newValue
             )
@@ -143,16 +143,16 @@ struct ContentView: View {
         }
     }
     
-    func updateDrawerMinHeight(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
+    func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         switch (isStickyHeaderShown, isTabBarShown) {
         case (true, true):
-            drawerMinHeight = .init(case: .matchesStickyHeaderContentHeightAlignedToTabBar())
+            drawerBottomPosition = .init(case: .matchesStickyHeaderContentHeightAlignedToTabBar())
         case (true, false):
-            drawerMinHeight = .init(case: .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom())
+            drawerBottomPosition = .init(case: .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom())
         case (false, true):
-            drawerMinHeight = .init(case: .relativeToTabBar(offset: 0))
+            drawerBottomPosition = .init(case: .relativeToTabBar(offset: 0))
         case (false, false):
-            drawerMinHeight = .init(case: .relativeToSafeAreaBottom(offset: 0))
+            drawerBottomPosition = .init(case: .relativeToSafeAreaBottom(offset: 0))
         }
     }
 }
