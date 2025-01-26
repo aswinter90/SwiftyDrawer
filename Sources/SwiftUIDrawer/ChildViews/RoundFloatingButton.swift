@@ -18,15 +18,17 @@ public struct RoundFloatingButton: View {
                     .icon
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
-                    .background(Color.background)
-                    .frame(width: Self.height)
-                    .clipShape(Circle())
-                    .prerenderedShadow(
-                        layerCornerRadius: 20,
-                        color: UIColor(drawerStyle.floatingButtonShadowStyle.color),
-                        opacity: Float(drawerStyle.floatingButtonShadowStyle.opacity),
-                        radius: drawerStyle.floatingButtonShadowStyle.radius,
-                        offset: drawerStyle.floatingButtonShadowStyle.offset
+                    .background(
+                        Color.background
+                            .frame(width: Self.height, height: Self.height)
+                            .clipShape(Circle())
+                            .prerenderedShadow(
+                                layerCornerRadius: 20,
+                                color: UIColor(drawerStyle.floatingButtonShadowStyle.color),
+                                opacity: Float(drawerStyle.floatingButtonShadowStyle.opacity),
+                                radius: drawerStyle.floatingButtonShadowStyle.radius,
+                                offset: drawerStyle.floatingButtonShadowStyle.offset
+                            )
                     )
             }
         )
