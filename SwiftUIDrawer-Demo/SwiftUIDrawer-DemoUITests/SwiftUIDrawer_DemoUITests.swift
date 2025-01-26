@@ -65,7 +65,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
             drawer.frame.origin.y,
             app.frame.height
                 - CGFloat(safeAreaInsets.bottom)
-                - TabBarHeightProvider.sharedInstance.height
+                - TabBarFrameProvider.sharedInstance.frame.height
                 - DrawerConstants.drawerDefaultMidPositionConstant
                 - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy

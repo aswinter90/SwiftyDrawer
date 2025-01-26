@@ -28,7 +28,7 @@ struct DimmingView: View {
         Color.black
             .allowsHitTesting(false)
             .opacity(opacity)
-//            .animation(.linear(duration: 0.3), value: opacity) // TODO: Still needed?
+            .animation(.linear(duration: 0.3), value: opacity)
     }
 
     private var opacity: CGFloat {

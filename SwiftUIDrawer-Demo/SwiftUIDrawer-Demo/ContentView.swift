@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
+    @State private var isCustomDragHandleShown = false
     
     @State private var selectedAlignment = Alignment.safeArea.rawValue
     
@@ -51,7 +52,9 @@ struct ContentView: View {
         .onChange(of: selectedAlignment) { newValue in
             isTabBarShown = newValue == Alignment.tabBar.rawValue
         }
-        .drawerStyle(.init(dragHandle: AnyView(Color.red.frame(width: 100, height: 100))))
+        .drawerStyle(
+            isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
+        )
     }
     
     @ViewBuilder
@@ -81,6 +84,8 @@ struct ContentView: View {
             )
             
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
+            
+            Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
             
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
                 Text("Actions:")
@@ -129,18 +134,35 @@ struct ContentView: View {
     }
     
     var drawerContent: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Text("Scrollable content")
                 .font(.title2)
-                .padding(.top)
+                .padding()
             
             ForEach(0..<30) { index in
                 Text("Item \(index)")
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
+                
+                Divider()
             }
             .padding(.vertical)
         }
+    }
+
+    func customDragHandleDrawerStyle() -> DrawerStyle {
+        DrawerStyle(
+            dragHandle: AnyView(
+                VStack(spacing: 2) {
+                    ForEach(0..<3) { _ in
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 50, height: 6)
+                    }
+                }
+                .padding(8)
+            )
+        )
     }
     
     func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {

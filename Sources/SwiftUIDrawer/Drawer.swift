@@ -32,6 +32,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     
     @State var stickyHeaderHeight: CGFloat = 0.0
     @State private var stickyHeaderId = UUID()
+    @State private var dragHandleId = UUID()
     @State var shouldElevateStickyHeader = false
 
     // MARK: - Properties: Private
@@ -158,16 +159,16 @@ extension Drawer {
     private var headerContainer: some View {
         VStack(spacing: 0) {
             style.dragHandle
+                .id(dragHandleId)
+                .readSize {
+                    positionCalculator.dragHandleHeight = $0.height
+                    updateCurrentHeight(with: state.case)
+                }
 
             ZStack {
                 stickyHeader
             }
             .id(stickyHeaderId)
-            .onChange(of: bottomPosition) {
-                // The `readSize` closure below is not always called when using SwiftUI previews after updating the sticky header content and changing the drawer's `bottomPosition` on the outside.
-                // By changing the view's id we trigger a redraw and can make sure we always re-read its size.
-                redrawHeaderIfNeeded(using: $0)
-            }
             .readSize {
                 if bottomPosition.shouldMatchStickyHeaderHeight {
                     bottomPosition.updateAssociatedValueOfCurrentCase($0.height)
@@ -191,10 +192,22 @@ extension Drawer {
             .opacity(shouldElevateStickyHeader ? 1 : 0)
             .padding(.horizontal, -8)
         }
+        // The `readSize`-closures above are not always called when using SwiftUI previews after updating the sticky header content or changing one of the drawer's fixed positions on the outside.
+        // By changing the view ids in `redrawHeader` we trigger a redraw and can make sure we always re-read their sizes.
+        .onChange(of: bottomPosition) { _ in
+            redrawHeader()
+        }
+        .onChange(of: midPosition) { _ in
+            redrawHeader()
+        }
+        .onChange(of: topPosition) { _ in
+            redrawHeader()
+        }
     }
     
-    private func redrawHeaderIfNeeded(using newBottomPosition: DrawerBottomPosition) {
-        stickyHeaderId = newBottomPosition.shouldMatchStickyHeaderHeight ? UUID() : stickyHeaderId
+    private func redrawHeader() {
+        stickyHeaderId = UUID()
+        dragHandleId = UUID()
     }
     
     @ViewBuilder
