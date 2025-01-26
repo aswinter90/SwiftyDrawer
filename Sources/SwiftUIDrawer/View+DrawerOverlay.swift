@@ -8,6 +8,7 @@ public extension View {
         midPosition: Binding<DrawerMidPosition?>? = .constant(DrawerConstants.drawerDefaultMidPosition),
         topPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
         isDimmingBackground: Bool = false,
+        positionCalculator: DrawerPositionCalculator = .init(),
         @ViewBuilder stickyHeader: () -> some View = { EmptyView() },
         @ViewBuilder content: () -> some View
     ) -> some View {
@@ -17,7 +18,8 @@ public extension View {
                 drawerState: state,
                 drawerBottomPosition: bottomPosition,
                 drawerMidPosition: midPosition,
-                drawerTopPosition: topPosition
+                drawerTopPosition: topPosition,
+                positionCalculator: positionCalculator
             )
             .overlay(alignment: .bottom, content: {
                 Drawer(
@@ -25,6 +27,7 @@ public extension View {
                     bottomPosition: bottomPosition,
                     midPosition: midPosition,
                     topPosition: topPosition,
+                    positionCalculator: positionCalculator,
                     stickyHeader: stickyHeader(),
                     content: content()
                 )
@@ -38,7 +41,8 @@ public extension View {
         drawerState: Binding<DrawerState>,
         drawerBottomPosition: Binding<DrawerBottomPosition>,
         drawerMidPosition: Binding<DrawerMidPosition?>?,
-        drawerTopPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0))
+        drawerTopPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        positionCalculator: DrawerPositionCalculator = .init()
     ) -> some View {
         if isShown {
             overlay {
@@ -46,7 +50,8 @@ public extension View {
                     drawerState: drawerState,
                     drawerBottomPosition: drawerBottomPosition,
                     drawerMidPosition: drawerMidPosition ?? .constant(nil),
-                    drawerTopPosition: drawerTopPosition
+                    drawerTopPosition: drawerTopPosition,
+                    positionCalculator: positionCalculator
                 )
                 .ignoresSafeArea()
             }

@@ -8,7 +8,7 @@ struct ContentView: View {
     }
     
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var drawerBottomPosition = DrawerBottomPosition(case: .relativeToSafeAreaBottom(offset: 0))
+    @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
@@ -146,13 +146,13 @@ struct ContentView: View {
     func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         switch (isStickyHeaderShown, isTabBarShown) {
         case (true, true):
-            drawerBottomPosition = .init(case: .matchesStickyHeaderContentHeightAlignedToTabBar())
+            drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToTabBar()
         case (true, false):
-            drawerBottomPosition = .init(case: .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom())
+            drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom()
         case (false, true):
-            drawerBottomPosition = .init(case: .relativeToTabBar(offset: 0))
+            drawerBottomPosition = .relativeToTabBar(offset: 0)
         case (false, false):
-            drawerBottomPosition = .init(case: .relativeToSafeAreaBottom(offset: 0))
+            drawerBottomPosition = .relativeToSafeAreaBottom(offset: 0)
         }
     }
 }

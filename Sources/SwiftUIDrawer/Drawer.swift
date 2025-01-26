@@ -36,6 +36,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Properties: Private
 
+    private let positionCalculator: DrawerPositionCalculator
     private let stickyHeader: HeaderContent?
     private let content: Content
 
@@ -44,7 +45,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     /// Property that controls the drawer's position on the screen.
     /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
     private var drawerPaddingTop: CGFloat {
-        UIScreen.main.bounds.height - state.currentHeight
+        UIScreen.main.bounds.height - state.currentPosition
     }
 
     /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
@@ -60,9 +61,14 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     }
 
     private var floatingButtonsOpacity: CGFloat {
-        let heightModifier = UIScreen.main.scale > 2 ? 200.0 : 100
-        let heightThreshold = midPosition?.value ?? bottomPosition.value
-        return (heightThreshold + heightModifier - state.currentHeight) / 100.0
+        let positionModifier = UIScreen.main.scale > 2 ? 200.0 : 100
+        let positionThreshold = if let midPosition {
+            positionCalculator.absoluteValue(for: midPosition)
+        } else {
+            positionCalculator.absoluteValue(for: bottomPosition)
+        }
+        
+        return (positionThreshold + positionModifier - state.currentPosition) / 100.0
     }
 
     // MARK: - Initializer
@@ -72,6 +78,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
         midPosition: Binding<DrawerMidPosition?>? = .constant(DrawerConstants.drawerDefaultMidPosition),
         topPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        positionCalculator: DrawerPositionCalculator = .init(),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {
@@ -79,6 +86,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         _bottomPosition = bottomPosition
         _midPosition = midPosition ?? .constant(nil)
         _topPosition = topPosition
+        
+        self.positionCalculator = positionCalculator
         self.stickyHeader = stickyHeader
         self.content = content
     }
@@ -122,7 +131,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
             // https://www.hackingwithswift.com/quick-start/swiftui/how-to-adjust-the-position-of-a-view-using-its-offset
-            // Instead of the default `offset` modifier, we add our own to observe value changes, which can be published to the outside world
+            // Instead of the default `offset` modifier, we add our own to observe value changes, which can also be published to the outside world
             OffsetEffect(
                 value: drawerPaddingTop,
                 onValueDidChange: onVerticalPositionDidChange
@@ -130,7 +139,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         )
         .animation(
             isDragging || isAnimationDisabled ? .none : animation,
-            value: state.currentHeight
+            value: state.currentPosition
         )
         .onFirstAppear {
             // The initial change of `state.currentHeight` should not be animated
@@ -227,11 +236,11 @@ extension Drawer {
 
                 isDragging = true
 
-                let newHeight = state.currentHeight - (value.translation.height - lastTranslationYValue)
+                let newPosition = state.currentPosition - (value.translation.height - lastTranslationYValue)
                 
-                state.currentHeight = max(
-                    bottomPosition.value,
-                    min(topPosition.value, newHeight)
+                state.currentPosition = max(
+                    positionCalculator.absoluteValue(for: bottomPosition),
+                    min(positionCalculator.absoluteValue(for: topPosition), newPosition)
                 )
             }
             .updating($lastTranslationYValue, body: { value, lastTranslationYValue, _ in
@@ -273,15 +282,21 @@ extension Drawer {
             state.case = .fullyOpened
         case (_, .undefined):
             // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
-            let offsetToBottomPosition = abs(state.currentHeight - bottomPosition.value)
+            let offsetToBottomPosition = abs(
+                state.currentPosition - positionCalculator.absoluteValue(for: bottomPosition)
+            )
 
-            let offsetToMidPosition = if let midPosition = midPosition?.value {
-                abs(max(state.currentHeight, midPosition) - min(state.currentHeight, midPosition))
+            var offsetToMidPosition: CGFloat
+            
+            if let midPosition = midPosition {
+                let midPositionValue = positionCalculator.absoluteValue(for: midPosition)
+                
+                offsetToMidPosition = abs(max(state.currentPosition, midPositionValue) - min(state.currentPosition, midPositionValue))
             } else {
-                CGFloat.infinity // Eliminates `offsetToMidPosition` from the following switch
+                offsetToMidPosition = CGFloat.infinity // Eliminates `offsetToMidPosition` from the following switch
             }
 
-            let offsetToTopPosition = abs(topPosition.value - state.currentHeight)
+            let offsetToTopPosition = abs(positionCalculator.absoluteValue(for: topPosition) - state.currentPosition)
 
             switch min(offsetToBottomPosition, offsetToMidPosition, offsetToTopPosition) {
             case offsetToBottomPosition:
@@ -302,15 +317,15 @@ extension Drawer {
     private func updateCurrentHeight(with newStateCase: DrawerState.Case) {
         switch newStateCase {
         case .closed:
-            state.currentHeight = bottomPosition.value
+            state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
         case .partiallyOpened:
-            if let midPosition = midPosition?.value {
-                state.currentHeight = midPosition
+            if let midPosition = midPosition {
+                state.currentPosition = positionCalculator.absoluteValue(for: midPosition)
             } else {
-                assertionFailure("Cannot set drawer state to `partiallyOpened` when no medium height was defined")
+                assertionFailure("Cannot set drawer state to `partiallyOpened` when no midPosition was defined")
             }
         case .fullyOpened:
-            state.currentHeight = topPosition.value
+            state.currentPosition = positionCalculator.absoluteValue(for: topPosition)
         }
     }
 

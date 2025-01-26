@@ -8,7 +8,7 @@ public struct DrawerState {
     }
 
     public var `case`: Case
-    public internal(set) var currentHeight: CGFloat = 0.0
+    public internal(set) var currentPosition: CGFloat = 0.0
 
     public init(case: Case) {
         self.case = `case`
