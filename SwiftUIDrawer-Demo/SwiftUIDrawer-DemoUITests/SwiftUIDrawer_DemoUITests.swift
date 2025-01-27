@@ -44,7 +44,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
 
         // Check drawer content by finding last item
         
-        await runAction(drawer.swipeUpFast(), iterations: 2)
+        await runAction(drawer.swipeUpFast(), iterations: 3)
         
         let lastDrawerContentItem = app
             .staticTexts
@@ -57,7 +57,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         
         await runAction(
             drawer.swipeDownFast(),
-            iterations: 3,
+            iterations: 4,
             sleepAfterAction: Self.drawerSwipeDuration
         )
         
