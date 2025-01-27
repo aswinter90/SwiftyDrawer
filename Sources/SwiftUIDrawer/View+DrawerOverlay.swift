@@ -5,8 +5,8 @@ public extension View {
     func drawerOverlay(
         state: Binding<DrawerState>,
         bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
-        midPosition: Binding<DrawerMidPosition?>? = .constant(DrawerConstants.drawerDefaultMidPosition),
-        topPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        midPosition: DrawerMidPosition? = DrawerConstants.drawerDefaultMidPosition,
+        topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         isDimmingBackground: Bool = false,
         positionCalculator: DrawerPositionCalculator = .init(),
         @ViewBuilder stickyHeader: () -> some View = { EmptyView() },
@@ -15,8 +15,8 @@ public extension View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
             .dimmedDrawerBackground(
                 isShown: isDimmingBackground,
-                drawerState: state,
-                drawerBottomPosition: bottomPosition,
+                drawerState: state.wrappedValue,
+                drawerBottomPosition: bottomPosition.wrappedValue,
                 drawerMidPosition: midPosition,
                 drawerTopPosition: topPosition,
                 positionCalculator: positionCalculator
@@ -38,10 +38,10 @@ public extension View {
     @ViewBuilder
     private func dimmedDrawerBackground(
         isShown: Bool,
-        drawerState: Binding<DrawerState>,
-        drawerBottomPosition: Binding<DrawerBottomPosition>,
-        drawerMidPosition: Binding<DrawerMidPosition?>?,
-        drawerTopPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        drawerState: DrawerState,
+        drawerBottomPosition: DrawerBottomPosition,
+        drawerMidPosition: DrawerMidPosition?,
+        drawerTopPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         positionCalculator: DrawerPositionCalculator = .init()
     ) -> some View {
         if isShown {
@@ -49,7 +49,7 @@ public extension View {
                 DimmingView(
                     drawerState: drawerState,
                     drawerBottomPosition: drawerBottomPosition,
-                    drawerMidPosition: drawerMidPosition ?? .constant(nil),
+                    drawerMidPosition: drawerMidPosition,
                     drawerTopPosition: drawerTopPosition,
                     positionCalculator: positionCalculator
                 )

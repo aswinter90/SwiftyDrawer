@@ -15,8 +15,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @Binding var state: DrawerState
     @Binding var bottomPosition: DrawerBottomPosition
-    @Binding var topPosition: DrawerTopPosition
-    @Binding var midPosition: DrawerMidPosition?
+    private let topPosition: DrawerTopPosition
+    private let midPosition: DrawerMidPosition?
 
     // MARK: - State
 
@@ -77,17 +77,16 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     public init(
         state: Binding<DrawerState>,
         bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
-        midPosition: Binding<DrawerMidPosition?>? = .constant(DrawerConstants.drawerDefaultMidPosition),
-        topPosition: Binding<DrawerTopPosition> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        midPosition: DrawerMidPosition? = DrawerConstants.drawerDefaultMidPosition,
+        topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         positionCalculator: DrawerPositionCalculator = .init(),
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {
         _state = state
         _bottomPosition = bottomPosition
-        _midPosition = midPosition ?? .constant(nil)
-        _topPosition = topPosition
-        
+        self.midPosition = midPosition
+        self.topPosition = topPosition
         self.positionCalculator = positionCalculator
         self.stickyHeader = stickyHeader
         self.content = content
