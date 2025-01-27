@@ -11,13 +11,20 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerContentOffsetController) var contentOffsetController: DrawerContentOffsetController?
     @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
     
-    // MARK: - Bindings
+    // MARK: - Bindings & Arguments
 
     @Binding var state: DrawerState
     @Binding var bottomPosition: DrawerBottomPosition
     private let topPosition: DrawerTopPosition
     private let midPosition: DrawerMidPosition?
+    private let positionCalculator: DrawerPositionCalculator
+    private let stickyHeader: HeaderContent?
+    private let content: Content
 
+    // MARK: - Reducer
+    
+    private let stateReducer: DrawerStateReducer
+    
     // MARK: - State
 
     @State private var isDragging = false
@@ -34,19 +41,15 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State private var stickyHeaderId = UUID()
     @State private var dragHandleId = UUID()
     @State var shouldElevateStickyHeader = false
-
-    // MARK: - Properties: Private
-
-    private let positionCalculator: DrawerPositionCalculator
-    private let stickyHeader: HeaderContent?
-    private let content: Content
-
+    
+    // MARK: - Computed
+    
     private var isAlignedToTabBar: Bool { bottomPosition.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
     /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
     private var drawerPaddingTop: CGFloat {
-        UIScreen.main.bounds.height - state.currentPosition
+        positionCalculator.screenHeight - state.currentPosition
     }
 
     /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
@@ -54,8 +57,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         switch state.case {
         case .fullyOpened:
             drawerPaddingTop
-                + UIApplication.shared.insets.bottom
-                + (isAlignedToTabBar ? TabBarFrameProvider.sharedInstance.frame.height : 0)
+            + positionCalculator.safeAreaInsets.bottom
+            + (isAlignedToTabBar ? positionCalculator.tabBarHeight : 0)
         default:
             0
         }
@@ -90,6 +93,12 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         self.positionCalculator = positionCalculator
         self.stickyHeader = stickyHeader
         self.content = content
+        self.stateReducer = .init(
+            bottomPosition: bottomPosition.wrappedValue,
+            topPosition: topPosition,
+            midPosition: midPosition,
+            positionCalculator: positionCalculator
+        )
     }
 
     // MARK: - Body
@@ -118,12 +127,12 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
             .gesture(drawerDragGesture)
-            .onAppear { updateCurrentHeight(with: state.case) }
+            .onAppear { stateReducer.updateCurrentPosition(of: &state) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
                 guard oldCase != newCase else { return }
 
                 DispatchQueue.main.async {
-                    updateCurrentHeight(with: newCase)
+                    stateReducer.updateCurrentPosition(of: &state)
                 }
             }
         }
@@ -161,7 +170,7 @@ extension Drawer {
                 .id(dragHandleId)
                 .readSize {
                     positionCalculator.dragHandleHeight = $0.height
-                    updateCurrentHeight(with: state.case)
+                    stateReducer.updateCurrentPosition(of: &state)
                 }
 
             ZStack {
@@ -169,12 +178,13 @@ extension Drawer {
             }
             .id(stickyHeaderId)
             .readSize {
+                stickyHeaderHeight = $0.height
+
                 if bottomPosition.shouldMatchStickyHeaderHeight {
                     bottomPosition.updateAssociatedValueOfCurrentCase($0.height)
                 }
 
-                updateCurrentHeight(with: state.case)
-                stickyHeaderHeight = $0.height
+                stateReducer.updateCurrentPosition(of: &state)
             }
         }
         .fixedSize(horizontal: false, vertical: true)
@@ -262,83 +272,14 @@ extension Drawer {
                 isDragging = false
 
                 DispatchQueue.main.async {
-                    updateState(withDragGestureValue: value)
+                    stateReducer.updateStateOnDraggingEnd(
+                        &state,
+                        draggingStartLocation: value.startLocation,
+                        draggingEndLocation: value.location,
+                        velocity: value.velocity
+                    )
                 }
             }
-    }
-
-    // MARK: - State updates
-    
-    private func updateState(withDragGestureValue value: _ChangedGesture<DragGesture>.Value) {
-        let startLocation = value.startLocation.y.roundToDecimal(3)
-        let endlocation = value.location.y.roundToDecimal(3)
-
-        let targetDirection = DragTargetDirection(
-            startLocationY: startLocation,
-            endLocationY: endlocation,
-            velocity: value.velocity.height
-        )
-
-        switch (state.case, targetDirection) {
-        case (.closed, .down):
-            state.case = .closed
-        case (.closed, .up):
-            state.case = midPosition != nil ? .partiallyOpened : .fullyOpened
-        case (.partiallyOpened, .down):
-            state.case = .closed
-        case (.partiallyOpened, .up):
-            state.case = .fullyOpened
-        case (.fullyOpened, .down):
-            state.case = midPosition != nil ? .partiallyOpened : .closed
-        case (.fullyOpened, .up):
-            state.case = .fullyOpened
-        case (_, .undefined):
-            // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
-            let offsetToBottomPosition = abs(
-                state.currentPosition - positionCalculator.absoluteValue(for: bottomPosition)
-            )
-
-            var offsetToMidPosition: CGFloat
-            
-            if let midPosition = midPosition {
-                let midPositionValue = positionCalculator.absoluteValue(for: midPosition)
-                
-                offsetToMidPosition = abs(max(state.currentPosition, midPositionValue) - min(state.currentPosition, midPositionValue))
-            } else {
-                offsetToMidPosition = CGFloat.infinity // Eliminates `offsetToMidPosition` from the following switch
-            }
-
-            let offsetToTopPosition = abs(positionCalculator.absoluteValue(for: topPosition) - state.currentPosition)
-
-            switch min(offsetToBottomPosition, offsetToMidPosition, offsetToTopPosition) {
-            case offsetToBottomPosition:
-                state.case = .closed
-            case offsetToMidPosition:
-                state.case = .partiallyOpened
-            case offsetToTopPosition:
-                state.case = .fullyOpened
-            default:
-                // Unexpected case
-                break
-            }
-        }
-
-        updateCurrentHeight(with: state.case)
-    }
-
-    private func updateCurrentHeight(with newStateCase: DrawerState.Case) {
-        switch newStateCase {
-        case .closed:
-            state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
-        case .partiallyOpened:
-            if let midPosition = midPosition {
-                state.currentPosition = positionCalculator.absoluteValue(for: midPosition)
-            } else {
-                assertionFailure("Cannot set drawer state to `partiallyOpened` when no midPosition was defined")
-            }
-        case .fullyOpened:
-            state.currentPosition = positionCalculator.absoluteValue(for: topPosition)
-        }
     }
 
     // MARK: - Origin observing

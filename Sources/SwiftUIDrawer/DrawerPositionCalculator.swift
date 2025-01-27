@@ -2,10 +2,14 @@ import UIKit
 import SwiftUI
 
 public class DrawerPositionCalculator {
-    let screenBoundsProvider: ScreenBoundsProviding
-    let safeAreaInsetsProvider: SafeAreaInsetsProviding
-    let tabBarFrameProvider: TabBarFrameProviding
+    private let screenBoundsProvider: ScreenBoundsProviding
+    private let safeAreaInsetsProvider: SafeAreaInsetsProviding
+    private let tabBarFrameProvider: TabBarFrameProviding
+    
     var dragHandleHeight: CGFloat
+    var screenHeight: CGFloat { screenBoundsProvider.bounds.height }
+    var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
+    var tabBarHeight: CGFloat { tabBarFrameProvider.frame.height }
     
     public init(
         screenBoundsProvider: ScreenBoundsProviding = UIScreen.main,
@@ -25,22 +29,22 @@ public class DrawerPositionCalculator {
             float + dragHandleHeight
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
-                + offset
-                + dragHandleHeight
+            + offset
+            + dragHandleHeight
         case let .relativeToTabBar(offset):
             safeAreaInsetsProvider.insets.bottom
-                + tabBarFrameProvider.frame.height
-                + offset
-                + dragHandleHeight
+            + tabBarFrameProvider.frame.height
+            + offset
+            + dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight):
             safeAreaInsetsProvider.insets.bottom
-                + stickyHeaderHeight
-                + dragHandleHeight
+            + stickyHeaderHeight
+            + dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight):
             safeAreaInsetsProvider.insets.bottom
-                + tabBarFrameProvider.frame.height
-                + stickyHeaderHeight
-                + dragHandleHeight
+            + tabBarFrameProvider.frame.height
+            + stickyHeaderHeight
+            + dragHandleHeight
         }
     }
     
@@ -50,13 +54,13 @@ public class DrawerPositionCalculator {
             float
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
-                + offset
-                + dragHandleHeight
+            + offset
+            + dragHandleHeight
         case let .relativeToTabBar(offset):
             safeAreaInsetsProvider.insets.bottom
-                + tabBarFrameProvider.frame.height
-                + offset
-                + dragHandleHeight
+            + tabBarFrameProvider.frame.height
+            + offset
+            + dragHandleHeight
         }
     }
     
@@ -66,8 +70,8 @@ public class DrawerPositionCalculator {
             float
         case let .relativeToSafeAreaTop(offset):
             screenBoundsProvider.bounds.height
-                - safeAreaInsetsProvider.insets.top
-                - offset
+            - safeAreaInsetsProvider.insets.top
+            - offset
         }
     }
 }
