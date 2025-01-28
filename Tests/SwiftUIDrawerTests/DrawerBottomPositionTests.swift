@@ -2,7 +2,8 @@ import Testing
 import CoreGraphics
 @testable import SwiftUIDrawer
 
-@Suite("DrawerBottomPositionTests") struct DrawerBottomPositionTests {
+@Suite("DrawerBottomPositionTests")
+struct DrawerBottomPositionTests {
     private static let expectedAssociatedValue: CGFloat = 10.0
     
     private static let allCases: [DrawerBottomPosition] = [
