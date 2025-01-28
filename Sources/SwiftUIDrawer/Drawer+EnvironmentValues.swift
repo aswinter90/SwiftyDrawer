@@ -14,7 +14,7 @@ extension EnvironmentValues {
     @Entry var drawerContentOffsetController: DrawerContentOffsetController?
     @Entry var drawerOriginObservable: DrawerOriginObservable?
     
-    @Entry var drawerMediumStateContentContainerHeight: CGFloat = 0
+    @Entry var drawerPartiallyOpenedStateContentContainerHeight: CGFloat = 0
     @Entry var drawerStickyHeaderHeight: CGFloat = 0
 }
 

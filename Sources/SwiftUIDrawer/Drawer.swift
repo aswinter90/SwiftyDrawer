@@ -122,7 +122,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 .padding(.bottom, contentBottomPadding)
                 .zIndex(0)
             }
-            .frame(height: UIScreen.main.bounds.height)
+            .frame(height: positionCalculator.screenHeight)
             .background(Color.background)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
@@ -151,13 +151,13 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             value: state.currentPosition
         )
         .onFirstAppear {
-            // The initial change of `state.currentHeight` should not be animated
+            // The initial change of `state.currentPosition` should not be animated
             DispatchQueue.main.async {
                 isAnimationDisabled = false
             }
         }
         .accessibilityIdentifier("SwiftUIDrawer")
-        .storeSafeAreaInsetsAsAccessibilityLabel()
+        .storeSafeAreaInsetsAsAccessibilityLabel(positionCalculator.safeAreaInsets)
     }
 }
 

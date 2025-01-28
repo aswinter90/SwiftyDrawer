@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension View {
-    func storeSafeAreaInsetsAsAccessibilityLabel() -> some View {
+    func storeSafeAreaInsetsAsAccessibilityLabel(_ insets: UIEdgeInsets) -> some View {
         let topInset = UIApplication.shared.insets.top
         let bottomInset = UIApplication.shared.insets.bottom
         
