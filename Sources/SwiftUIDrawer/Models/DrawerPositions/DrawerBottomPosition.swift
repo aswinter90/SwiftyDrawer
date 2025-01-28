@@ -1,6 +1,5 @@
 import UIKit
 
-@MainActor
 public enum DrawerBottomPosition: Equatable {
     case absolute(CGFloat)
     case relativeToSafeAreaBottom(offset: CGFloat) // Value of 0: Drag handle is on top of the safe area
