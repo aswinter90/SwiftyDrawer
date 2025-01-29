@@ -18,7 +18,7 @@ struct DrawerStateReducer {
         self.positionCalculator = positionCalculator
     }
     
-    func updateStateOnDraggingEnd(
+    func updateStateOnDraggingEnded(
         _ state: inout DrawerState,
         draggingStartLocation: CGPoint,
         draggingEndLocation: CGPoint,

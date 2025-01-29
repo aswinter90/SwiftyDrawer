@@ -126,7 +126,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .background(Color.background)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
-            .gesture(drawerDragGesture)
+            .gesture(dragGesture)
             .onAppear { stateReducer.updateCurrentPosition(of: &state) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
                 guard oldCase != newCase else { return }
@@ -251,7 +251,7 @@ extension Drawer {
     
     // MARK: - Drag Gesture
 
-    private var drawerDragGesture: some Gesture {
+    private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
                 guard isDrawerDragGestureEnabled else { return }
@@ -272,7 +272,7 @@ extension Drawer {
                 isDragging = false
 
                 DispatchQueue.main.async {
-                    stateReducer.updateStateOnDraggingEnd(
+                    stateReducer.updateStateOnDraggingEnded(
                         &state,
                         draggingStartLocation: value.startLocation,
                         draggingEndLocation: value.location,
