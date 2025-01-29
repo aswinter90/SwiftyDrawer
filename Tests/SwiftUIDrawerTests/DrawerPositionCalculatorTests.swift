@@ -25,7 +25,7 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for given `DrawerBottomPosition` cases",
+        "Test returned CGFloat value for a given `DrawerBottomPosition` cases",
         arguments: [
             DrawerBottomPosition.absolute(expectedPositionAssociatedValue),
             .relativeToSafeAreaBottom(offset: expectedPositionAssociatedValue),
@@ -62,7 +62,7 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for given `DrawerMidPosition` cases",
+        "Test returned CGFloat value for a given `DrawerMidPosition` cases",
         arguments: [
             DrawerMidPosition.absolute(Self.expectedPositionAssociatedValue),
             .relativeToSafeAreaBottom(offset: Self.expectedPositionAssociatedValue),
@@ -87,7 +87,7 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for given `DrawerTopPosition` cases",
+        "Test returned CGFloat value for a given `DrawerTopPosition` cases",
         arguments: [
             DrawerTopPosition.absolute(Self.expectedPositionAssociatedValue),
             .relativeToSafeAreaTop(offset: Self.expectedPositionAssociatedValue)
