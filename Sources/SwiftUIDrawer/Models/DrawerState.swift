@@ -2,6 +2,7 @@ import Foundation
 
 public struct DrawerState {
     public enum Case {
+        case dragging
         case closed
         case partiallyOpened
         case fullyOpened

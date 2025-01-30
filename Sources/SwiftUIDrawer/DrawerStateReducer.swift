@@ -18,35 +18,53 @@ struct DrawerStateReducer {
         self.positionCalculator = positionCalculator
     }
     
-    func updateStateOnDraggingEnded(
+    func onDrag(
         _ state: inout DrawerState,
-        draggingStartLocation: CGPoint,
-        draggingEndLocation: CGPoint,
+        yTranslation: Double,
+        lastYTranslation: Double
+    ) {
+        state.case = .dragging
+
+        let newPosition = state.currentPosition - (yTranslation - lastYTranslation)
+        
+        state.currentPosition = max(
+            positionCalculator.absoluteValue(for: bottomPosition),
+            min(positionCalculator.absoluteValue(for: topPosition), newPosition)
+        )
+    }
+    
+    func onDraggingEnded(
+        _ state: inout DrawerState,
+        startLocation: CGPoint,
+        endLocation: CGPoint,
         velocity: CGSize
     ) {
-        let startLocation = draggingStartLocation.y.roundToDecimal(3)
-        let endlocation = draggingEndLocation.y.roundToDecimal(3)
+        let startLocation = startLocation.y.roundToDecimal(3)
+        let endlocation = endLocation.y.roundToDecimal(3)
         
-        let targetDirection = DragTargetDirection(
+        let targetDirection = DragDirection(
             startLocationY: startLocation,
             endLocationY: endlocation,
             velocity: velocity.height
         )
 
-        switch (state.case, targetDirection) {
-        case (.closed, .down):
-            state.case = .closed
-        case (.closed, .up):
-            state.case = midPosition != nil ? .partiallyOpened : .fullyOpened
-        case (.partiallyOpened, .down):
-            state.case = .closed
-        case (.partiallyOpened, .up):
-            state.case = .fullyOpened
-        case (.fullyOpened, .down):
-            state.case = midPosition != nil ? .partiallyOpened : .closed
-        case (.fullyOpened, .up):
-            state.case = .fullyOpened
-        case (_, .undefined):
+        let currentPosition = state.currentPosition
+        let absoluteMidPosition = midPosition.map { positionCalculator.absoluteValue(for: $0) }
+        
+        switch targetDirection {
+        case .up:
+            if let absoluteMidPosition, currentPosition < absoluteMidPosition {
+                state.case = .partiallyOpened
+            } else {
+                state.case = .fullyOpened
+            }
+        case .down:
+            if let absoluteMidPosition, currentPosition > absoluteMidPosition {
+                state.case = .partiallyOpened
+            } else {
+                state.case = .closed
+            }
+        case .undefined:
             // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
             let offsetToBottomPosition = abs(
                 state.currentPosition - positionCalculator.absoluteValue(for: bottomPosition)
@@ -77,13 +95,13 @@ struct DrawerStateReducer {
                 // Unexpected case
                 break
             }
-            
-            updateCurrentPosition(of: &state)
         }
     }
     
     func updateCurrentPosition(of state: inout DrawerState) {
         switch state.case {
+        case .dragging:
+            break
         case .closed:
             state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
         case .partiallyOpened:

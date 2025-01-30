@@ -39,23 +39,23 @@ extension Drawer {
     private func shouldContentBeginDragging(verticalContentOffset: CGFloat, verticalTranslation: CGFloat) -> Bool {
         // Content scrolling is only available on a fully opened drawer
         if state.case != .fullyOpened {
-            isDrawerDragGestureEnabled = true
+            isDragGestureEnabled = true
             return false
         }
 
         // User moves content up
         if verticalTranslation < 0 {
-            isDrawerDragGestureEnabled = false
+            isDragGestureEnabled = false
             return true
         }
         // User moves content down
         else {
             // ScrollView fully scrolled up, return false to redirect the gesture to the drawer
             if verticalContentOffset <= 0 {
-                isDrawerDragGestureEnabled = true
+                isDragGestureEnabled = true
                 return false
             } else {
-                isDrawerDragGestureEnabled = false
+                isDragGestureEnabled = false
                 return true
             }
         }
@@ -63,12 +63,12 @@ extension Drawer {
 
     private func onContentDraggingEnded(willDecelerate: Bool) {
         if !willDecelerate {
-            isDrawerDragGestureEnabled = true
+            isDragGestureEnabled = true
         }
     }
 
     private func onContentDecelaratingEnded() {
-        isDrawerDragGestureEnabled = true
+        isDragGestureEnabled = true
     }
 
     private func onContentDidScroll(verticalContentOffset: CGFloat) {

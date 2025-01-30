@@ -74,4 +74,19 @@ public class DrawerPositionCalculator {
             - offset
         }
     }
+    
+    func floatingButtonsOpacity(
+        currentDrawerPosition: CGFloat,
+        drawerBottomPosition: DrawerBottomPosition,
+        drawerMidPosition: DrawerMidPosition?
+    ) -> CGFloat {
+        let positionModifier = UIScreen.main.scale > 2 ? 200.0 : 100
+        let positionThreshold = if let drawerMidPosition {
+            absoluteValue(for: drawerMidPosition)
+        } else {
+            absoluteValue(for: drawerBottomPosition)
+        }
+        
+        return (positionThreshold + positionModifier - currentDrawerPosition) / 100.0
+    }
 }

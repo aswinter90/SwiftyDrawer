@@ -27,12 +27,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     
     // MARK: - State
 
-    @State private var isDragging = false
-    @GestureState private var lastTranslationYValue = 0.0
+    @GestureState private var lastYTranslation = 0.0
     @State private var isAnimationDisabled = true
     
     /// Additional safety measure to prevent the drawer from moving slightly when scrolling its content
-    @State var isDrawerDragGestureEnabled = true
+    @State var isDragGestureEnabled = true
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
     @State var contentHeight: CGFloat = 0.0
@@ -44,6 +43,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     
     // MARK: - Computed
     
+    private var isDragging: Bool { state.case == .dragging }
     private var isAlignedToTabBar: Bool { bottomPosition.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
@@ -62,17 +62,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         default:
             0
         }
-    }
-
-    private var floatingButtonsOpacity: CGFloat {
-        let positionModifier = UIScreen.main.scale > 2 ? 200.0 : 100
-        let positionThreshold = if let midPosition {
-            positionCalculator.absoluteValue(for: midPosition)
-        } else {
-            positionCalculator.absoluteValue(for: bottomPosition)
-        }
-        
-        return (positionThreshold + positionModifier - state.currentPosition) / 100.0
     }
 
     // MARK: - Initializer
@@ -242,7 +231,14 @@ extension Drawer {
                 .animation(.smooth, value: !floatingButtonsConfiguration.trailingButtons.isEmpty)
             }
             .padding(.horizontal, DrawerConstants.floatingButtonsPadding)
-            .opacity(floatingButtonsOpacity)
+            .opacity(
+                positionCalculator
+                    .floatingButtonsOpacity(
+                        currentDrawerPosition: state.currentPosition,
+                        drawerBottomPosition: bottomPosition,
+                        drawerMidPosition: midPosition
+                    )
+            )
         }
     }
 }
@@ -254,28 +250,23 @@ extension Drawer {
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 20, coordinateSpace: .global)
             .onChanged { value in
-                guard isDrawerDragGestureEnabled else { return }
+                guard isDragGestureEnabled else { return }
 
-                isDragging = true
-
-                let newPosition = state.currentPosition - (value.translation.height - lastTranslationYValue)
-                
-                state.currentPosition = max(
-                    positionCalculator.absoluteValue(for: bottomPosition),
-                    min(positionCalculator.absoluteValue(for: topPosition), newPosition)
+                stateReducer.onDrag(
+                    &state,
+                    yTranslation: value.translation.height,
+                    lastYTranslation: lastYTranslation
                 )
             }
-            .updating($lastTranslationYValue, body: { value, lastTranslationYValue, _ in
+            .updating($lastYTranslation, body: { value, lastTranslationYValue, _ in
                 lastTranslationYValue = value.translation.height
             })
             .onEnded { value in
-                isDragging = false
-
                 DispatchQueue.main.async {
-                    stateReducer.updateStateOnDraggingEnded(
+                    stateReducer.onDraggingEnded(
                         &state,
-                        draggingStartLocation: value.startLocation,
-                        draggingEndLocation: value.location,
+                        startLocation: value.startLocation,
+                        endLocation: value.location,
                         velocity: value.velocity
                     )
                 }
