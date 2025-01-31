@@ -65,7 +65,7 @@ struct DrawerStateReducer {
                 state.case = .closed
             }
         case .undefined:
-            // Gesture was too slow or the translation was too small. Find the nearest fixed drawer position
+            // The gesture was too slow or the translation was too small. The user likely let go of the drawer between two fixed positions. Find the nearest fixed position.
             let offsetToBottomPosition = abs(
                 state.currentPosition - positionCalculator.absoluteValue(for: bottomPosition)
             )
@@ -98,20 +98,21 @@ struct DrawerStateReducer {
         }
     }
     
-    func updateCurrentPosition(of state: inout DrawerState) {
+    func syncCaseAndCurrentPosition(of state: inout DrawerState) {
         switch state.case {
-        case .dragging:
-            break
         case .closed:
             state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
         case .partiallyOpened:
             if let midPosition = midPosition {
                 state.currentPosition = positionCalculator.absoluteValue(for: midPosition)
             } else {
-                assertionFailure("Cannot set drawer state to `partiallyOpened` when no midPosition was defined")
+                assertionFailure("Cannot set `state.currentPosition` to value for `partiallyOpened` case when no `midPosition` was defined")
             }
         case .fullyOpened:
             state.currentPosition = positionCalculator.absoluteValue(for: topPosition)
+        case .dragging:
+            debugPrint("Unexpected case, during dragging, the drawers position should be updated via the `onDrag` function.")
+            break
         }
     }
 }

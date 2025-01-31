@@ -87,11 +87,10 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 )
                 .padding(
                     .bottom,
-                    positionCalculator
-                        .contentBottomPadding(
-                            for: state,
-                            bottomPosition: bottomPosition
-                        )
+                    positionCalculator.contentBottomPadding(
+                        for: state,
+                        bottomPosition: bottomPosition
+                    )
                 )
                 .zIndex(0)
             }
@@ -100,12 +99,12 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
             .gesture(dragGesture)
-            .onAppear { stateReducer.updateCurrentPosition(of: &state) }
+            .onAppear { stateReducer.syncCaseAndCurrentPosition(of: &state) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
                 guard oldCase != newCase else { return }
 
                 DispatchQueue.main.async {
-                    stateReducer.updateCurrentPosition(of: &state)
+                    stateReducer.syncCaseAndCurrentPosition(of: &state)
                 }
             }
         }
@@ -143,7 +142,7 @@ extension Drawer {
                 .id(dragHandleId)
                 .readSize {
                     positionCalculator.dragHandleHeight = $0.height
-                    stateReducer.updateCurrentPosition(of: &state)
+                    stateReducer.syncCaseAndCurrentPosition(of: &state)
                 }
 
             ZStack {
@@ -157,7 +156,7 @@ extension Drawer {
                     bottomPosition.updateAssociatedValueOfCurrentCase($0.height)
                 }
 
-                stateReducer.updateCurrentPosition(of: &state)
+                stateReducer.syncCaseAndCurrentPosition(of: &state)
             }
         }
         .fixedSize(horizontal: false, vertical: true)
