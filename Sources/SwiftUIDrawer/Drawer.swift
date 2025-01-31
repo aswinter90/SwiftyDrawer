@@ -44,7 +44,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Computed
     
     private var isDragging: Bool { state.case == .dragging }
-    private var isAlignedToTabBar: Bool { bottomPosition.isAlignedToTabBar }
     
     /// Property that controls the drawer's position on the screen.
     /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
@@ -58,7 +57,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         case .fullyOpened:
             drawerPaddingTop
             + positionCalculator.safeAreaInsets.bottom
-            + (isAlignedToTabBar ? positionCalculator.tabBarHeight : 0)
+            + (bottomPosition.isAlignedToTabBar ? positionCalculator.tabBarHeight : 0)
         default:
             0
         }
