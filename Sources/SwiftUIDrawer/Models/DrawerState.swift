@@ -1,7 +1,7 @@
 import Foundation
 
 public struct DrawerState {
-    public enum Case {
+    public enum Case: CaseIterable {
         case dragging
         case closed
         case partiallyOpened

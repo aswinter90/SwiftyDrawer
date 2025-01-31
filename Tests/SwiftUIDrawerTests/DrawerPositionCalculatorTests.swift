@@ -2,8 +2,6 @@ import Testing
 import UIKit
 @testable import SwiftUIDrawer
 
-// TODO: Add tests for `paddingTop` and `contentBottomPadding` functions
-
 @Suite("DrawerPositionCalculatorTests")
 struct DrawerPositionCalculatorTests {
     static let dragHandleHeight = 12.0
@@ -27,7 +25,49 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for a given `DrawerBottomPosition` cases",
+        "Test returned `paddingTop` CGFloat value for a given `DrawerState`",
+        arguments: [
+            DrawerState(case: .dragging),
+            .init(case: .closed),
+            .init(case: .partiallyOpened),
+            .init(case: .fullyOpened)
+        ]
+    )
+    func testPaddingTop(for drawerState: DrawerState) {
+        let paddingTop = subject.paddingTop(for: drawerState)
+        #expect(paddingTop == screenBounds.height - drawerState.currentPosition)
+    }
+    
+    @Test(
+        "Test returned `contentBottomPadding` CGFloat value for a given `DrawerState` and `DrawerBottomPosition",
+        arguments: ContentBottomPaddingTestArguments.allCombinations
+    )
+    func contentBottomPadding(arguments: ContentBottomPaddingTestArguments) {
+        let state = arguments.drawerState
+        let position = arguments.bottomPosition
+        let subject = subject
+        
+        let contentBottomPadding = subject.contentBottomPadding(
+            for: state,
+            bottomPosition: position
+        )
+        
+        switch state.case {
+        case .fullyOpened:
+            let sum = subject.paddingTop(for: state) + safeAreaInsets.bottom
+            
+            if position.isAlignedToTabBar {
+                #expect(contentBottomPadding == sum + tabBarFrame.height)
+            } else {
+                #expect(contentBottomPadding == sum)
+            }
+        default:
+            #expect(contentBottomPadding == 0)
+        }
+    }
+    
+    @Test(
+        "Test returned absolute CGFloat value for a given `DrawerBottomPosition` cases",
         arguments: [
             DrawerBottomPosition.absolute(expectedPositionAssociatedValue),
             .relativeToSafeAreaBottom(offset: expectedPositionAssociatedValue),
@@ -64,7 +104,7 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for a given `DrawerMidPosition` cases",
+        "Test returned absolute CGFloat value for a given `DrawerMidPosition` cases",
         arguments: [
             DrawerMidPosition.absolute(Self.expectedPositionAssociatedValue),
             .relativeToSafeAreaBottom(offset: Self.expectedPositionAssociatedValue),
@@ -89,7 +129,7 @@ struct DrawerPositionCalculatorTests {
     }
     
     @Test(
-        "Test returned CGFloat value for a given `DrawerTopPosition` cases",
+        "Test returned absolute CGFloat value for a given `DrawerTopPosition` cases",
         arguments: [
             DrawerTopPosition.absolute(Self.expectedPositionAssociatedValue),
             .relativeToSafeAreaTop(offset: Self.expectedPositionAssociatedValue)
@@ -105,6 +145,42 @@ struct DrawerPositionCalculatorTests {
             let sum = CGFloat(screenBounds.height - safeAreaInsets.top - offset)
             
             #expect(absoluteValue == sum)
+        }
+    }
+}
+
+// MARK: - Test utils
+
+struct ContentBottomPaddingTestArguments {
+    static let expectedPositionAssociatedValue: CGFloat = 33.0
+    
+    let drawerState: DrawerState
+    let bottomPosition: DrawerBottomPosition
+    
+    static var allCombinations: [ContentBottomPaddingTestArguments] {
+        DrawerState.Case.allCases.flatMap {
+            [
+                .init(
+                    drawerState: .init(case: $0),
+                    bottomPosition: .absolute(Self.expectedPositionAssociatedValue)
+                ),
+                .init(
+                    drawerState: .init(case: $0),
+                    bottomPosition: .relativeToSafeAreaBottom(offset: Self.expectedPositionAssociatedValue)
+                ),
+                .init(
+                    drawerState: .init(case: $0),
+                    bottomPosition: .relativeToTabBar(offset: Self.expectedPositionAssociatedValue)
+                ),
+                .init(
+                    drawerState: .init(case: $0),
+                    bottomPosition: .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: Self.expectedPositionAssociatedValue)
+                ),
+                .init(
+                    drawerState: .init(case: $0),
+                    bottomPosition: .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: Self.expectedPositionAssociatedValue)
+                )
+            ]
         }
     }
 }
