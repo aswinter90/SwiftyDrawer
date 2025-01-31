@@ -15,8 +15,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @Binding var state: DrawerState
     @Binding var bottomPosition: DrawerBottomPosition
-    private let topPosition: DrawerTopPosition
     private let midPosition: DrawerMidPosition?
+    private let topPosition: DrawerTopPosition
     private let positionCalculator: DrawerPositionCalculator
     private let stickyHeader: HeaderContent?
     private let content: Content
@@ -30,7 +30,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @GestureState private var lastYTranslation = 0.0
     @State private var isAnimationDisabled = true
     
-    /// Additional safety measure to prevent the drawer from moving slightly when scrolling its content
+    /// Additional safety measure to prevent the drawer from moving slightly when its content is being scrolled
     @State var isDragGestureEnabled = true
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
@@ -75,7 +75,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             floatingButtons()
                 .padding(.bottom, DrawerConstants.floatingButtonsPadding)
 
-            // Header and content container
+            // Header and content
             VStack(spacing: 0) {
                 headerContainer
                     .zIndex(1) // For casting shadows on the scrollable content below
