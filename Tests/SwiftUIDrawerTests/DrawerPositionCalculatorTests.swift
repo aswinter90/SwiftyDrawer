@@ -2,6 +2,8 @@ import Testing
 import UIKit
 @testable import SwiftUIDrawer
 
+// TODO: Add tests for `paddingTop` and `contentBottomPadding` functions
+
 @Suite("DrawerPositionCalculatorTests")
 struct DrawerPositionCalculatorTests {
     static let dragHandleHeight = 12.0

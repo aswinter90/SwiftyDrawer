@@ -23,6 +23,23 @@ public class DrawerPositionCalculator {
         self.dragHandleHeight = dragHandleHeight
     }
     
+    /// Property that controls the drawer's position on the screen by adding a top padding.
+    func paddingTop(for state: DrawerState) -> CGFloat {
+        screenHeight - state.currentPosition
+    }
+
+    /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
+    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> CGFloat {
+        switch state.case {
+        case .fullyOpened:
+            paddingTop(for: state)
+            + safeAreaInsets.bottom
+            + (bottomPosition.isAlignedToTabBar ? tabBarHeight : 0)
+        default:
+            0
+        }
+    }
+    
     func absoluteValue(for bottomPosition: DrawerBottomPosition) -> CGFloat {
         switch bottomPosition {
         case let .absolute(float):

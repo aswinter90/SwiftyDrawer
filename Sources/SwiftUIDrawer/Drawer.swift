@@ -41,28 +41,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State private var dragHandleId = UUID()
     @State var shouldElevateStickyHeader = false
     
-    // MARK: - Computed
-    
-    private var isDragging: Bool { state.case == .dragging }
-    
-    /// Property that controls the drawer's position on the screen.
-    /// Updating the drawer's visible portion this way is less error-prone than changing its frame as in previous implementations
-    private var drawerPaddingTop: CGFloat {
-        positionCalculator.screenHeight - state.currentPosition
-    }
-
-    /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
-    private var contentBottomPadding: CGFloat {
-        switch state.case {
-        case .fullyOpened:
-            drawerPaddingTop
-            + positionCalculator.safeAreaInsets.bottom
-            + (bottomPosition.isAlignedToTabBar ? positionCalculator.tabBarHeight : 0)
-        default:
-            0
-        }
-    }
-
     // MARK: - Initializer
 
     public init(
@@ -107,7 +85,14 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .background(style.backgroundColor)
                 )
-                .padding(.bottom, contentBottomPadding)
+                .padding(
+                    .bottom,
+                    positionCalculator
+                        .contentBottomPadding(
+                            for: state,
+                            bottomPosition: bottomPosition
+                        )
+                )
                 .zIndex(0)
             }
             .frame(height: positionCalculator.screenHeight)
@@ -124,18 +109,18 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
-        .padding(.top, drawerPaddingTop)
+        .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
             // https://www.hackingwithswift.com/quick-start/swiftui/how-to-adjust-the-position-of-a-view-using-its-offset
             // Instead of the default `offset` modifier, we add our own to observe value changes, which can also be published to the outside world
             OffsetEffect(
-                value: drawerPaddingTop,
+                value: positionCalculator.paddingTop(for: state),
                 onValueDidChange: onVerticalPositionDidChange
             )
         )
         .animation(
-            isDragging || isAnimationDisabled ? .none : animation,
+            state.isDragging || isAnimationDisabled ? .none : animation,
             value: state.currentPosition
         )
         .onFirstAppear {
