@@ -9,17 +9,9 @@
 /* Begin PBXBuildFile section */
 		14176C7E2D0E2BF9000AC841 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14176C7D2D0E2BF9000AC841 /* SwiftUIDrawer */; };
 		147368662D2D502000F6AEF9 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 147368652D2D502000F6AEF9 /* SwiftUIDrawer */; };
-		147368682D2D502800F6AEF9 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 147368672D2D502800F6AEF9 /* SwiftUIDrawer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		14176C382D0E2AA0000AC841 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 14176C1E2D0E2A9F000AC841 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 14176C252D0E2A9F000AC841;
-			remoteInfo = "SwiftUIDrawer-Demo";
-		};
 		14176C422D0E2AA0000AC841 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 14176C1E2D0E2A9F000AC841 /* Project object */;
@@ -31,7 +23,6 @@
 
 /* Begin PBXFileReference section */
 		14176C262D0E2A9F000AC841 /* SwiftUIDrawer-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUIDrawer-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		14176C372D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUIDrawer-DemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14176C412D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUIDrawer-DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14176C7C2D0E2BA4000AC841 /* SwiftUIDrawer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIDrawer; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,11 +31,6 @@
 		14176C282D0E2A9F000AC841 /* SwiftUIDrawer-Demo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "SwiftUIDrawer-Demo";
-			sourceTree = "<group>";
-		};
-		14176C3A2D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "SwiftUIDrawer-DemoTests";
 			sourceTree = "<group>";
 		};
 		14176C442D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests */ = {
@@ -63,14 +49,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14176C342D0E2AA0000AC841 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				147368682D2D502800F6AEF9 /* SwiftUIDrawer in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14176C3E2D0E2AA0000AC841 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -86,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				14176C282D0E2A9F000AC841 /* SwiftUIDrawer-Demo */,
-				14176C3A2D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests */,
 				14176C442D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests */,
 				14176C7B2D0E2BA4000AC841 /* Frameworks */,
 				14176C272D0E2A9F000AC841 /* Products */,
@@ -97,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				14176C262D0E2A9F000AC841 /* SwiftUIDrawer-Demo.app */,
-				14176C372D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests.xctest */,
 				14176C412D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests.xctest */,
 			);
 			name = Products;
@@ -137,30 +113,6 @@
 			productReference = 14176C262D0E2A9F000AC841 /* SwiftUIDrawer-Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		14176C362D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 14176C4E2D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-DemoTests" */;
-			buildPhases = (
-				14176C332D0E2AA0000AC841 /* Sources */,
-				14176C342D0E2AA0000AC841 /* Frameworks */,
-				14176C352D0E2AA0000AC841 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				14176C392D0E2AA0000AC841 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				14176C3A2D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests */,
-			);
-			name = "SwiftUIDrawer-DemoTests";
-			packageProductDependencies = (
-				147368672D2D502800F6AEF9 /* SwiftUIDrawer */,
-			);
-			productName = "SwiftUIDrawer-DemoTests";
-			productReference = 14176C372D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		14176C402D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14176C512D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-DemoUITests" */;
@@ -198,10 +150,6 @@
 					14176C252D0E2A9F000AC841 = {
 						CreatedOnToolsVersion = 16.1;
 					};
-					14176C362D0E2AA0000AC841 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 14176C252D0E2A9F000AC841;
-					};
 					14176C402D0E2AA0000AC841 = {
 						CreatedOnToolsVersion = 16.1;
 						TestTargetID = 14176C252D0E2A9F000AC841;
@@ -225,7 +173,6 @@
 			projectRoot = "";
 			targets = (
 				14176C252D0E2A9F000AC841 /* SwiftUIDrawer-Demo */,
-				14176C362D0E2AA0000AC841 /* SwiftUIDrawer-DemoTests */,
 				14176C402D0E2AA0000AC841 /* SwiftUIDrawer-DemoUITests */,
 			);
 		};
@@ -233,13 +180,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		14176C242D0E2A9F000AC841 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14176C352D0E2AA0000AC841 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,13 +203,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14176C332D0E2AA0000AC841 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		14176C3D2D0E2AA0000AC841 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,11 +213,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		14176C392D0E2AA0000AC841 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 14176C252D0E2A9F000AC841 /* SwiftUIDrawer-Demo */;
-			targetProxy = 14176C382D0E2AA0000AC841 /* PBXContainerItemProxy */;
-		};
 		14176C432D0E2AA0000AC841 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 14176C252D0E2A9F000AC841 /* SwiftUIDrawer-Demo */;
@@ -485,52 +413,6 @@
 			};
 			name = Release;
 		};
-		14176C4F2D0E2AA0000AC841 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FBNH5NP9RY;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftUIDrawer-DemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIDrawer-Demo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUIDrawer-Demo";
-				XROS_DEPLOYMENT_TARGET = 2.1;
-			};
-			name = Debug;
-		};
-		14176C502D0E2AA0000AC841 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = FBNH5NP9RY;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MACOSX_DEPLOYMENT_TARGET = 15.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftUIDrawer-DemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIDrawer-Demo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SwiftUIDrawer-Demo";
-				XROS_DEPLOYMENT_TARGET = 2.1;
-			};
-			name = Release;
-		};
 		14176C522D0E2AA0000AC841 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -596,15 +478,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		14176C4E2D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-DemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14176C4F2D0E2AA0000AC841 /* Debug */,
-				14176C502D0E2AA0000AC841 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		14176C512D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-DemoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -622,10 +495,6 @@
 			productName = SwiftUIDrawer;
 		};
 		147368652D2D502000F6AEF9 /* SwiftUIDrawer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftUIDrawer;
-		};
-		147368672D2D502800F6AEF9 /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIDrawer;
 		};
