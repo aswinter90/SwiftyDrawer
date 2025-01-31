@@ -27,7 +27,15 @@ struct DrawerStateReducerTests {
         )
     }
     
-    @Test func testUpdateStateOnDraggingEnded() {
+    @Test func testOnDrag() {
+        
+    }
+    
+    @Test func testOnDraggingEnded() {
+        
+    }
+    
+    @Test func testUpdateCurrentPositionOfState() {
         
     }
 }
