@@ -8,10 +8,11 @@ struct ContentView: View {
     }
     
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var drawerMinHeight = DrawerMinHeight.relativeToSafeAreaBottom(offset: 0)
+    @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
+    @State private var isCustomDragHandleShown = false
     
     @State private var selectedAlignment = Alignment.safeArea.rawValue
     
@@ -29,7 +30,7 @@ struct ContentView: View {
             configList
                 .drawerOverlay(
                     state: $drawerState,
-                    minHeight: $drawerMinHeight,
+                    bottomPosition: $drawerBottomPosition,
                     isDimmingBackground: true,
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
@@ -37,13 +38,13 @@ struct ContentView: View {
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
-            updateDrawerMinHeight(
+            updateDrawerBottomPosition(
                 isStickyHeaderShown: newValue,
                 isTabBarShown: isTabBarShown
             )
         }
         .onChange(of: isTabBarShown) { newValue in
-            updateDrawerMinHeight(
+            updateDrawerBottomPosition(
                 isStickyHeaderShown: isStickyHeaderShown,
                 isTabBarShown: newValue
             )
@@ -51,6 +52,9 @@ struct ContentView: View {
         .onChange(of: selectedAlignment) { newValue in
             isTabBarShown = newValue == Alignment.tabBar.rawValue
         }
+        .drawerStyle(
+            isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
+        )
     }
     
     @ViewBuilder
@@ -80,6 +84,8 @@ struct ContentView: View {
             )
             
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
+            
+            Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
             
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
                 Text("Actions:")
@@ -128,30 +134,47 @@ struct ContentView: View {
     }
     
     var drawerContent: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             Text("Scrollable content")
                 .font(.title2)
-                .padding(.top)
+                .padding()
             
             ForEach(0..<30) { index in
                 Text("Item \(index)")
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
+                
+                Divider()
             }
             .padding(.vertical)
         }
     }
+
+    func customDragHandleDrawerStyle() -> DrawerStyle {
+        DrawerStyle(
+            dragHandle: AnyView(
+                VStack(spacing: 2) {
+                    ForEach(0..<3) { _ in
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 50, height: 6)
+                    }
+                }
+                .padding(8)
+            )
+        )
+    }
     
-    func updateDrawerMinHeight(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
+    func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         switch (isStickyHeaderShown, isTabBarShown) {
         case (true, true):
-            drawerMinHeight = .matchesStickyHeaderContentHeightAlignedToTabBar()
+            drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToTabBar()
         case (true, false):
-            drawerMinHeight = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom()
+            drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom()
         case (false, true):
-            drawerMinHeight = .relativeToTabBar(offset: 0)
+            drawerBottomPosition = .relativeToTabBar(offset: 0)
         case (false, false):
-            drawerMinHeight = .relativeToSafeAreaBottom(offset: 0)
+            drawerBottomPosition = .relativeToSafeAreaBottom(offset: 0)
         }
     }
 }

@@ -1,10 +1,13 @@
 import UIKit
 
-@MainActor
-public final class TabBarHeightProvider {
-    public static let sharedInstance: TabBarHeightProvider = .init()
+public protocol TabBarFrameProviding {
+    var frame: CGRect { get }
+}
 
-    public var height = UITabBarController().tabBar.frame.height
+public final class TabBarFrameProvider: TabBarFrameProviding {
+    public static let sharedInstance: TabBarFrameProvider = .init()
+    
+    public let frame = UITabBarController().tabBar.frame
 
-    init() {}
+    public init() {}
 }

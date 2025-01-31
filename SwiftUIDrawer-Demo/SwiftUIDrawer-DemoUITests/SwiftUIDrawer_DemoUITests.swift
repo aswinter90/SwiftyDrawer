@@ -44,7 +44,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
 
         // Check drawer content by finding last item
         
-        await runAction(drawer.swipeUpFast(), iterations: 2)
+        await runAction(drawer.swipeUpFast(), iterations: 3)
         
         let lastDrawerContentItem = app
             .staticTexts
@@ -57,7 +57,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         
         await runAction(
             drawer.swipeDownFast(),
-            iterations: 3,
+            iterations: 4,
             sleepAfterAction: Self.drawerSwipeDuration
         )
         
@@ -65,8 +65,8 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
             drawer.frame.origin.y,
             app.frame.height
                 - CGFloat(safeAreaInsets.bottom)
-                - TabBarHeightProvider.sharedInstance.height
-                - DrawerConstants.drawerDefaultMediumHeightConstant
+                - TabBarFrameProvider.sharedInstance.frame.height
+                - DrawerConstants.drawerDefaultMidPositionConstant
                 - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy
         )

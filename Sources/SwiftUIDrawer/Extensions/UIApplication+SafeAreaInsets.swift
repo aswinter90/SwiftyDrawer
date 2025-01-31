@@ -1,7 +1,11 @@
 import UIKit
 
-public extension UIApplication {
-    var safeAreaInsets: UIEdgeInsets {
+public protocol SafeAreaInsetsProviding {
+    var insets: UIEdgeInsets { get }
+}
+
+extension UIApplication: SafeAreaInsetsProviding {
+    public var insets: UIEdgeInsets {
         UIApplication
             .shared
             .connectedScenes

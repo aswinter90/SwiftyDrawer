@@ -2,6 +2,7 @@ import SwiftUI
 
 extension EnvironmentValues {
     @Entry var drawerStyle = DrawerStyle()
+    @Entry var drawerFloatingButtonShadowStyle = DrawerStyle.ShadowStyle(offset: .init(width: 0, height: 3))
     @Entry var drawerLayoutStrategy = DrawerContentLayoutStrategy.classic
     @Entry var drawerAnimation = Animation.smooth(duration: DrawerConstants.defaultAnimationDuration)
     
@@ -13,7 +14,7 @@ extension EnvironmentValues {
     @Entry var drawerContentOffsetController: DrawerContentOffsetController?
     @Entry var drawerOriginObservable: DrawerOriginObservable?
     
-    @Entry var drawerMediumStateContentContainerHeight: CGFloat = 0
+    @Entry var drawerPartiallyOpenedStateContentContainerHeight: CGFloat = 0
     @Entry var drawerStickyHeaderHeight: CGFloat = 0
 }
 

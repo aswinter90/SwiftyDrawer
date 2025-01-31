@@ -9,10 +9,10 @@ import SwiftUI
 }
 
 struct DrawerDemoView: View {
-    private let mediumHeight: CGFloat = 450
+    private let midPosition: CGFloat = 450
     @State private var drawerState = DrawerState(case: .fullyOpened)
-    @State private var minHeight1: DrawerMinHeight = DrawerMinHeight.matchesStickyHeaderContentHeightAlignedToTabBar()
-    @State private var minHeight2 = DrawerMinHeight.relativeToTabBar(offset: 0)
+    @State private var bottomPosition1 = DrawerBottomPosition.matchesStickyHeaderContentHeightAlignedToTabBar()
+    @State private var bottomPosition2 = DrawerBottomPosition.relativeToTabBar(offset: 0)
     
     let isShowingStickyHeader: Bool
 
@@ -21,8 +21,8 @@ struct DrawerDemoView: View {
             .ignoresSafeArea()
             .drawerOverlay(
                 state: $drawerState,
-                minHeight: isShowingStickyHeader ? $minHeight1 : $minHeight2,
-                mediumHeight: .constant(.absolute(mediumHeight)),
+                bottomPosition: isShowingStickyHeader ? $bottomPosition1 : $bottomPosition2,
+                midPosition: .absolute(midPosition),
                 isDimmingBackground: true,
                 stickyHeader: isShowingStickyHeader ? {
                     VStack {
@@ -103,8 +103,8 @@ private extension View {
                     .shadow(radius: 2)
                     .frame(
                         width: UIScreen.main.bounds.width,
-                        height: TabBarHeightProvider.sharedInstance.height
-                            + UIApplication.shared.safeAreaInsets.bottom
+                        height: TabBarFrameProvider.sharedInstance.frame.height
+                            + UIApplication.shared.insets.bottom
                     )
                     .background(Color.gray.opacity(0.8))
             }

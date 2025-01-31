@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct RoundFloatingButton: View {
-    @Environment(\.drawerStyle) private var drawerStyle: DrawerStyle
+    @Environment(\.drawerFloatingButtonShadowStyle) private var shadowStyle: DrawerStyle.ShadowStyle
     
     private static let height = 40.0
     private let properties: DrawerFloatingButtonsConfiguration.ButtonProperties
@@ -18,15 +18,17 @@ public struct RoundFloatingButton: View {
                     .icon
                     .aspectRatio(contentMode: .fit)
                     .padding(8)
-                    .background(Color.background)
-                    .frame(width: Self.height)
-                    .clipShape(Circle())
-                    .prerenderedShadow(
-                        layerCornerRadius: 20,
-                        color: UIColor(drawerStyle.floatingButtonShadowStyle.color),
-                        opacity: Float(drawerStyle.floatingButtonShadowStyle.opacity),
-                        radius: drawerStyle.floatingButtonShadowStyle.radius,
-                        offset: drawerStyle.floatingButtonShadowStyle.offset
+                    .background(
+                        Color.background
+                            .frame(width: Self.height, height: Self.height)
+                            .clipShape(Circle())
+                            .prerenderedShadow(
+                                layerCornerRadius: 20,
+                                color: UIColor(shadowStyle.color),
+                                opacity: Float(shadowStyle.opacity),
+                                radius: shadowStyle.radius,
+                                offset: shadowStyle.offset
+                            )
                     )
             }
         )

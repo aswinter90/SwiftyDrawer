@@ -4,27 +4,30 @@ public extension View {
     @ViewBuilder
     func drawerOverlay(
         state: Binding<DrawerState>,
-        minHeight: Binding<DrawerMinHeight> = .constant(.relativeToSafeAreaBottom(offset: 0)),
-        mediumHeight: Binding<DrawerMediumHeight?>? = .constant(DrawerConstants.drawerDefaultMediumHeightCase),
-        maxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0)),
+        bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
+        midPosition: DrawerMidPosition? = DrawerConstants.drawerDefaultMidPosition,
+        topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         isDimmingBackground: Bool = false,
+        positionCalculator: DrawerPositionCalculator = .init(),
         @ViewBuilder stickyHeader: () -> some View = { EmptyView() },
         @ViewBuilder content: () -> some View
     ) -> some View {
         frame(maxWidth: .infinity, maxHeight: .infinity)
             .dimmedDrawerBackground(
                 isShown: isDimmingBackground,
-                drawerState: state,
-                drawerMinHeight: minHeight,
-                drawerMediumHeight: mediumHeight,
-                drawerMaxHeight: maxHeight
+                drawerState: state.wrappedValue,
+                drawerBottomPosition: bottomPosition.wrappedValue,
+                drawerMidPosition: midPosition,
+                drawerTopPosition: topPosition,
+                positionCalculator: positionCalculator
             )
             .overlay(alignment: .bottom, content: {
                 Drawer(
                     state: state,
-                    minHeight: minHeight,
-                    mediumHeight: mediumHeight,
-                    maxHeight: maxHeight,
+                    bottomPosition: bottomPosition,
+                    midPosition: midPosition,
+                    topPosition: topPosition,
+                    positionCalculator: positionCalculator,
                     stickyHeader: stickyHeader(),
                     content: content()
                 )
@@ -35,18 +38,20 @@ public extension View {
     @ViewBuilder
     private func dimmedDrawerBackground(
         isShown: Bool,
-        drawerState: Binding<DrawerState>,
-        drawerMinHeight: Binding<DrawerMinHeight>,
-        drawerMediumHeight: Binding<DrawerMediumHeight?>?,
-        drawerMaxHeight: Binding<DrawerMaxHeight> = .constant(.relativeToSafeAreaTop(offset: 0))
+        drawerState: DrawerState,
+        drawerBottomPosition: DrawerBottomPosition,
+        drawerMidPosition: DrawerMidPosition?,
+        drawerTopPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
+        positionCalculator: DrawerPositionCalculator = .init()
     ) -> some View {
         if isShown {
             overlay {
                 DimmingView(
                     drawerState: drawerState,
-                    drawerMinHeight: drawerMinHeight,
-                    drawerMediumHeight: drawerMediumHeight ?? .constant(nil),
-                    drawerMaxHeight: drawerMaxHeight
+                    drawerBottomPosition: drawerBottomPosition,
+                    drawerMidPosition: drawerMidPosition,
+                    drawerTopPosition: drawerTopPosition,
+                    positionCalculator: positionCalculator
                 )
                 .ignoresSafeArea()
             }

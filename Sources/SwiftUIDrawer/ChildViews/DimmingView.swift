@@ -4,11 +4,12 @@ import SwiftUI
 struct DimmingView: View {
     private static let maxOpacity = 0.4
 
-    @Binding var drawerState: DrawerState
-    @Binding var drawerMinHeight: DrawerMinHeight
-    @Binding var drawerMediumHeight: DrawerMediumHeight?
-    @Binding var drawerMaxHeight: DrawerMaxHeight
-
+    let drawerState: DrawerState
+    let drawerBottomPosition: DrawerBottomPosition
+    let drawerMidPosition: DrawerMidPosition?
+    let drawerTopPosition: DrawerTopPosition
+    let positionCalculator: DrawerPositionCalculator
+    
     var body: some View {
         Color.black
             .allowsHitTesting(false)
@@ -17,15 +18,17 @@ struct DimmingView: View {
     }
 
     private var opacity: CGFloat {
-        let mediumHeight = if let drawerMediumHeight = drawerMediumHeight?.value {
-            drawerMediumHeight
+        let topPosition = positionCalculator.absoluteValue(for: drawerTopPosition)
+        
+        let midPosition = if let drawerMidPosition {
+            positionCalculator.absoluteValue(for: drawerMidPosition)
         } else {
-            (drawerMinHeight.value + drawerMaxHeight.value) / 2
+            (positionCalculator.absoluteValue(for: drawerBottomPosition) + topPosition) / 2
         }
 
-        let opacity = drawerState.currentHeight.normalize(
-            min: mediumHeight,
-            max: drawerMaxHeight.value,
+        let opacity = drawerState.currentPosition.normalize(
+            min: midPosition,
+            max: topPosition,
             from: 0,
             to: Self.maxOpacity
         )
