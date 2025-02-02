@@ -14,5 +14,4 @@ struct CGFloatTests {
         let rounded3 = CGFloat(10.9).roundToDecimal(0)
         #expect(rounded3 == 11)
     }
-
 }

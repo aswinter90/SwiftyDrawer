@@ -49,7 +49,9 @@ struct DrawerStateReducer {
         )
 
         let currentPosition = state.currentPosition
-        let absoluteMidPosition = midPosition.map { positionCalculator.absoluteValue(for: $0) }
+        let absoluteMidPosition = midPosition.map {
+            positionCalculator.absoluteValue(for: $0)
+        }
         
         switch targetDirection {
         case .up:
