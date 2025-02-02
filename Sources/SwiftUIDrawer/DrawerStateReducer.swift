@@ -100,6 +100,8 @@ struct DrawerStateReducer {
     
     func syncCaseAndCurrentPosition(of state: inout DrawerState) {
         switch state.case {
+        case .dragging:
+            break
         case .closed:
             state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
         case .partiallyOpened:
@@ -110,9 +112,6 @@ struct DrawerStateReducer {
             }
         case .fullyOpened:
             state.currentPosition = positionCalculator.absoluteValue(for: topPosition)
-        case .dragging:
-            debugPrint("Unexpected case, during dragging, the drawers position should be updated via the `onDrag` function.")
-            break
         }
     }
 }

@@ -58,11 +58,6 @@ struct DrawerStateReducerTests {
         #expect(drawerState.currentPosition <= positionCalculator.absoluteValue(for: topPosition))
     }
     
-    // TODO: Finish tests
-    @Test func testOnDraggingEnded() {
-        
-    }
-    
     @Test(
         "Test if the `state.currentPosition` is correctly updated for the current `state.case`",
         arguments: [
@@ -97,5 +92,10 @@ struct DrawerStateReducerTests {
         case .fullyOpened:
             #expect(state.currentPosition == positionCalculator.absoluteValue(for: topPosition))
         }
+    }
+    
+    @Test("Test `onDraggingEnded` when the user dragged down with a high enough velocity to invoke a state change")
+    func testOnDraggingEnded() {
+        
     }
 }
