@@ -1,12 +1,12 @@
 import SwiftUI
 import SwiftUIDrawer
 
-struct MinimalContentView: View {
+struct ContentView: View {
     @State private var drawerState = DrawerState.init(case: .partiallyOpened)
     
     var body: some View {
         AppleLogo()
-            .padding(.top, 8)
+            .offset(y: -(UIScreen.main.bounds.height / 4))
             .drawerOverlay(
                 state: $drawerState,
                 content: {
@@ -22,7 +22,7 @@ struct MinimalContentView: View {
 }
 
 #Preview {
-    MinimalContentView()
+    ContentView()
 }
 
 private struct AppleLogo: View {
@@ -30,7 +30,6 @@ private struct AppleLogo: View {
         Image(systemName: "apple.logo")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 64, height: 64)
-            .frame(maxHeight: .infinity, alignment: .top)
+            .frame(width: 128, height: 128)
     }
 }
