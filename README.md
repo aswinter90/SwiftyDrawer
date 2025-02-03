@@ -1,9 +1,8 @@
 # SwiftUIDrawer
 
-A customizable drawer UI-component, which is mostly written in SwiftUI, that looks similar to the standard sheet modifier but comes with more fixed positions and further customization options.
-Handy for showing expandable and scrollable content on top of a background view like how Apple and Google do it in their map apps.
+This mostly SwiftUI-based customizable drawer component offers functionality similar to the standard sheet modifier, but with additional fixed positions and extensive customization options. Ideal for displaying expandable and scrollable content over a background view, akin to the drawer behavior seen in Apple and Google map applications.
 
-This project is still in progress and I work on it sporadically. Later I might add more documentation and a license file to make it open-source.
+This project is currently a work in progress, developed sporadically. Future updates may include additional documentation and a license file to transition it to an open-source project.
 
 ## Examples
 
@@ -35,4 +34,8 @@ struct MinimalContentView: View {
 
 ### [With sticky header and changing alignments](https://github.com/aswinter90/SwiftUIDrawer/blob/main/SwiftUIDrawer-Demo/SwiftUIDrawer-Demo/ContentView.swift)
 
-https://github.com/user-attachments/assets/efe3143f-4cc5-452a-a470-9c9f2c84034b
+As shown in the video the drawer can be modified with a sticky header, which stays on top of the tab bar if required. The default drag handle can also be replaced with any other view.
+Finally the `DrawerState` is mutable and changing it from the outside will update the drawer position automatically. 
+
+https://github.com/user-attachments/assets/daf244f4-a09f-4272-9095-8aa4669a4b26
+
