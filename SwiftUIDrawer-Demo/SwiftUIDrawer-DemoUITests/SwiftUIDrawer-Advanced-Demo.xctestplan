@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "0C6A5095-B894-4895-9BF3-85B85ECEF823",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SwiftUIDrawer-Demo.xcodeproj",
+      "identifier" : "14176C252D0E2A9F000AC841",
+      "name" : "SwiftUIDrawer-Advanced-Demo"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SwiftUIDrawer-Demo.xcodeproj",
+        "identifier" : "14176C402D0E2AA0000AC841",
+        "name" : "SwiftUIDrawer-Advanced-UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

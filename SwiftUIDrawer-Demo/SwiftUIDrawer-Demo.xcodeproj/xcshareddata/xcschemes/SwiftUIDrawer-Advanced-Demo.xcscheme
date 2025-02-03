@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1610"
+   LastUpgradeVersion = "1620"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "14176C252D0E2A9F000AC841"
-               BuildableName = "SwiftUIDrawer-Demo.app"
-               BlueprintName = "SwiftUIDrawer-Demo"
+               BuildableName = "SwiftUIDrawer-Advanced-Demo.app"
+               BlueprintName = "SwiftUIDrawer-Advanced-Demo"
                ReferencedContainer = "container:SwiftUIDrawer-Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,32 +27,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14176C362D0E2AA0000AC841"
-               BuildableName = "SwiftUIDrawer-DemoTests.xctest"
-               BlueprintName = "SwiftUIDrawer-DemoTests"
-               ReferencedContainer = "container:SwiftUIDrawer-Demo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14176C402D0E2AA0000AC841"
-               BuildableName = "SwiftUIDrawer-DemoUITests.xctest"
-               BlueprintName = "SwiftUIDrawer-DemoUITests"
-               ReferencedContainer = "container:SwiftUIDrawer-Demo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:SwiftUIDrawer-DemoUITests/SwiftUIDrawer-Advanced-Demo.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -69,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14176C252D0E2A9F000AC841"
-            BuildableName = "SwiftUIDrawer-Demo.app"
-            BlueprintName = "SwiftUIDrawer-Demo"
+            BuildableName = "SwiftUIDrawer-Advanced-Demo.app"
+            BlueprintName = "SwiftUIDrawer-Advanced-Demo"
             ReferencedContainer = "container:SwiftUIDrawer-Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -86,8 +67,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14176C252D0E2A9F000AC841"
-            BuildableName = "SwiftUIDrawer-Demo.app"
-            BlueprintName = "SwiftUIDrawer-Demo"
+            BuildableName = "SwiftUIDrawer-Advanced-Demo.app"
+            BlueprintName = "SwiftUIDrawer-Advanced-Demo"
             ReferencedContainer = "container:SwiftUIDrawer-Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
