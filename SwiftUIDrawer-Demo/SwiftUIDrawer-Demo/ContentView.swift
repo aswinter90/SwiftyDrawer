@@ -88,22 +88,22 @@ struct ContentView: View {
             Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
             
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
-                Text("Actions:")
+                Text("Set state to:")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                actionButton("Close") {
+                actionButton("closed") {
                     drawerState.case = .closed
                 }
                 
                 Spacer()
                 
-                actionButton("Open half") {
+                actionButton("partiallyOpened") {
                     drawerState.case = .partiallyOpened
                 }
                 
                 Spacer()
                 
-                actionButton("Open fully") {
+                actionButton("fullyOpened") {
                     drawerState.case = .fullyOpened
                 }
             }
@@ -113,7 +113,7 @@ struct ContentView: View {
     func actionButton(_ title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
-                .frame(width: 80)
+                .frame(width: 140)
         }
         .buttonStyle(.bordered)
         .frame(maxWidth: .infinity, alignment: .trailing)
