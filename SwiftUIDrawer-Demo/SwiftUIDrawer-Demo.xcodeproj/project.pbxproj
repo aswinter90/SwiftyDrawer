@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14176C7E2D0E2BF9000AC841 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14176C7D2D0E2BF9000AC841 /* SwiftUIDrawer */; };
+		143E69382D53790E00EEECE6 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 143E69372D53790E00EEECE6 /* SwiftUIDrawer */; };
 		147368662D2D502000F6AEF9 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 147368652D2D502000F6AEF9 /* SwiftUIDrawer */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14176C7E2D0E2BF9000AC841 /* SwiftUIDrawer in Frameworks */,
+				143E69382D53790E00EEECE6 /* SwiftUIDrawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 			);
 			name = "SwiftUIDrawer-Demo";
 			packageProductDependencies = (
-				14176C7D2D0E2BF9000AC841 /* SwiftUIDrawer */,
+				143E69372D53790E00EEECE6 /* SwiftUIDrawer */,
 			);
 			productName = "SwiftUIDrawer-Demo";
 			productReference = 14176C262D0E2A9F000AC841 /* SwiftUIDrawer-Demo.app */;
@@ -166,6 +166,7 @@
 			mainGroup = 14176C1D2D0E2A9F000AC841;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				143E69362D53790E00EEECE6 /* XCLocalSwiftPackageReference "../../SwiftUIDrawer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14176C272D0E2A9F000AC841 /* Products */;
@@ -489,8 +490,15 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		143E69362D53790E00EEECE6 /* XCLocalSwiftPackageReference "../../SwiftUIDrawer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../SwiftUIDrawer;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		14176C7D2D0E2BF9000AC841 /* SwiftUIDrawer */ = {
+		143E69372D53790E00EEECE6 /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIDrawer;
 		};
