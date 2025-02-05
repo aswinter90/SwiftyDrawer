@@ -10,6 +10,7 @@
 		14176C7E2D0E2BF9000AC841 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14176C7D2D0E2BF9000AC841 /* SwiftUIDrawer */; };
 		147368662D2D502000F6AEF9 /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 147368652D2D502000F6AEF9 /* SwiftUIDrawer */; };
 		14BDB0772D51628B00D600FF /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14BDB0762D51628B00D600FF /* SwiftUIDrawer */; };
+		14BDB08C2D51681300D600FF /* SwiftUIDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14BDB08B2D51681300D600FF /* SwiftUIDrawer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 		14176C412D0E2AA0000AC841 /* SwiftUIDrawer-Advanced-Demo-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUIDrawer-Advanced-Demo-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14176C7C2D0E2BA4000AC841 /* SwiftUIDrawer */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIDrawer; path = ..; sourceTree = "<group>"; };
 		14BDB0642D5161A700D600FF /* SwiftUIDrawer-Basic-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUIDrawer-Basic-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14BDB07C2D51678400D600FF /* SwiftUIDrawer-Map-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUIDrawer-Map-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -58,6 +60,11 @@
 			path = "SwiftUIDrawer-Basic-Demo";
 			sourceTree = "<group>";
 		};
+		14BDB07D2D51678400D600FF /* SwiftUIDrawer-Map-Demo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SwiftUIDrawer-Map-Demo";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +92,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14BDB0792D51678400D600FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14BDB08C2D51681300D600FF /* SwiftUIDrawer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,6 +108,7 @@
 			children = (
 				14BDB0652D5161A700D600FF /* SwiftUIDrawer-Basic-Demo */,
 				14176C282D0E2A9F000AC841 /* SwiftUIDrawer-Advanced-Demo */,
+				14BDB07D2D51678400D600FF /* SwiftUIDrawer-Map-Demo */,
 				14176C442D0E2AA0000AC841 /* SwiftUIDrawer-Advanced-Demo-UITests */,
 				14176C7B2D0E2BA4000AC841 /* Frameworks */,
 				14176C272D0E2A9F000AC841 /* Products */,
@@ -105,6 +121,7 @@
 				14176C262D0E2A9F000AC841 /* SwiftUIDrawer-Advanced-Demo.app */,
 				14176C412D0E2AA0000AC841 /* SwiftUIDrawer-Advanced-Demo-UITests.xctest */,
 				14BDB0642D5161A700D600FF /* SwiftUIDrawer-Basic-Demo.app */,
+				14BDB07C2D51678400D600FF /* SwiftUIDrawer-Map-Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,6 +207,29 @@
 			productReference = 14BDB0642D5161A700D600FF /* SwiftUIDrawer-Basic-Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		14BDB07B2D51678400D600FF /* SwiftUIDrawer-Map-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14BDB0872D51678500D600FF /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-Map-Demo" */;
+			buildPhases = (
+				14BDB0782D51678400D600FF /* Sources */,
+				14BDB0792D51678400D600FF /* Frameworks */,
+				14BDB07A2D51678400D600FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				14BDB07D2D51678400D600FF /* SwiftUIDrawer-Map-Demo */,
+			);
+			name = "SwiftUIDrawer-Map-Demo";
+			packageProductDependencies = (
+				14BDB08B2D51681300D600FF /* SwiftUIDrawer */,
+			);
+			productName = "SwiftUIDrawer-Map-Demo";
+			productReference = 14BDB07C2D51678400D600FF /* SwiftUIDrawer-Map-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -208,6 +248,9 @@
 						TestTargetID = 14176C252D0E2A9F000AC841;
 					};
 					14BDB0632D5161A700D600FF = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					14BDB07B2D51678400D600FF = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
@@ -230,6 +273,7 @@
 			targets = (
 				14BDB0632D5161A700D600FF /* SwiftUIDrawer-Basic-Demo */,
 				14176C252D0E2A9F000AC841 /* SwiftUIDrawer-Advanced-Demo */,
+				14BDB07B2D51678400D600FF /* SwiftUIDrawer-Map-Demo */,
 				14176C402D0E2AA0000AC841 /* SwiftUIDrawer-Advanced-Demo-UITests */,
 			);
 		};
@@ -257,6 +301,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14BDB07A2D51678400D600FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -275,6 +326,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		14BDB0602D5161A700D600FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0782D51678400D600FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -556,7 +614,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -590,7 +648,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -602,6 +660,69 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14BDB0882D51678500D600FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIDrawer-Map-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftUIDrawer-Map-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14BDB0892D51678500D600FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftUIDrawer-Map-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftUIDrawer-Map-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -648,6 +769,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		14BDB0872D51678500D600FF /* Build configuration list for PBXNativeTarget "SwiftUIDrawer-Map-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14BDB0882D51678500D600FF /* Debug */,
+				14BDB0892D51678500D600FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -660,6 +790,10 @@
 			productName = SwiftUIDrawer;
 		};
 		14BDB0762D51628B00D600FF /* SwiftUIDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIDrawer;
+		};
+		14BDB08B2D51681300D600FF /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIDrawer;
 		};
