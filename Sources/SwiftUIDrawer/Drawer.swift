@@ -10,6 +10,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
     @Environment(\.drawerContentOffsetController) var contentOffsetController: DrawerContentOffsetController?
     @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
+    @Environment(\.viewBounds) private var viewBounds: CGSize
     
     // MARK: - Bindings & Arguments
 

@@ -9,30 +9,34 @@ public extension View {
         topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         isDimmingBackground: Bool = false,
         positionCalculator: DrawerPositionCalculator = .init(),
-        @ViewBuilder stickyHeader: () -> some View = { EmptyView() },
-        @ViewBuilder content: () -> some View
+        @ViewBuilder stickyHeader: @escaping () -> some View = { EmptyView() },
+        @ViewBuilder content: @escaping () -> some View
     ) -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity)
-            .dimmedDrawerBackground(
-                isShown: isDimmingBackground,
-                drawerState: state.wrappedValue,
-                drawerBottomPosition: bottomPosition.wrappedValue,
-                drawerMidPosition: midPosition,
-                drawerTopPosition: topPosition,
-                positionCalculator: positionCalculator
-            )
-            .overlay(alignment: .bottom, content: {
-                Drawer(
-                    state: state,
-                    bottomPosition: bottomPosition,
-                    midPosition: midPosition,
-                    topPosition: topPosition,
-                    positionCalculator: positionCalculator,
-                    stickyHeader: stickyHeader(),
-                    content: content()
+        GeometryReader {
+            frame(maxWidth: .infinity, maxHeight: .infinity)
+                .dimmedDrawerBackground(
+                    isShown: isDimmingBackground,
+                    drawerState: state.wrappedValue,
+                    drawerBottomPosition: bottomPosition.wrappedValue,
+                    drawerMidPosition: midPosition,
+                    drawerTopPosition: topPosition,
+                    positionCalculator: positionCalculator
                 )
-            })
-            .ignoresSafeArea(.container, edges: .bottom)
+                .overlay(alignment: .bottom, content: {
+                    Drawer(
+                        state: state,
+                        bottomPosition: bottomPosition,
+                        midPosition: midPosition,
+                        topPosition: topPosition,
+                        positionCalculator: positionCalculator,
+                        stickyHeader: stickyHeader(),
+                        content: content()
+                    )
+                })
+                .ignoresSafeArea(.container, edges: .bottom)
+                .viewBounds($0.size)
+        }
+        .ignoresSafeArea()
     }
     
     @ViewBuilder

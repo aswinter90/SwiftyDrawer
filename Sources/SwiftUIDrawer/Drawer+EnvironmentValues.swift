@@ -16,6 +16,8 @@ extension EnvironmentValues {
     
     @Entry var drawerPartiallyOpenedStateContentContainerHeight: CGFloat = 0
     @Entry var drawerStickyHeaderHeight: CGFloat = 0
+    
+    @Entry var viewBounds: CGSize = .zero
 }
 
 public extension View {
@@ -41,5 +43,11 @@ public extension View {
     
     func drawerOriginObservable(_ observable: DrawerOriginObservable?) -> some View {
         environment(\.drawerOriginObservable, observable)
+    }
+}
+
+extension View {
+    func viewBounds(_ bounds: CGSize) -> some View {
+        environment(\.viewBounds, bounds)
     }
 }
