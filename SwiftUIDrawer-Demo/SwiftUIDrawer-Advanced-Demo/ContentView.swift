@@ -2,19 +2,12 @@ import SwiftUI
 import SwiftUIDrawer
 
 struct ContentView: View {
-    private enum Alignment: Int {
-        case safeArea
-        case tabBar
-    }
-    
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
     
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
     @State private var isCustomDragHandleShown = false
-    
-    @State private var selectedAlignment = Alignment.safeArea.rawValue
     
     private let floatingButtonsConfig = DrawerFloatingButtonsConfiguration(
         trailingButtons: [
@@ -49,9 +42,6 @@ struct ContentView: View {
                 isTabBarShown: newValue
             )
         }
-        .onChange(of: selectedAlignment) { newValue in
-            isTabBarShown = newValue == Alignment.tabBar.rawValue
-        }
         .drawerStyle(
             isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
         )
@@ -74,12 +64,12 @@ struct ContentView: View {
         List {
             Picker(
                 "Align to",
-                selection: $selectedAlignment,
+                selection: $isTabBarShown,
                 content: {
                     Text("Safe area")
-                        .tag(Alignment.safeArea.rawValue)
+                        .tag(false)
                     Text("Tab bar")
-                        .tag(Alignment.tabBar.rawValue)
+                        .tag(true)
                 }
             )
             
@@ -91,26 +81,26 @@ struct ContentView: View {
                 Text("Set state to:")
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                actionButton("closed") {
+                button("closed") {
                     drawerState.case = .closed
                 }
                 
                 Spacer()
                 
-                actionButton("partiallyOpened") {
+                button("partiallyOpened") {
                     drawerState.case = .partiallyOpened
                 }
                 
                 Spacer()
                 
-                actionButton("fullyOpened") {
+                button("fullyOpened") {
                     drawerState.case = .fullyOpened
                 }
             }
         }
     }
     
-    func actionButton(_ title: String, action: @escaping () -> Void) -> some View {
+    func button(_ title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
                 .frame(width: 140)
