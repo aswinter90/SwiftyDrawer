@@ -10,7 +10,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
     @Environment(\.drawerContentOffsetController) var contentOffsetController: DrawerContentOffsetController?
     @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
-    @Environment(\.viewBounds) private var viewBounds: CGSize
     
     // MARK: - Bindings & Arguments
 
@@ -49,7 +48,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
         bottomPosition: Binding<DrawerBottomPosition> = .constant(.relativeToSafeAreaBottom(offset: 0)),
         midPosition: DrawerMidPosition? = DrawerConstants.drawerDefaultMidPosition,
         topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
-        positionCalculator: DrawerPositionCalculator = .init(),
+        positionCalculator: DrawerPositionCalculator,
         stickyHeader: HeaderContent? = nil,
         content: Content
     ) {

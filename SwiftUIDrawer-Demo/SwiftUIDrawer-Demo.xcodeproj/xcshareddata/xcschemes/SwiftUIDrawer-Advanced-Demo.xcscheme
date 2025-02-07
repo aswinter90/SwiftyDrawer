@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SwiftUIDrawer-DemoUITests/SwiftUIDrawer-Advanced-Demo.xctestplan"
+            reference = "container:SwiftUIDrawer-Advanced-Demo-UITests/SwiftUIDrawer-Advanced-Demo.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

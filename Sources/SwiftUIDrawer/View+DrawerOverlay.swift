@@ -8,59 +8,19 @@ public extension View {
         midPosition: DrawerMidPosition? = DrawerConstants.drawerDefaultMidPosition,
         topPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
         isDimmingBackground: Bool = false,
-        positionCalculator: DrawerPositionCalculator = .init(),
         @ViewBuilder stickyHeader: @escaping () -> some View = { EmptyView() },
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
-        GeometryReader {
-            frame(maxWidth: .infinity, maxHeight: .infinity)
-                .dimmedDrawerBackground(
-                    isShown: isDimmingBackground,
-                    drawerState: state.wrappedValue,
-                    drawerBottomPosition: bottomPosition.wrappedValue,
-                    drawerMidPosition: midPosition,
-                    drawerTopPosition: topPosition,
-                    positionCalculator: positionCalculator
-                )
-                .overlay(alignment: .bottom, content: {
-                    Drawer(
-                        state: state,
-                        bottomPosition: bottomPosition,
-                        midPosition: midPosition,
-                        topPosition: topPosition,
-                        positionCalculator: positionCalculator,
-                        stickyHeader: stickyHeader(),
-                        content: content()
-                    )
-                })
-                .ignoresSafeArea(.container, edges: .bottom)
-                .viewBounds($0.size)
-        }
-        .ignoresSafeArea()
-    }
-    
-    @ViewBuilder
-    private func dimmedDrawerBackground(
-        isShown: Bool,
-        drawerState: DrawerState,
-        drawerBottomPosition: DrawerBottomPosition,
-        drawerMidPosition: DrawerMidPosition?,
-        drawerTopPosition: DrawerTopPosition = .relativeToSafeAreaTop(offset: 0),
-        positionCalculator: DrawerPositionCalculator = .init()
-    ) -> some View {
-        if isShown {
-            overlay {
-                DimmingView(
-                    drawerState: drawerState,
-                    drawerBottomPosition: drawerBottomPosition,
-                    drawerMidPosition: drawerMidPosition,
-                    drawerTopPosition: drawerTopPosition,
-                    positionCalculator: positionCalculator
-                )
-                .ignoresSafeArea()
-            }
-        } else {
-            self
-        }
+        modifier(
+            DrawerOverlayModifier(
+                state: state,
+                bottomPosition: bottomPosition,
+                midPosition: midPosition,
+                topPosition: topPosition,
+                isDimmingBackground: isDimmingBackground,
+                stickyHeader: stickyHeader,
+                drawerContent: content
+            )
+        )
     }
 }

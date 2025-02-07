@@ -4,19 +4,17 @@ import UIKit
 
 @Suite("DrawerStateReducerTests")
 struct DrawerStateReducerTests {
+    static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
     static let dragHandleHeight = 12.0
     static let unsufficientDragVelocity = DrawerConstants.draggingVelocityThreshold - 1
-    
-    static let screenBoundsProvider = ScreenBoundsProvidingMock()
     static let safeAreaInsetsProvider = SafeAreaInsetsProvidingMock()
     static let tabBarFrameProvider = TabBarFrameProvidingMock()
     
-    var screenBounds: CGRect { Self.screenBoundsProvider.bounds }
     var safeAreaInsets: UIEdgeInsets { Self.safeAreaInsetsProvider.insets }
     var tabBarFrame: CGRect { Self.tabBarFrameProvider.frame }
     
     let positionCalculator = DrawerPositionCalculator(
-        screenBoundsProvider: Self.screenBoundsProvider,
+        screenBounds: Self.screenBounds,
         safeAreaInsetsProvider: Self.safeAreaInsetsProvider,
         tabBarFrameProvider: Self.tabBarFrameProvider,
         dragHandleHeight: Self.dragHandleHeight
