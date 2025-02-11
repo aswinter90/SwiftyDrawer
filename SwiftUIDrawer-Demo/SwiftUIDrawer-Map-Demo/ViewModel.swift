@@ -17,35 +17,25 @@ class ViewModel: ObservableObject {
         }
     }
     
-    struct AnnotationModel: Equatable {
+    struct AnnotationModel: Equatable, Identifiable {
+        var id = UUID().uuidString
         let name: String
         let region: MKCoordinateRegion
     }
     
-    private static let germanyRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 51.1642292,
-            longitude: 10.4541194
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0,
-            longitudeDelta: 10
-        )
-    )
+    @Published var state: State
+    let annotations: [AnnotationModel] = [
+        .init(name: "Hamburg", region: Regions.hamburgRegion),
+        .init(name: "Berlin", region: Regions.berlinRegion),
+        .init(name: "Frankfurt", region: Regions.frankfurtRegion),
+        .init(name: "Munich", region: Regions.munichRegion),
+        .init(name: "Stuttgart", region: Regions.stuttgartRegion),
+        .init(name: "Cologne", region: Regions.cologneRegion),
+    ]
     
-    private static let hamburgRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 53.552016,
-            longitude: 9.994599
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.025,
-            longitudeDelta: 0.05
-        )
-    )
-    
-    @Published var state: State = .overview(region: germanyRegion)
-    let annotations = [AnnotationModel(name: "Hamburg", region: hamburgRegion)]
+    init(state: State = .overview(region: Regions.germanyRegion)) {
+        self.state = state
+    }
     
     func didSelectAnnotation(_ annotation: AnnotationModel) {
         state = .selectedAnnotation(annotation)

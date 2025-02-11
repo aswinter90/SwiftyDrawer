@@ -28,7 +28,7 @@ struct ContentView: View {
         })
         .drawerOverlay(
             state: $drawerState,
-            midPosition: .absolute(300),
+            midPosition: .absolute(450),
             isDimmingBackground: true,
             content: { DrawerContentView(viewModel: viewModel) }
         )
@@ -36,13 +36,18 @@ struct ContentView: View {
     
     private var mapView: some View {
         Map(position: $cameraPosition) {
-            ForEach(viewModel.annotations, id: \.name) { model in
-                Annotation(model.name, coordinate: model.region.center) {
-                    Text("📍")
-                        .padding(5)
+            ForEach(viewModel.annotations) { model in
+                Annotation(model.name, coordinate: model.region.center, anchor: .bottom) {
+                    Image(systemName: "building")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(.gray)
+                        .padding(.horizontal, 1)
+                        .padding(.vertical, 3)
                         .background {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.yellow)
+                            RoundedRectangle(cornerRadius: 2)
+                                .foregroundStyle(.white)
                         }
                         .onTapGesture {
                             withAnimation {
@@ -67,25 +72,6 @@ struct ContentView: View {
         
         region.center = newCenter
         cameraPosition = .region(region)
-    }
-}
-
-struct DrawerContentView: View {
-    @ObservedObject var viewModel: ViewModel
-    
-    var body: some View {
-        switch viewModel.state {
-        case .overview:
-            VStack {
-                Text("Select a city from the map")
-                    .font(.title)
-            }
-        case .selectedAnnotation(let annotation):
-            VStack {
-                Text(annotation.name)
-                    .font(.title)
-            }
-        }
     }
 }
 

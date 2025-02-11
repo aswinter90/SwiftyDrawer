@@ -150,6 +150,7 @@ extension Drawer {
             }
             .id(stickyHeaderId)
             .readSize {
+                guard $0.height > 0 else { return }
                 stickyHeaderHeight = $0.height
 
                 if bottomPosition.shouldMatchStickyHeaderHeight {
