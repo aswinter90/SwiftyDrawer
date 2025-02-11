@@ -12,7 +12,7 @@ enum Regions {
             longitude: 10.4541194
         ),
         span: MKCoordinateSpan(
-            latitudeDelta: 10,
+            latitudeDelta: 11,
             longitudeDelta: 13
         )
     )

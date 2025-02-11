@@ -17,12 +17,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    struct AnnotationModel: Equatable, Identifiable {
-        var id = UUID().uuidString
-        let name: String
-        let region: MKCoordinateRegion
-    }
-    
     @Published var state: State
     let annotations: [AnnotationModel] = [
         .init(name: "Hamburg", region: Regions.hamburgRegion),

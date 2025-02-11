@@ -7,26 +7,27 @@ struct DrawerContentView: View {
     var body: some View {
         switch viewModel.state {
         case .overview:
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Select a city")
-                    .font(.largeTitle)
-                    .padding(.bottom, 8)
-                
-                ForEach(viewModel.annotations) { annotation in
-                    listItem(for: annotation)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-        case .selectedAnnotation(let annotation):
-            VStack {
-                Text(annotation.name)
-                    .font(.largeTitle)
-            }
+            listView
+        case let .selectedAnnotation(annotation):
+            cityDetails(for: annotation)
         }
     }
     
-    private func listItem(for annotation: ViewModel.AnnotationModel) -> some View {
+    private var listView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Select a city")
+                .font(.largeTitle)
+                .padding(.bottom, 8)
+            
+            ForEach(viewModel.annotations) { annotation in
+                listItem(for: annotation)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+    }
+    
+    private func listItem(for annotation: AnnotationModel) -> some View {
         VStack(spacing: 16) {
             Text(annotation.name)
                 .font(.title2)
@@ -43,6 +44,15 @@ struct DrawerContentView: View {
             viewModel.didSelectAnnotation(annotation)
         }
     }
+    
+    private func cityDetails(for model: AnnotationModel) -> some View {
+        VStack {
+            Text(model.name)
+                .font(.largeTitle)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+    }
 }
 
 #Preview {
@@ -52,7 +62,16 @@ struct DrawerContentView: View {
         .drawerOverlay(
             state: $state,
             content: {
-                DrawerContentView(viewModel: .init())
+                DrawerContentView(
+                    viewModel: .init(
+                        state: .selectedAnnotation(
+                            .init(
+                                name: "Hamburg",
+                                region: Regions.hamburgRegion
+                            )
+                        )
+                    )
+                )
             }
         )
         .ignoresSafeArea()

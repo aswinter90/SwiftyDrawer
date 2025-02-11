@@ -11,21 +11,19 @@ struct ContentView: View {
     var body: some View {
         mapView
         .ignoresSafeArea()
-        .onAppear { cameraPosition = .region(viewModel.state.region) }
         .readSize { mapHeight = $0.height }
         .onChange(of: mapHeight) {
-            adjustMapCenter(
+            updateCameraPosition(
                 with: mapHeight,
                 currentRegion: viewModel.state.region
             )
         }
-        .onChange(of: viewModel.state, { _, newState in
-            withAnimation {
-                let region = newState.region
-                cameraPosition = .region(region)
-                adjustMapCenter(with: mapHeight, currentRegion: region)
-            }
-        })
+        .onChange(of: viewModel.state) { _, newState in
+            updateCameraPosition(
+                with: mapHeight,
+                currentRegion: newState.region
+            )
+        }
         .drawerOverlay(
             state: $drawerState,
             midPosition: .absolute(450),
@@ -37,16 +35,15 @@ struct ContentView: View {
     private var mapView: some View {
         Map(position: $cameraPosition) {
             ForEach(viewModel.annotations) { model in
-                Annotation(model.name, coordinate: model.region.center, anchor: .bottom) {
+                Annotation(model.name, coordinate: model.region.center) {
                     Image(systemName: "building")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
-                        .foregroundStyle(.gray)
-                        .padding(.horizontal, 1)
-                        .padding(.vertical, 3)
+                        .foregroundStyle(.blue)
+                        .padding(.vertical, 6)
                         .background {
-                            RoundedRectangle(cornerRadius: 2)
+                            RoundedRectangle(cornerRadius: 4)
                                 .foregroundStyle(.white)
                         }
                         .onTapGesture {
@@ -59,7 +56,7 @@ struct ContentView: View {
         }
     }
     
-    private func adjustMapCenter(with mapHeight: CGFloat, currentRegion: MKCoordinateRegion) {
+    private func updateCameraPosition(with mapHeight: CGFloat, currentRegion: MKCoordinateRegion) {
         var region = currentRegion
         
         let fraction = (mapHeight - drawerState.currentPosition) / mapHeight
@@ -71,7 +68,10 @@ struct ContentView: View {
         )
         
         region.center = newCenter
-        cameraPosition = .region(region)
+        
+        withAnimation {
+            cameraPosition = .region(region)
+        }
     }
 }
 
