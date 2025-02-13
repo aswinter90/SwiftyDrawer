@@ -66,11 +66,35 @@ enum MapData {
     )
     
     static let annotations: [AnnotationModel] = [
-        .init(name: "Hamburg", region: Self.hamburgRegion),
-        .init(name: "Berlin", region: Self.berlinRegion),
-        .init(name: "Frankfurt", region: Self.frankfurtRegion),
-        .init(name: "Munich", region: Self.munichRegion),
-        .init(name: "Stuttgart", region: Self.stuttgartRegion),
-        .init(name: "Cologne", region: Self.cologneRegion),
+        .init(
+            name: "Hamburg",
+            description: "Hamburg, Germany's second-largest city, is known for its historic port, vibrant culture, and stunning architecture. It's a major hub for trade and industry with a rich maritime heritage.",
+            region: Self.hamburgRegion
+        ),
+        .init(
+            name: "Berlin",
+            description: "Berlin, the capital of Germany, is a city steeped in history and culture. Known for its dynamic arts scene, iconic landmarks like the Brandenburg Gate, and a vibrant nightlife, Berlin is a city that never sleeps.",
+            region: Self.berlinRegion
+        ),
+        .init(
+            name: "Frankfurt",
+            description: "Frankfurt is a global financial center, famous for its futuristic skyline and bustling airport. The city offers a blend of modernity and tradition, with historic sites and contemporary architecture.",
+            region: Self.frankfurtRegion
+        ),
+        .init(
+            name: "Munich",
+            description: "Munich, the capital of Bavaria, is renowned for its Oktoberfest, beer gardens, and rich cultural heritage. It's a city of contrasts, combining historic architecture with modern urban living.",
+            region: Self.munichRegion
+        ),
+        .init(
+            name: "Stuttgart",
+            description: "Stuttgart is the heart of Germany's automotive industry, home to companies like Mercedes-Benz and Porsche. It offers a mix of green spaces, vineyards, and a thriving cultural scene.",
+            region: Self.stuttgartRegion
+        ),
+        .init(
+            name: "Cologne",
+            description: "Cologne is known for its impressive cathedral, lively carnival celebrations, and vibrant arts scene. Situated on the Rhine River, it’s a city with a rich history and a bustling urban vibe.",
+            region: Self.cologneRegion
+        ),
     ]
 }

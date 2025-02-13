@@ -46,9 +46,13 @@ struct DrawerContentView: View {
     }
     
     private func cityDetails(for model: AnnotationModel) -> some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 16) {
             Text(model.name)
                 .font(.largeTitle)
+            
+            Text(model.description)
+                .font(.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
@@ -56,19 +60,16 @@ struct DrawerContentView: View {
 }
 
 #Preview {
-    @Previewable @State var state = DrawerState(case: .fullyOpened)
+    @Previewable @State var drawerState = DrawerState(case: .fullyOpened)
     
     Color.green
         .drawerOverlay(
-            state: $state,
+            state: $drawerState,
             content: {
                 DrawerContentView(
                     viewModel: .init(
                         state: .selectedAnnotation(
-                            .init(
-                                name: "Hamburg",
-                                region: MapData.hamburgRegion
-                            )
+                            MapData.annotations.first!
                         )
                     )
                 )
