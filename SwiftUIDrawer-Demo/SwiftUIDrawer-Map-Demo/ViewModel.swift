@@ -24,6 +24,21 @@ class ViewModel: ObservableObject {
     @Published var state: State
     @Published var drawerState = DrawerState(case: .partiallyOpened)
     
+    var drawerFloatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
+        switch state {
+        case .overview:
+            .init()
+        case .selectedAnnotation:
+                .init(
+                    leadingButtons: [
+                        .init(icon: .init(systemName: "arrow.backward")) {
+                            self.didReturn()
+                        }
+                    ]
+                )
+        }
+    }
+    
     init(state: State = State.defaultOverview) {
         self.state = state
     }

@@ -37,7 +37,7 @@ struct ContentView: View {
             isDimmingBackground: true,
             content: { DrawerContentView(viewModel: viewModel) }
         )
-        .drawerFloatingButtonsConfiguration(floatingButtonConfiguration)
+        .drawerFloatingButtonsConfiguration(viewModel.drawerFloatingButtonConfiguration)
     }
     
     private var mapView: some View {
@@ -70,21 +70,6 @@ struct ContentView: View {
                         viewModel.didSelectAnnotation(annotation)
                     }
                 }
-        }
-    }
-    
-    private var floatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
-        switch viewModel.state {
-        case .overview:
-            .init()
-        case .selectedAnnotation:
-                .init(
-                    leadingButtons: [
-                        .init(icon: .init(systemName: "arrow.backward")) {
-                            viewModel.didReturn()
-                        }
-                    ]
-                )
         }
     }
 }
