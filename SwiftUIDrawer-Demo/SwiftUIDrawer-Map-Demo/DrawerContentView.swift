@@ -2,7 +2,8 @@ import SwiftUI
 import SwiftUIDrawer
 
 struct DrawerContentView: View {
-    @ObservedObject var viewModel: ViewModel
+    let viewModel: ViewModel
+    @Binding var drawerState: DrawerState
     
     var body: some View {
         switch viewModel.state {
@@ -42,6 +43,7 @@ struct DrawerContentView: View {
         .background()
         .onTapGesture {
             viewModel.didSelectAnnotation(annotation)
+            drawerState.case = .partiallyOpened
         }
     }
     
@@ -71,7 +73,7 @@ struct DrawerContentView: View {
                         state: .selectedAnnotation(
                             MapData.annotations.first!
                         )
-                    )
+                    ), drawerState: $drawerState
                 )
             }
         )

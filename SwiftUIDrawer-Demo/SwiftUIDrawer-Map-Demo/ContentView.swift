@@ -6,7 +6,8 @@ struct ContentView: View {
     private static let drawerBottomPositionValue = 100.0
     private static let drawerMidPositionValue = 450.0
     
-    @StateObject private var viewModel = ViewModel()
+    @State private var viewModel = ViewModel()
+    @State var drawerState = DrawerState(case: .partiallyOpened)
     @State private var mapHeight: CGFloat = 0
     @State private var cameraPosition = MapCameraPosition.region(.init())
     
@@ -31,13 +32,13 @@ struct ContentView: View {
             )
         }
         .drawerOverlay(
-            state: $viewModel.drawerState,
+            state: $drawerState,
             bottomPosition: .constant(.relativeToSafeAreaBottom(offset: Self.drawerBottomPositionValue)),
             midPosition: .absolute(Self.drawerMidPositionValue),
             isDimmingBackground: true,
-            content: { DrawerContentView(viewModel: viewModel) }
+            content: { DrawerContentView(viewModel: viewModel, drawerState: $drawerState) }
         )
-        .drawerFloatingButtonsConfiguration(viewModel.drawerFloatingButtonConfiguration)
+        .drawerFloatingButtonsConfiguration(drawerFloatingButtonConfiguration)
     }
     
     private var mapView: some View {
@@ -45,21 +46,37 @@ struct ContentView: View {
             switch viewModel.state {
             case let .overview(_, annotations):
                 ForEach(annotations) { annotation in
-                    annotationView(for: annotation)
+                    annotationView(for: annotation, isSelected: false)
                 }
             case let .selectedAnnotation(annotation):
-                annotationView(for: annotation)
+                annotationView(for: annotation, isSelected: true)
             }
         }
     }
     
-    private func annotationView(for annotation: AnnotationModel) -> Annotation<Text, some View> {
+    private var drawerFloatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
+        switch viewModel.state {
+        case .overview:
+            .init()
+        case .selectedAnnotation:
+                .init(
+                    leadingButtons: [
+                        .init(icon: .init(systemName: "arrow.backward")) {
+                            viewModel.didReturn()
+                        }
+                    ]
+                )
+        }
+    }
+    
+    private func annotationView(for annotation: AnnotationModel, isSelected: Bool) -> Annotation<Text, some View> {
         Annotation(annotation.name, coordinate: annotation.region.center) {
-            Image(systemName: "building")
+            Image(systemName: isSelected ? "flag" : "building.2")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 30, height: 30)
                 .foregroundStyle(.blue)
+                .animation(.smooth, value: isSelected)
                 .padding(.vertical, 6)
                 .background {
                     RoundedRectangle(cornerRadius: 4)

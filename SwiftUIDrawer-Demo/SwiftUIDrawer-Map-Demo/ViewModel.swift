@@ -2,7 +2,7 @@ import Foundation
 import MapKit
 import SwiftUIDrawer
 
-class ViewModel: ObservableObject {
+@Observable class ViewModel {
     enum State {
         case overview(region: MKCoordinateRegion, annotations: [AnnotationModel])
         case selectedAnnotation(_ annotation: AnnotationModel)
@@ -21,23 +21,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    @Published var state: State
-    @Published var drawerState = DrawerState(case: .partiallyOpened)
-    
-    var drawerFloatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
-        switch state {
-        case .overview:
-            .init()
-        case .selectedAnnotation:
-                .init(
-                    leadingButtons: [
-                        .init(icon: .init(systemName: "arrow.backward")) {
-                            self.didReturn()
-                        }
-                    ]
-                )
-        }
-    }
+    var state: State
     
     init(state: State = State.defaultOverview) {
         self.state = state
@@ -45,7 +29,6 @@ class ViewModel: ObservableObject {
     
     func didSelectAnnotation(_ annotation: AnnotationModel) {
         state = .selectedAnnotation(annotation)
-        drawerState.case = .partiallyOpened
     }
     
     func didReturn() {
