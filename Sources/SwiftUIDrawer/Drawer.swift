@@ -31,15 +31,16 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State private var isAnimationDisabled = true
     
     /// Additional safety measure to prevent the drawer from moving slightly when its content is being scrolled
+    /// TODO: Check if this is obsolete or still required for older iOS versions than 18.0
     @State var isDragGestureEnabled = true
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
     @State var contentHeight: CGFloat = 0.0
     
     @State var stickyHeaderHeight: CGFloat = 0.0
+    @State var shouldElevateStickyHeader = false
     @State private var stickyHeaderId = UUID()
     @State private var dragHandleId = UUID()
-    @State var shouldElevateStickyHeader = false
     
     // MARK: - Initializer
 

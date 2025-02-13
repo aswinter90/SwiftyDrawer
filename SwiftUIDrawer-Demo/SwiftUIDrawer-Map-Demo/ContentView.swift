@@ -25,7 +25,7 @@ struct ContentView: View {
             )
         }
         .drawerOverlay(
-            state: $drawerState,
+            state: .constant(.init(case: .partiallyOpened)),
             midPosition: .absolute(450),
             isDimmingBackground: true,
             content: { DrawerContentView(viewModel: viewModel) }
