@@ -15,18 +15,26 @@ class ViewModel: ObservableObject {
                 model.region
             }
         }
+        
+        static var defaultOverview: Self {
+            Self.overview(region: MapData.germanyRegion, annotations: MapData.annotations)
+        }
     }
     
     @Published var state: State
     @Published var drawerState = DrawerState(case: .partiallyOpened)
     
-    init(state: State = .overview(region: MapData.germanyRegion, annotations: MapData.annotations)) {
+    init(state: State = State.defaultOverview) {
         self.state = state
     }
     
     func didSelectAnnotation(_ annotation: AnnotationModel) {
         state = .selectedAnnotation(annotation)
         drawerState.case = .partiallyOpened
+    }
+    
+    func didReturn() {
+        state = State.defaultOverview
     }
 }
 

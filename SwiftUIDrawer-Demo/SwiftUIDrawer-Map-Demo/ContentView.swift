@@ -37,6 +37,7 @@ struct ContentView: View {
             isDimmingBackground: true,
             content: { DrawerContentView(viewModel: viewModel) }
         )
+        .drawerFloatingButtonsConfiguration(floatingButtonConfiguration)
     }
     
     private var mapView: some View {
@@ -72,6 +73,23 @@ struct ContentView: View {
         }
     }
     
+    private var floatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
+        switch viewModel.state {
+        case .overview:
+            .init()
+        case .selectedAnnotation:
+                .init(
+                    leadingButtons: [
+                        .init(icon: .init(systemName: "arrow.backward")) {
+                            viewModel.didReturn()
+                        }
+                    ]
+                )
+        }
+    }
+}
+
+extension ContentView {
     private func updateCameraPosition(with mapHeight: CGFloat, currentRegion: MKCoordinateRegion) {
         var region = currentRegion
         
