@@ -1,6 +1,6 @@
 import MapKit
 
-enum Regions {
+enum MapData {
     private static let citySpan = MKCoordinateSpan(
         latitudeDelta: 0.035,
         longitudeDelta: 0.05
@@ -64,4 +64,13 @@ enum Regions {
         ),
         span: citySpan
     )
+    
+    static let annotations: [AnnotationModel] = [
+        .init(name: "Hamburg", region: Self.hamburgRegion),
+        .init(name: "Berlin", region: Self.berlinRegion),
+        .init(name: "Frankfurt", region: Self.frankfurtRegion),
+        .init(name: "Munich", region: Self.munichRegion),
+        .init(name: "Stuttgart", region: Self.stuttgartRegion),
+        .init(name: "Cologne", region: Self.cologneRegion),
+    ]
 }

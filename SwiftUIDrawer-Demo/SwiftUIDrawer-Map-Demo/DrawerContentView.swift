@@ -6,20 +6,20 @@ struct DrawerContentView: View {
     
     var body: some View {
         switch viewModel.state {
-        case .overview:
-            listView
+        case let .overview(_, annotations):
+            listView(with: annotations)
         case let .selectedAnnotation(annotation):
             cityDetails(for: annotation)
         }
     }
     
-    private var listView: some View {
+    private func listView(with annotations: [AnnotationModel]) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Select a city")
                 .font(.largeTitle)
                 .padding(.bottom, 8)
             
-            ForEach(viewModel.annotations) { annotation in
+            ForEach(annotations) { annotation in
                 listItem(for: annotation)
             }
         }
@@ -67,7 +67,7 @@ struct DrawerContentView: View {
                         state: .selectedAnnotation(
                             .init(
                                 name: "Hamburg",
-                                region: Regions.hamburgRegion
+                                region: MapData.hamburgRegion
                             )
                         )
                     )

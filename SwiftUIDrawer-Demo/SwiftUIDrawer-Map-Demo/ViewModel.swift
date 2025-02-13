@@ -4,12 +4,12 @@ import SwiftUIDrawer
 
 class ViewModel: ObservableObject {
     enum State {
-        case overview(region: MKCoordinateRegion)
+        case overview(region: MKCoordinateRegion, annotations: [AnnotationModel])
         case selectedAnnotation(_ annotation: AnnotationModel)
         
         var region: MKCoordinateRegion {
             switch self {
-            case .overview(let region):
+            case .overview(let region, _):
                 region
             case .selectedAnnotation(let model):
                 model.region
@@ -18,29 +18,23 @@ class ViewModel: ObservableObject {
     }
     
     @Published var state: State
-    let annotations: [AnnotationModel] = [
-        .init(name: "Hamburg", region: Regions.hamburgRegion),
-        .init(name: "Berlin", region: Regions.berlinRegion),
-        .init(name: "Frankfurt", region: Regions.frankfurtRegion),
-        .init(name: "Munich", region: Regions.munichRegion),
-        .init(name: "Stuttgart", region: Regions.stuttgartRegion),
-        .init(name: "Cologne", region: Regions.cologneRegion),
-    ]
+    @Published var drawerState = DrawerState(case: .partiallyOpened)
     
-    init(state: State = .overview(region: Regions.germanyRegion)) {
+    init(state: State = .overview(region: MapData.germanyRegion, annotations: MapData.annotations)) {
         self.state = state
     }
     
     func didSelectAnnotation(_ annotation: AnnotationModel) {
         state = .selectedAnnotation(annotation)
+        drawerState.case = .partiallyOpened
     }
 }
 
 extension ViewModel.State: Equatable {
     static func ==(lhs: ViewModel.State, rhs: ViewModel.State) -> Bool {
         return switch (lhs, rhs) {
-        case let (.overview(lhsRegion), .overview(rhsRegion)):
-            lhsRegion == rhsRegion
+        case let (.overview(lhsRegion, lhsAnnotations), .overview(rhsRegion, rhsAnnotations)):
+            lhsRegion == rhsRegion && lhsAnnotations == rhsAnnotations
         case let (.selectedAnnotation(lhsModel), .selectedAnnotation(rhsModel)):
             lhsModel == rhsModel
         default:
