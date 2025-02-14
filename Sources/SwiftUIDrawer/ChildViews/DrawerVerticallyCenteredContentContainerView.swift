@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// This view can be used as a wrapper for `Drawer` content, which must not be laid out from the top but be centered vertically when the drawer is in its partiallyOpened state.
+/// This view can be used as a wrapper for `Drawer` content, which must not be laid out from the top but should be centered vertically when the drawer is in its `partiallyOpened` state.
 public struct DrawerVerticallyCenteredContentContainerView<Content: View>: View {
     @Environment(\.drawerPartiallyOpenedStateContentContainerHeight) private var drawerPartiallyOpenedStateContentContainerHeight: CGFloat
     @Environment(\.drawerStickyHeaderHeight) private var drawerStickyHeaderHeight: CGFloat

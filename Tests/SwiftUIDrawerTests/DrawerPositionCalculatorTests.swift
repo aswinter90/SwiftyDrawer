@@ -4,20 +4,19 @@ import UIKit
 
 @Suite("DrawerPositionCalculatorTests")
 struct DrawerPositionCalculatorTests {
+    static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
     static let dragHandleHeight = 12.0
     static let expectedPositionAssociatedValue: CGFloat = 33.0
     
-    let screenBoundsProvider = ScreenBoundsProvidingMock()
     let safeAreaInsetsProvider = SafeAreaInsetsProvidingMock()
     let tabBarFrameProvider = TabBarFrameProvidingMock()
 
-    var screenBounds: CGRect { screenBoundsProvider.bounds }
     var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
     var tabBarFrame: CGRect { tabBarFrameProvider.frame }
     
     var subject: DrawerPositionCalculator {
         .init(
-            screenBoundsProvider: screenBoundsProvider,
+            screenBounds: Self.screenBounds,
             safeAreaInsetsProvider: safeAreaInsetsProvider,
             tabBarFrameProvider: tabBarFrameProvider,
             dragHandleHeight: Self.dragHandleHeight
@@ -35,7 +34,7 @@ struct DrawerPositionCalculatorTests {
     )
     func testPaddingTop(for drawerState: DrawerState) {
         let paddingTop = subject.paddingTop(for: drawerState)
-        #expect(paddingTop == screenBounds.height - drawerState.currentPosition)
+        #expect(paddingTop == Self.screenBounds.height - drawerState.currentPosition)
     }
     
     @Test(
@@ -142,7 +141,7 @@ struct DrawerPositionCalculatorTests {
         case .absolute(let cGFloat):
             #expect(absoluteValue == cGFloat)
         case .relativeToSafeAreaTop(let offset):
-            let sum = CGFloat(screenBounds.height - safeAreaInsets.top - offset)
+            let sum = CGFloat(Self.screenBounds.height - safeAreaInsets.top - offset)
             
             #expect(absoluteValue == sum)
         }

@@ -1,6 +1,11 @@
 import Foundation
 
 struct SafeAreaInsetsHolder: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case top = "safeAreaTop"
+        case bottom = "safeAreaBottom"
+    }
+    
     let top: CGFloat
     let bottom: CGFloat
     
@@ -8,8 +13,4 @@ struct SafeAreaInsetsHolder: Decodable {
         self = try JSONDecoder().decode(SafeAreaInsetsHolder.self, from: data)
     }
     
-    enum CodingKeys: String, CodingKey {
-        case top = "safeAreaTop"
-        case bottom = "safeAreaBottom"
-    }
 }

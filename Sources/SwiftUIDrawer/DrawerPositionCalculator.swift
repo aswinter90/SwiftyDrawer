@@ -2,22 +2,22 @@ import UIKit
 import SwiftUI
 
 public class DrawerPositionCalculator {
-    private let screenBoundsProvider: ScreenBoundsProviding
     private let safeAreaInsetsProvider: SafeAreaInsetsProviding
     private let tabBarFrameProvider: TabBarFrameProviding
-    
+
+    let screenBounds: CGRect
     var dragHandleHeight: CGFloat
-    var screenHeight: CGFloat { screenBoundsProvider.bounds.height }
+    var screenHeight: CGFloat { screenBounds.height }
     var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
     var tabBarHeight: CGFloat { tabBarFrameProvider.frame.height }
     
     public init(
-        screenBoundsProvider: ScreenBoundsProviding = UIScreen.main,
+        screenBounds: CGRect,
         safeAreaInsetsProvider: SafeAreaInsetsProviding = UIApplication.shared,
         tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
         dragHandleHeight: CGFloat = DrawerConstants.dragHandleHeight
     ) {
-        self.screenBoundsProvider = screenBoundsProvider
+        self.screenBounds = screenBounds
         self.safeAreaInsetsProvider = safeAreaInsetsProvider
         self.tabBarFrameProvider = tabBarFrameProvider
         self.dragHandleHeight = dragHandleHeight
@@ -86,7 +86,7 @@ public class DrawerPositionCalculator {
         case let .absolute(float):
             float
         case let .relativeToSafeAreaTop(offset):
-            screenBoundsProvider.bounds.height
+            screenBounds.height
             - safeAreaInsetsProvider.insets.top
             - offset
         }
