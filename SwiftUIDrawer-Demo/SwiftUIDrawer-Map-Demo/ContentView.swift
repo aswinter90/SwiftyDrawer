@@ -12,7 +12,10 @@ struct ContentView: View {
     @State private var cameraPosition = MapCameraPosition.region(.init())
     
     var body: some View {
-        mapView
+        MapView(
+            cameraPosition: $cameraPosition,
+            viewModel: viewModel
+        )
         .ignoresSafeArea()
         .onGeometryChange(
             for: CGFloat.self, of: {
@@ -41,19 +44,6 @@ struct ContentView: View {
         .drawerFloatingButtonsConfiguration(drawerFloatingButtonConfiguration)
     }
     
-    private var mapView: some View {
-        Map(position: $cameraPosition) {
-            switch viewModel.state {
-            case let .overview(_, annotations):
-                ForEach(annotations) { annotation in
-                    annotationView(for: annotation, isSelected: false)
-                }
-            case let .selectedAnnotation(annotation):
-                annotationView(for: annotation, isSelected: true)
-            }
-        }
-    }
-    
     private var drawerFloatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
         switch viewModel.state {
         case .overview:
@@ -66,27 +56,6 @@ struct ContentView: View {
                         }
                     ]
                 )
-        }
-    }
-    
-    private func annotationView(for annotation: AnnotationModel, isSelected: Bool) -> Annotation<Text, some View> {
-        Annotation(annotation.name, coordinate: annotation.region.center) {
-            Image(systemName: isSelected ? "flag" : "building.2")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
-                .foregroundStyle(.blue)
-                .animation(.smooth, value: isSelected)
-                .padding(.vertical, 6)
-                .background {
-                    RoundedRectangle(cornerRadius: 4)
-                        .foregroundStyle(.white)
-                }
-                .onTapGesture {
-                    withAnimation {
-                        viewModel.didSelectAnnotation(annotation)
-                    }
-                }
         }
     }
 }
