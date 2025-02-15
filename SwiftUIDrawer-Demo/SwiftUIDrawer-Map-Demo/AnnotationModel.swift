@@ -5,4 +5,5 @@ struct AnnotationModel: Equatable, Identifiable {
     let name: String
     let description: String
     let region: MKCoordinateRegion
+    let imageAddress: String
 }

@@ -52,6 +52,23 @@ struct DrawerContentView: View {
             Text(model.name)
                 .font(.largeTitle)
             
+            AsyncImage(url: URL(string: model.imageAddress)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                } else if phase.error != nil {
+                    Image(systemName: "photo.artframe")
+                        .frame(width: 24, height: 24)
+                        .frame(maxWidth: .infinity)
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .frame(height: 250)
+            
             Text(model.description)
                 .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)

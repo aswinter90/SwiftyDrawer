@@ -69,32 +69,38 @@ enum MapData {
         .init(
             name: "Hamburg",
             description: "Hamburg, Germany's second-largest city, is known for its historic port, vibrant culture, and stunning architecture. It's a major hub for trade and industry with a rich maritime heritage.",
-            region: Self.hamburgRegion
+            region: Self.hamburgRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/7/77/Rathaus_Hbg.jpg"
         ),
         .init(
             name: "Berlin",
             description: "Berlin, the capital of Germany, is a city steeped in history and culture. Known for its dynamic arts scene, iconic landmarks like the Brandenburg Gate, and a vibrant nightlife, Berlin is a city that never sleeps.",
-            region: Self.berlinRegion
+            region: Self.berlinRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg"
         ),
         .init(
             name: "Frankfurt",
             description: "Frankfurt is a global financial center, famous for its futuristic skyline and bustling airport. The city offers a blend of modernity and tradition, with historic sites and contemporary architecture.",
-            region: Self.frankfurtRegion
+            region: Self.frankfurtRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Frankfurter_Altstadt_mit_Skyline_2024_cropped.jpg"
         ),
         .init(
             name: "Munich",
             description: "Munich, the capital of Bavaria, is renowned for its Oktoberfest, beer gardens, and rich cultural heritage. It's a city of contrasts, combining historic architecture with modern urban living.",
-            region: Self.munichRegion
+            region: Self.munichRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Stadtbild_M%C3%BCnchen.jpg"
         ),
         .init(
             name: "Stuttgart",
             description: "Stuttgart is the heart of Germany's automotive industry, home to companies like Mercedes-Benz and Porsche. It offers a mix of green spaces, vineyards, and a thriving cultural scene.",
-            region: Self.stuttgartRegion
+            region: Self.stuttgartRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/e/e1/Neues_Schloss_Schlossplatzspringbrunnen_Schlossplatz_Stuttgart_2015_01.jpg"
         ),
         .init(
             name: "Cologne",
             description: "Cologne is known for its impressive cathedral, lively carnival celebrations, and vibrant arts scene. Situated on the Rhine River, it’s a city with a rich history and a bustling urban vibe.",
-            region: Self.cologneRegion
+            region: Self.cologneRegion,
+            imageAddress: "https://upload.wikimedia.org/wikipedia/commons/f/fa/K%C3%B6lner_Dom_und_Hohenzollernbr%C3%BCcke_Abendd%C3%A4mmerung_%289706_7_8%29.jpg"
         ),
     ]
 }
