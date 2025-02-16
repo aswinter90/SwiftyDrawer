@@ -4,10 +4,10 @@ import UIKit
 extension Drawer {
     /// Used for interpolating values of the drawer position during animations.
     struct OffsetEffect: GeometryEffect {
-        var value: CGFloat
-        var onValueDidChange: (CGFloat) -> Void
+        var value: Double
+        var onValueDidChange: (Double) -> Void
 
-        var animatableData: CGFloat {
+        var animatableData: Double {
             get { value }
             set { value = newValue }
         }

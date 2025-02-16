@@ -63,7 +63,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         XCTAssertEqual(
             drawer.frame.origin.y,
             app.frame.height
-                - CGFloat(safeAreaInsets.bottom)
+                - Double(safeAreaInsets.bottom)
                 - TabBarFrameProvider.sharedInstance.frame.height
                 - DrawerConstants.drawerDefaultMidPositionConstant
                 - DrawerConstants.dragHandleHeight,
@@ -76,7 +76,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         
         XCTAssertEqual(
             drawer.frame.origin.y,
-            app.frame.height - CGFloat(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight,
+            app.frame.height - Double(safeAreaInsets.bottom) - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy
         )
     }

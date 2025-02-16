@@ -5,7 +5,7 @@ enum DragDirection {
     case down
     case undefined
     
-    init(startLocationY: CGFloat, endLocationY: CGFloat, velocity: CGFloat) {
+    init(startLocationY: Double, endLocationY: Double, velocity: Double) {
         let isSlowGesture = abs(velocity) < DrawerConstants.draggingVelocityThreshold
         
         if isSlowGesture {

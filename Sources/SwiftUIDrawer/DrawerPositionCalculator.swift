@@ -6,16 +6,16 @@ public class DrawerPositionCalculator {
     private let tabBarFrameProvider: TabBarFrameProviding
 
     let screenBounds: CGRect
-    var dragHandleHeight: CGFloat
-    var screenHeight: CGFloat { screenBounds.height }
+    var dragHandleHeight: Double
+    var screenHeight: Double { screenBounds.height }
     var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
-    var tabBarHeight: CGFloat { tabBarFrameProvider.frame.height }
+    var tabBarHeight: Double { tabBarFrameProvider.frame.height }
     
     public init(
         screenBounds: CGRect,
         safeAreaInsetsProvider: SafeAreaInsetsProviding = UIApplication.shared,
         tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
-        dragHandleHeight: CGFloat = DrawerConstants.dragHandleHeight
+        dragHandleHeight: Double = DrawerConstants.dragHandleHeight
     ) {
         self.screenBounds = screenBounds
         self.safeAreaInsetsProvider = safeAreaInsetsProvider
@@ -24,12 +24,12 @@ public class DrawerPositionCalculator {
     }
     
     /// Property that controls the drawer's position on the screen by adding a top padding.
-    func paddingTop(for state: DrawerState) -> CGFloat {
+    func paddingTop(for state: DrawerState) -> Double {
         screenHeight - state.currentPosition
     }
 
     /// This makes sure that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
-    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> CGFloat {
+    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> Double {
         switch state.case {
         case .fullyOpened:
             paddingTop(for: state)
@@ -40,10 +40,10 @@ public class DrawerPositionCalculator {
         }
     }
     
-    func absoluteValue(for bottomPosition: DrawerBottomPosition) -> CGFloat {
+    func absoluteValue(for bottomPosition: DrawerBottomPosition) -> Double {
         switch bottomPosition {
-        case let .absolute(float):
-            float + dragHandleHeight
+        case let .absolute(double):
+            double + dragHandleHeight
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
             + offset
@@ -65,10 +65,10 @@ public class DrawerPositionCalculator {
         }
     }
     
-    func absoluteValue(for midPosition: DrawerMidPosition) -> CGFloat {
+    func absoluteValue(for midPosition: DrawerMidPosition) -> Double {
         switch midPosition {
-        case let .absolute(float):
-            float
+        case let .absolute(double):
+            double
         case let .relativeToSafeAreaBottom(offset):
             safeAreaInsetsProvider.insets.bottom
             + offset
@@ -81,10 +81,10 @@ public class DrawerPositionCalculator {
         }
     }
     
-    func absoluteValue(for topPosition: DrawerTopPosition) -> CGFloat {
+    func absoluteValue(for topPosition: DrawerTopPosition) -> Double {
         switch topPosition {
-        case let .absolute(float):
-            float
+        case let .absolute(double):
+            double
         case let .relativeToSafeAreaTop(offset):
             screenBounds.height
             - safeAreaInsetsProvider.insets.top
@@ -93,10 +93,10 @@ public class DrawerPositionCalculator {
     }
     
     func floatingButtonsOpacity(
-        currentDrawerPosition: CGFloat,
+        currentDrawerPosition: Double,
         drawerBottomPosition: DrawerBottomPosition,
         drawerMidPosition: DrawerMidPosition?
-    ) -> CGFloat {
+    ) -> Double {
         let positionModifier = UIScreen.main.scale > 2 ? 200.0 : 100
         let positionThreshold = if let drawerMidPosition {
             absoluteValue(for: drawerMidPosition)

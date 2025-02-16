@@ -1,7 +1,7 @@
 import UIKit
 
 public enum DrawerMidPosition: Equatable {
-    case absolute(CGFloat)
-    case relativeToSafeAreaBottom(offset: CGFloat)
-    case relativeToTabBar(offset: CGFloat)
+    case absolute(Double)
+    case relativeToSafeAreaBottom(offset: Double)
+    case relativeToTabBar(offset: Double)
 }

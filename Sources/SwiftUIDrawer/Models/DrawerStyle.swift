@@ -4,14 +4,14 @@ import SwiftUI
 public struct DrawerStyle {
     public struct ShadowStyle {
         let color: Color
-        let opacity: CGFloat
-        let radius: CGFloat
+        let opacity: Double
+        let radius: Double
         let offset: CGSize
         
         public init(
             color: Color = .black,
-            opacity: CGFloat = 0.15,
-            radius: CGFloat = 3.0,
+            opacity: Double = 0.15,
+            radius: Double = 3.0,
             offset: CGSize
         ) {
             self.color = color
@@ -22,14 +22,14 @@ public struct DrawerStyle {
     }
     
     let backgroundColor: Color
-    let cornerRadius: CGFloat
+    let cornerRadius: Double
     let shadowStyle: ShadowStyle
     let dragHandle: AnyView
     let stickyHeaderShadowStyle: ShadowStyle
     
     public init(
         backgroundColor: Color = Color.background,
-        cornerRadius: CGFloat = DrawerConstants.drawerCornerRadius,
+        cornerRadius: Double = DrawerConstants.drawerCornerRadius,
         shadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: -3)),
         dragHandle: @autoclosure (() -> AnyView) = { AnyView(DragHandle()) }(),
         stickyHeaderShadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: 3))

@@ -8,7 +8,7 @@ struct ContentView: View {
     
     @State private var viewModel = ViewModel()
     @State private var drawerState = DrawerState(case: .partiallyOpened)
-    @State private var mapHeight: CGFloat = 0
+    @State private var mapHeight: Double = 0
     @State private var cameraPosition = MapCameraPosition.region(.init())
     
     var body: some View {
@@ -18,7 +18,7 @@ struct ContentView: View {
         )
         .ignoresSafeArea()
         .onGeometryChange(
-            for: CGFloat.self,
+            for: Double.self,
             of: { $0.size.height },
             action: {
                 mapHeight = $0
@@ -60,7 +60,7 @@ struct ContentView: View {
         )
     }
     
-    private func updateCameraPosition(with mapHeight: CGFloat, currentRegion: MKCoordinateRegion) {
+    private func updateCameraPosition(with mapHeight: Double, currentRegion: MKCoordinateRegion) {
         var region = currentRegion
         
         let fraction = (mapHeight - Self.drawerMidPositionValue) / mapHeight

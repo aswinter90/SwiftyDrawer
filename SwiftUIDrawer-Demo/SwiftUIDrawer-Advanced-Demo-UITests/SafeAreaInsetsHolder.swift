@@ -6,8 +6,8 @@ struct SafeAreaInsetsHolder: Decodable {
         case bottom = "safeAreaBottom"
     }
     
-    let top: CGFloat
-    let bottom: CGFloat
+    let top: Double
+    let bottom: Double
     
     init(data: Data) throws {
         self = try JSONDecoder().decode(SafeAreaInsetsHolder.self, from: data)

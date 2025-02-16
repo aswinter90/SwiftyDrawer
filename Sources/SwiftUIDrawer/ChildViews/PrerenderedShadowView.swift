@@ -5,13 +5,13 @@ import UIKit
 /// The `PrerenderedShadowView` replaces the default SwiftUI shadow modifier. It has a smaller performance impact due to its shadow path, which must not be redrawn if the layout changes.
 public class PrerenderedShadowView: UIView {
     public struct ShadowConfiguration: Equatable {
-        let layerCornerRadius: CGFloat
+        let layerCornerRadius: Double
         let shadowColor: UIColor
-        let shadowOpacity: CGFloat
-        let shadowRadius: CGFloat
+        let shadowOpacity: Double
+        let shadowRadius: Double
         let shadowOffset: CGSize
         
-        init(style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) {
+        init(style: DrawerStyle.ShadowStyle, cornerRadius: Double) {
             self.init(
                 layerCornerRadius: cornerRadius,
                 shadowColor: UIColor(style.color),
@@ -22,10 +22,10 @@ public class PrerenderedShadowView: UIView {
         }
         
         init(
-            layerCornerRadius: CGFloat,
+            layerCornerRadius: Double,
             shadowColor: UIColor,
-            shadowOpacity: CGFloat,
-            shadowRadius: CGFloat,
+            shadowOpacity: Double,
+            shadowRadius: Double,
             shadowOffset: CGSize
         ) {
             self.layerCornerRadius = layerCornerRadius
@@ -112,10 +112,10 @@ public extension PrerenderedShadowView {
 
 public extension View {
     func prerenderedShadow(
-        layerCornerRadius: CGFloat,
+        layerCornerRadius: Double,
         color: UIColor,
         opacity: Float,
-        radius: CGFloat,
+        radius: Double,
         offset: CGSize
     ) -> some View {
         background {
@@ -123,7 +123,7 @@ public extension View {
                 configuration: .init(
                     layerCornerRadius: layerCornerRadius,
                     shadowColor: color,
-                    shadowOpacity: CGFloat(opacity),
+                    shadowOpacity: Double(opacity),
                     shadowRadius: radius,
                     shadowOffset: offset
                 )
@@ -132,7 +132,7 @@ public extension View {
         }
     }
     
-    func prerenderedShadow(_ style: DrawerStyle.ShadowStyle, cornerRadius: CGFloat) -> some View {
+    func prerenderedShadow(_ style: DrawerStyle.ShadowStyle, cornerRadius: Double) -> some View {
         prerenderedShadow(
             layerCornerRadius: cornerRadius,
             color: UIColor(style.color),

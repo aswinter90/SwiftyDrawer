@@ -1,6 +1,6 @@
 import UIKit
 
 public enum DrawerTopPosition: Equatable {
-    case absolute(CGFloat)
-    case relativeToSafeAreaTop(offset: CGFloat)
+    case absolute(Double)
+    case relativeToSafeAreaTop(offset: Double)
 }

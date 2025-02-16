@@ -1,7 +1,7 @@
 import SwiftUI
 
-typealias VerticalContentOffset = CGFloat
-typealias VerticalDragTranslation = CGFloat
+typealias VerticalContentOffset = Double
+typealias VerticalDragTranslation = Double
 
 /// In order to orchestrate drag gestures between the drawer and its scrollable content, a CollectionView like this was found as the least problematic solution, compared to a UIScrollView which leads to UI freezes or a UITableView which crashes the app on appearance.
 /// Hopefully SwiftUI will soon offer tools to quickly make this Frankenstein setup obsolete.
@@ -24,7 +24,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
     var shouldBeginDragging: (VerticalContentOffset, VerticalDragTranslation) -> Bool
     var onDraggingEnded: (_ willDecelerate: Bool) -> Void
     var onDecelaratingEnded: () -> Void
-    var onDidScroll: (_ verticalContentOffset: CGFloat) -> Void
+    var onDidScroll: (_ verticalContentOffset: Double) -> Void
     var onDidResetContentOffset: () -> Void
 
     // MARK: - Properties: Private
@@ -55,7 +55,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         shouldBeginDragging: @escaping (VerticalContentOffset, VerticalDragTranslation) -> Bool,
         onDraggingEnded: @escaping (_ willDecelerate: Bool) -> Void,
         onDecelaratingEnded: @escaping () -> Void,
-        onDidScroll: @escaping (_ verticalContentOffset: CGFloat) -> Void,
+        onDidScroll: @escaping (_ verticalContentOffset: Double) -> Void,
         onDidResetContentOffset: @escaping () -> Void,
         drawerContentOffsetController: DrawerContentOffsetController?
     ) {

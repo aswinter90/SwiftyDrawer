@@ -35,9 +35,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @State var isDragGestureEnabled = true
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
-    @State var contentHeight: CGFloat = 0.0
+    @State var contentHeight: Double = 0.0
     
-    @State var stickyHeaderHeight: CGFloat = 0.0
+    @State var stickyHeaderHeight: Double = 0.0
     @State var shouldElevateStickyHeader = false
     @State private var stickyHeaderId = UUID()
     @State private var dragHandleId = UUID()
@@ -260,7 +260,7 @@ extension Drawer {
 
     // MARK: - Origin observing
 
-    private func onVerticalPositionDidChange(_ verticalPosition: CGFloat) {
+    private func onVerticalPositionDidChange(_ verticalPosition: Double) {
         guard let originObservable else { return }
 
         originObservable.updateIfNeeded(

@@ -4,7 +4,7 @@ import CoreGraphics
 
 @Suite("DrawerBottomPositionTests")
 struct DrawerBottomPositionTests {
-    private static let expectedAssociatedValue: CGFloat = 10.0
+    private static let expectedAssociatedValue: Double = 10.0
     
     private static let allCases: [DrawerBottomPosition] = [
         .absolute(expectedAssociatedValue),
@@ -19,8 +19,8 @@ struct DrawerBottomPositionTests {
         arguments: allCases
     ) func testAssociatedValues(subject: DrawerBottomPosition) async throws {
         switch subject {
-        case .absolute(let cGFloat):
-            #expect(cGFloat == Self.expectedAssociatedValue)
+        case .absolute(let double):
+            #expect(double == Self.expectedAssociatedValue)
         case .relativeToSafeAreaBottom(let offset):
             #expect(offset == Self.expectedAssociatedValue)
         case .relativeToTabBar(let offset):
@@ -60,14 +60,14 @@ struct DrawerBottomPositionTests {
         "Associated value is correctly mutated after calling `updateAssociatedValueOfCurrentCase` function",
         arguments: allCases
     ) func testUpdateAssociatedValueOfCurrentCase(subject: DrawerBottomPosition) {
-        let newValue: CGFloat = 20.0
+        let newValue: Double = 20.0
 
         var updatedSubject = subject
         updatedSubject.updateAssociatedValueOfCurrentCase(newValue)
         
         switch updatedSubject {
-        case .absolute(let cGFloat):
-            #expect(cGFloat == newValue)
+        case .absolute(let double):
+            #expect(double == newValue)
         case .relativeToSafeAreaBottom(let offset):
             #expect(offset == newValue)
         case .relativeToTabBar(let offset):

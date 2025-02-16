@@ -72,7 +72,7 @@ struct DrawerStateReducer {
                 state.currentPosition - positionCalculator.absoluteValue(for: bottomPosition)
             )
 
-            var offsetToMidPosition: CGFloat
+            var offsetToMidPosition: Double
             
             if let midPosition = midPosition {
                 let midPositionValue = positionCalculator.absoluteValue(for: midPosition)
@@ -81,7 +81,7 @@ struct DrawerStateReducer {
                     max(state.currentPosition, midPositionValue) - min(state.currentPosition, midPositionValue)
                 )
             } else {
-                offsetToMidPosition = CGFloat.infinity // Eliminates `offsetToMidPosition` from the following switch
+                offsetToMidPosition = Double.infinity // Eliminates `offsetToMidPosition` from the following switch
             }
 
             let offsetToTopPosition = abs(positionCalculator.absoluteValue(for: topPosition) - state.currentPosition)

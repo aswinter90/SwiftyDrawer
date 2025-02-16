@@ -21,10 +21,10 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
     }
 
     var shouldBeginDragging: (VerticalContentOffset, VerticalDragTranslation) -> Bool
-    var contentHeight: CGFloat
+    var contentHeight: Double
     var onDraggingEnded: (_ willDecelerate: Bool) -> Void
     var onDecelaratingEnded: () -> Void
-    var onDidScroll: (_ verticalContentOffset: CGFloat) -> Void
+    var onDidScroll: (_ verticalContentOffset: Double) -> Void
     var onDidResetContentOffset: () -> Void
 
     // MARK: - Properties: Private
@@ -36,11 +36,11 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
     init(
         content: Content,
-        contentHeight: CGFloat,
+        contentHeight: Double,
         shouldBeginDragging: @escaping (VerticalContentOffset, VerticalDragTranslation) -> Bool,
         onDraggingEnded: @escaping (_ willDecelerate: Bool) -> Void,
         onDecelaratingEnded: @escaping () -> Void,
-        onDidScroll: @escaping (_ verticalContentOffset: CGFloat) -> Void,
+        onDidScroll: @escaping (_ verticalContentOffset: Double) -> Void,
         onDidResetContentOffset: @escaping () -> Void,
         drawerContentOffsetController: DrawerContentOffsetController?
     ) {

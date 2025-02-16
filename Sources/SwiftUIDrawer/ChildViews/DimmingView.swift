@@ -17,7 +17,7 @@ struct DimmingView: View {
             .animation(.linear(duration: 0.3), value: opacity)
     }
 
-    private var opacity: CGFloat {
+    private var opacity: Double {
         let topPosition = positionCalculator.absoluteValue(for: drawerTopPosition)
         
         let midPosition = if let drawerMidPosition {
