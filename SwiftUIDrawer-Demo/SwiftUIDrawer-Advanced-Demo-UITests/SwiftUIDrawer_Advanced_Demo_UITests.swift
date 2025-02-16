@@ -28,7 +28,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         let drawer = app.otherElements.matching(identifier: "SwiftUIDrawer").firstMatch
         XCTAssertTrue(drawer.exists)
 
-        // Unfortunately there is no UIWindow instance available in XCTestCases to grab the safe area insets from, hence the insets are injected as an accessibility label from the UI hierarchy. Which is rather a hack, but... 🙄
+        // Unfortunately there is no UIWindow instance available in XCTestCases to get the safe-area-insets from, hence the insets are injected as an accessibility label in the UI hierarchy of the demo app. Which is a hack, but... 🙄
         let safeAreaInsets = try SafeAreaInsetsHolder(data: drawer.label.data(using: .utf8)!)
         
         // Check drawer top position
@@ -54,11 +54,7 @@ final class SwiftUIDrawer_DemoUITests: XCTestCase {
         
         // Check drawer mid position
         
-        await runAction(
-            drawer.swipeDownFast(),
-            iterations: 4,
-            sleepAfterAction: Self.drawerSwipeDuration
-        )
+        await runAction(drawer.swipeDownFast(), iterations: 4)
         
         XCTAssertEqual(
             drawer.frame.origin.y,
