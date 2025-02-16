@@ -19,7 +19,7 @@ struct ContentView: View {
     )
     
     var body: some View {
-        tabViewIfNeeded {
+        tabView(isTabBarShown: isTabBarShown) {
             configList
                 .drawerOverlay(
                     state: $drawerState,
@@ -48,15 +48,11 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    func tabViewIfNeeded<Content: View>(content: () -> Content) -> some View {
-        if isTabBarShown {
-            TabView {
-                content()
-                    .tabItem { Label("Demo", systemImage: "wrench.and.screwdriver") }
-                    .opaqueTabBarStyle()
-            }
-        } else {
-            ZStack { content() }
+    func tabView<Content: View>(isTabBarShown: Bool, content: () -> Content) -> some View {
+        TabView {
+            content()
+                .tabItem { Label("Demo", systemImage: "wrench.and.screwdriver") }
+                .opaqueTabBarStyle(isTabBarShown: isTabBarShown)
         }
     }
     
@@ -170,11 +166,12 @@ struct ContentView: View {
 }
 
 extension View {
-    @ViewBuilder func opaqueTabBarStyle() -> some View {
+    @ViewBuilder func opaqueTabBarStyle(isTabBarShown: Bool) -> some View {
         if #available(iOS 16.0, *) {
             self
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarBackground(Color(.secondarySystemFill), for: .tabBar)
+                .toolbar(isTabBarShown ? .visible : .hidden, for: .tabBar)
         } else {
             self
         }
