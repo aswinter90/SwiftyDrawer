@@ -7,17 +7,18 @@ let package = Package(
     name: "SwiftUIDrawer",
     platforms: [.iOS(.v15)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SwiftUIDrawer",
             targets: ["SwiftUIDrawer"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.2")
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftUIDrawer"
+            name: "SwiftUIDrawer",
+            plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(
             name: "SwiftUIDrawerTests",
