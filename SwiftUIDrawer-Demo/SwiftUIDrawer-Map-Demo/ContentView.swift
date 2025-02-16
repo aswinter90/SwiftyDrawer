@@ -36,27 +36,28 @@ struct ContentView: View {
         }
         .drawerOverlay(
             state: $drawerState,
-            bottomPosition: .constant(.relativeToSafeAreaBottom(offset: Self.drawerBottomPositionValue)),
+            bottomPosition: .constant(
+                .relativeToSafeAreaBottom(offset: Self.drawerBottomPositionValue)
+            ),
             midPosition: .absolute(Self.drawerMidPositionValue),
             isDimmingBackground: true,
             content: { DrawerContentView(viewModel: viewModel, drawerState: $drawerState) }
         )
-        .drawerFloatingButtonsConfiguration(drawerFloatingButtonConfiguration)
+        .drawerFloatingButtonsConfiguration(floatingButtonsConfiguration)
     }
     
-    private var drawerFloatingButtonConfiguration: DrawerFloatingButtonsConfiguration {
-        switch viewModel.state {
-        case .overview:
-            .init()
-        case .selectedAnnotation:
-                .init(
-                    leadingButtons: [
-                        .init(icon: .init(systemName: "arrow.backward")) {
-                            viewModel.didReturn()
-                        }
-                    ]
-                )
+    private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration {
+        guard case .selectedAnnotation = viewModel.state else {
+            return .init()
         }
+        
+        return .init(
+            leadingButtons: [
+                .init(icon: .init(systemName: "arrow.backward")) {
+                    viewModel.didReturn()
+                }
+            ]
+        )
     }
     
     private func updateCameraPosition(with mapHeight: CGFloat, currentRegion: MKCoordinateRegion) {

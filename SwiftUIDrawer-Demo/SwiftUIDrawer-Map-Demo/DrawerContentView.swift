@@ -47,12 +47,12 @@ struct DrawerContentView: View {
         }
     }
     
-    private func cityDetails(for model: AnnotationModel) -> some View {
+    private func cityDetails(for annotation: AnnotationModel) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(model.name)
+            Text(annotation.name)
                 .font(.largeTitle)
             
-            AsyncImage(url: URL(string: model.imageAddress)) { phase in
+            AsyncImage(url: URL(string: annotation.imageAddress)) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
@@ -69,7 +69,7 @@ struct DrawerContentView: View {
             }
             .frame(height: 250)
             
-            Text(model.description)
+            Text(annotation.description)
                 .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
