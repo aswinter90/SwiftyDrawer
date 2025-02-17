@@ -26,7 +26,7 @@ extension UIColor {
             }
         }
     }
-    
+
     convenience init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -56,10 +56,10 @@ extension UIColor {
         } else {
             fatalError("Could not create Color from hex value \(hex)")
         }
-        
+
         self.init(red: red, green: green, blue: blue, alpha: opacity)
     }
-    
+
     func toColor() -> Color {
         Color(uiColor: self)
     }

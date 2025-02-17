@@ -5,7 +5,7 @@ enum MapData {
         latitudeDelta: 0.035,
         longitudeDelta: 0.05
     )
-    
+
     static let germanyRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 51.1642292,
@@ -16,7 +16,7 @@ enum MapData {
             longitudeDelta: 13
         )
     )
-    
+
     static let hamburgRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 53.552016,
@@ -24,7 +24,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let berlinRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 52.52437,
@@ -32,7 +32,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let frankfurtRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 50.11552,
@@ -40,7 +40,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let munichRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 48.13743,
@@ -48,7 +48,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let stuttgartRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 48.78232,
@@ -56,7 +56,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let cologneRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
             latitude: 50.93333,
@@ -64,7 +64,7 @@ enum MapData {
         ),
         span: citySpan
     )
-    
+
     static let annotations: [AnnotationModel] = [
         .init(
             name: "Hamburg",
@@ -101,6 +101,6 @@ enum MapData {
             description: "Cologne is known for its impressive cathedral, lively carnival celebrations, and vibrant arts scene. Situated on the Rhine River, it’s a city with a rich history and a bustling urban vibe.",
             region: Self.cologneRegion,
             imageAddress: "https://upload.wikimedia.org/wikipedia/commons/f/fa/K%C3%B6lner_Dom_und_Hohenzollernbr%C3%BCcke_Abendd%C3%A4mmerung_%289706_7_8%29.jpg"
-        ),
+        )
     ]
 }

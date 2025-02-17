@@ -5,7 +5,7 @@ import CoreGraphics
 @Suite("DrawerBottomPositionTests")
 struct DrawerBottomPositionTests {
     private static let expectedAssociatedValue: Double = 10.0
-    
+
     private static let allCases: [DrawerBottomPosition] = [
         .absolute(expectedAssociatedValue),
         .relativeToSafeAreaBottom(offset: expectedAssociatedValue),
@@ -13,7 +13,7 @@ struct DrawerBottomPositionTests {
         .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: expectedAssociatedValue),
         .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: expectedAssociatedValue)
     ]
-    
+
     @Test(
         "Associated values match expected value",
         arguments: allCases
@@ -31,7 +31,7 @@ struct DrawerBottomPositionTests {
             #expect(stickyHeaderHeight == Self.expectedAssociatedValue)
         }
     }
-    
+
     @Test(
         "Returned value of `shouldMatchStickyHeaderHeight` property is correct",
         arguments: allCases
@@ -43,7 +43,7 @@ struct DrawerBottomPositionTests {
             #expect(subject.shouldMatchStickyHeaderHeight == false)
         }
     }
-    
+
     @Test(
         "Returned value of `isAlignedToTabBar` property is correct",
         arguments: allCases
@@ -55,7 +55,7 @@ struct DrawerBottomPositionTests {
             #expect(subject.isAlignedToTabBar == false)
         }
     }
-    
+
     @Test(
         "Associated value is correctly mutated after calling `updateAssociatedValueOfCurrentCase` function",
         arguments: allCases
@@ -64,7 +64,7 @@ struct DrawerBottomPositionTests {
 
         var updatedSubject = subject
         updatedSubject.updateAssociatedValueOfCurrentCase(newValue)
-        
+
         switch updatedSubject {
         case .absolute(let double):
             #expect(double == newValue)

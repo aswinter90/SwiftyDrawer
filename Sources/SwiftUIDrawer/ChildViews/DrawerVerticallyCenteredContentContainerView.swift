@@ -21,7 +21,7 @@ public struct DrawerVerticallyCenteredContentContainerView<Content: View>: View 
         })
         .padding(.top, paddingTop)
     }
-    
+
     private var paddingTop: Double {
         (drawerPartiallyOpenedStateContentContainerHeight - drawerStickyHeaderHeight) / 2 - (height ?? 0) / 2
     }

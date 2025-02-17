@@ -6,7 +6,7 @@ public enum DrawerBottomPosition: Equatable {
     case relativeToTabBar(offset: Double) // Value of 0: Drag handle is on top of the tab bar
     case matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: Double = 0) // Value will be calculated. Can be 0 during init
     case matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: Double = 0) // Value will be calculated. Can be 0 during init
-    
+
     var shouldMatchStickyHeaderHeight: Bool {
         switch self {
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom, .matchesStickyHeaderContentHeightAlignedToTabBar:
@@ -15,7 +15,7 @@ public enum DrawerBottomPosition: Equatable {
             false
         }
     }
-    
+
     var isAlignedToTabBar: Bool {
         switch self {
         case .relativeToTabBar, .matchesStickyHeaderContentHeightAlignedToTabBar:
@@ -24,7 +24,7 @@ public enum DrawerBottomPosition: Equatable {
             false
         }
     }
-    
+
     mutating func updateAssociatedValueOfCurrentCase(_ newValue: Double) {
         switch self {
         case .absolute:

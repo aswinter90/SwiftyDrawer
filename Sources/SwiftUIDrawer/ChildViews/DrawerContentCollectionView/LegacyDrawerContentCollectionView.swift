@@ -115,9 +115,9 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             withReuseIdentifier: String(describing: UICollectionViewCell.self),
             for: indexPath
         )
-        
+
         let contentView = cell.contentView
-        
+
         if !contentView.subviews.isEmpty {
             return cell
         }
@@ -126,25 +126,25 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
         contentView.backgroundColor = .init(.background)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
             contentView.topAnchor.constraint(equalTo: cell.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
         ])
-        
+
         contentView.addSubview(hostingView)
-        
+
         hostingView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             hostingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             hostingView.topAnchor.constraint(equalTo: contentView.topAnchor),
             hostingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             hostingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
+
         let widthConstraint = contentView.widthAnchor.constraint(
             equalToConstant: UIScreen.main.bounds.width
         )

@@ -5,12 +5,12 @@ import MapKit
 struct ContentView: View {
     private static let drawerBottomPositionValue = 100.0
     private static let drawerMidPositionValue = 450.0
-    
+
     @State private var viewModel = ViewModel()
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var mapHeight: Double = 0
     @State private var cameraPosition = MapCameraPosition.region(.init())
-    
+
     var body: some View {
         MapView(
             cameraPosition: $cameraPosition,
@@ -45,12 +45,12 @@ struct ContentView: View {
         )
         .drawerFloatingButtonsConfiguration(floatingButtonsConfiguration)
     }
-    
+
     private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration {
         guard case .selectedAnnotation = viewModel.state else {
             return .init()
         }
-        
+
         return .init(
             leadingButtons: [
                 .init(icon: .init(systemName: "arrow.backward")) {
@@ -59,20 +59,20 @@ struct ContentView: View {
             ]
         )
     }
-    
+
     private func updateCameraPosition(with mapHeight: Double, currentRegion: MKCoordinateRegion) {
         var region = currentRegion
-        
+
         let fraction = (mapHeight - Self.drawerMidPositionValue) / mapHeight
         let offsetLatitude = region.span.latitudeDelta * fraction
-        
+
         let newCenter = CLLocationCoordinate2D(
             latitude: region.center.latitude - offsetLatitude,
             longitude: region.center.longitude
         )
-        
+
         region.center = newCenter
-        
+
         withAnimation {
             cameraPosition = .region(region)
         }

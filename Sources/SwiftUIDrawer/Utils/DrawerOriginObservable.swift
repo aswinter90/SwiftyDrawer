@@ -8,7 +8,7 @@ public final class DrawerOriginObservable {
 
     func updateIfNeeded(origin: CGPoint) {
         guard self.origin != origin else { return }
-        
+
         self.origin = origin
     }
 }

@@ -7,7 +7,7 @@ public struct DrawerStyle {
         let opacity: Double
         let radius: Double
         let offset: CGSize
-        
+
         public init(
             color: Color = .black,
             opacity: Double = 0.15,
@@ -20,13 +20,13 @@ public struct DrawerStyle {
             self.offset = offset
         }
     }
-    
+
     let backgroundColor: Color
     let cornerRadius: Double
     let shadowStyle: ShadowStyle
     let dragHandle: AnyView
     let stickyHeaderShadowStyle: ShadowStyle
-    
+
     public init(
         backgroundColor: Color = Color.background,
         cornerRadius: Double = DrawerConstants.drawerCornerRadius,

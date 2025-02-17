@@ -5,7 +5,7 @@ struct DrawerStateReducer {
     private let topPosition: DrawerTopPosition
     private let midPosition: DrawerMidPosition?
     private let positionCalculator: DrawerPositionCalculator
-    
+
     init(
         bottomPosition: DrawerBottomPosition,
         topPosition: DrawerTopPosition,
@@ -17,7 +17,7 @@ struct DrawerStateReducer {
         self.midPosition = midPosition
         self.positionCalculator = positionCalculator
     }
-    
+
     func onDrag(
         _ state: inout DrawerState,
         yTranslation: Double,
@@ -26,13 +26,13 @@ struct DrawerStateReducer {
         state.case = .dragging
 
         let newPosition = state.currentPosition - (yTranslation - lastYTranslation)
-        
+
         state.currentPosition = max(
             positionCalculator.absoluteValue(for: bottomPosition),
             min(positionCalculator.absoluteValue(for: topPosition), newPosition)
         )
     }
-    
+
     func onDraggingEnded(
         _ state: inout DrawerState,
         startLocation: CGPoint,
@@ -41,7 +41,7 @@ struct DrawerStateReducer {
     ) {
         let startLocation = startLocation.y.roundToDecimal(3)
         let endlocation = endLocation.y.roundToDecimal(3)
-        
+
         let targetDirection = DragDirection(
             startLocationY: startLocation,
             endLocationY: endlocation,
@@ -52,7 +52,7 @@ struct DrawerStateReducer {
         let absoluteMidPosition = midPosition.map {
             positionCalculator.absoluteValue(for: $0)
         }
-        
+
         switch targetDirection {
         case .up:
             if let absoluteMidPosition, currentPosition < absoluteMidPosition {
@@ -73,10 +73,10 @@ struct DrawerStateReducer {
             )
 
             var offsetToMidPosition: Double
-            
+
             if let midPosition = midPosition {
                 let midPositionValue = positionCalculator.absoluteValue(for: midPosition)
-                
+
                 offsetToMidPosition = abs(
                     max(state.currentPosition, midPositionValue) - min(state.currentPosition, midPositionValue)
                 )
@@ -99,7 +99,7 @@ struct DrawerStateReducer {
             }
         }
     }
-    
+
     func syncCaseAndCurrentPosition(of state: inout DrawerState) {
         switch state.case {
         case .dragging:

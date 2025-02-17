@@ -8,14 +8,14 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
     let isDimmingBackground: Bool
     @ViewBuilder let stickyHeader: () -> StickyHeader
     @ViewBuilder let drawerContent: () -> DrawerContent
-    
+
     func body(content: Content) -> some View {
         ZStack {
             content
-            
+
             GeometryReader { proxy in
                 let positionCalculator = DrawerPositionCalculator(screenBounds: proxy.frame(in: .global))
-                
+
                 Color.clear
                     .dimmedDrawerBackground(
                         isShown: isDimmingBackground,

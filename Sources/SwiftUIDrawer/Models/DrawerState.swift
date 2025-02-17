@@ -14,6 +14,6 @@ public struct DrawerState {
     public init(case: Case) {
         self.case = `case`
     }
-    
+
     var isDragging: Bool { self.case == .dragging }
 }
