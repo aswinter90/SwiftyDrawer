@@ -33,10 +33,10 @@ extension UIColor {
 
         var rgb: UInt64 = 0
 
-        var red: Double = 0.0
-        var green: Double = 0.0
-        var blue: Double = 0.0
-        var opacity: Double = 1.0
+        var red = 0.0
+        var green = 0.0
+        var blue = 0.0
+        var opacity = 1.0
 
         let length = hexSanitized.count
 

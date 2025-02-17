@@ -74,7 +74,7 @@ struct DrawerStateReducer {
 
             var offsetToMidPosition: Double
 
-            if let midPosition = midPosition {
+            if let midPosition {
                 let midPositionValue = positionCalculator.absoluteValue(for: midPosition)
 
                 offsetToMidPosition = abs(
@@ -107,7 +107,7 @@ struct DrawerStateReducer {
         case .closed:
             state.currentPosition = positionCalculator.absoluteValue(for: bottomPosition)
         case .partiallyOpened:
-            if let midPosition = midPosition {
+            if let midPosition {
                 state.currentPosition = positionCalculator.absoluteValue(for: midPosition)
             } else {
                 assertionFailure("Cannot set `state.currentPosition` to value for `partiallyOpened` case when no `midPosition` was defined")

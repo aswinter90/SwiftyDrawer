@@ -7,7 +7,6 @@ typealias VerticalDragTranslation = Double
 /// compared to a UIScrollView which leads to UI freezes or a UITableView which crashes the app.
 /// Hopefully SwiftUI will soon offer tools to quickly make this Frankenstein setup obsolete.
 class DrawerContentCollectionView<Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
-
     // MARK: - Properties: Internal
 
     var content: Content {

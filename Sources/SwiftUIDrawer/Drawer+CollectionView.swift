@@ -49,6 +49,7 @@ extension Drawer {
             isDragGestureEnabled = false
             return true
         }
+        // swiftlint:disable superfluous_else
         // User moves content down
         else {
             // ScrollView fully scrolled up, return false to redirect the gesture to the drawer
@@ -60,6 +61,7 @@ extension Drawer {
                 return true
             }
         }
+        // swiftlint:enable superfluous_else
     }
 
     private func onContentDraggingEnded(willDecelerate: Bool) {

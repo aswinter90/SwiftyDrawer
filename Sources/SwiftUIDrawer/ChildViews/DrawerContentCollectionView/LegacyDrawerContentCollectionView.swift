@@ -2,7 +2,6 @@ import SwiftUI
 import UIKit
 
 class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
-
     // MARK: - Properties: Internal
 
     var content: Content {
@@ -131,7 +130,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             contentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
             contentView.topAnchor.constraint(equalTo: cell.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
+            contentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
         ])
 
         contentView.addSubview(hostingView)
@@ -142,7 +141,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             hostingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             hostingView.topAnchor.constraint(equalTo: contentView.topAnchor),
             hostingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            hostingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            hostingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
 
         let widthConstraint = contentView.widthAnchor.constraint(

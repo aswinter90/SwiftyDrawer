@@ -1,7 +1,8 @@
 import SwiftUI
 
 public struct RoundFloatingButton: View {
-    @Environment(\.drawerFloatingButtonShadowStyle) private var shadowStyle: DrawerStyle.ShadowStyle
+    @Environment(\.drawerFloatingButtonShadowStyle)
+    private var shadowStyle: DrawerStyle.ShadowStyle
 
     private static let height = 40.0
     private let properties: DrawerFloatingButtonsConfiguration.ButtonProperties
