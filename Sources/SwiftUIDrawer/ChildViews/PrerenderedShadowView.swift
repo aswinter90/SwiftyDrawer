@@ -10,7 +10,7 @@ public class PrerenderedShadowView: UIView {
         let shadowOpacity: Double
         let shadowRadius: Double
         let shadowOffset: CGSize
-        
+
         init(style: DrawerStyle.ShadowStyle, cornerRadius: Double) {
             self.init(
                 layerCornerRadius: cornerRadius,
@@ -20,7 +20,7 @@ public class PrerenderedShadowView: UIView {
                 shadowOffset: style.offset
             )
         }
-        
+
         init(
             layerCornerRadius: Double,
             shadowColor: UIColor,
@@ -131,7 +131,7 @@ public extension View {
             .swiftUIView
         }
     }
-    
+
     func prerenderedShadow(_ style: DrawerStyle.ShadowStyle, cornerRadius: Double) -> some View {
         prerenderedShadow(
             layerCornerRadius: cornerRadius,

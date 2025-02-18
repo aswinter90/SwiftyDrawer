@@ -4,7 +4,7 @@ import MapKit
 struct MapView: View {
     @Binding var cameraPosition: MapCameraPosition
     let viewModel: ViewModel
-    
+
     var body: some View {
         Map(position: $cameraPosition) {
             switch viewModel.state {
@@ -17,7 +17,7 @@ struct MapView: View {
             }
         }
     }
-    
+
     private func annotationView(for annotation: AnnotationModel, isSelected: Bool) -> Annotation<Text, some View> {
         Annotation(annotation.name, coordinate: annotation.region.center) {
             Image(systemName: isSelected ? "flag" : "building.2")

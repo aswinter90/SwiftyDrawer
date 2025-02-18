@@ -4,11 +4,11 @@ import SwiftUIDrawer
 struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
-    
+
     @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
     @State private var isCustomDragHandleShown = false
-    
+
     private let floatingButtonsConfig = DrawerFloatingButtonsConfiguration(
         trailingButtons: [
             .init(
@@ -17,7 +17,7 @@ struct ContentView: View {
             )
         ]
     )
-    
+
     var body: some View {
         tabView(isTabBarShown: isTabBarShown) {
             configList
@@ -46,7 +46,7 @@ struct ContentView: View {
             isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
         )
     }
-    
+
     @ViewBuilder
     func tabView<Content: View>(isTabBarShown: Bool, content: () -> Content) -> some View {
         TabView {
@@ -55,7 +55,7 @@ struct ContentView: View {
                 .opaqueTabBarStyle(isTabBarShown: isTabBarShown)
         }
     }
-    
+
     var configList: some View {
         List {
             Picker(
@@ -68,34 +68,34 @@ struct ContentView: View {
                         .tag(true)
                 }
             )
-            
+
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
-            
+
             Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
-            
+
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
                 Text("Set state to:")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                
+
                 button("closed") {
                     drawerState.case = .closed
                 }
-                
+
                 Spacer()
-                
+
                 button("partiallyOpened") {
                     drawerState.case = .partiallyOpened
                 }
-                
+
                 Spacer()
-                
+
                 button("fullyOpened") {
                     drawerState.case = .fullyOpened
                 }
             }
         }
     }
-    
+
     func button(_ title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
@@ -104,7 +104,7 @@ struct ContentView: View {
         .buttonStyle(.bordered)
         .frame(maxWidth: .infinity, alignment: .trailing)
     }
-    
+
     var stickyDrawerHeader: some View {
         VStack(spacing: 0) {
             Text("Sticky header")
@@ -112,24 +112,24 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .padding(.horizontal)
-            
+
             Color.black.opacity(0.3)
                 .frame(height: 1)
         }
         .background { Color.teal }
     }
-    
+
     var drawerContent: some View {
         VStack(spacing: 8) {
             Text("Scrollable content")
                 .font(.title2)
                 .padding()
-            
+
             ForEach(0..<30) { index in
                 Text("Item \(index)")
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
-                
+
                 Divider()
             }
             .padding(.vertical)
@@ -150,7 +150,7 @@ struct ContentView: View {
             )
         )
     }
-    
+
     func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
         switch (isStickyHeaderShown, isTabBarShown) {
         case (true, true):

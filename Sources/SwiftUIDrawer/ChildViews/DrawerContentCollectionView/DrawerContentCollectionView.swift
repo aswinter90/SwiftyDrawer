@@ -3,10 +3,10 @@ import SwiftUI
 typealias VerticalContentOffset = Double
 typealias VerticalDragTranslation = Double
 
-/// In order to orchestrate drag gestures between the drawer and its scrollable content, a CollectionView like this was found as the least problematic solution, compared to a UIScrollView which leads to UI freezes or a UITableView which crashes the app on appearance.
+/// To orchestrate drag gestures between the drawer and its scrollable content, a UICollectionView was found as the best solution,
+/// compared to a UIScrollView which leads to UI freezes or a UITableView which crashes the app.
 /// Hopefully SwiftUI will soon offer tools to quickly make this Frankenstein setup obsolete.
 class DrawerContentCollectionView<Content: View>: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
-
     // MARK: - Properties: Internal
 
     var content: Content {

@@ -21,7 +21,7 @@
       "target" : {
         "containerPath" : "container:SwiftUIDrawer-Demo.xcodeproj",
         "identifier" : "14176C402D0E2AA0000AC841",
-        "name" : "SwiftUIDrawer-Advanced-UITests"
+        "name" : "SwiftUIDrawer-Advanced-Demo-UITests"
       }
     }
   ],

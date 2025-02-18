@@ -7,13 +7,13 @@ struct DrawerPositionCalculatorTests {
     static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
     static let dragHandleHeight = 12.0
     static let expectedPositionAssociatedValue: Double = 33.0
-    
+
     let safeAreaInsetsProvider = SafeAreaInsetsProvidingMock()
     let tabBarFrameProvider = TabBarFrameProvidingMock()
 
     var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
     var tabBarFrame: CGRect { tabBarFrameProvider.frame }
-    
+
     var subject: DrawerPositionCalculator {
         .init(
             screenBounds: Self.screenBounds,
@@ -22,7 +22,7 @@ struct DrawerPositionCalculatorTests {
             dragHandleHeight: Self.dragHandleHeight
         )
     }
-    
+
     @Test(
         "Test returned `paddingTop` Double value for a given `DrawerState`",
         arguments: [
@@ -36,7 +36,7 @@ struct DrawerPositionCalculatorTests {
         let paddingTop = subject.paddingTop(for: drawerState)
         #expect(paddingTop == Self.screenBounds.height - drawerState.currentPosition)
     }
-    
+
     @Test(
         "Test returned `contentBottomPadding` Double value for a given `DrawerState` and `DrawerBottomPosition",
         arguments: ContentBottomPaddingTestArguments.allCombinations
@@ -45,16 +45,16 @@ struct DrawerPositionCalculatorTests {
         let state = arguments.drawerState
         let position = arguments.bottomPosition
         let subject = subject
-        
+
         let contentBottomPadding = subject.contentBottomPadding(
             for: state,
             bottomPosition: position
         )
-        
+
         switch state.case {
         case .fullyOpened:
             let sum = subject.paddingTop(for: state) + safeAreaInsets.bottom
-            
+
             if position.isAlignedToTabBar {
                 #expect(contentBottomPadding == sum + tabBarFrame.height)
             } else {
@@ -64,7 +64,7 @@ struct DrawerPositionCalculatorTests {
             #expect(contentBottomPadding == 0)
         }
     }
-    
+
     @Test(
         "Test returned absolute Double value for a given `DrawerBottomPosition` cases",
         arguments: [
@@ -77,31 +77,31 @@ struct DrawerPositionCalculatorTests {
     )
     func testAbsoluteValueForBottomPosition(bottomPosition: DrawerBottomPosition) {
         let absoluteValue = subject.absoluteValue(for: bottomPosition)
-        
+
         switch bottomPosition {
         case .absolute(let double):
             let sum = Double(double + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         case .relativeToSafeAreaBottom(let offset):
             let sum = Double(safeAreaInsets.bottom + offset + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         case .relativeToTabBar(let offset):
             let sum = Double(safeAreaInsets.bottom + tabBarFrame.height + offset + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(let stickyHeaderHeight):
             let sum = Double(safeAreaInsets.bottom + stickyHeaderHeight + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         case .matchesStickyHeaderContentHeightAlignedToTabBar(let stickyHeaderHeight):
             let sum = Double(safeAreaInsets.bottom + tabBarFrame.height + stickyHeaderHeight + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         }
     }
-    
+
     @Test(
         "Test returned absolute Double value for a given `DrawerMidPosition` cases",
         arguments: [
@@ -112,21 +112,21 @@ struct DrawerPositionCalculatorTests {
     )
     func testAbsoluteValueForMidPosition(midPosition: DrawerMidPosition) {
         let absoluteValue = subject.absoluteValue(for: midPosition)
-    
+
         switch midPosition {
         case .absolute(let double):
             #expect(absoluteValue == double)
         case .relativeToSafeAreaBottom(let offset):
             let sum = Double(safeAreaInsets.bottom + offset + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         case .relativeToTabBar(let offset):
             let sum = Double(safeAreaInsets.bottom + tabBarFrame.height + offset + Self.dragHandleHeight)
-            
+
             #expect(absoluteValue == sum)
         }
     }
-    
+
     @Test(
         "Test returned absolute Double value for a given `DrawerTopPosition` cases",
         arguments: [
@@ -136,13 +136,13 @@ struct DrawerPositionCalculatorTests {
     )
     func testAbsoluteValueForTopPosition(topPosition: DrawerTopPosition) {
         let absoluteValue = subject.absoluteValue(for: topPosition)
-    
+
         switch topPosition {
         case .absolute(let double):
             #expect(absoluteValue == double)
         case .relativeToSafeAreaTop(let offset):
             let sum = Double(Self.screenBounds.height - safeAreaInsets.top - offset)
-            
+
             #expect(absoluteValue == sum)
         }
     }
@@ -152,10 +152,10 @@ struct DrawerPositionCalculatorTests {
 
 struct ContentBottomPaddingTestArguments {
     static let expectedPositionAssociatedValue: Double = 33.0
-    
+
     let drawerState: DrawerState
     let bottomPosition: DrawerBottomPosition
-    
+
     static var allCombinations: [ContentBottomPaddingTestArguments] {
         DrawerState.Case.allCases.flatMap {
             [

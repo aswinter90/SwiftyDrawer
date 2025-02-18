@@ -4,7 +4,7 @@ import SwiftUIDrawer
 struct DrawerContentView: View {
     let viewModel: ViewModel
     @Binding var drawerState: DrawerState
-    
+
     var body: some View {
         switch viewModel.state {
         case let .overview(_, annotations):
@@ -13,13 +13,13 @@ struct DrawerContentView: View {
             cityDetails(for: annotation)
         }
     }
-    
+
     private func listView(with annotations: [AnnotationModel]) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Select a city")
                 .font(.largeTitle)
                 .padding(.bottom, 8)
-            
+
             ForEach(annotations) { annotation in
                 listItem(for: annotation)
             }
@@ -27,13 +27,13 @@ struct DrawerContentView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 16)
     }
-    
+
     private func listItem(for annotation: AnnotationModel) -> some View {
         VStack(spacing: 16) {
             Text(annotation.name)
                 .font(.title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                
+
             Divider()
                 .frame(height: 1)
         }
@@ -46,12 +46,12 @@ struct DrawerContentView: View {
             drawerState.case = .partiallyOpened
         }
     }
-    
+
     private func cityDetails(for annotation: AnnotationModel) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(annotation.name)
                 .font(.largeTitle)
-            
+
             AsyncImage(url: URL(string: annotation.imageAddress)) { phase in
                 if let image = phase.image {
                     image
@@ -68,7 +68,7 @@ struct DrawerContentView: View {
                 }
             }
             .frame(height: 250)
-            
+
             Text(annotation.description)
                 .font(.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -80,7 +80,7 @@ struct DrawerContentView: View {
 
 #Preview {
     @Previewable @State var drawerState = DrawerState(case: .fullyOpened)
-    
+
     Color.green
         .drawerOverlay(
             state: $drawerState,

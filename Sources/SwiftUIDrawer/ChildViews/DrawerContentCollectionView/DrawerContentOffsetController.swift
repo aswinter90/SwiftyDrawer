@@ -9,7 +9,8 @@ public final class DrawerContentOffsetController {
         contentOffset = offset
     }
 
-    @discardableResult func consumeLatestContentOffset() -> CGPoint? {
+    @discardableResult
+    func consumeLatestContentOffset() -> CGPoint? {
         guard let contentOffset else { return nil }
 
         self.contentOffset = nil

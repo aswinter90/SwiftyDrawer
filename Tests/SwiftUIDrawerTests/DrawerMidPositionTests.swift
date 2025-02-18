@@ -4,13 +4,13 @@ import CoreGraphics
 
 @Suite("DrawerMidPositionTests") struct DrawerMidPositionTests {
     private static let expectedAssociatedValue: Double = 10.0
-    
+
     private static let allCases: [DrawerMidPosition] = [
         .absolute(Self.expectedAssociatedValue),
         .relativeToSafeAreaBottom(offset: Self.expectedAssociatedValue),
         .relativeToTabBar(offset: Self.expectedAssociatedValue)
     ]
-    
+
     @Test(
         "Associated values match expected value",
         arguments: allCases

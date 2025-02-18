@@ -6,7 +6,7 @@ public protocol TabBarFrameProviding {
 
 public final class TabBarFrameProvider: TabBarFrameProviding {
     public static let sharedInstance: TabBarFrameProvider = .init()
-    
+
     public let frame = UITabBarController().tabBar.frame
 
     public init() {}

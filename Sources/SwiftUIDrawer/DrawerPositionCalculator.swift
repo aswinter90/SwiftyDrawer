@@ -1,5 +1,5 @@
-import UIKit
 import SwiftUI
+import UIKit
 
 public class DrawerPositionCalculator {
     private let safeAreaInsetsProvider: SafeAreaInsetsProviding
@@ -10,7 +10,7 @@ public class DrawerPositionCalculator {
     var screenHeight: Double { screenBounds.height }
     var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
     var tabBarHeight: Double { tabBarFrameProvider.frame.height }
-    
+
     public init(
         screenBounds: CGRect,
         safeAreaInsetsProvider: SafeAreaInsetsProviding = UIApplication.shared,
@@ -22,7 +22,7 @@ public class DrawerPositionCalculator {
         self.tabBarFrameProvider = tabBarFrameProvider
         self.dragHandleHeight = dragHandleHeight
     }
-    
+
     /// Property that controls the drawer's position on the screen by adding a top padding.
     func paddingTop(for state: DrawerState) -> Double {
         screenHeight - state.currentPosition
@@ -39,7 +39,7 @@ public class DrawerPositionCalculator {
             0
         }
     }
-    
+
     func absoluteValue(for bottomPosition: DrawerBottomPosition) -> Double {
         switch bottomPosition {
         case let .absolute(double):
@@ -64,7 +64,7 @@ public class DrawerPositionCalculator {
             + dragHandleHeight
         }
     }
-    
+
     func absoluteValue(for midPosition: DrawerMidPosition) -> Double {
         switch midPosition {
         case let .absolute(double):
@@ -80,7 +80,7 @@ public class DrawerPositionCalculator {
             + dragHandleHeight
         }
     }
-    
+
     func absoluteValue(for topPosition: DrawerTopPosition) -> Double {
         switch topPosition {
         case let .absolute(double):
@@ -91,7 +91,7 @@ public class DrawerPositionCalculator {
             - offset
         }
     }
-    
+
     func floatingButtonsOpacity(
         currentDrawerPosition: Double,
         drawerBottomPosition: DrawerBottomPosition,
@@ -103,7 +103,7 @@ public class DrawerPositionCalculator {
         } else {
             absoluteValue(for: drawerBottomPosition)
         }
-        
+
         return (positionThreshold + positionModifier - currentDrawerPosition) / 100.0
     }
 }

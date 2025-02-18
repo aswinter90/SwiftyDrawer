@@ -9,7 +9,7 @@ struct DimmingView: View {
     let drawerMidPosition: DrawerMidPosition?
     let drawerTopPosition: DrawerTopPosition
     let positionCalculator: DrawerPositionCalculator
-    
+
     var body: some View {
         Color.black
             .allowsHitTesting(false)
@@ -19,7 +19,7 @@ struct DimmingView: View {
 
     private var opacity: Double {
         let topPosition = positionCalculator.absoluteValue(for: drawerTopPosition)
-        
+
         let midPosition = if let drawerMidPosition {
             positionCalculator.absoluteValue(for: drawerMidPosition)
         } else {

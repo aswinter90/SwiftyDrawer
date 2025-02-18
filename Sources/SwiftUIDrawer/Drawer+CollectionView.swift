@@ -34,7 +34,8 @@ extension Drawer {
         }
     }
 
-    /// The value returned by this function controls if the `UICollectionView`, which is embedded in the `Drawer`, should accept drag gestures based on its content offset, the current drag gesture and the `DrawerState`.
+    /// The value returned by this function controls if the `UICollectionView`, which is embedded in the `Drawer`,
+    /// should accept drag gestures based on its content offset, the current drag gesture and the `DrawerState`.
     /// If the drawer is closed or partially opened, the gesture is never consumed by the `UICollectionView, as scrolling its content should only be possible when the drawer is fully opened.
     private func shouldContentBeginDragging(verticalContentOffset: Double, verticalTranslation: Double) -> Bool {
         // Content scrolling is only available on a fully opened drawer
@@ -48,6 +49,7 @@ extension Drawer {
             isDragGestureEnabled = false
             return true
         }
+        // swiftlint:disable superfluous_else
         // User moves content down
         else {
             // ScrollView fully scrolled up, return false to redirect the gesture to the drawer
@@ -59,6 +61,7 @@ extension Drawer {
                 return true
             }
         }
+        // swiftlint:enable superfluous_else
     }
 
     private func onContentDraggingEnded(willDecelerate: Bool) {

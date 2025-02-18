@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct DragHandle: View {
     public init() {}
-    
+
     public var body: some View {
         HStack {
             Color.border

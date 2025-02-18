@@ -4,13 +4,24 @@ import SwiftUI
 public struct Drawer<Content: View, HeaderContent: View>: View {
     // MARK: - Environment
 
-    @Environment(\.drawerStyle) var style: DrawerStyle
-    @Environment(\.drawerLayoutStrategy) var layoutStrategy: DrawerContentLayoutStrategy
-    @Environment(\.drawerAnimation) private var animation: Animation
-    @Environment(\.drawerFloatingButtonsConfiguration) private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
-    @Environment(\.drawerContentOffsetController) var contentOffsetController: DrawerContentOffsetController?
-    @Environment(\.drawerOriginObservable) private var originObservable: DrawerOriginObservable?
-    
+    @Environment(\.drawerStyle)
+    var style: DrawerStyle
+
+    @Environment(\.drawerLayoutStrategy)
+    var layoutStrategy: DrawerContentLayoutStrategy
+
+    @Environment(\.drawerAnimation)
+    private var animation: Animation
+
+    @Environment(\.drawerFloatingButtonsConfiguration)
+    private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
+
+    @Environment(\.drawerContentOffsetController)
+    var contentOffsetController: DrawerContentOffsetController?
+
+    @Environment(\.drawerOriginObservable)
+    private var originObservable: DrawerOriginObservable?
+
     // MARK: - Bindings & Arguments
 
     @Binding var state: DrawerState
@@ -22,26 +33,28 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     private let content: Content
 
     // MARK: - Reducer
-    
+
     private let stateReducer: DrawerStateReducer
-    
+
     // MARK: - State
 
     @GestureState private var lastYTranslation = 0.0
     @State private var isAnimationDisabled = true
-    
+
+    // swiftlint:disable private_swiftui_state
     /// Additional safety measure to prevent the drawer from moving slightly when its content is being scrolled
-    /// TODO: Check if this is obsolete or still required for older iOS versions than 18.0
     @State var isDragGestureEnabled = true
 
     /// Only needed when using `DrawerContentLayoutingStrategy.classic`
-    @State var contentHeight: Double = 0.0
-    
-    @State var stickyHeaderHeight: Double = 0.0
+    @State var contentHeight = 0.0
+
+    @State var stickyHeaderHeight = 0.0
     @State var shouldElevateStickyHeader = false
+    // swiftlint:enable private_swiftui_state
+
     @State private var stickyHeaderId = UUID()
     @State private var dragHandleId = UUID()
-    
+
     // MARK: - Initializer
 
     public init(
@@ -69,7 +82,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     }
 
     // MARK: - Body
-    
+
     public var body: some View {
         // Outer transparent container
         VStack(spacing: 0) {
@@ -187,12 +200,12 @@ extension Drawer {
             redrawHeader()
         }
     }
-    
+
     private func redrawHeader() {
         stickyHeaderId = UUID()
         dragHandleId = UUID()
     }
-    
+
     @ViewBuilder
     private func floatingButtons() -> some View {
         if floatingButtonsConfiguration.isEmpty {
@@ -205,9 +218,9 @@ extension Drawer {
                     }
                 }
                 .animation(.smooth, value: !floatingButtonsConfiguration.leadingButtons.isEmpty)
-                
+
                 Spacer()
-                
+
                 VStack(spacing: DrawerConstants.floatingButtonsPadding) {
                     ForEach(floatingButtonsConfiguration.trailingButtons) { buttonProperties in
                         RoundFloatingButton(properties: buttonProperties)
@@ -229,7 +242,6 @@ extension Drawer {
 }
 
 extension Drawer {
-    
     // MARK: - Drag Gesture
 
     private var dragGesture: some Gesture {

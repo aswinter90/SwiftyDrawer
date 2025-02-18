@@ -3,7 +3,7 @@ import SwiftUIDrawer
 
 struct ContentView: View {
     @State private var drawerState = DrawerState.init(case: .partiallyOpened)
-    
+
     var body: some View {
         AppleLogo()
             .offset(y: -(UIScreen.main.bounds.height / 4))
