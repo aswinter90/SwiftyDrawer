@@ -37,7 +37,7 @@ import SwiftUIDrawer
 }
 
 extension ViewModel.State: Equatable {
-    static func ==(lhs: ViewModel.State, rhs: ViewModel.State) -> Bool {
+    static func == (lhs: ViewModel.State, rhs: ViewModel.State) -> Bool {
         return switch (lhs, rhs) {
         case let (.overview(lhsRegion, lhsAnnotations), .overview(rhsRegion, rhsAnnotations)):
             lhsRegion == rhsRegion && lhsAnnotations == rhsAnnotations
@@ -50,7 +50,7 @@ extension ViewModel.State: Equatable {
 }
 
 extension MKCoordinateRegion: @retroactive Equatable {
-    public static func ==(lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
         lhs.center.latitude == rhs.center.latitude
         && lhs.center.longitude == rhs.center.longitude
         && lhs.span.latitudeDelta == rhs.span.latitudeDelta

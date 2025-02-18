@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct SwiftUIDrawer_Map_DemoApp: App {
+struct SwiftUIDrawerMapDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

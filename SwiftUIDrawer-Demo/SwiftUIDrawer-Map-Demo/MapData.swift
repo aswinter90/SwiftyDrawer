@@ -65,6 +65,7 @@ enum MapData {
         span: citySpan
     )
 
+    // swiftlint:disable line_length
     static let annotations: [AnnotationModel] = [
         .init(
             name: "Hamburg",
@@ -103,4 +104,5 @@ enum MapData {
             imageAddress: "https://upload.wikimedia.org/wikipedia/commons/f/fa/K%C3%B6lner_Dom_und_Hohenzollernbr%C3%BCcke_Abendd%C3%A4mmerung_%289706_7_8%29.jpg"
         )
     ]
+    // swiftlint:enable line_length
 }

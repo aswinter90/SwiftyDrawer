@@ -148,6 +148,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				14796CEF2D6494EC002AB134 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				14176C282D0E2A9F000AC841 /* SwiftUIDrawer-Advanced-Demo */,
@@ -195,6 +196,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				14796CED2D6494E6002AB134 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				14BDB0652D5161A700D600FF /* SwiftUIDrawer-Basic-Demo */,
@@ -218,6 +220,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				14796CF12D6494F0002AB134 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				14BDB07D2D51678400D600FF /* SwiftUIDrawer-Map-Demo */,
@@ -266,6 +269,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				143E69362D53790E00EEECE6 /* XCLocalSwiftPackageReference "../../SwiftUIDrawer" */,
+				14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14176C272D0E2A9F000AC841 /* Products */;
@@ -347,6 +351,18 @@
 			isa = PBXTargetDependency;
 			target = 14176C252D0E2A9F000AC841 /* SwiftUIDrawer-Advanced-Demo */;
 			targetProxy = 14176C422D0E2AA0000AC841 /* PBXContainerItemProxy */;
+		};
+		14796CED2D6494E6002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CEC2D6494E6002AB134 /* SwiftLintBuildToolPlugin */;
+		};
+		14796CEF2D6494EC002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CEE2D6494EC002AB134 /* SwiftLintBuildToolPlugin */;
+		};
+		14796CF12D6494F0002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CF02D6494F0002AB134 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -788,6 +804,17 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.58.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		143E69372D53790E00EEECE6 /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -796,6 +823,21 @@
 		147368652D2D502000F6AEF9 /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIDrawer;
+		};
+		14796CEC2D6494E6002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		14796CEE2D6494EC002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		14796CF02D6494F0002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 		14BDB0762D51628B00D600FF /* SwiftUIDrawer */ = {
 			isa = XCSwiftPackageProductDependency;
