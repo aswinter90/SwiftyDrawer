@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "DCA3565A-2321-4363-8E6B-8F19375A9BC7",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SwiftyDrawerTests",
+        "name" : "SwiftyDrawerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

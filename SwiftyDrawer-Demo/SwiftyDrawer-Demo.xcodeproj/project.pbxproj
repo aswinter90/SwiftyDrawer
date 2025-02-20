@@ -1,0 +1,842 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		145828362D67A4320069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828352D67A4320069D73E /* SwiftyDrawer */; };
+		145828382D67A4360069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828372D67A4360069D73E /* SwiftyDrawer */; };
+		1458283A2D67A4390069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828392D67A4390069D73E /* SwiftyDrawer */; };
+		1458283C2D67A43E0069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 1458283B2D67A43E0069D73E /* SwiftyDrawer */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14176C422D0E2AA0000AC841 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14176C1E2D0E2A9F000AC841 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14176C252D0E2A9F000AC841;
+			remoteInfo = "SwiftUIDrawer-Demo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14176C262D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftyDrawer-Advanced-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14176C412D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyDrawer-Advanced-Demo-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14BDB0642D5161A700D600FF /* SwiftyDrawer-Basic-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftyDrawer-Basic-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14BDB07C2D51678400D600FF /* SwiftyDrawer-Map-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftyDrawer-Map-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		14176C282D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SwiftyDrawer-Advanced-Demo";
+			sourceTree = "<group>";
+		};
+		14176C442D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SwiftyDrawer-Advanced-Demo-UITests";
+			sourceTree = "<group>";
+		};
+		14BDB0652D5161A700D600FF /* SwiftyDrawer-Basic-Demo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SwiftyDrawer-Basic-Demo";
+			sourceTree = "<group>";
+		};
+		14BDB07D2D51678400D600FF /* SwiftyDrawer-Map-Demo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "SwiftyDrawer-Map-Demo";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14176C232D0E2A9F000AC841 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				145828382D67A4360069D73E /* SwiftyDrawer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14176C3E2D0E2AA0000AC841 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1458283C2D67A43E0069D73E /* SwiftyDrawer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0612D5161A700D600FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				145828362D67A4320069D73E /* SwiftyDrawer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0792D51678400D600FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1458283A2D67A4390069D73E /* SwiftyDrawer in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14176C1D2D0E2A9F000AC841 = {
+			isa = PBXGroup;
+			children = (
+				14BDB0652D5161A700D600FF /* SwiftyDrawer-Basic-Demo */,
+				14176C282D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */,
+				14BDB07D2D51678400D600FF /* SwiftyDrawer-Map-Demo */,
+				14176C442D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */,
+				145828342D67A4320069D73E /* Frameworks */,
+				14176C272D0E2A9F000AC841 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14176C272D0E2A9F000AC841 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14176C262D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo.app */,
+				14176C412D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests.xctest */,
+				14BDB0642D5161A700D600FF /* SwiftyDrawer-Basic-Demo.app */,
+				14BDB07C2D51678400D600FF /* SwiftyDrawer-Map-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		145828342D67A4320069D73E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		14176C252D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14176C4B2D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Advanced-Demo" */;
+			buildPhases = (
+				14176C222D0E2A9F000AC841 /* Sources */,
+				14176C232D0E2A9F000AC841 /* Frameworks */,
+				14176C242D0E2A9F000AC841 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14796CEF2D6494EC002AB134 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				14176C282D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */,
+			);
+			name = "SwiftyDrawer-Advanced-Demo";
+			packageProductDependencies = (
+				145828372D67A4360069D73E /* SwiftyDrawer */,
+			);
+			productName = "SwiftUIDrawer-Demo";
+			productReference = 14176C262D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		14176C402D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14176C512D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Advanced-Demo-UITests" */;
+			buildPhases = (
+				14176C3D2D0E2AA0000AC841 /* Sources */,
+				14176C3E2D0E2AA0000AC841 /* Frameworks */,
+				14176C3F2D0E2AA0000AC841 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14176C432D0E2AA0000AC841 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				14176C442D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */,
+			);
+			name = "SwiftyDrawer-Advanced-Demo-UITests";
+			packageProductDependencies = (
+				1458283B2D67A43E0069D73E /* SwiftyDrawer */,
+			);
+			productName = "SwiftUIDrawer-DemoUITests";
+			productReference = 14176C412D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		14BDB0632D5161A700D600FF /* SwiftyDrawer-Basic-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14BDB06F2D5161A800D600FF /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Basic-Demo" */;
+			buildPhases = (
+				14BDB0602D5161A700D600FF /* Sources */,
+				14BDB0612D5161A700D600FF /* Frameworks */,
+				14BDB0622D5161A700D600FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14796CED2D6494E6002AB134 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				14BDB0652D5161A700D600FF /* SwiftyDrawer-Basic-Demo */,
+			);
+			name = "SwiftyDrawer-Basic-Demo";
+			packageProductDependencies = (
+				145828352D67A4320069D73E /* SwiftyDrawer */,
+			);
+			productName = "SwiftUIDrawer-Basic-Demo";
+			productReference = 14BDB0642D5161A700D600FF /* SwiftyDrawer-Basic-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		14BDB07B2D51678400D600FF /* SwiftyDrawer-Map-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14BDB0872D51678500D600FF /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Map-Demo" */;
+			buildPhases = (
+				14BDB0782D51678400D600FF /* Sources */,
+				14BDB0792D51678400D600FF /* Frameworks */,
+				14BDB07A2D51678400D600FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14796CF12D6494F0002AB134 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				14BDB07D2D51678400D600FF /* SwiftyDrawer-Map-Demo */,
+			);
+			name = "SwiftyDrawer-Map-Demo";
+			packageProductDependencies = (
+				145828392D67A4390069D73E /* SwiftyDrawer */,
+			);
+			productName = "SwiftUIDrawer-Map-Demo";
+			productReference = 14BDB07C2D51678400D600FF /* SwiftyDrawer-Map-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14176C1E2D0E2A9F000AC841 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					14176C252D0E2A9F000AC841 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					14176C402D0E2AA0000AC841 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 14176C252D0E2A9F000AC841;
+					};
+					14BDB0632D5161A700D600FF = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					14BDB07B2D51678400D600FF = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 14176C212D0E2A9F000AC841 /* Build configuration list for PBXProject "SwiftyDrawer-Demo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14176C1D2D0E2A9F000AC841;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 14176C272D0E2A9F000AC841 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14BDB0632D5161A700D600FF /* SwiftyDrawer-Basic-Demo */,
+				14176C252D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */,
+				14BDB07B2D51678400D600FF /* SwiftyDrawer-Map-Demo */,
+				14176C402D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14176C242D0E2A9F000AC841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14176C3F2D0E2AA0000AC841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0622D5161A700D600FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB07A2D51678400D600FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14176C222D0E2A9F000AC841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14176C3D2D0E2AA0000AC841 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0602D5161A700D600FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14BDB0782D51678400D600FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14176C432D0E2AA0000AC841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14176C252D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */;
+			targetProxy = 14176C422D0E2AA0000AC841 /* PBXContainerItemProxy */;
+		};
+		14796CED2D6494E6002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CEC2D6494E6002AB134 /* SwiftLintBuildToolPlugin */;
+		};
+		14796CEF2D6494EC002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CEE2D6494EC002AB134 /* SwiftLintBuildToolPlugin */;
+		};
+		14796CF12D6494F0002AB134 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 14796CF02D6494F0002AB134 /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		14176C492D0E2AA0000AC841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		14176C4A2D0E2AA0000AC841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		14176C4C2D0E2AA0000AC841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SwiftyDrawer-Advanced-Demo/Resources/SwiftyDrawer_Demo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Advanced-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Advanced-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		14176C4D2D0E2AA0000AC841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "SwiftyDrawer-Advanced-Demo/Resources/SwiftyDrawer_Demo.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Advanced-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Advanced-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		14176C522D0E2AA0000AC841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-DemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = "SwiftyDrawer-Advanced-Demo";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		14176C532D0E2AA0000AC841 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-DemoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = "SwiftyDrawer-Advanced-Demo";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		14BDB0702D5161A800D600FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Basic-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Basic-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14BDB0712D5161A800D600FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Basic-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Basic-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14BDB0882D51678500D600FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Map-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Map-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		14BDB0892D51678500D600FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwiftyDrawer-Map-Demo/Resources/Preview Content\"";
+				DEVELOPMENT_TEAM = FBNH5NP9RY;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Map-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14176C212D0E2A9F000AC841 /* Build configuration list for PBXProject "SwiftyDrawer-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14176C492D0E2AA0000AC841 /* Debug */,
+				14176C4A2D0E2AA0000AC841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14176C4B2D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Advanced-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14176C4C2D0E2AA0000AC841 /* Debug */,
+				14176C4D2D0E2AA0000AC841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14176C512D0E2AA0000AC841 /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Advanced-Demo-UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14176C522D0E2AA0000AC841 /* Debug */,
+				14176C532D0E2AA0000AC841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14BDB06F2D5161A800D600FF /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Basic-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14BDB0702D5161A800D600FF /* Debug */,
+				14BDB0712D5161A800D600FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14BDB0872D51678500D600FF /* Build configuration list for PBXNativeTarget "SwiftyDrawer-Map-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14BDB0882D51678500D600FF /* Debug */,
+				14BDB0892D51678500D600FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../SwiftyDrawer;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.58.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		145828352D67A4320069D73E /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		145828372D67A4360069D73E /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		145828392D67A4390069D73E /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		1458283B2D67A43E0069D73E /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		14796CEC2D6494E6002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		14796CEE2D6494EC002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		14796CF02D6494F0002AB134 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 14176C1E2D0E2A9F000AC841 /* Project object */;
+}

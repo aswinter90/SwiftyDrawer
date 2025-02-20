@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftUIDrawer",
+    name: "SwiftyDrawer",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "SwiftUIDrawer",
-            targets: ["SwiftUIDrawer"]
+            name: "SwiftyDrawer",
+            targets: ["SwiftyDrawer"]
         )
     ],
     dependencies: [
@@ -17,12 +17,12 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftUIDrawer",
+            name: "SwiftyDrawer",
             plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(
-            name: "SwiftUIDrawerTests",
-            dependencies: ["SwiftUIDrawer"]
+            name: "SwiftyDrawerTests",
+            dependencies: ["SwiftyDrawer"]
         )
     ]
 )
