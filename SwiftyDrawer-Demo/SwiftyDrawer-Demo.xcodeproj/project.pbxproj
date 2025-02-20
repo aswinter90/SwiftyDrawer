@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		145828362D67A4320069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828352D67A4320069D73E /* SwiftyDrawer */; };
-		145828382D67A4360069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828372D67A4360069D73E /* SwiftyDrawer */; };
-		1458283A2D67A4390069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 145828392D67A4390069D73E /* SwiftyDrawer */; };
-		1458283C2D67A43E0069D73E /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 1458283B2D67A43E0069D73E /* SwiftyDrawer */; };
+		14F1B35C2D67BAA100551696 /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14F1B35B2D67BAA100551696 /* SwiftyDrawer */; };
+		14F1B35E2D67BAA400551696 /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14F1B35D2D67BAA400551696 /* SwiftyDrawer */; };
+		14F1B3602D67BAA700551696 /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14F1B35F2D67BAA700551696 /* SwiftyDrawer */; };
+		14F1B3622D67BAAB00551696 /* SwiftyDrawer in Frameworks */ = {isa = PBXBuildFile; productRef = 14F1B3612D67BAAB00551696 /* SwiftyDrawer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145828382D67A4360069D73E /* SwiftyDrawer in Frameworks */,
+				14F1B35E2D67BAA400551696 /* SwiftyDrawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1458283C2D67A43E0069D73E /* SwiftyDrawer in Frameworks */,
+				14F1B3622D67BAAB00551696 /* SwiftyDrawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145828362D67A4320069D73E /* SwiftyDrawer in Frameworks */,
+				14F1B35C2D67BAA100551696 /* SwiftyDrawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1458283A2D67A4390069D73E /* SwiftyDrawer in Frameworks */,
+				14F1B3602D67BAA700551696 /* SwiftyDrawer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 				14176C282D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo */,
 				14BDB07D2D51678400D600FF /* SwiftyDrawer-Map-Demo */,
 				14176C442D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests */,
-				145828342D67A4320069D73E /* Frameworks */,
+				14F1B35A2D67BAA100551696 /* Frameworks */,
 				14176C272D0E2A9F000AC841 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,7 +112,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		145828342D67A4320069D73E /* Frameworks */ = {
+		14F1B35A2D67BAA100551696 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -140,7 +140,7 @@
 			);
 			name = "SwiftyDrawer-Advanced-Demo";
 			packageProductDependencies = (
-				145828372D67A4360069D73E /* SwiftyDrawer */,
+				14F1B35D2D67BAA400551696 /* SwiftyDrawer */,
 			);
 			productName = "SwiftUIDrawer-Demo";
 			productReference = 14176C262D0E2A9F000AC841 /* SwiftyDrawer-Advanced-Demo.app */;
@@ -164,7 +164,7 @@
 			);
 			name = "SwiftyDrawer-Advanced-Demo-UITests";
 			packageProductDependencies = (
-				1458283B2D67A43E0069D73E /* SwiftyDrawer */,
+				14F1B3612D67BAAB00551696 /* SwiftyDrawer */,
 			);
 			productName = "SwiftUIDrawer-DemoUITests";
 			productReference = 14176C412D0E2AA0000AC841 /* SwiftyDrawer-Advanced-Demo-UITests.xctest */;
@@ -188,7 +188,7 @@
 			);
 			name = "SwiftyDrawer-Basic-Demo";
 			packageProductDependencies = (
-				145828352D67A4320069D73E /* SwiftyDrawer */,
+				14F1B35B2D67BAA100551696 /* SwiftyDrawer */,
 			);
 			productName = "SwiftUIDrawer-Basic-Demo";
 			productReference = 14BDB0642D5161A700D600FF /* SwiftyDrawer-Basic-Demo.app */;
@@ -212,7 +212,7 @@
 			);
 			name = "SwiftyDrawer-Map-Demo";
 			packageProductDependencies = (
-				145828392D67A4390069D73E /* SwiftyDrawer */,
+				14F1B35F2D67BAA700551696 /* SwiftyDrawer */,
 			);
 			productName = "SwiftUIDrawer-Map-Demo";
 			productReference = 14BDB07C2D51678400D600FF /* SwiftyDrawer-Map-Demo.app */;
@@ -254,7 +254,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
-				145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */,
+				14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 14176C272D0E2A9F000AC841 /* Products */;
@@ -783,7 +783,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */ = {
+		14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../SwiftyDrawer;
 		};
@@ -801,26 +801,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		145828352D67A4320069D73E /* SwiftyDrawer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
-			productName = SwiftyDrawer;
-		};
-		145828372D67A4360069D73E /* SwiftyDrawer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
-			productName = SwiftyDrawer;
-		};
-		145828392D67A4390069D73E /* SwiftyDrawer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
-			productName = SwiftyDrawer;
-		};
-		1458283B2D67A43E0069D73E /* SwiftyDrawer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 145828332D67A3FC0069D73E /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
-			productName = SwiftyDrawer;
-		};
 		14796CEC2D6494E6002AB134 /* SwiftLintBuildToolPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
@@ -835,6 +815,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 14796CEB2D649438002AB134 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		14F1B35B2D67BAA100551696 /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		14F1B35D2D67BAA400551696 /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		14F1B35F2D67BAA700551696 /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
+		};
+		14F1B3612D67BAAB00551696 /* SwiftyDrawer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14F1B3592D67BA3000551696 /* XCLocalSwiftPackageReference "../../SwiftyDrawer" */;
+			productName = SwiftyDrawer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
