@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:SwiftyDrawer.xctestplan"
+            reference = "container:Tests/SwiftyDrawerTests/SwiftyDrawer.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -39,9 +39,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftUIDrawerTests"
-               BuildableName = "SwiftUIDrawerTests"
-               BlueprintName = "SwiftUIDrawerTests"
+               BlueprintIdentifier = "SwiftyDrawerTests"
+               BuildableName = "SwiftyDrawerTests"
+               BlueprintName = "SwiftyDrawerTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
