@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "5DDC83DE-BD1D-4A6C-8422-9E3B5835425C",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SwiftyDrawerTests",
+        "name" : "SwiftyDrawerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

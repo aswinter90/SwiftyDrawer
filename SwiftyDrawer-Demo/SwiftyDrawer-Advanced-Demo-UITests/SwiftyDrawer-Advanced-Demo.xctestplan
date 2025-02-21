@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "E8C33676-DEBA-47A4-90D8-17D723935A77",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SwiftyDrawer-Demo.xcodeproj",
+        "identifier" : "14176C402D0E2AA0000AC841",
+        "name" : "SwiftyDrawer-Advanced-Demo-UITests"
+      }
+    }
+  ],
+  "version" : 1
+}
