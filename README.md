@@ -34,14 +34,14 @@ struct MinimalContentView: View {
 }
 ```
 
-### [With sticky header and changing alignments](https://github.com/aswinter90/SwiftyDrawer/blob/main/SwiftyDrawer-Demo/SwiftyDrawer-Map-Demo/ContentView.swift)
+### [With sticky header and changing alignments](https://github.com/aswinter90/SwiftyDrawer/blob/main/SwiftyDrawer-Demo/SwiftyDrawer-Advanced-Demo/ContentView.swift)
 
 As shown in the video the drawer can be modified with a sticky header, which stays on top of the tab bar if required. The default drag handle can also be replaced with any other given view.
 Finally the `DrawerState` is mutable and changing it from the outside will update the drawer position automatically. 
 
 https://github.com/user-attachments/assets/daf244f4-a09f-4272-9095-8aa4669a4b26
 
-### [State based drawer content](https://github.com/aswinter90/SwiftyDrawer/blob/main/SwiftyDrawer-Demo/SwiftyDrawer-Demo/ContentView.swift)
+### [State based drawer content](https://github.com/aswinter90/SwiftyDrawer/blob/main/SwiftyDrawer-Demo/SwiftyDrawer-Map-Demo/ContentView.swift)
 
 This is a demonstration for how the drawer content can be updated by observing a ViewModel state.
 
