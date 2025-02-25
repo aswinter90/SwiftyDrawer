@@ -2,7 +2,7 @@
 
 This mostly SwiftUI-based customizable drawer component offers functionality similar to the standard sheet modifier, but with additional fixed positions and extensive customization options. Ideal for displaying expandable and scrollable content over a background view, akin to the drawer behavior seen in Apple and Google map applications.
 
-This project is currently a work in progress, being developed sporadically. Future updates may include additional documentation, bug fixes and of course releases.
+This project is currently a work in progress, being developed sporadically. Future updates may include additional documentation and bug fixes.
 
 ## Installation
 You can add SwiftyDrawer to an Xcode project by adding it as a package dependency. The required minimum platform version is iOS 15.
@@ -23,7 +23,7 @@ let package = Package(
 
     ],
     dependencies: [
-        .package(url: "https://github.com/aswinter90/SwiftyDrawer", branch: "main")
+        .package(url: "https://github.com/aswinter90/SwiftyDrawer", from: "0.1.0")
     ],
     targets: [
         .target(
