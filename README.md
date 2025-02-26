@@ -4,7 +4,7 @@ This mostly SwiftUI-based customizable drawer component offers functionality sim
 
 This project is currently a work in progress, being developed sporadically. Future updates may include additional documentation and bug fixes.
 
-## Installation
+## 🔩 Installation
 You can add SwiftyDrawer to an Xcode project by adding it as a package dependency. The required minimum platform version is iOS 15.
 
 From the File menu, select Add Package Dependencies...
@@ -34,7 +34,7 @@ let package = Package(
 )
 ```
 
-## Examples
+## 📱 Examples
 
 The project contains multiple demo applications with showcases for displaying the `SwiftyDrawer` in different usage scenarios.
 
