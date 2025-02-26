@@ -75,4 +75,4 @@ https://github.com/user-attachments/assets/daf244f4-a09f-4272-9095-8aa4669a4b26
 
 This is a demonstration for how the drawer content can be updated by observing a ViewModel state.
 
-https://github.com/user-attachments/assets/1c40e24a-fddd-4768-b4f3-ccc0444c49d1
+https://github.com/user-attachments/assets/0b127664-3b4d-40a6-8a0a-98061e0b6680
