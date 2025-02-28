@@ -42,21 +42,27 @@ The project contains multiple demo applications with showcases for displaying th
 
 ### Minimal setup
 
-![image](https://github.com/user-attachments/assets/5c4c22e8-db86-4beb-9a44-ee43f2486d40)
+![basic-demo](https://github.com/user-attachments/assets/32200c26-2df8-4a76-8f9f-f4ada0509f31)
 
 ```
-struct MinimalContentView: View {
+import SwiftUI
+import SwiftyDrawer
+
+struct ContentView: View {
     @State private var drawerState = DrawerState.init(case: .partiallyOpened)
-    
+
     var body: some View {
-        AppleLogo()
-            .padding(.top, 8)
+        MyAppleLogo()
             .drawerOverlay(
                 state: $drawerState,
                 content: {
-                    VStack(spacing: 16) {
+                    VStack {
                         ForEach(0..<30) { index in
                             Text("Item \(index)")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+
+                            Divider()
                         }
                     }
                     .padding(.top, 8)
