@@ -42,7 +42,7 @@ The project contains multiple demo applications with showcases for displaying th
 
 ### Minimal setup
 
-![basic-demo](https://github.com/user-attachments/assets/32200c26-2df8-4a76-8f9f-f4ada0509f31)
+<img src="https://github.com/user-attachments/assets/32200c26-2df8-4a76-8f9f-f4ada0509f31" width=350>
 
 ```
 import SwiftUI
