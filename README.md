@@ -42,6 +42,9 @@ The project contains multiple demo applications with showcases for displaying th
 
 ### Minimal setup
 
+<img alt="basic-demo-png" src="https://github.com/user-attachments/assets/7e0957c8-739d-498d-ab3d-286e0f9c2713" />
+
+
 <img src="https://github.com/user-attachments/assets/32200c26-2df8-4a76-8f9f-f4ada0509f31" width=350>
 
 ```
