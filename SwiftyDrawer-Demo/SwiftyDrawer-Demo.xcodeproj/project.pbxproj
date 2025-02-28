@@ -498,7 +498,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Advanced-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Advanced-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -539,7 +539,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Advanced-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Advanced-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -562,7 +562,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-DemoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-DemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = auto;
@@ -587,7 +587,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-DemoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-DemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = auto;
@@ -623,7 +623,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Basic-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Basic-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -657,7 +657,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Basic-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Basic-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -692,7 +692,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Map-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Map-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -723,7 +723,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Winter-Productions.SwiftyDrawer-Map-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.winter-productions.SwiftyDrawer-Map-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
