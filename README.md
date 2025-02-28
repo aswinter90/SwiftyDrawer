@@ -1,5 +1,7 @@
 # SwiftyDrawer
 
+<img src="https://github.com/user-attachments/assets/a439db3d-2bbe-4c81-aaa0-7308832dd5ce" width=400p>
+
 This mostly SwiftUI-based customizable drawer component offers functionality similar to the standard sheet modifier, but with additional fixed positions and extensive customization options. Ideal for displaying expandable and scrollable content on top of a background view, akin to the drawer behavior seen in Apple's and Google's map applications.
 
 This project is currently a work in progress, being developed sporadically. Future updates may include additional documentation and bug fixes.
