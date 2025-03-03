@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftyDrawer
 
 struct ContentView: View {
-    @State private var drawerState = DrawerState.init(case: .partiallyOpened)
+    @State private var drawerState = DrawerState(case: .partiallyOpened)
 
     var body: some View {
         MyAppleLogo()
