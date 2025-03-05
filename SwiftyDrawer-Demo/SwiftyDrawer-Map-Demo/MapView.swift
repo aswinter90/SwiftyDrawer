@@ -25,7 +25,6 @@ struct MapView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 30, height: 30)
                 .foregroundStyle(.blue)
-                .animation(.smooth, value: isSelected)
                 .padding(.vertical, 6)
                 .background {
                     RoundedRectangle(cornerRadius: 4)
@@ -36,6 +35,7 @@ struct MapView: View {
                         viewModel.didSelectAnnotation(annotation)
                     }
                 }
+                .contentTransition(.symbolEffect)
         }
     }
 }
