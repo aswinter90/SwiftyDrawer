@@ -33,14 +33,14 @@ struct DrawerContentView: View {
             Text(annotation.name)
                 .font(.title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(alignment: .trailing) {
+                    Image(systemName: "chevron.right")
+                }
 
             Divider()
                 .frame(height: 1)
         }
-        .overlay(alignment: .trailing) {
-            Image(systemName: "chevron.right")
-        }
-        .background()
+        .contentShape(Rectangle())
         .onTapGesture {
             viewModel.didSelectAnnotation(annotation)
             drawerState.case = .partiallyOpened

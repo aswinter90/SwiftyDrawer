@@ -13,6 +13,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerAnimation)
     private var animation: Animation
 
+    @Environment(\.isDrawerHapticFeedbackEnabled)
+    private var isHapticFeedbackEnabled: Bool
+
     @Environment(\.drawerFloatingButtonsConfiguration)
     private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
 
@@ -54,6 +57,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     @State private var stickyHeaderId = UUID()
     @State private var dragHandleId = UUID()
+    @State private var hapticFeedbackTrigger = Trigger()
 
     // MARK: - Initializer
 
@@ -117,6 +121,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .onChange(of: state.case) { [oldCase = state.case] newCase in
                 guard oldCase != newCase else { return }
 
+                if newCase != .dragging { hapticFeedbackTrigger.update() }
+
                 DispatchQueue.main.async {
                     stateReducer.syncCaseAndCurrentPosition(of: &state)
                 }
@@ -136,6 +142,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             state.isDragging || isAnimationDisabled ? .none : animation,
             value: state.currentPosition
         )
+        .hapticFeedback(trigger: hapticFeedbackTrigger, isEnabled: isHapticFeedbackEnabled)
         .onFirstAppear {
             // The initial change of `state.currentPosition` should not be animated
             DispatchQueue.main.async {

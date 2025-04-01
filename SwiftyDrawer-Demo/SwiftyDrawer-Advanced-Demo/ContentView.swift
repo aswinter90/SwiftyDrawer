@@ -29,6 +29,7 @@ struct ContentView: View {
                     content: { drawerContent }
                 )
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
+                .isDrawerHapticFeedbackEnabled(true)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
             updateDrawerBottomPosition(

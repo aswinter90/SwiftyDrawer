@@ -5,6 +5,7 @@ extension EnvironmentValues {
     @Entry var drawerFloatingButtonShadowStyle = DrawerStyle.ShadowStyle(offset: .init(width: 0, height: 3))
     @Entry var drawerLayoutStrategy = DrawerContentLayoutStrategy.classic
     @Entry var drawerAnimation = Animation.smooth(duration: DrawerConstants.defaultAnimationDuration)
+    @Entry var isDrawerHapticFeedbackEnabled = false
 
     @Entry var drawerFloatingButtonsConfiguration = DrawerFloatingButtonsConfiguration(
         leadingButtons: [],
@@ -29,6 +30,10 @@ public extension View {
 
     func drawerAnimation(_ animation: Animation) -> some View {
         environment(\.drawerAnimation, animation)
+    }
+
+    func isDrawerHapticFeedbackEnabled(_ isEnabled: Bool) -> some View {
+        environment(\.isDrawerHapticFeedbackEnabled, isEnabled)
     }
 
     func drawerFloatingButtonsConfiguration(_ configuration: DrawerFloatingButtonsConfiguration) -> some View {

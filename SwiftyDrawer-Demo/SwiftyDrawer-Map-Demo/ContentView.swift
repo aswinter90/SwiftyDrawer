@@ -44,6 +44,7 @@ struct ContentView: View {
             content: { DrawerContentView(viewModel: viewModel, drawerState: $drawerState) }
         )
         .drawerFloatingButtonsConfiguration(floatingButtonsConfiguration)
+        .isDrawerHapticFeedbackEnabled(true)
     }
 
     private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration {
