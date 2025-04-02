@@ -113,7 +113,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 .zIndex(0)
             }
             .frame(height: positionCalculator.screenHeight)
-            .background(Color.background)
+            .background { Color.background }
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
             .gesture(dragGesture)
@@ -182,7 +182,7 @@ extension Drawer {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .background(style.backgroundColor)
+        .background { style.backgroundColor }
         .drawingGroup()
         .background {
             PrerenderedShadowView(
