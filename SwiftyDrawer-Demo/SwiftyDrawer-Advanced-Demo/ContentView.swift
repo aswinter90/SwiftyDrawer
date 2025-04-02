@@ -6,8 +6,9 @@ struct ContentView: View {
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
 
     @State private var isTabBarShown = false
-    @State private var isStickyHeaderShown = false
+    @State private var isStickyHeaderShown = true
     @State private var isCustomDragHandleShown = false
+    @State private var isStickyHeaderScrollable = false
 
     private let floatingButtonsConfig = DrawerFloatingButtonsConfiguration(
         trailingButtons: [
@@ -30,6 +31,7 @@ struct ContentView: View {
                 )
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
                 .isDrawerHapticFeedbackEnabled(true)
+                .isApplyingRenderingOptimizationToDrawerHeader(!isStickyHeaderScrollable)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
             updateDrawerBottomPosition(
@@ -71,7 +73,7 @@ struct ContentView: View {
             )
 
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
-
+            Toggle("Sticky header is scrollable", isOn: $isStickyHeaderScrollable)
             Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
 
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
@@ -106,18 +108,40 @@ struct ContentView: View {
         .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
+    @ViewBuilder
     var stickyDrawerHeader: some View {
-        VStack(spacing: 0) {
-            Text("Sticky header")
-                .font(.title)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .padding(.horizontal)
+        if isStickyHeaderScrollable {
+            ScrollView(.horizontal) {
+                HStack(spacing: 0) {
+                    ForEach(0..<3) { index in
+                        stickyHeaderText(title: "Sticky header item \(index)")
+                    }
+                }
+            }
+            .background { Color.teal }
+        } else {
+            VStack(spacing: 0) {
+                stickyHeaderText(
+                    title: "Sticky header",
+                    isShowingDivider: true
+                )
+            }
+            .background { Color.teal }
+        }
+    }
 
+    @ViewBuilder
+    func stickyHeaderText(title: String, isShowingDivider: Bool = false) -> some View {
+        Text(title)
+            .font(.title)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .padding(.horizontal)
+
+        if isShowingDivider {
             Color.black.opacity(0.3)
                 .frame(height: 1)
         }
-        .background { Color.teal }
     }
 
     var drawerContent: some View {
