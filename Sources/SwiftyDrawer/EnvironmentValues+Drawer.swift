@@ -12,6 +12,8 @@ extension EnvironmentValues {
         trailingButtons: []
     )
 
+    @Entry var isApplyingRenderingOptimizationToDrawerHeader = true
+
     @Entry var drawerContentOffsetController: DrawerContentOffsetController?
     @Entry var drawerOriginObservable: DrawerOriginObservable?
 
@@ -38,6 +40,11 @@ public extension View {
 
     func drawerFloatingButtonsConfiguration(_ configuration: DrawerFloatingButtonsConfiguration) -> some View {
         environment(\.drawerFloatingButtonsConfiguration, configuration)
+    }
+
+    /// By default, the drawer header  is using a `drawingGroup` modifier to prevent glitchy animations when dragging the drawer or changing its state programmatically. Unfortunately this comes with some implications, for example the inability to use a `ScrollView` or any other view backed by native platform, which are simply not rendered. Use this environment value to disable this optimization.
+    func isApplyingRenderingOptimizationToDrawerHeader(_ isApplying: Bool) -> some View {
+        environment(\.isApplyingRenderingOptimizationToDrawerHeader, isApplying)
     }
 
     func drawerContentOffsetController(_ controller: DrawerContentOffsetController?) -> some View {
