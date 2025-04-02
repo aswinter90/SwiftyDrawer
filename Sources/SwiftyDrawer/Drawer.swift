@@ -19,6 +19,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Environment(\.drawerFloatingButtonsConfiguration)
     private var floatingButtonsConfiguration: DrawerFloatingButtonsConfiguration
 
+    @Environment(\.isApplyingRenderingOptimizationToDrawerHeader)
+    private var isApplyingRenderingOptimizationToDrawerHeader: Bool
+
     @Environment(\.drawerContentOffsetController)
     var contentOffsetController: DrawerContentOffsetController?
 
@@ -183,7 +186,7 @@ extension Drawer {
         }
         .fixedSize(horizontal: false, vertical: true)
         .background { style.backgroundColor }
-        .drawingGroup()
+        .drawingGroup(isEnabled: isApplyingRenderingOptimizationToDrawerHeader)
         .background {
             PrerenderedShadowView(
                 configuration: .init(
