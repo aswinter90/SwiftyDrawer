@@ -1,6 +1,7 @@
 import SwiftUI
 import UIKit
 
+@MainActor
 public class DrawerPositionCalculator {
     private let safeAreaInsetsProvider: SafeAreaInsetsProviding
     private let tabBarFrameProvider: TabBarFrameProviding
