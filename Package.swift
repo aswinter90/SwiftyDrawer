@@ -24,5 +24,6 @@ let package = Package(
             name: "SwiftyDrawerTests",
             dependencies: ["SwiftyDrawer"]
         )
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )

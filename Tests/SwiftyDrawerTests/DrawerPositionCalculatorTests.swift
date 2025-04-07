@@ -2,6 +2,7 @@ import Testing
 import UIKit
 @testable import SwiftyDrawer
 
+@MainActor
 @Suite("DrawerPositionCalculatorTests")
 struct DrawerPositionCalculatorTests {
     static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
@@ -23,13 +24,14 @@ struct DrawerPositionCalculatorTests {
         )
     }
 
+    @MainActor
     @Test(
         "Test returned `paddingTop` Double value for a given `DrawerState`",
         arguments: [
-            DrawerState(case: .dragging),
-            .init(case: .closed),
-            .init(case: .partiallyOpened),
-            .init(case: .fullyOpened)
+            await DrawerState(case: .dragging),
+            await .init(case: .closed),
+            await .init(case: .partiallyOpened),
+            await .init(case: .fullyOpened)
         ]
     )
     func testPaddingTop(for drawerState: DrawerState) {
@@ -39,7 +41,7 @@ struct DrawerPositionCalculatorTests {
 
     @Test(
         "Test returned `contentBottomPadding` Double value for a given `DrawerState` and `DrawerBottomPosition",
-        arguments: ContentBottomPaddingTestArguments.allCombinations
+        arguments: await ContentBottomPaddingTestArguments.allCombinations
     )
     func contentBottomPadding(arguments: ContentBottomPaddingTestArguments) {
         let state = arguments.drawerState
@@ -68,11 +70,11 @@ struct DrawerPositionCalculatorTests {
     @Test(
         "Test returned absolute Double value for a given `DrawerBottomPosition` cases",
         arguments: [
-            DrawerBottomPosition.absolute(expectedPositionAssociatedValue),
-            .relativeToSafeAreaBottom(offset: expectedPositionAssociatedValue),
-            .relativeToTabBar(offset: expectedPositionAssociatedValue),
-            .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: expectedPositionAssociatedValue),
-            .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: expectedPositionAssociatedValue)
+            await DrawerBottomPosition.absolute(expectedPositionAssociatedValue),
+            await .relativeToSafeAreaBottom(offset: expectedPositionAssociatedValue),
+            await .relativeToTabBar(offset: expectedPositionAssociatedValue),
+            await .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: expectedPositionAssociatedValue),
+            await .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: expectedPositionAssociatedValue)
         ]
     )
     func testAbsoluteValueForBottomPosition(bottomPosition: DrawerBottomPosition) {
@@ -105,9 +107,9 @@ struct DrawerPositionCalculatorTests {
     @Test(
         "Test returned absolute Double value for a given `DrawerMidPosition` cases",
         arguments: [
-            DrawerMidPosition.absolute(Self.expectedPositionAssociatedValue),
-            .relativeToSafeAreaBottom(offset: Self.expectedPositionAssociatedValue),
-            .relativeToTabBar(offset: Self.expectedPositionAssociatedValue)
+            await DrawerMidPosition.absolute(Self.expectedPositionAssociatedValue),
+            await .relativeToSafeAreaBottom(offset: Self.expectedPositionAssociatedValue),
+            await .relativeToTabBar(offset: Self.expectedPositionAssociatedValue)
         ]
     )
     func testAbsoluteValueForMidPosition(midPosition: DrawerMidPosition) {
@@ -130,8 +132,8 @@ struct DrawerPositionCalculatorTests {
     @Test(
         "Test returned absolute Double value for a given `DrawerTopPosition` cases",
         arguments: [
-            DrawerTopPosition.absolute(Self.expectedPositionAssociatedValue),
-            .relativeToSafeAreaTop(offset: Self.expectedPositionAssociatedValue)
+            await DrawerTopPosition.absolute(Self.expectedPositionAssociatedValue),
+            await .relativeToSafeAreaTop(offset: Self.expectedPositionAssociatedValue)
         ]
     )
     func testAbsoluteValueForTopPosition(topPosition: DrawerTopPosition) {
@@ -150,7 +152,8 @@ struct DrawerPositionCalculatorTests {
 
 // MARK: - Test utils
 
-struct ContentBottomPaddingTestArguments {
+@MainActor
+struct ContentBottomPaddingTestArguments: Sendable {
     static let expectedPositionAssociatedValue: Double = 33.0
 
     let drawerState: DrawerState

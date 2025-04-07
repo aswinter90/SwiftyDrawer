@@ -1,6 +1,6 @@
 import UIKit
 
-public enum DrawerBottomPosition: Equatable {
+public enum DrawerBottomPosition: Equatable, Sendable {
     case absolute(Double)
     case relativeToSafeAreaBottom(offset: Double) // Value of 0: Drag handle is on top of the safe area
     case relativeToTabBar(offset: Double) // Value of 0: Drag handle is on top of the tab bar
