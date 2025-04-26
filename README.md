@@ -26,7 +26,7 @@ let package = Package(
 
     ],
     dependencies: [
-        .package(url: "https://github.com/aswinter90/SwiftyDrawer", from: "0.2.0")
+        .package(url: "https://github.com/aswinter90/SwiftyDrawer", from: "0.3.0")
     ],
     targets: [
         .target(
