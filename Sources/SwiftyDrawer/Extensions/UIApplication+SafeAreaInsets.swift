@@ -1,7 +1,7 @@
 import UIKit
 
 public protocol SafeAreaInsetsProviding {
-    var insets: UIEdgeInsets { get }
+    @MainActor var insets: UIEdgeInsets { get }
 }
 
 extension UIApplication: SafeAreaInsetsProviding {

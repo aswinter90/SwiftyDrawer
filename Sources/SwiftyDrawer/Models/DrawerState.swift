@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 public struct DrawerState {
     public enum Case: CaseIterable {
         case dragging

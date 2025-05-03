@@ -2,6 +2,7 @@ import Testing
 import UIKit
 @testable import SwiftyDrawer
 
+@MainActor
 @Suite("DrawerStateReducerTests")
 struct DrawerStateReducerTests {
     static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
@@ -60,10 +61,10 @@ struct DrawerStateReducerTests {
     @Test(
         "Test if the `state.currentPosition` is correctly updated for the current `state.case`",
         arguments: [
-            DrawerState(case: .dragging),
-            .init(case: .closed),
-            .init(case: .partiallyOpened),
-            .init(case: .fullyOpened)
+            await DrawerState(case: .dragging),
+            await .init(case: .closed),
+            await .init(case: .partiallyOpened),
+            await .init(case: .fullyOpened)
         ]
     ) func testSyncCaseAndCurrentPosition(of state: DrawerState) {
         var state = state

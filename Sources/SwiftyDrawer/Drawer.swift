@@ -162,7 +162,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 extension Drawer {
     private var headerContainer: some View {
         VStack(spacing: 0) {
-            style.dragHandle
+            style.dragHandleStyle.view
                 .id(dragHandleId)
                 .readSize {
                     positionCalculator.dragHandleHeight = $0.height

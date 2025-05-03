@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 struct DrawerStateReducer {
     private let bottomPosition: DrawerBottomPosition
     private let topPosition: DrawerTopPosition

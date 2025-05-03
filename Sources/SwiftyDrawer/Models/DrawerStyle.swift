@@ -2,6 +2,24 @@ import Foundation
 import SwiftUI
 
 public struct DrawerStyle {
+    public enum DragHandleStyle {
+        case standard
+        // swiftlint:disable:next discouraged_none_name
+        case none
+        case custom(@MainActor () -> AnyView)
+
+        @MainActor var view: AnyView? {
+            switch self {
+            case .standard:
+                AnyView(DragHandle())
+            case .none:
+                nil
+            case .custom(let view):
+                AnyView(view())
+            }
+        }
+    }
+
     public struct ShadowStyle {
         let color: Color
         let opacity: Double
@@ -24,20 +42,20 @@ public struct DrawerStyle {
     let backgroundColor: Color
     let cornerRadius: Double
     let shadowStyle: ShadowStyle
-    let dragHandle: AnyView
+    let dragHandleStyle: DragHandleStyle
     let stickyHeaderShadowStyle: ShadowStyle
 
     public init(
         backgroundColor: Color = Color.background,
         cornerRadius: Double = DrawerConstants.drawerCornerRadius,
         shadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: -3)),
-        dragHandle: @autoclosure (() -> AnyView) = { AnyView(DragHandle()) }(),
+        dragHandleStyle: DragHandleStyle = .standard,
         stickyHeaderShadowStyle: ShadowStyle = .init(offset: .init(width: 0, height: 3))
     ) {
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
         self.shadowStyle = shadowStyle
-        self.dragHandle = dragHandle()
+        self.dragHandleStyle = dragHandleStyle
         self.stickyHeaderShadowStyle = stickyHeaderShadowStyle
     }
 }
