@@ -163,16 +163,18 @@ struct ContentView: View {
 
     func customDragHandleDrawerStyle() -> DrawerStyle {
         DrawerStyle(
-            dragHandle: AnyView(
-                VStack(spacing: 2) {
-                    ForEach(0..<3) { _ in
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color.gray.opacity(0.5))
-                            .frame(width: 50, height: 6)
+            dragHandleStyle: .custom({
+                AnyView(
+                    VStack(spacing: 2) {
+                        ForEach(0..<3) { _ in
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.gray.opacity(0.5))
+                                .frame(width: 50, height: 6)
+                        }
                     }
-                }
-                .padding(8)
-            )
+                    .padding(8)
+                )
+            })
         )
     }
 
