@@ -20,7 +20,7 @@ jobs:
       - name: Build advanced demo application (iOS)
         run: |
           xcodebuild \
-            -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
+            -project SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
             -scheme SwiftyDrawer-Advanced-Demo \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=17.4' \
             build
@@ -28,7 +28,7 @@ jobs:
       - name: Test Swift Package (iOS)
         run: |
           xcodebuild \
-            -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
+            -project SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
             -scheme SwiftyDrawer \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=17.4' \
             test
@@ -36,7 +36,7 @@ jobs:
       - name: Test advanced demo application (iOS)
         run: |
           xcodebuild \
-            -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
+            -project SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
             -scheme SwiftyDrawer-Advanced-Demo-UITests \
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=17.4' \
             test
