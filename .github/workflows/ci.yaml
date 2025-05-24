@@ -17,13 +17,7 @@ jobs:
       - name: Select Xcode version
         run: sudo xcode-select -s /Applications/Xcode_15.3.app
 
-      - name: Build Swift Package
-        run: swift build --build-tests -v
-
-      - name: Run Swift Package Tests
-        run: swift test -v
-
-      - name: Build iOS Demo App
+      - name: Build advanced demo application (iOS)
         run: |
           xcodebuild \
             -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
@@ -31,7 +25,15 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=17.4' \
             build
 
-      - name: Run UI Tests for Demo App
+      - name: Test Swift Package (iOS)
+        run: |
+          xcodebuild \
+            -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
+            -scheme SwiftyDrawer \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=17.4' \
+            test
+
+      - name: Test advanced demo application (iOS)
         run: |
           xcodebuild \
             -project SwiftyDrawer/SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
