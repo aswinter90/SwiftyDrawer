@@ -5,10 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftyDrawer",
-    platforms: [
-        .iOS(.v15),
-        .macOS(.v12)
-    ],
+    platforms: [.iOS(.v15)],
     products: [
         .library(
             name: "SwiftyDrawer",
@@ -16,7 +13,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.2")
+        // .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.2")
     ],
     targets: [
         .target(
@@ -24,7 +21,7 @@ let package = Package(
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ],
-            plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
+            // plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(
             name: "SwiftyDrawerTests",
