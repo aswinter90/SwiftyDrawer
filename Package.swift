@@ -20,7 +20,7 @@ let package = Package(
             name: "SwiftyDrawer",
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
-            ],
+            ]
             // plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(
