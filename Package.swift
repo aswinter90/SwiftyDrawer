@@ -17,7 +17,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftyDrawer",
+            name: "SwiftyDrawer"
 //            plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(
