@@ -23,6 +23,7 @@ jobs:
             -project SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
             -scheme SwiftyDrawer \
             -destination 'platform=iOS Simulator,OS=18.4,name=iPhone 16' \
+            -skipPackagePluginValidation \
             clean test \
             -verbose \
             -showBuildTimingSummary
@@ -33,6 +34,7 @@ jobs:
             -project SwiftyDrawer-Demo/SwiftyDrawer-Demo.xcodeproj \
             -scheme SwiftyDrawer-Advanced-Demo \
             -destination 'platform=iOS Simulator,OS=18.4,name=iPhone 16' \
+            -skipPackagePluginValidation \
             clean test \
             -verbose \
             -showBuildTimingSummary
