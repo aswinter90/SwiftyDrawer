@@ -72,12 +72,13 @@ final class SwiftyDrawer_DemoUITests: XCTestCase {
     private func runAction(
         _ action: @escaping @autoclosure () -> Void,
         iterations: Int = 1,
-        sleepAfterAction nanoseconds: UInt64 = SwiftyDrawer_DemoUITests.drawerSwipeDuration
+        sleepAfterAction nanoseconds: UInt64? = nil
     ) async {
+        let duration = nanoseconds ?? Self.drawerSwipeDuration
         for _ in 0 ..< iterations {
             action()
 
-            try! await Task.sleep(nanoseconds: nanoseconds)
+            try! await Task.sleep(nanoseconds: duration)
         }
     }
 }
