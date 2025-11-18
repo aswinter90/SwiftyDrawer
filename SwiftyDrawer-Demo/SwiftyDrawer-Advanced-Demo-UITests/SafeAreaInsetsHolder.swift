@@ -12,5 +12,4 @@ struct SafeAreaInsetsHolder: Decodable {
     init(data: Data) throws {
         self = try JSONDecoder().decode(SafeAreaInsetsHolder.self, from: data)
     }
-
 }

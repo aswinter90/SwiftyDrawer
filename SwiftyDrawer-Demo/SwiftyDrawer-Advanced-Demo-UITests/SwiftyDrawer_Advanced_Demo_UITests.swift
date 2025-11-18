@@ -2,7 +2,7 @@ import XCTest
 import SwiftyDrawer
 
 /// The UI tests defined here serve as a playground for the author to catch up with the capabilities of XCUITests. In the long term they should probably be replaced with Snapshot tests (using the Point-Free framework, or similar)
-final class SwiftyDrawer_DemoUITests: XCTestCase {
+nonisolated final class SwiftyDrawer_DemoUITests: XCTestCase {
     private static let drawerSwipeDuration: UInt64 = 1_000_000_000
     private static let drawerPositionCheckAccuracy = 0.1
     private static let lastDrawerContentItemIdentifier = "Item 29"
