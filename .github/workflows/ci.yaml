@@ -14,8 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: List applications
+      - run: ls -1 /Applications
+
       - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_26.app
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app
 
       - name: Test Swift Package (iOS)
         run: |
