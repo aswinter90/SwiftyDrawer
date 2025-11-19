@@ -1,5 +1,5 @@
 import Testing
-import UIKit
+import SwiftUI
 @testable import SwiftyDrawer
 
 @MainActor
@@ -8,17 +8,20 @@ struct DrawerPositionCalculatorTests {
     static let screenBounds = CGRect(x: 0, y: 0, width: 1080, height: 1920)
     static let dragHandleHeight = 12.0
     static let expectedPositionAssociatedValue: Double = 33.0
+    static let safeAreaInsets = EdgeInsets(
+        top: 50,
+        leading: 0,
+        bottom: 100,
+        trailing: 0
+    )
 
-    let safeAreaInsetsProvider = SafeAreaInsetsProvidingMock()
     let tabBarFrameProvider = TabBarFrameProvidingMock()
-
-    var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
     var tabBarFrame: CGRect { tabBarFrameProvider.frame }
 
     var subject: DrawerPositionCalculator {
         .init(
             screenBounds: Self.screenBounds,
-            safeAreaInsetsProvider: safeAreaInsetsProvider,
+            safeAreaInsets: Self.safeAreaInsets,
             tabBarFrameProvider: tabBarFrameProvider,
             dragHandleHeight: Self.dragHandleHeight
         )

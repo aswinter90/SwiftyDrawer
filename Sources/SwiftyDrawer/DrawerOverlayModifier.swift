@@ -14,7 +14,10 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
             content
 
             GeometryReader { proxy in
-                let positionCalculator = DrawerPositionCalculator(screenBounds: proxy.frame(in: .global))
+                let positionCalculator = DrawerPositionCalculator(
+                    screenBounds: proxy.frame(in: .global),
+                    safeAreaInsets: proxy.safeAreaInsets
+                )
 
                 Color.clear
                     .dimmedDrawerBackground(
@@ -40,7 +43,7 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
                         }
                     )
             }
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
         }
     }
 }

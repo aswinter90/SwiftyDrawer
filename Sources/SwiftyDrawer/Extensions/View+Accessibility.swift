@@ -10,7 +10,7 @@ private enum Formatters {
 }
 
 extension View {
-    func storeSafeAreaInsetsAsAccessibilityLabel(_ insets: UIEdgeInsets) -> some View {
+    func storeSafeAreaInsetsAsAccessibilityLabel(_ insets: EdgeInsets) -> some View {
         // swiftlint:disable legacy_objc_type
         let formattedTopInset = Formatters.safeAreaInsetsNumberFormatter.string(from: NSNumber(value: insets.top)) ?? ""
         let formattedBottomInset = Formatters.safeAreaInsetsNumberFormatter.string(from: NSNumber(value: insets.bottom)) ?? ""
