@@ -14,6 +14,7 @@ struct DrawerBottomPositionTests {
         .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: expectedAssociatedValue)
     ]
 
+    @MainActor
     @Test(
         "Associated values match expected value",
         arguments: allCases
@@ -32,6 +33,7 @@ struct DrawerBottomPositionTests {
         }
     }
 
+    @MainActor
     @Test(
         "Returned value of `shouldMatchStickyHeaderHeight` property is correct",
         arguments: allCases
@@ -44,6 +46,7 @@ struct DrawerBottomPositionTests {
         }
     }
 
+    @MainActor
     @Test(
         "Returned value of `isAlignedToTabBar` property is correct",
         arguments: allCases
@@ -56,6 +59,7 @@ struct DrawerBottomPositionTests {
         }
     }
 
+    @MainActor
     @Test(
         "Associated value is correctly mutated after calling `updateAssociatedValueOfCurrentCase` function",
         arguments: allCases
