@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
 
     var body: some View {
-        MyAppleLogo()
+        MySwiftLogo()
             .drawerOverlay(
                 state: $drawerState,
                 content: {
@@ -28,10 +28,10 @@ struct ContentView: View {
     ContentView()
 }
 
-private struct MyAppleLogo: View {
+private struct MySwiftLogo: View {
     var body: some View {
         GeometryReader { proxy in
-            Image(systemName: "apple.logo")
+            Image(systemName: "swift")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 128, height: 128)
