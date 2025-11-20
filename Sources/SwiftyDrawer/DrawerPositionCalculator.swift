@@ -11,11 +11,11 @@ public class DrawerPositionCalculator {
     }
 
     public init(
-        screenBounds: CGRect,
+        containerBounds: CGRect,
         safeAreaInsets: EdgeInsets,
         dragHandleHeight: Double = DrawerConstants.dragHandleHeight
     ) {
-        self.containerBounds = screenBounds
+        self.containerBounds = containerBounds
         self.safeAreaInsets = safeAreaInsets
         self.dragHandleHeight = dragHandleHeight
     }

@@ -14,14 +14,10 @@ struct DrawerStateReducerTests {
         bottom: 100,
         trailing: 0
     )
-    static let tabBarFrameProvider = TabBarFrameProvidingMock()
-
-    var tabBarFrame: CGRect { Self.tabBarFrameProvider.frame }
 
     let positionCalculator = DrawerPositionCalculator(
-        screenBounds: Self.screenBounds,
+        containerBounds: Self.screenBounds,
         safeAreaInsets: safeAreaInsets,
-        tabBarFrameProvider: Self.tabBarFrameProvider,
         dragHandleHeight: Self.dragHandleHeight
     )
 

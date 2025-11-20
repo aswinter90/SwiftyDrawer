@@ -15,7 +15,7 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
 
             GeometryReader { proxy in
                 let positionCalculator = DrawerPositionCalculator(
-                    screenBounds: proxy.frame(in: .global),
+                    containerBounds: proxy.frame(in: .global),
                     safeAreaInsets: proxy.safeAreaInsets
                 )
 
