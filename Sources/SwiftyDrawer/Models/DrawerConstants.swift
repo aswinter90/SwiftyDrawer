@@ -1,6 +1,6 @@
 public enum DrawerConstants {
     public static let dragHandleHeight = 28.0
-    @MainActor public static let drawerDefaultMidPosition = DrawerMidPosition.relativeToTabBar(offset: Self.drawerDefaultMidPositionConstant)
+    @MainActor public static let drawerDefaultMidPosition = DrawerMidPosition.relativeToSafeAreaBottom(offset: Self.drawerDefaultMidPositionConstant)
     public static let drawerDefaultMidPositionConstant = 328.0
     public static let defaultAnimationDuration = 0.32
     public static let drawerCornerRadius = 14.0
