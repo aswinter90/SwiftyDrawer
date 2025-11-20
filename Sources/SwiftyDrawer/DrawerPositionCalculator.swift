@@ -5,10 +5,12 @@ import UIKit
 public class DrawerPositionCalculator {
     private let tabBarFrameProvider: TabBarFrameProviding
 
-    let screenBounds: CGRect
+    let containerBounds: CGRect // Screen bounds minus safe area insets
     let safeAreaInsets: EdgeInsets
     var dragHandleHeight: Double
-    var screenHeight: Double { screenBounds.height }
+    var drawerHeight: Double {
+        containerBounds.height + safeAreaInsets.bottom
+    }
     var tabBarHeight: Double { tabBarFrameProvider.frame.height }
 
     public init(
@@ -17,7 +19,7 @@ public class DrawerPositionCalculator {
         tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
         dragHandleHeight: Double = DrawerConstants.dragHandleHeight
     ) {
-        self.screenBounds = screenBounds
+        self.containerBounds = screenBounds
         self.safeAreaInsets = safeAreaInsets
         self.tabBarFrameProvider = tabBarFrameProvider
         self.dragHandleHeight = dragHandleHeight
@@ -25,19 +27,7 @@ public class DrawerPositionCalculator {
 
     /// The returned value controls the drawer's position on the screen
     func paddingTop(for state: DrawerState) -> Double {
-        screenHeight - state.currentPosition
-    }
-
-    /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
-    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> Double {
-        switch state.case {
-        case .fullyOpened:
-            paddingTop(for: state)
-            + safeAreaInsets.bottom
-            + (bottomPosition.isAlignedToTabBar ? tabBarHeight : 0)
-        default:
-            0
-        }
+        drawerHeight - state.currentPosition
     }
 
     func absoluteValue(for bottomPosition: DrawerBottomPosition) -> Double {
@@ -84,10 +74,14 @@ public class DrawerPositionCalculator {
     func absoluteValue(for topPosition: DrawerTopPosition) -> Double {
         switch topPosition {
         case let .absolute(double):
-            double
+            return double
         case let .relativeToSafeAreaTop(offset):
-            screenBounds.height
-            - safeAreaInsets.top
+            print("screen: \(containerBounds.height)")
+            print("safeArea: \(safeAreaInsets.top)")
+            print("offset: \(offset)")
+
+            return containerBounds.height
+            + safeAreaInsets.bottom
             - offset
         }
     }

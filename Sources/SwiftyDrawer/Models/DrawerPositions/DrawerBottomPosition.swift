@@ -16,15 +16,6 @@ public enum DrawerBottomPosition: Equatable, Sendable {
         }
     }
 
-    var isAlignedToTabBar: Bool {
-        switch self {
-        case .relativeToTabBar, .matchesStickyHeaderContentHeightAlignedToTabBar:
-            true
-        default:
-            false
-        }
-    }
-
     mutating func updateAssociatedValueOfCurrentCase(_ newValue: Double) {
         switch self {
         case .absolute:

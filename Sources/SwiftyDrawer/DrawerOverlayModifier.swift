@@ -42,8 +42,12 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
                             )
                         }
                     )
+                    .ignoresSafeArea()
+                    .onAppear {
+                        print("UIScreen: \(UIScreen.main.bounds.height)")
+                    }
             }
-//            .ignoresSafeArea()
+            .border(.blue)
         }
     }
 }

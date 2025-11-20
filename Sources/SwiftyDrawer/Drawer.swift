@@ -106,16 +106,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .background(style.backgroundColor)
                 )
-                .padding(
-                    .bottom,
-                    positionCalculator.contentBottomPadding(
-                        for: state,
-                        bottomPosition: bottomPosition
-                    )
-                )
                 .zIndex(0)
             }
-            .frame(height: positionCalculator.screenHeight)
+            .frame(height: positionCalculator.drawerHeight)
             .background { Color.background }
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
@@ -131,6 +124,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
+        .border(.red)
         .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
