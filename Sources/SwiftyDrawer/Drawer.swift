@@ -106,6 +106,13 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .background(style.backgroundColor)
                 )
+                .padding(
+                    .bottom,
+                    positionCalculator.contentBottomPadding(
+                        for: state,
+                        bottomPosition: bottomPosition
+                    )
+                )
                 .zIndex(0)
             }
             .frame(height: positionCalculator.drawerHeight)
