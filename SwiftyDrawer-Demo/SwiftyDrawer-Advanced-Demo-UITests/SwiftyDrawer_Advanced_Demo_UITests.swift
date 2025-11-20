@@ -51,7 +51,6 @@ nonisolated final class SwiftyDrawer_DemoUITests: XCTestCase {
             drawer.frame.origin.y,
             app.frame.height
                 - Double(safeAreaInsets.bottom)
-                - TabBarFrameProvider.sharedInstance.frame.height
                 - DrawerConstants.drawerDefaultMidPositionConstant
                 - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy
