@@ -21,6 +21,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         }
     }
 
+    var safeAreaBottom: Double
     var shouldBeginDragging: (VerticalContentOffset, VerticalDragTranslation) -> Bool
     var onDraggingEnded: (_ willDecelerate: Bool) -> Void
     var onDecelaratingEnded: () -> Void
@@ -52,6 +53,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
 
     init(
         content: Content,
+        safeAreaBottom: Double,
         shouldBeginDragging: @escaping (VerticalContentOffset, VerticalDragTranslation) -> Bool,
         onDraggingEnded: @escaping (_ willDecelerate: Bool) -> Void,
         onDecelaratingEnded: @escaping () -> Void,
@@ -60,6 +62,7 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
         drawerContentOffsetController: DrawerContentOffsetController?
     ) {
         self.content = content
+        self.safeAreaBottom = safeAreaBottom
         self.shouldBeginDragging = shouldBeginDragging
         self.onDraggingEnded = onDraggingEnded
         self.onDecelaratingEnded = onDecelaratingEnded
@@ -150,5 +153,10 @@ struct DrawerContentCollectionViewRepresentable<Content: View>: UIViewRepresenta
         uiView.onDecelaratingEnded = component.onDecelaratingEnded
         uiView.onDidScroll = component.onDidScroll
         uiView.onDidResetContentOffset = component.onDidResetContentOffset
+
+        if component.safeAreaBottom != uiView.safeAreaBottom {
+            uiView.safeAreaBottom = component.safeAreaBottom
+            uiView.reloadData()
+        }
     }
 }

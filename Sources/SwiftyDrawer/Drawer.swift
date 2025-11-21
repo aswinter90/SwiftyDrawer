@@ -34,7 +34,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
     @Binding var bottomPosition: DrawerBottomPosition
     private let midPosition: DrawerMidPosition?
     private let topPosition: DrawerTopPosition
-    private let positionCalculator: DrawerPositionCalculator
+    let positionCalculator: DrawerPositionCalculator
     private let stickyHeader: HeaderContent?
     private let content: Content
 
@@ -102,16 +102,14 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                     .zIndex(1) // For casting shadows on the scrollable content below
 
                 contentContainer(
-                    content: content
-                        .fixedSize(horizontal: false, vertical: true)
-                        .background(style.backgroundColor)
-                )
-                .padding(
-                    .bottom,
-                    positionCalculator.contentBottomPadding(
-                        for: state,
-                        bottomPosition: bottomPosition
-                    )
+                    content:
+                        content
+                            .fixedSize(horizontal: false, vertical: true)
+                            .background(style.backgroundColor)
+                            .if(condition: layoutStrategy == .modern) {
+                                $0.padding(.bottom, positionCalculator.contentBottomPadding)
+                            }
+                            .border(Color.green)
                 )
                 .zIndex(0)
             }

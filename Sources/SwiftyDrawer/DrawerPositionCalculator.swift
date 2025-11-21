@@ -10,6 +10,12 @@ public class DrawerPositionCalculator {
         containerBounds.height + safeAreaInsets.bottom
     }
 
+    /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
+    var contentBottomPadding: Double {
+        print(safeAreaInsets.bottom)
+        return safeAreaInsets.bottom
+    }
+
     public init(
         containerBounds: CGRect,
         safeAreaInsets: EdgeInsets,
@@ -23,17 +29,6 @@ public class DrawerPositionCalculator {
     /// The returned value controls the drawer's position on the screen
     func paddingTop(for state: DrawerState) -> Double {
         drawerHeight - state.currentPosition
-    }
-
-    /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
-    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> Double {
-        switch state.case {
-        case .fullyOpened:
-            paddingTop(for: state)
-            + safeAreaInsets.bottom
-        default:
-            0
-        }
     }
 
     func absoluteValue(for bottomPosition: DrawerBottomPosition) -> Double {

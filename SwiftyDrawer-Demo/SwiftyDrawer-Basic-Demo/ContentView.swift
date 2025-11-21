@@ -16,6 +16,7 @@ struct ContentView: View {
                                 .padding()
 
                             Divider()
+                                .background(.black)
                         }
                     }
                     .padding(.top, 8)

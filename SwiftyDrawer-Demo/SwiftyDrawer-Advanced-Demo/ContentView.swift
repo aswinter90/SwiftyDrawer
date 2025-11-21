@@ -29,6 +29,7 @@ struct ContentView: View {
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
                 )
+                .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
                 .isDrawerHapticFeedbackEnabled(true)
                 .isApplyingRenderingOptimizationToDrawerHeader(!isStickyHeaderScrollable)
@@ -135,10 +136,10 @@ struct ContentView: View {
                 Text("Item \(index)")
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
+                    .padding(.vertical)
 
                 Divider()
             }
-            .padding(.vertical)
         }
     }
 
