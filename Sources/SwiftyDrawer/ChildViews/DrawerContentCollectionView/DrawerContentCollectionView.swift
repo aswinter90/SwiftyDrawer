@@ -41,7 +41,10 @@ class DrawerContentCollectionView<Content: View>: UICollectionView, UICollection
 
     private let swiftUICellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Content> { collectionViewCell, _, content in
         if #available(iOS 16.0, *) {
-            let hostingConfiguration = UIHostingConfiguration { content }.margins(.horizontal, 0)
+            let hostingConfiguration = UIHostingConfiguration { content }
+                .margins(.horizontal, 0)
+                .margins(.vertical, 0)
+            
             collectionViewCell.contentConfiguration = hostingConfiguration
             collectionViewCell.contentView.backgroundColor = .init(.background)
         } else {

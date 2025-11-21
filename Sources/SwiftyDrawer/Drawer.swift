@@ -107,9 +107,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .background(style.backgroundColor)
                             .if(condition: layoutStrategy == .modern) {
+                                // Fixme: For the `classic` strategy the padding had to be added in `LegacyDrawerContentCollectionView`
                                 $0.padding(.bottom, positionCalculator.contentBottomPadding)
                             }
-                            .border(Color.green)
                 )
                 .zIndex(0)
             }
@@ -129,7 +129,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
-        .border(.red)
         .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:

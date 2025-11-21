@@ -44,7 +44,6 @@ struct DrawerOverlayModifier<StickyHeader: View, DrawerContent: View>: ViewModif
                     )
                     .ignoresSafeArea()
             }
-            .border(.blue)
         }
     }
 }
