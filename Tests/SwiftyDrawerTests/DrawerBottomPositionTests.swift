@@ -9,11 +9,10 @@ struct DrawerBottomPositionTests {
     private static let allCases: [DrawerBottomPosition] = [
         .absolute(expectedAssociatedValue),
         .relativeToSafeAreaBottom(offset: expectedAssociatedValue),
-        .relativeToTabBar(offset: expectedAssociatedValue),
         .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight: expectedAssociatedValue),
-        .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight: expectedAssociatedValue)
     ]
 
+    @MainActor
     @Test(
         "Associated values match expected value",
         arguments: allCases
@@ -23,39 +22,25 @@ struct DrawerBottomPositionTests {
             #expect(double == Self.expectedAssociatedValue)
         case .relativeToSafeAreaBottom(let offset):
             #expect(offset == Self.expectedAssociatedValue)
-        case .relativeToTabBar(let offset):
-            #expect(offset == Self.expectedAssociatedValue)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(let stickyHeaderHeight):
-            #expect(stickyHeaderHeight == Self.expectedAssociatedValue)
-        case .matchesStickyHeaderContentHeightAlignedToTabBar(let stickyHeaderHeight):
             #expect(stickyHeaderHeight == Self.expectedAssociatedValue)
         }
     }
 
+    @MainActor
     @Test(
         "Returned value of `shouldMatchStickyHeaderHeight` property is correct",
         arguments: allCases
     ) func testShouldMatchStickyHeaderHeightProperty(subject: DrawerBottomPosition) {
         switch subject {
-        case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom, .matchesStickyHeaderContentHeightAlignedToTabBar:
+        case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom:
             #expect(subject.shouldMatchStickyHeaderHeight == true)
         default:
             #expect(subject.shouldMatchStickyHeaderHeight == false)
         }
     }
 
-    @Test(
-        "Returned value of `isAlignedToTabBar` property is correct",
-        arguments: allCases
-    ) func testIsAlignedToTabBarProperty(subject: DrawerBottomPosition) {
-        switch subject {
-        case .relativeToTabBar, .matchesStickyHeaderContentHeightAlignedToTabBar:
-            #expect(subject.isAlignedToTabBar == true)
-        default:
-            #expect(subject.isAlignedToTabBar == false)
-        }
-    }
-
+    @MainActor
     @Test(
         "Associated value is correctly mutated after calling `updateAssociatedValueOfCurrentCase` function",
         arguments: allCases
@@ -70,11 +55,7 @@ struct DrawerBottomPositionTests {
             #expect(double == newValue)
         case .relativeToSafeAreaBottom(let offset):
             #expect(offset == newValue)
-        case .relativeToTabBar(let offset):
-            #expect(offset == newValue)
         case .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(let stickyHeaderHeight):
-            #expect(stickyHeaderHeight == newValue)
-        case .matchesStickyHeaderContentHeightAlignedToTabBar(let stickyHeaderHeight):
             #expect(stickyHeaderHeight == newValue)
         }
     }

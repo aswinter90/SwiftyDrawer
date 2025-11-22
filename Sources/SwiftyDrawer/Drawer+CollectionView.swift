@@ -11,6 +11,7 @@ extension Drawer {
                     contentHeight = $0.height
                 },
                 contentHeight: contentHeight,
+                safeAreaBottom: positionCalculator.safeAreaInsets.bottom,
                 shouldBeginDragging: shouldContentBeginDragging,
                 onDraggingEnded: onContentDraggingEnded,
                 onDecelaratingEnded: onContentDecelaratingEnded,
@@ -23,6 +24,7 @@ extension Drawer {
         case .modern:
             DrawerContentCollectionView(
                 content: content,
+                safeAreaBottom: positionCalculator.safeAreaInsets.bottom,
                 shouldBeginDragging: shouldContentBeginDragging,
                 onDraggingEnded: onContentDraggingEnded,
                 onDecelaratingEnded: onContentDecelaratingEnded,

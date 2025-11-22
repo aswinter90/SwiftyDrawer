@@ -2,6 +2,7 @@ import Testing
 import Foundation
 @testable import SwiftyDrawer
 
+@MainActor
 @Suite("DragDirectionTests")
 struct DragDirectionTests {
     @Test("Test `DragDirection` is `up` if startLocation.y is bigger than endLocation.y and the velocity is not too low")

@@ -2,7 +2,7 @@ import XCTest
 import SwiftyDrawer
 
 /// The UI tests defined here serve as a playground for the author to catch up with the capabilities of XCUITests. In the long term they should probably be replaced with Snapshot tests (using the Point-Free framework, or similar)
-final class SwiftyDrawer_DemoUITests: XCTestCase {
+nonisolated final class SwiftyDrawer_DemoUITests: XCTestCase {
     private static let drawerSwipeDuration: UInt64 = 1_000_000_000
     private static let drawerPositionCheckAccuracy = 0.1
     private static let lastDrawerContentItemIdentifier = "Item 29"
@@ -34,7 +34,7 @@ final class SwiftyDrawer_DemoUITests: XCTestCase {
 
         // Check drawer content by finding last item
 
-        await runAction(drawer.swipeUpFast(), iterations: 3)
+        await runAction(drawer.swipeUpFast(), iterations: 2)
 
         let lastDrawerContentItem = app
             .staticTexts
@@ -45,13 +45,12 @@ final class SwiftyDrawer_DemoUITests: XCTestCase {
 
         // Check drawer mid position
 
-        await runAction(drawer.swipeDownFast(), iterations: 4)
+        await runAction(drawer.swipeDownFast(), iterations: 3)
 
         XCTAssertEqual(
             drawer.frame.origin.y,
             app.frame.height
                 - Double(safeAreaInsets.bottom)
-                - TabBarFrameProvider.sharedInstance.frame.height
                 - DrawerConstants.drawerDefaultMidPositionConstant
                 - DrawerConstants.dragHandleHeight,
             accuracy: Self.drawerPositionCheckAccuracy
@@ -72,12 +71,13 @@ final class SwiftyDrawer_DemoUITests: XCTestCase {
     private func runAction(
         _ action: @escaping @autoclosure () -> Void,
         iterations: Int = 1,
-        sleepAfterAction nanoseconds: UInt64 = SwiftyDrawer_DemoUITests.drawerSwipeDuration
+        sleepAfterAction nanoseconds: UInt64? = nil
     ) async {
+        let duration = nanoseconds ?? Self.drawerSwipeDuration
         for _ in 0 ..< iterations {
             action()
 
-            try! await Task.sleep(nanoseconds: nanoseconds)
+            try! await Task.sleep(nanoseconds: duration)
         }
     }
 }

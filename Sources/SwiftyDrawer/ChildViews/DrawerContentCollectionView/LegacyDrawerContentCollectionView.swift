@@ -21,6 +21,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
     var shouldBeginDragging: (VerticalContentOffset, VerticalDragTranslation) -> Bool
     var contentHeight: Double
+    var safeAreaBottom: Double
     var onDraggingEnded: (_ willDecelerate: Bool) -> Void
     var onDecelaratingEnded: () -> Void
     var onDidScroll: (_ verticalContentOffset: Double) -> Void
@@ -30,12 +31,14 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
     private let flowLayout = UICollectionViewFlowLayout()
     private let drawerContentOffsetController: DrawerContentOffsetController?
+    private var lastUsedSafeAreaBottom: Double?
 
     // MARK: - Initializer
 
     init(
         content: Content,
         contentHeight: Double,
+        safeAreaBottom: Double,
         shouldBeginDragging: @escaping (VerticalContentOffset, VerticalDragTranslation) -> Bool,
         onDraggingEnded: @escaping (_ willDecelerate: Bool) -> Void,
         onDecelaratingEnded: @escaping () -> Void,
@@ -45,6 +48,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
     ) {
         self.content = content
         self.contentHeight = contentHeight
+        self.safeAreaBottom = safeAreaBottom
         self.shouldBeginDragging = shouldBeginDragging
         self.onDraggingEnded = onDraggingEnded
         self.onDecelaratingEnded = onDecelaratingEnded
@@ -118,10 +122,16 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
         let contentView = cell.contentView
 
         if !contentView.subviews.isEmpty {
-            return cell
+            if lastUsedSafeAreaBottom == safeAreaBottom {
+                return cell
+            }
+            contentView.subviews.forEach { $0.removeFromSuperview() }
         }
 
-        guard let hostingView = UIHostingController(rootView: content).view else { return .init() }
+        let view = content.padding(.bottom, safeAreaBottom)
+        lastUsedSafeAreaBottom = safeAreaBottom
+
+        guard let hostingView = UIHostingController(rootView: view).view else { return .init() }
 
         contentView.backgroundColor = .init(.background)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -179,6 +189,11 @@ struct LegacyDrawerContentCollectionViewRepresentable<Content: View>: UIViewRepr
 
         if uiView.contentHeight != component.contentHeight {
             uiView.contentHeight = component.contentHeight
+            uiView.collectionViewLayout.invalidateLayout()
+        }
+
+        if uiView.safeAreaBottom != component.safeAreaBottom {
+            uiView.safeAreaBottom = component.safeAreaBottom
             uiView.collectionViewLayout.invalidateLayout()
         }
     }

@@ -7,8 +7,7 @@ import CoreGraphics
 
     private static let allCases: [DrawerMidPosition] = [
         .absolute(Self.expectedAssociatedValue),
-        .relativeToSafeAreaBottom(offset: Self.expectedAssociatedValue),
-        .relativeToTabBar(offset: Self.expectedAssociatedValue)
+        .relativeToSafeAreaBottom(offset: Self.expectedAssociatedValue)
     ]
 
     @Test(
@@ -19,8 +18,6 @@ import CoreGraphics
         case .absolute(let double):
             #expect(double == Self.expectedAssociatedValue)
         case .relativeToSafeAreaBottom(let offset):
-            #expect(offset == Self.expectedAssociatedValue)
-        case .relativeToTabBar(let offset):
             #expect(offset == Self.expectedAssociatedValue)
         }
     }

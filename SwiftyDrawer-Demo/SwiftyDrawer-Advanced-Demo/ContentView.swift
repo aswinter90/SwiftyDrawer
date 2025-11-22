@@ -29,21 +29,13 @@ struct ContentView: View {
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
                 )
+                .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
                 .isDrawerHapticFeedbackEnabled(true)
                 .isApplyingRenderingOptimizationToDrawerHeader(!isStickyHeaderScrollable)
         }
         .onChange(of: isStickyHeaderShown) { newValue in
-            updateDrawerBottomPosition(
-                isStickyHeaderShown: newValue,
-                isTabBarShown: isTabBarShown
-            )
-        }
-        .onChange(of: isTabBarShown) { newValue in
-            updateDrawerBottomPosition(
-                isStickyHeaderShown: isStickyHeaderShown,
-                isTabBarShown: newValue
-            )
+            updateDrawerBottomPosition(isStickyHeaderShown: newValue)
         }
         .drawerStyle(
             isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
@@ -61,17 +53,7 @@ struct ContentView: View {
 
     var configList: some View {
         List {
-            Picker(
-                "Align to",
-                selection: $isTabBarShown,
-                content: {
-                    Text("Safe area")
-                        .tag(false)
-                    Text("Tab bar")
-                        .tag(true)
-                }
-            )
-
+            Toggle("Show tab bar", isOn: $isTabBarShown)
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
             Toggle("Sticky header is scrollable", isOn: $isStickyHeaderScrollable)
             Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
@@ -154,10 +136,10 @@ struct ContentView: View {
                 Text("Item \(index)")
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal, 16)
+                    .padding(.vertical)
 
                 Divider()
             }
-            .padding(.vertical)
         }
     }
 
@@ -178,22 +160,18 @@ struct ContentView: View {
         )
     }
 
-    func updateDrawerBottomPosition(isStickyHeaderShown: Bool, isTabBarShown: Bool) {
-        switch (isStickyHeaderShown, isTabBarShown) {
-        case (true, true):
-            drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToTabBar()
-        case (true, false):
+    func updateDrawerBottomPosition(isStickyHeaderShown: Bool) {
+        if isStickyHeaderShown {
             drawerBottomPosition = .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom()
-        case (false, true):
-            drawerBottomPosition = .relativeToTabBar(offset: 0)
-        case (false, false):
+        } else {
             drawerBottomPosition = .relativeToSafeAreaBottom(offset: 0)
         }
     }
 }
 
 extension View {
-    @ViewBuilder func opaqueTabBarStyle(isTabBarShown: Bool) -> some View {
+    @ViewBuilder
+    func opaqueTabBarStyle(isTabBarShown: Bool) -> some View {
         if #available(iOS 16.0, *) {
             self
                 .toolbarBackground(.visible, for: .tabBar)
@@ -201,6 +179,7 @@ extension View {
                 .toolbar(isTabBarShown ? .visible : .hidden, for: .tabBar)
         } else {
             self
+                .background(TabBarRepresentable(isHidden: !isTabBarShown))
         }
     }
 }

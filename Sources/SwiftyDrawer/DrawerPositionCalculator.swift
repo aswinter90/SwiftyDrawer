@@ -3,42 +3,32 @@ import UIKit
 
 @MainActor
 public class DrawerPositionCalculator {
-    private let safeAreaInsetsProvider: SafeAreaInsetsProviding
-    private let tabBarFrameProvider: TabBarFrameProviding
+    private let containerBounds: CGRect // Screen bounds minus safe area insets
 
-    let screenBounds: CGRect
+    let safeAreaInsets: EdgeInsets
     var dragHandleHeight: Double
-    var screenHeight: Double { screenBounds.height }
-    var safeAreaInsets: UIEdgeInsets { safeAreaInsetsProvider.insets }
-    var tabBarHeight: Double { tabBarFrameProvider.frame.height }
+    var drawerHeight: Double {
+        containerBounds.height + safeAreaInsets.bottom
+    }
+
+    /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
+    var contentBottomPadding: Double {
+        safeAreaInsets.bottom
+    }
 
     public init(
-        screenBounds: CGRect,
-        safeAreaInsetsProvider: SafeAreaInsetsProviding = UIApplication.shared,
-        tabBarFrameProvider: TabBarFrameProviding = TabBarFrameProvider.sharedInstance,
+        containerBounds: CGRect,
+        safeAreaInsets: EdgeInsets,
         dragHandleHeight: Double = DrawerConstants.dragHandleHeight
     ) {
-        self.screenBounds = screenBounds
-        self.safeAreaInsetsProvider = safeAreaInsetsProvider
-        self.tabBarFrameProvider = tabBarFrameProvider
+        self.containerBounds = containerBounds
+        self.safeAreaInsets = safeAreaInsets
         self.dragHandleHeight = dragHandleHeight
     }
 
     /// The returned value controls the drawer's position on the screen
     func paddingTop(for state: DrawerState) -> Double {
-        screenHeight - state.currentPosition
-    }
-
-    /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
-    func contentBottomPadding(for state: DrawerState, bottomPosition: DrawerBottomPosition) -> Double {
-        switch state.case {
-        case .fullyOpened:
-            paddingTop(for: state)
-            + safeAreaInsets.bottom
-            + (bottomPosition.isAlignedToTabBar ? tabBarHeight : 0)
-        default:
-            0
-        }
+        drawerHeight - state.currentPosition
     }
 
     func absoluteValue(for bottomPosition: DrawerBottomPosition) -> Double {
@@ -46,21 +36,11 @@ public class DrawerPositionCalculator {
         case let .absolute(double):
             double + dragHandleHeight
         case let .relativeToSafeAreaBottom(offset):
-            safeAreaInsetsProvider.insets.bottom
-            + offset
-            + dragHandleHeight
-        case let .relativeToTabBar(offset):
-            safeAreaInsetsProvider.insets.bottom
-            + tabBarFrameProvider.frame.height
+            safeAreaInsets.bottom
             + offset
             + dragHandleHeight
         case let .matchesStickyHeaderContentHeightAlignedToSafeAreaBottom(stickyHeaderHeight):
-            safeAreaInsetsProvider.insets.bottom
-            + stickyHeaderHeight
-            + dragHandleHeight
-        case let .matchesStickyHeaderContentHeightAlignedToTabBar(stickyHeaderHeight):
-            safeAreaInsetsProvider.insets.bottom
-            + tabBarFrameProvider.frame.height
+            safeAreaInsets.bottom
             + stickyHeaderHeight
             + dragHandleHeight
         }
@@ -71,12 +51,7 @@ public class DrawerPositionCalculator {
         case let .absolute(double):
             double
         case let .relativeToSafeAreaBottom(offset):
-            safeAreaInsetsProvider.insets.bottom
-            + offset
-            + dragHandleHeight
-        case let .relativeToTabBar(offset):
-            safeAreaInsetsProvider.insets.bottom
-            + tabBarFrameProvider.frame.height
+            safeAreaInsets.bottom
             + offset
             + dragHandleHeight
         }
@@ -87,8 +62,8 @@ public class DrawerPositionCalculator {
         case let .absolute(double):
             double
         case let .relativeToSafeAreaTop(offset):
-            screenBounds.height
-            - safeAreaInsetsProvider.insets.top
+            containerBounds.height
+            + safeAreaInsets.bottom
             - offset
         }
     }

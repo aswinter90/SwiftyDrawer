@@ -30,11 +30,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Bindings & Arguments
 
+    let positionCalculator: DrawerPositionCalculator
     @Binding var state: DrawerState
     @Binding var bottomPosition: DrawerBottomPosition
     private let midPosition: DrawerMidPosition?
     private let topPosition: DrawerTopPosition
-    private let positionCalculator: DrawerPositionCalculator
     private let stickyHeader: HeaderContent?
     private let content: Content
 
@@ -102,20 +102,18 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                     .zIndex(1) // For casting shadows on the scrollable content below
 
                 contentContainer(
-                    content: content
-                        .fixedSize(horizontal: false, vertical: true)
-                        .background(style.backgroundColor)
-                )
-                .padding(
-                    .bottom,
-                    positionCalculator.contentBottomPadding(
-                        for: state,
-                        bottomPosition: bottomPosition
-                    )
+                    content:
+                        content
+                            .fixedSize(horizontal: false, vertical: true)
+                            .background(style.backgroundColor)
+                            .if(condition: layoutStrategy == .modern) {
+                                // Fixme: For the `classic` strategy the padding had to be added in `LegacyDrawerContentCollectionView`
+                                $0.padding(.bottom, positionCalculator.contentBottomPadding)
+                            }
                 )
                 .zIndex(0)
             }
-            .frame(height: positionCalculator.screenHeight)
+            .frame(height: positionCalculator.drawerHeight)
             .background { Color.background }
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
@@ -131,6 +129,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
+        // Automatically redraw the drawer and update its position if the SafeArea changed, e.g. when a tab bar became visible
+        .id(positionCalculator.safeAreaInsets)
         .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
