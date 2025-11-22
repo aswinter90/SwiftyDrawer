@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
 
-    @State private var isTabBarShown = false
+    @State private var isTabBarShown = true
     @State private var isStickyHeaderShown = false
     @State private var isCustomDragHandleShown = false
     @State private var isStickyHeaderScrollable = false
@@ -170,7 +170,8 @@ struct ContentView: View {
 }
 
 extension View {
-    @ViewBuilder func opaqueTabBarStyle(isTabBarShown: Bool) -> some View {
+    @ViewBuilder
+    func opaqueTabBarStyle(isTabBarShown: Bool) -> some View {
         if #available(iOS 16.0, *) {
             self
                 .toolbarBackground(.visible, for: .tabBar)
@@ -178,6 +179,7 @@ extension View {
                 .toolbar(isTabBarShown ? .visible : .hidden, for: .tabBar)
         } else {
             self
+                .background(TabBarRepresentable(isHidden: !isTabBarShown))
         }
     }
 }
