@@ -3,7 +3,8 @@ import UIKit
 
 @MainActor
 public class DrawerPositionCalculator {
-    let containerBounds: CGRect // Screen bounds minus safe area insets
+    private let containerBounds: CGRect // Screen bounds minus safe area insets
+
     let safeAreaInsets: EdgeInsets
     var dragHandleHeight: Double
     var drawerHeight: Double {

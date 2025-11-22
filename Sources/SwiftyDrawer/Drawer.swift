@@ -30,11 +30,11 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
 
     // MARK: - Bindings & Arguments
 
+    let positionCalculator: DrawerPositionCalculator
     @Binding var state: DrawerState
     @Binding var bottomPosition: DrawerBottomPosition
     private let midPosition: DrawerMidPosition?
     private let topPosition: DrawerTopPosition
-    let positionCalculator: DrawerPositionCalculator
     private let stickyHeader: HeaderContent?
     private let content: Content
 
@@ -129,7 +129,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
-        // Automatically redraw the drawer and update its position if the SafeArea changed, e.g. when a tab bar becomes visible
+        // Automatically redraw the drawer and update its position if the SafeArea changed, e.g. when a tab bar became visible
         .id(positionCalculator.safeAreaInsets)
         .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(

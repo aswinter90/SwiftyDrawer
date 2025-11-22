@@ -34,7 +34,7 @@ nonisolated final class SwiftyDrawer_DemoUITests: XCTestCase {
 
         // Check drawer content by finding last item
 
-        await runAction(drawer.swipeUpFast(), iterations: 3)
+        await runAction(drawer.swipeUpFast(), iterations: 2)
 
         let lastDrawerContentItem = app
             .staticTexts
@@ -45,7 +45,7 @@ nonisolated final class SwiftyDrawer_DemoUITests: XCTestCase {
 
         // Check drawer mid position
 
-        await runAction(drawer.swipeDownFast(), iterations: 4)
+        await runAction(drawer.swipeDownFast(), iterations: 3)
 
         XCTAssertEqual(
             drawer.frame.origin.y,
