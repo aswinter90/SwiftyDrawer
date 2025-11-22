@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
 
-    @State private var isTabBarShown = true
+    @State private var isTabBarShown = false
     @State private var isStickyHeaderShown = false
     @State private var isCustomDragHandleShown = false
     @State private var isStickyHeaderScrollable = false
