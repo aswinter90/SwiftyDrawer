@@ -12,8 +12,7 @@ public class DrawerPositionCalculator {
 
     /// This assures that the scrollable content is not covered by the tab bar or the lower safe area when the drawer is open
     var contentBottomPadding: Double {
-        print(safeAreaInsets.bottom)
-        return safeAreaInsets.bottom
+        safeAreaInsets.bottom
     }
 
     public init(

@@ -129,6 +129,8 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 }
             }
         }
+        // Automatically redraw the drawer and update its position if the SafeArea changed, e.g. when a tab bar becomes visible
+        .id(positionCalculator.safeAreaInsets)
         .padding(.top, positionCalculator.paddingTop(for: state))
         .modifier(
             // Visually the drawer does not move from just adding a top-padding. An offset effect is also required:
