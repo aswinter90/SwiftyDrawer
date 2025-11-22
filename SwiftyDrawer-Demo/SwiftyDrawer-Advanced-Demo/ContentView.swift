@@ -29,7 +29,7 @@ struct ContentView: View {
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
                 )
-                .drawerLayoutStrategy(.modern)
+                .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
                 .isDrawerHapticFeedbackEnabled(true)
                 .isApplyingRenderingOptimizationToDrawerHeader(!isStickyHeaderScrollable)
