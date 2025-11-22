@@ -105,7 +105,6 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                     content:
                         content
                             .fixedSize(horizontal: false, vertical: true)
-                            .background(style.backgroundColor)
                             .if(condition: layoutStrategy == .modern) {
                                 // Fixme: For the `classic` strategy the padding had to be added in `LegacyDrawerContentCollectionView`
                                 $0.padding(.bottom, positionCalculator.contentBottomPadding)
@@ -114,7 +113,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                 .zIndex(0)
             }
             .frame(height: positionCalculator.drawerHeight)
-            .background { Color.background }
+            .background(style.backgroundColor)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
             .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
             .gesture(dragGesture)
@@ -185,7 +184,6 @@ extension Drawer {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .background { style.backgroundColor }
         .drawingGroup(isEnabled: isApplyingRenderingOptimizationToDrawerHeader)
         .background {
             PrerenderedShadowView(
