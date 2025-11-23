@@ -73,7 +73,7 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self)
         )
         dataSource = self
-        backgroundColor = .init(.background)
+        backgroundColor = .clear
         delegate = self
     }
 
@@ -118,6 +118,9 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
             withReuseIdentifier: String(describing: UICollectionViewCell.self),
             for: indexPath
         )
+        cell.backgroundColor = .clear
+        cell.backgroundView = .init()
+        cell.backgroundView?.backgroundColor = .clear
 
         let contentView = cell.contentView
 
@@ -133,7 +136,9 @@ class LegacyDrawerContentCollectionView<Content: View>: UICollectionView, UIColl
 
         guard let hostingView = UIHostingController(rootView: view).view else { return .init() }
 
-        contentView.backgroundColor = .init(.background)
+        hostingView.backgroundColor = .clear
+
+        contentView.backgroundColor = .clear
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([

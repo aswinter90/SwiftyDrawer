@@ -37,6 +37,12 @@ public struct DrawerStyle {
             self.radius = radius
             self.offset = offset
         }
+
+        // swiftlint:disable:next discouraged_none_name
+        public static var none: Self {
+            // swiftlint:disable:next explicit_init
+            Self.init(color: .clear, offset: .init(width: 0, height: 0))
+        }
     }
 
     let backgroundColor: Color
@@ -44,6 +50,11 @@ public struct DrawerStyle {
     let shadowStyle: ShadowStyle
     let dragHandleStyle: DragHandleStyle
     let stickyHeaderShadowStyle: ShadowStyle
+
+    var hasOpaqueBackgroundColor: Bool {
+        let color = UIColor(backgroundColor)
+        return color.cgColor.alpha == 1 && color != .clear
+    }
 
     public init(
         backgroundColor: Color = Color.background,
