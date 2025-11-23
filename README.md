@@ -78,10 +78,15 @@ struct ContentView: View {
 As shown in the video the drawer can be modified with a sticky header, which stays on top of the safe area or the tab bar when the drawer is closed. The default drag handle can also be replaced with any other given view.
 Finally the `DrawerState` is mutable and changing it from the outside will update the drawer position automatically.
 
-https://github.com/user-attachments/assets/daf244f4-a09f-4272-9095-8aa4669a4b26
+https://github.com/user-attachments/assets/107b48e3-2f99-47ac-a7a9-5430d77b444a
 
 ### [State based drawer content](https://github.com/aswinter90/SwiftyDrawer/blob/main/SwiftyDrawer-Demo/SwiftyDrawer-Map-Demo/ContentView.swift)
 
 This is a demonstration for how the drawer content can be updated by observing a ViewModel state.
 
 https://github.com/user-attachments/assets/0b127664-3b4d-40a6-8a0a-98061e0b6680
+
+# 💥 Known issues
+- Bugs and glitches on older iOS versions like 15 must be expected. In some scenarios the drawer content is not scrollable in other the content's scroll level resets randomnly.
+- The drawer always requires a modifyable `state` binding, meaning that passing a constant binding will not work: `.drawerOverlay(state: Binding.constant(.init(case: .fullyOpened)), ...)`
+- Your content gets updated but it is not reflected in the drawer? Make sure to define your content as a dedicated view, which obsorves changes of a `Binding` or an `ObservableObject` or take a look at the `SwiftyDrawer-Map-Demo`.
