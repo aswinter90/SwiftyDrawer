@@ -30,9 +30,6 @@ struct ContentView: View {
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
                 )
-                .drawerStyle(
-                    isDrawerTransparent ? .init(backgroundColor: .clear) : .init()
-                )
                 .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
                 .isDrawerHapticFeedbackEnabled(true)
@@ -42,7 +39,7 @@ struct ContentView: View {
             updateDrawerBottomPosition(isStickyHeaderShown: newValue)
         }
         .drawerStyle(
-            isCustomDragHandleShown ? customDragHandleDrawerStyle() : .init()
+            makeCustomDrawerStyle()
         )
     }
 
@@ -148,9 +145,10 @@ struct ContentView: View {
         }
     }
 
-    func customDragHandleDrawerStyle() -> DrawerStyle {
-        DrawerStyle(
-            dragHandleStyle: .custom({
+    func makeCustomDrawerStyle() -> DrawerStyle {
+        let backgroundColor = isDrawerTransparent ? Color.clear : .background
+        let dragHandleStyle: DrawerStyle.DragHandleStyle = if isCustomDragHandleShown {
+            .custom({
                 AnyView(
                     VStack(spacing: 2) {
                         ForEach(0..<3) { _ in
@@ -162,6 +160,13 @@ struct ContentView: View {
                     .padding(8)
                 )
             })
+        } else {
+            .standard
+        }
+
+        return DrawerStyle(
+            backgroundColor: backgroundColor,
+            dragHandleStyle: dragHandleStyle
         )
     }
 
