@@ -6,8 +6,9 @@ struct ContentView: View {
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
 
     @State private var isTabBarShown = false
-    @State private var isStickyHeaderShown = false
+    @State private var isStickyHeaderShown = true
     @State private var isCustomDragHandleShown = false
+    @State private var isDrawerTransparent = false
     @State private var isStickyHeaderScrollable = false
 
     private let floatingButtonsConfig = DrawerFloatingButtonsConfiguration(
@@ -28,6 +29,9 @@ struct ContentView: View {
                     isDimmingBackground: true,
                     stickyHeader: { isStickyHeaderShown ? stickyDrawerHeader : nil },
                     content: { drawerContent }
+                )
+                .drawerStyle(
+                    isDrawerTransparent ? .init(backgroundColor: .red.opacity(0.3)) : .init()
                 )
                 .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
@@ -57,6 +61,7 @@ struct ContentView: View {
             Toggle("Show sticky header", isOn: $isStickyHeaderShown)
             Toggle("Sticky header is scrollable", isOn: $isStickyHeaderScrollable)
             Toggle("Show custom drag handle", isOn: $isCustomDragHandleShown)
+            Toggle("Make drawer transparent", isOn: $isDrawerTransparent)
 
             LazyVGrid(columns: [.init(.flexible()), .init(.flexible())]) {
                 Text("Set state to:")

@@ -105,7 +105,7 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
                     content:
                         content
                             .fixedSize(horizontal: false, vertical: true)
-                            .if(condition: layoutStrategy == .modern) {
+                            .if(layoutStrategy == .modern) {
                                 // Fixme: For the `classic` strategy the padding had to be added in `LegacyDrawerContentCollectionView`
                                 $0.padding(.bottom, positionCalculator.contentBottomPadding)
                             }
@@ -115,7 +115,9 @@ public struct Drawer<Content: View, HeaderContent: View>: View {
             .frame(height: positionCalculator.drawerHeight)
             .background(style.backgroundColor)
             .roundedCorners(style.cornerRadius, corners: [.topLeft, .topRight])
-            .prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
+            .if(style.hasOpaqueBackgroundColor) {
+                $0.prerenderedShadow(style.shadowStyle, cornerRadius: style.cornerRadius)
+            }
             .gesture(dragGesture)
             .onAppear { stateReducer.syncCaseAndCurrentPosition(of: &state) }
             .onChange(of: state.case) { [oldCase = state.case] newCase in
@@ -184,18 +186,20 @@ extension Drawer {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .background { style.backgroundColor }
         .drawingGroup(isEnabled: isApplyingRenderingOptimizationToDrawerHeader)
-        .background {
-            PrerenderedShadowView(
-                configuration: .init(
-                    style: style.stickyHeaderShadowStyle,
-                    cornerRadius: 0
-                )
-            )
-            .swiftUIView
-            .opacity(shouldElevateStickyHeader ? 1 : 0)
-            .padding(.horizontal, -8)
+        .if(style.hasOpaqueBackgroundColor) {
+            $0.background { style.backgroundColor }
+                .background {
+                    PrerenderedShadowView(
+                        configuration: .init(
+                            style: style.stickyHeaderShadowStyle,
+                            cornerRadius: 0
+                        )
+                    )
+                    .swiftUIView
+                    .opacity(shouldElevateStickyHeader ? 1 : 0)
+                    .padding(.horizontal, -8)
+                }
         }
         // The `readSize`-closures above are not always called when using SwiftUI previews after updating the sticky header content or changing one of the drawer's fixed positions on the outside.
         // By changing the view ids in `redrawHeader` we trigger a redraw and can make sure we always re-read their sizes.

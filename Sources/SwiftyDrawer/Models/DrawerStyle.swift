@@ -49,6 +49,11 @@ public struct DrawerStyle {
     let dragHandleStyle: DragHandleStyle
     let stickyHeaderShadowStyle: ShadowStyle
 
+    var hasOpaqueBackgroundColor: Bool {
+        let color = UIColor(backgroundColor)
+        return color.cgColor.alpha == 1 && color != .clear
+    }
+
     public init(
         backgroundColor: Color = Color.background,
         cornerRadius: Double = DrawerConstants.drawerCornerRadius,
