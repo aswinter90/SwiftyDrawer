@@ -26,7 +26,7 @@ let package = Package(
 
     ],
     dependencies: [
-        .package(url: "https://github.com/aswinter90/SwiftyDrawer", from: "0.4.0")
+        .package(url: "https://github.com/aswinter90/SwiftyDrawer", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -43,7 +43,7 @@ The project contains multiple demo applications with showcases for displaying th
 
 ### Minimal setup
 
-<img width="350" alt="basic" src="https://github.com/user-attachments/assets/a4fcacf2-5a28-4c05-9193-fd8926507b1f" />
+<img width="350" height="761" alt="image" src="https://github.com/user-attachments/assets/b192581e-9a37-41d3-9898-7ccf1f99b9ed" />
 
 ```
 import SwiftUI
@@ -53,7 +53,7 @@ struct ContentView: View {
     @State private var drawerState = DrawerState(case: .partiallyOpened)
 
     var body: some View {
-        MyAppleLogo()
+        MySwiftLogo()
             .drawerOverlay(
                 state: $drawerState,
                 content: {
