@@ -38,7 +38,9 @@ public struct DrawerStyle {
             self.offset = offset
         }
 
+        // swiftlint:disable:next discouraged_none_name
         public static var none: Self {
+            // swiftlint:disable:next explicit_init
             Self.init(color: .clear, offset: .init(width: 0, height: 0))
         }
     }

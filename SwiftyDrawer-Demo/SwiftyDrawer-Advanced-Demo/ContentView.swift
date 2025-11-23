@@ -6,10 +6,10 @@ struct ContentView: View {
     @State private var drawerBottomPosition = DrawerBottomPosition.relativeToSafeAreaBottom(offset: 0)
 
     @State private var isTabBarShown = false
-    @State private var isStickyHeaderShown = true
+    @State private var isStickyHeaderShown = false
+    @State private var isStickyHeaderScrollable = false
     @State private var isCustomDragHandleShown = false
     @State private var isDrawerTransparent = false
-    @State private var isStickyHeaderScrollable = false
 
     private let floatingButtonsConfig = DrawerFloatingButtonsConfiguration(
         trailingButtons: [
@@ -31,7 +31,7 @@ struct ContentView: View {
                     content: { drawerContent }
                 )
                 .drawerStyle(
-                    isDrawerTransparent ? .init(backgroundColor: .red.opacity(0.3)) : .init()
+                    isDrawerTransparent ? .init(backgroundColor: .clear) : .init()
                 )
                 .drawerLayoutStrategy(.classic)
                 .drawerFloatingButtonsConfiguration(floatingButtonsConfig)
