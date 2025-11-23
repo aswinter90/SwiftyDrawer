@@ -18,7 +18,6 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftyDrawer",
-            swiftSettings: [.defaultIsolation(MainActor.self)],
             plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(

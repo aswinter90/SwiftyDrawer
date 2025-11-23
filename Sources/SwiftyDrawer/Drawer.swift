@@ -184,6 +184,7 @@ extension Drawer {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
+        .background { style.backgroundColor }
         .drawingGroup(isEnabled: isApplyingRenderingOptimizationToDrawerHeader)
         .background {
             PrerenderedShadowView(
