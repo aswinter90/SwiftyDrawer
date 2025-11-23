@@ -37,6 +37,10 @@ public struct DrawerStyle {
             self.radius = radius
             self.offset = offset
         }
+
+        public static var none: Self {
+            Self.init(color: .clear, offset: .init(width: 0, height: 0))
+        }
     }
 
     let backgroundColor: Color
