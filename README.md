@@ -96,14 +96,14 @@ MySwiftLogo()
         state: $drawerState,
         content: {...}
     )
-    .drawerStyle(drawerStyle: DrawerStyle)
-    .drawerFloatingButtonsConfiguration(configuration: DrawerFloatingButtonsConfiguration)
-    .drawerLayoutStrategy(layoutStrategy: DrawerContentLayoutStrategy)
-    .drawerAnimation(<animation: Animation)
-    .isDrawerHapticFeedbackEnabled(isEnabled: Bool)
-    .isApplyingRenderingOptimizationToDrawerHeader(Bool)
-    .drawerContentOffsetController(DrawerContentOffsetController?)
-    .drawerOriginObservable(DrawerOriginObservable?)
+    .drawerStyle(drawerStyle: DrawerStyle) // Color, corner radius, shadows, etc.
+    .drawerFloatingButtonsConfiguration(configuration: DrawerFloatingButtonsConfiguration) // Circular buttons that are shown over the drawer
+    .drawerLayoutStrategy(layoutStrategy: DrawerContentLayoutStrategy) // Defines which collection-view–based layout approach the drawer uses—either a robust classic flow layout or a smoother but occasionally glitchy modern compositional layout.
+    .drawerAnimation(animation: Animation) // Define the animation type for opening and closing animations
+    .isDrawerHapticFeedbackEnabled(isEnabled: Bool) // If true the device vibrates after the drawer finished its opening and closing animation
+    .isApplyingRenderingOptimizationToDrawerHeader(Bool) // Set to false to prevent the drawer header being rendered as an offscreen image (using the `drawingGroup` modifier). This can be helpful if the header contains interactable content, like a horizontal scrollview
+    .drawerContentOffsetController(DrawerContentOffsetController?) // Used for reading or changing the content's scroll offset
+    .drawerOriginObservable(DrawerOriginObservable?) // Used for reading the drawer position
 ```
 
 ## 💥 Known issues
