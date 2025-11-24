@@ -86,7 +86,27 @@ This is a demonstration for how the drawer content can be updated by observing a
 
 https://github.com/user-attachments/assets/0b127664-3b4d-40a6-8a0a-98061e0b6680
 
-# 💥 Known issues
+## Customization
+
+There are several modifiers for changing the drawer appearance and behaviors:
+
+```
+MySwiftLogo()
+    .drawerOverlay(
+        state: $drawerState,
+        content: {...}
+    )
+    .drawerStyle(drawerStyle: DrawerStyle)
+    .drawerFloatingButtonsConfiguration(configuration: DrawerFloatingButtonsConfiguration)
+    .drawerLayoutStrategy(layoutStrategy: DrawerContentLayoutStrategy)
+    .drawerAnimation(<animation: Animation)
+    .isDrawerHapticFeedbackEnabled(isEnabled: Bool)
+    .isApplyingRenderingOptimizationToDrawerHeader(Bool)
+    .drawerContentOffsetController(DrawerContentOffsetController?)
+    .drawerOriginObservable(DrawerOriginObservable?)
+```
+
+## 💥 Known issues
 - Bugs and glitches on older iOS versions like 15 must be expected. In some scenarios the drawer content is not scrollable in other the content's scroll level resets randomnly.
 - The drawer always requires a modifyable `state` binding, meaning that passing a constant binding will not work: `.drawerOverlay(state: Binding.constant(.init(case: .fullyOpened)), ...)`
 - Your content gets updated but it is not reflected in the drawer? Make sure to define your content as a dedicated view, which obsorves changes of a `Binding` or an `ObservableObject` or take a look at the `SwiftyDrawer-Map-Demo`.
