@@ -10,7 +10,7 @@ This project is currently a work in progress, being developed sporadically. Futu
 ## 🔩 Installation
 You can add SwiftyDrawer to an Xcode project by adding it as a package dependency. The required minimum platform version is iOS 15.
 
-From the File menu, select Add Package Dependencies...
+From the File menu, select `Add Package Dependencies...`
 Enter "https://github.com/aswinter90/SwiftyDrawer" into the package repository URL text field.
 
 Or add it to your Swift package by referencing it in your package manifest:
