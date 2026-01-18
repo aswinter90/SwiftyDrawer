@@ -107,6 +107,6 @@ MySwiftLogo()
 ```
 
 ## 💥 Known issues
-- Bugs and glitches on older iOS versions like 15 must be expected. In some scenarios the drawer content is not scrollable in other the content's scroll level resets randomnly.
+- Bugs and glitches on older iOS versions like 15 must be expected. In some scenarios the drawer content is not scrollable in other the content's scroll level resets randomly.
 - The drawer always requires a modifyable `state` binding, meaning that passing a constant binding will not work: `.drawerOverlay(state: Binding.constant(.init(case: .fullyOpened)), ...)`
 - Your content gets updated but it is not reflected in the drawer? Make sure to define your content as a dedicated view, which obsorves changes of a `Binding` or an `ObservableObject` or take a look at the `SwiftyDrawer-Map-Demo`.
